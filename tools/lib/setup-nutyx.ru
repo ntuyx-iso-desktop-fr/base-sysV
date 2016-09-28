@@ -10,187 +10,187 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Settings"
-msgstr "Ayarlar"
+msgstr "Settings"
 
 msgid "Keyboard Layout"
-msgstr "Klavye Seçimi"
+msgstr "Keyboard Layout"
 
 msgid "Choose available"
-msgstr "Uygun olanı seçin"
+msgstr "Choose available"
 
 msgid "ERROR configuration"
-msgstr "ayarlama hatası"
+msgstr "ERROR configuration"
 
 msgid "Please try again"
-msgstr "Lütfen,tekrar deneyiniz"
+msgstr "Please try again"
 
 msgid "Network card"
-msgstr "Ağ kartı"
+msgstr "Network card"
 
 msgid "Select the card"
-msgstr "Kartı seçiniz"
+msgstr "Select the card"
 
 msgid "Card to configure"
-msgstr "Ayarlamak için kartlar"
+msgstr "Card to configure"
 
 msgid "Configuration of"
-msgstr "Ayarı:"
+msgstr "Configuration of"
 
 msgid "Configuration mode"
-msgstr "ayar modu"
+msgstr "Configuration mode"
 
 msgid "Auto"
-msgstr "otomatik"
+msgstr "Auto"
 
 msgid "Man"
-msgstr "Bilgi"
+msgstr "Man"
 
 msgid "IP address automatically set from DHCP server"
-msgstr "ip adresi DHCP tarafından otomatik verildi."
+msgstr "IP address automatically set from DHCP server"
 
 msgid "Manually specify parameters"
-msgstr "Değerleri elle giriniz"
+msgstr "Manually specify parameters"
 
 msgid "Enter an IP address"
-msgstr "bir IP adresi giriniz"
+msgstr "Enter an IP address"
 
 msgid "Enter a broadcast address"
-msgstr "Broadcast adresi giriniz"
+msgstr "Enter a broadcast address"
 
 msgid "in most cases the current value can be used"
-msgstr "çoğu durumda,şimdiki değer kullanılacak."
+msgstr "in most cases the current value can be used"
 
 msgid "Enter the subnet mask"
-msgstr "Altağ adresini giriniz"
+msgstr "Enter the subnet mask"
 
 msgid "Enter the gateway address"
-msgstr "İnternete çıkış cihaz adresini giriniz"
+msgstr "Enter the gateway address"
 
 msgid "it is normally the address of your router access point"
-msgstr "bu sizin internete çıkış cihaz adresidir"
+msgstr "it is normally the address of your router access point"
 
 msgid "Enter the DNS address"
-msgstr "DNS adresini giriniz"
+msgstr "Enter the DNS address"
 
 msgid "DNS Search Suffix"
-msgstr "DNS arama soneki"
+msgstr "DNS Search Suffix"
 
 msgid "Enter the domain name"
-msgstr "Domain adınızı giriniz"
+msgstr "Enter the domain name"
 
 msgid "this is only need if you are in a subdomain"
-msgstr "eğer altdomaine sahipseniz gereklidir"
+msgstr "this is only need if you are in a subdomain"
 
 msgid "Most of the time it's not need"
-msgstr "çoğu zaman buna gerek yoktur"
+msgstr "Most of the time it's not need"
 
 msgid "Start the service"
-msgstr "servisi başlat"
+msgstr "Start the service"
 
 msgid "Checking the configuration, returning true or false"
-msgstr "ayar kontrol ediliyor,doğru yada yanlış geri dönecektir"
+msgstr "Checking the configuration, returning true or false"
 
 msgid "Show the network configuration"
-msgstr "ağ ayarlarını göster"
+msgstr "Show the network configuration"
 
 msgid "Show the keyboard configuration"
-msgstr "klavye ayarlarını göster"
+msgstr "Show the keyboard configuration"
 
 msgid "Show the date and time settings"
-msgstr "tarih ve saat ayarlarını göster"
+msgstr "Show the date and time settings"
 
 msgid "Show the timezone and time adjustment"
-msgstr "zaman ve yerel ayarları göster"
+msgstr "Show the timezone and time adjustment"
 
 msgid "Show all configurations"
-msgstr "bütün ayarları göster"
+msgstr "Show the timezone and time adjustment"
 
 msgid "Configure the language"
-msgstr "dili ayarla"
+msgstr "Configure the language"
 
 msgid "Configure the keyboard"
-msgstr "klavyeyi ayarla"
+msgstr "Configure the keyboard"
 
 msgid "Configure the network"
-msgstr "ağı ayarla"
+msgstr "Configure the network"
 
 msgid "Date and time settings"
-msgstr "tarih ve saat ayarla"
+msgstr "Date and time settings"
 
 msgid "Add a user to the system"
-msgstr "sisteme bir kullanıcı ekle"
+msgstr "Add a user to the system"
 
 msgid "Configure the system"
-msgstr "sistemi ayarla"
+msgstr "Configure the system"
 
 msgid "Install NuTyX"
-msgstr "NuTyX kurucu"
+msgstr "Install NuTyX"
 
 msgid "Use the arrows keys to change the values"
-msgstr "değerleri değiştirmek için okları kullan"
+msgstr "Use the arrows keys to change the values"
 
 msgid "Coordinated Universal Time ??or Local Time ?"
-msgstr "yerel zaman mı koordinatlı zaman mı?"
+msgstr "Coordinated Universal Time ??or Local Time ?"
 
 msgid "The hardware clock is set to"
-msgstr "donanım saati buna ayarlanıyor:"
+msgstr "The hardware clock is set to"
 
 msgid "Do you want to use this time as Coordinated Universal Time ?"
-msgstr "koordinat tanımlı zamanı kullnamak istiyor musunuz?"
+msgstr "Do you want to use this time as Coordinated Universal Time ?"
 
 msgid "so that the summer/winter time is changed automatically"
-msgstr "yaz-kış saaatinde otomatik değişir."
+msgstr "so that the summer/winter time is changed automatically"
 
 msgid "Please enter the date"
-msgstr "tarih giriniz"
+msgstr "Please enter the date"
 
 msgid "Please enter the time"
-msgstr "saat giriniz"
+msgstr "Please enter the time"
 
 msgid "Configuration of the boot of the computer (GRUB)"
-msgstr "(GRUB) başalatıcı ayarları"
+msgstr "Configuration of the boot of the computer (GRUB)"
 
 msgid "Select the disk on which you want to modify the MBR"
-msgstr "MBR kuracağınız diski seçiniz"
+msgstr "Select the disk on which you want to modify the MBR"
 
 msgid "Select the partition on which you want to place the GRUB files"
-msgstr "GRUB dosyalarını hangi disk bölümünde kaydedilsin"
+msgstr "Select the partition on which you want to place the GRUB files"
 
 msgid "Note that the destination partition can contain NuTyX or any other distribution"
-msgstr "Not:Hedef disk bölümü Nutyx ve herhangi bir dağıtım içerebilir."
+msgstr "Note that the destination partition can contain NuTyX or any other distribution"
 
 msgid "No boot process configured"
-msgstr "Başlangıç için herhangi bir sürec ayarlanmadı"
+msgstr "No boot process configured"
 
 msgid "You have installed NuTyX without configuring the boot process"
-msgstr "Nutyx herhangi bir başlatıcı ayarlanmadan kuruldu."
+msgstr "You have installed NuTyX without configuring the boot process"
 
 msgid "Are you sure, you want to cancel the process ?"
-msgstr "İşlemi bitirmek çin emin misiniz?"
+msgstr "Are you sure, you want to cancel the process ?"
 
 msgid "You already have a copy of the original MBR, I will not make a backup of it"
-msgstr "Orjinal MBR nin zaten bir kopyası var,yedek alınmayacak."
+msgstr "You already have a copy of the original MBR, I will not make a backup of it"
 
 msgid "Good to know"
-msgstr "Bilmenizde fayda var"
+msgstr "Good to know"
 
 msgid "Main Menu"
-msgstr "Ana menü"
+msgstr "Main Menu"
 
 msgid "Welcome to the NuTyX installer"
-msgstr "NuTyX kurulumuna hoşgeldiniz"
+msgstr "Welcome to the NuTyX installer"
 
 msgid "Create all your partitions"
-msgstr "Bütün bölümlemerini oluşturunuz"
+msgstr "Create all your partitions"
 
 msgid "Format a partition"
-msgstr "Bir disk bölümünü formatlayınız"
+msgstr "Format a partition"
 
 msgid "Configure the boot of the PC"
-msgstr "Bilgisayarın açılışını ayarlama"
+msgstr "Configure the boot of the PC"
 
 msgid "Reboot the PC"
-msgstr "Bilgisayarı yeniden başlatın"
+msgstr "Reboot the PC"
 
 msgid "Press OK to reboot the computer"
 msgstr "Press OK to reboot the computer"
