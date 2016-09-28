@@ -34,7 +34,7 @@ install: all
 	install -D -m0755 setup-nutyx $(SBINDIR)/setup-nutyx
 	install -D -m0755 flushmem $(SBINDIR)/flushmem
 	install -D -m0755 ifup $(SBINDIR)/ifup
-	install -D -m0755 ifdown  $(SBINDIR)/ifup
+	install -D -m0755 ifdown  $(SBINDIR)/ifdown
 	install -D -m0755 which $(BINDIR)/which
 
 clean:
