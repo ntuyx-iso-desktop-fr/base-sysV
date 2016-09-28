@@ -21,7 +21,7 @@
 
 include ../Makefile.inc
 
-all: links
+all:
 
 
 .PHONY:	install clean distclean
@@ -107,7 +107,7 @@ rc6: files
 	ln -sf ../init.d/random		${ETCDIR}/rc.d/rc6.d/K45random
 	ln -sf ../init.d/reboot		${ETCDIR}/rc.d/rc6.d/S99reboot
 
-install: all
+install: links
 
 clean:
 
