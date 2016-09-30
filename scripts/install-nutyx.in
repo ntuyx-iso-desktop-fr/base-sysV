@@ -196,7 +196,8 @@ error() {
 	echo ""
 	echo " $1"
 	echo ""
-	rm -rf $TMP
+	ERREUR="yes"
+	end
 	exit 1
 }
 end() {
