@@ -244,6 +244,7 @@ chmod 755 $WDIR/lib/udev/do_start_clock
 # Install the kernel modules if requested
 if [ -n "$KERNEL_VERSION" ]; then
   for i in dm-mod md-mod ehci-pci usbcore \
+xhci-pci xhci-hcd \
 ehci-hcd uhci-hcd usbcore uas \
 usbcore usb-storage usb-common \
 usb-storage usbcore loop sr_mod \

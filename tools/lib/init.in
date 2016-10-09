@@ -143,7 +143,10 @@ MainLoop(){
    clear
 }
 LoadModules() {
- for i in dm-mod md-mod ehci-pci uhci-hcd uas sr_mod usb-storage loop squashfs isofs
+ for i in dm-mod md-mod ehci-pci \
+ xhci-pci xhci-hcd ehci-hcd \
+ uhci-hcd uas sr_mod usb-storage loop \
+ squashfs isofs
  do
   if [ "$verbose" == "yes" ]; then
     modprobe -v $i
