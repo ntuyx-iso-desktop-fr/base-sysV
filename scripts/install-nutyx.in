@@ -1218,21 +1218,21 @@ check_root() {
 [ "$UID" != "0" ] && error " You are not root, cannot continue"
 }
 check_variables() {
-if [ -z $CHROOT_LIST ]; then
+if [ -z "$CHROOT_LIST" ]; then
 	CHROOT_LIST="nutyx acl attr bash bzip2 coreutils curl \
 expat gcc readline ncurses lzo glibc gmp xz zlib \
 libarchive mpc mpfr openssl cards"
 fi
-[ -z $URL ] && URL="http://downloads.nutyx.org"
-[ -z $VERSION ] && VERSION="#VERSION#"
+[ -z "$URL" ] && URL="http://downloads.nutyx.org"
+[ -z "$VERSION" ] && VERSION="#VERSION#"
 if [ "$VERSION" == "development" ]; then
 	CODE_NAME="`date +%Y%m%d`"
 else
 	CODE_NAME="stable"
 fi
-[ -z $DEPOT ] && DEPOT="/var/lib/pkg/depot"
-[ -z $FOLDER ] && FOLDER="/mnt/hd"
-[ -z $KERNEL ] && KERNEL="linux-firmware sysklogd sysvinit reiserfsprogs e3 \
+[ -z "$DEPOT" ] && DEPOT="/var/lib/pkg/depot"
+[ -z "$FOLDER" ] && FOLDER="/mnt/hd"
+[ -z "$KERNEL" ] && KERNEL="linux-firmware sysklogd sysvinit reiserfsprogs e3 \
 grub lz4 mdadm jfsutils xfsprogs btrfs-progs dhcpcd kernel-lts"
 [ "$KERNEL" == "NONE" ] && KERNEL=""
 [ "$KERNEL" == "none" ] && KERNEL=""
