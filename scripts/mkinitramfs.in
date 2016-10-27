@@ -248,7 +248,7 @@ xhci-pci xhci-hcd \
 ehci-hcd uhci-hcd usbcore uas \
 usbcore usb-storage usb-common \
 usb-storage usbcore loop sr_mod \
-cdrom squashfs isofs
+cdrom squashfs isofs overlay
   do
     find /lib/modules/ -type f -name $i* 2> /dev/null | cpio --make-directories -p --quiet $WDIR 2> /dev/null
   done
