@@ -94,7 +94,6 @@ rc1: files
 
 rc2: files
 	ln -sf ../init.d/network        ${ETCDIR}/rc.d/rc2.d/K80network
-	ln -sf ../init.d/sysklogd       ${ETCDIR}/rc.d/rc2.d/K90sysklogd
 	ln -sf ../init.d/random         ${ETCDIR}/rc.d/rc2.d/S25random
 
 rc3: files

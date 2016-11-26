@@ -1420,6 +1420,7 @@ do_start_network()
                [ "$?" = "0" ] && log_success_msg "Network startup" || log_failure_msg "Network startup"
                [ -n "${NETWORKDELAY}" ] && /bin/sleep ${NETWORKDELAY}
             fi
+            evaluate_retval
          else
             echo "the package networkmanager seems not to be install"
             echo "check the ${NETWORKCONFIG_FILE} file"
@@ -1473,6 +1474,7 @@ do_start_network()
             fi
             /sbin/ifup ${interface}
          done
+         evaluate_retval
       ;;
    esac
 }
@@ -1485,6 +1487,7 @@ do_stop_network()
          if [ -f /usr/sbin/NetworkManager ]; then
             log_info_msg "Stopping NetworkManager daemon..."
             killproc /usr/sbin/NetworkManager
+            evaluate_retval
          else
             echo "the package networkmanager seems not to be install"
             echo "check the ${NETWORKCONFIG_FILE} file"
@@ -1523,6 +1526,7 @@ do_stop_network()
                  kill `cat /var/run/wpa_supplicant.${interface}`
              fi
          done
+         evaluate_retval
       ;;
    esac
 }

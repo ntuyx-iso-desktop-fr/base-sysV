@@ -278,7 +278,7 @@ setup_user()
 	fi
 	local RESULT
 	USER_GROUPS=""
-	DEFAULT_GROUPS=(users disk network floppy fuse video lp tty audio cdrom scanner adm vboxusers wheel)
+	DEFAULT_GROUPS=(users disk network floppy fuse video lp netdev tty audio cdrom scanner adm vboxusers wheel)
 	# Avoid spaces troubles :)
 	OLD_IFS=$IFS
 	IFS="|
@@ -2158,6 +2158,7 @@ check_root () {
 }
 main () {
 	parse_options "$@"
+	TMP=`mktemp -d`
 	if [ "$SETUP_INITRD" == "yes" ]; then
 		SETUP_CONFIG_LANGUAGE="yes"
 		SETUP_INSTALL="no"
@@ -2171,9 +2172,7 @@ main () {
 		log_info_msg "Checking configuration..."
 		check_all
 		if [ $? -ne 0 ]; then
-			TMP=`mktemp -d`
 			top_loop
-			cleanup
 		fi
 		evaluate_retval
 	fi
@@ -2185,6 +2184,7 @@ main () {
 			evaluate_retval
 		fi
 	fi
+	cleanup
 }
 
 #
