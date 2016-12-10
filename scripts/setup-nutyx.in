@@ -494,7 +494,7 @@ while [ "$retval" == "" ]; do
 				exit;;
   esac
 done
-if [ "`cat $TMP/result`" == "Auto" ];then
+if [ "`cat $TMP/result`" == "$(gettext "Auto")" ];then
 	cat > /etc/sysconfig/ifconfig.$NETWORK_CARD << "EOF"
 ONBOOT="yes"
 SERVICE="dhcpcd"

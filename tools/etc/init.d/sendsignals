@@ -29,29 +29,7 @@
 
 case "${1}" in
    stop)
-      log_info_msg "Sending all processes the TERM signal..."
-      killall5 -15
-      error_value=${?}
-
-      sleep ${KILLDELAY}
-
-      if [ "${error_value}" = 0 -o "${error_value}" = 2 ]; then
-         log_success_msg
-      else
-         log_failure_msg
-      fi
-
-      log_info_msg "Sending all processes the KILL signal..."
-      killall5 -9
-      error_value=${?}
-
-      sleep ${KILLDELAY}
-
-      if [ "${error_value}" = 0 -o "${error_value}" = 2 ]; then
-         log_success_msg
-      else
-         log_failure_msg
-      fi
+      do_stop_sendsignals
       ;;
 
    *)
