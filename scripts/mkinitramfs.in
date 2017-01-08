@@ -107,10 +107,9 @@ cp /bin/echo $WDIR/bin/echo
 cp /bin/false $WDIR/bin/false
 
 # terminal stuff
-mkdir -p $WDIR/lib/ncurses/terminfo/l
-cp /lib/ncurses/terminfo/l/linux \
- $WDIR/lib/ncurses/terminfo/l
-ln -s ../../lib/ncurses/terminfo $WDIR/usr/share/terminfo
+mkdir -p $WDIR/usr/share/terminfo/l
+cp /usr/share/terminfo/l/linux \
+ $WDIR/usr/share/terminfo/l/
 # Install the udev configuration files
 if [ -f /etc/udev/udev.conf ]; then
   cp /etc/udev/udev.conf $WDIR/etc/udev/udev.conf

@@ -364,6 +364,9 @@ setup_user()
 	fi
 }
 choose_available_ESSID() {
+OLD_IFS=$IFS
+IFS="
+"
 [ -z $"WIFI_NETWORK_CARD" ] && WIFI_NETWORK_CARD=`cat $TMP/result|sed 's/"//g'`
 
 DEVTYPE=`/sbin/udevadm info /sys/class/net/$WIFI_NETWORK_CARD | grep DEVTYPE | cut -d"=" -f2`
@@ -373,10 +376,10 @@ if [ "$DEVTYPE" = "wlan" ]; then
 	--colors \
 	--radiolist \" $(gettext "Choose the name of the wireless access point") (ESSID) \" 0 0 0 " > $TMP/networks
 
-	NETWORKS=`iwlist $WIFI_NETWORK_CARD scanning 2>/dev/null | grep "ESSID:" | cut -d"\"" -f2 | grep -v "\\x00"`
+	NETWORKS=`iwlist $WIFI_NETWORK_CARD scanning 2>/dev/null | grep "ESSID:" | cut -d":" -f2 | grep -v "\\x00"`
 	[ -z "$NETWORKS" ] && return
 	for i in $NETWORKS; do
-		echo -n \""$i"\" \""$i"\" " off "
+		echo -n "$i \" \" off"
 	done >> $TMP/networks
 
 	dialog --file $TMP/networks 2>$TMP/result
@@ -414,7 +417,10 @@ if [ "$DEVTYPE" = "wlan" ]; then
 			fi ;;
 	esac
 fi
-
+IFS=$OLD_IFS
+rm $TMP/result
+rm $TMP/networks
+rm $TMP/passwd
 }
 setup_wireless()
 {
@@ -581,13 +587,15 @@ EOF
 		fi
 	fi
 fi
-cat > /etc/sysconfig/network << "EOF"
+if [ ! -f /etc/sysconfig/network ]; then
+	cat > /etc/sysconfig/network << "EOF"
 HOSTNAME='nutyx'        # Hostname of this machine
 MANAGER=''              # Network manager (wicd/networkmanager/cli/nothing)
 NETWORKWAIT='no'        # Wait or not for network
 LINKDELAY='15'          # init delay for initialisation of Networkmanager
 NETWORKDELAY='0'        # init delay to wait after initialisation of Networkmanager
 EOF
+fi
 if [ "$SETUP_INITRD" == "yes" ]; then
 	/etc/rc.d/init.d/network start
 fi
@@ -1546,7 +1554,6 @@ install_nutyx() {
 	echo "$PARTITION   /    $FORMAT  defaults     0    0" >> /etc/fstab
 	for FILE in boot/kernel  \
 	boot/kernel-`uname -r` \
-	boot/initrd \
 	etc/profile.d/i18n.sh \
 	etc/sysconfig/network \
 	etc/sysconfig/clock \
@@ -1555,7 +1562,7 @@ install_nutyx() {
 	etc/fstab \
 	etc/localtime \
 	etc/network \
-  etc/mdadm.conf \
+	etc/mdadm.conf \
 	$TEXTDOMAINDIR
 	do
 		if [ -f /$FILE ] || [ -d /$FILE ];then
@@ -1570,9 +1577,6 @@ install_nutyx() {
 		cp  ${1}/kernel ${2}/boot/kernel-`uname -r`
 		ln -sf kernel-`uname -r` ${2}/boot/kernel
 	fi
-	if [ -f ${1}/initrd ]; then
-		cp  ${1}/initrd ${2}/boot/initrd
-	fi
 	for DIR in proc sys dev srv mnt tmp
 	do
 		[ ! -d ${2}/$DIR ] &&	mkdir ${2}/$DIR
@@ -1580,14 +1584,6 @@ install_nutyx() {
 	[ -a ${2}/dev/console ] || mknod -m 640 ${2}/dev/console c 5 1
 	[ -a ${2}/dev/null ] || mknod -m 664 ${2}/dev/null    c 1 3
 	chmod 1777 ${2}/tmp
-	echo "95"
-	cd /
-	mkdir /boot
-	mkinitramfs `uname -r` > /dev/null
-	rm ${2}/boot/initrd
-	mv /boot/initrd-`uname -r` ${2}/boot/initrd-`uname -r`
-	ln -sf initrd-`uname -r` ${2}/boot/initrd
-	cd - > /dev/null
 	echo "100") |
 	dialog --title "$(gettext "Install NuTyX")" --gauge "$(gettext "Please wait") ..." 6 50
 	$SETUP_LOG "setup-nutyx" "Install NuTyX on ${PARTITION} done"
@@ -1789,19 +1785,17 @@ EOF
 		BOOT_FS="`print_file_system $PARTITION`"
 		NuTyX_FS="`print_file_system $NuTyX_PART`"
 		echo "menuentry \"NuTyX ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
-		echo " linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro quiet " >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
-		echo " initrd /${GRUB_DESTINATION_DIR}initrd" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo " linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro quiet verbose=no" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo "}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
-		echo " " >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE
-		echo "menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {" >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE
-		echo "  linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro " >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE
-		echo "  initrd /${GRUB_DESTINATION_DIR}initrd" >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE
-		echo "}" >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE
+		echo " " >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo "menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo "  linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro " >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo "}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 	else
 		#
 		# NuTyX is not yet installed
 		#
-		cat >> $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE  << "EOF"
+		cat >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}  << "EOF"
 #################################################################
 #                                                               #
 #               Example of a menuentry:                         #
@@ -1833,8 +1827,7 @@ EOF
 #
 #menuentry  "Harddisk number 2 and partition number 3" {
 #   set root=(hd1,3)
-#   linux /boot/kernel root=/dev/sdb3 ro quiet
-#   initrd /boot/initrd
+#   linux /boot/kernel root=/dev/sdb3 ro quiet verbose=no
 #}
 #
 # The same one for debug purpose:
@@ -1842,7 +1835,6 @@ EOF
 #menuentry  "Harddisk number 2 and partition number 3 verbose mode" {
 #   set root=(hd1,3)
 #   linux /boot/kernel root=/dev/sdb3 ro
-#   initrd /boot/initrd
 #}
 #
 EOF
