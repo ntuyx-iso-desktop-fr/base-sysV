@@ -379,64 +379,64 @@ msgid "A copy of the original MBR is saved in the folder /boot/grub of your NuTy
 msgstr "En kopia av original MBR sparas i mappen /boot/grub i din NuTyX. Den kan då återställas om det behövs"
 
 msgid "The name you enter is invalid"
-msgstr "The name you enter is invalid"
+msgstr "Namnet du angav är inte giltigt"
 
 msgid "The name you enter is already register on the system"
-msgstr "The name you enter is already register on the system"
+msgstr "Namnet du angav är redan upptaget"
 
 msgid "The description you enter is invalid"
-msgstr "The description you enter is invalid"
+msgstr "Beskrivningen du angav är inte giltig"
 
 msgid "Name of the user"
-msgstr "Name of the user"
+msgstr "Användarnamnet"
 
 msgid "Add a description for the user"
-msgstr "Add a description for the user"
+msgstr "Lägg till en användar beskrivning"
 
 msgid "Name or Description of the user"
-msgstr "Name or Description of the user"
+msgstr "Benämning av användaren"
 
 msgid "Password"
-msgstr "Password"
+msgstr "Lösenord"
 
 msgid "Enter a new password"
-msgstr "Enter a new password"
+msgstr "Ange ett nytt lösenord"
 
 msgid "Confirm the new password"
-msgstr "Confirm the new password"
+msgstr "Bekräfta det nya lösenordet"
 
 msgid "Passwords are differents, please try again"
-msgstr "Passwords are differents, please try again"
+msgstr "Lösenorden är inte lika, var god försök igen"
 
 msgid "Do you want to try again"
-msgstr "Do you want to try again"
+msgstr "Vill du försöka igen?"
 
 msgid "Please run this command as root"
-msgstr "Please run this command as root"
+msgstr "Var god kör kommandot som root"
 
 msgid "Sync the HD"
-msgstr "Sync the HD"
+msgstr "Synka HD"
 
 msgid "Emptying memory"
-msgstr "Emptying memory"
+msgstr "Tömmer minnet"
 
 msgid "Swap partition not found"
-msgstr "Swap partition not found"
+msgstr "Swap partitionen ej funnen"
 
 msgid "recommended"
-msgstr "recommended"
+msgstr "rekommenderad"
 
 msgid "skilled"
-msgstr "skilled"
+msgstr "erfaren"
 
 msgid "Configure the wireless access point"
-msgstr "Configure the wireless access point"
+msgstr "Konfigurera den tradlösa atkomstpunkten"
 
 msgid "Configuration of a wireless access point for"
-msgstr "Configuration of a wireless access point for"
+msgstr "Konfiguration av den tradlösa atkomstpunkten för"
 
 msgid "Choose the name of the wireless access point"
-msgstr "Choose the name of the wireless access point"
+msgstr "Choose the name of"
 
 msgid "Enter the password of"
 msgstr "Enter the password of"
@@ -457,4 +457,4 @@ msgid "Configure automatic update"
 msgstr "Configure automatic update"
 
 msgid "Would you like to enable automatic update"
-msgstr "Would you like to enable automatic update"
+msgstr ""
