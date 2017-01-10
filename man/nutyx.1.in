@@ -1,4 +1,4 @@
-.TH "NuTyX version #VERSION#" 8 "Septembre, 2016" ""
+.TH "NuTyX version #VERSION#" 8 "Janvier, 2017" ""
 
 
 .SH NuTyX
@@ -103,14 +103,14 @@ Si vous avez déjà créer le(s) utilisateur(s) et que vous souhaitez monter le 
  En root tapez les commandes suivantes:
  # init 3
  # sync
- # cd /home
- # tar cf /root/users.tar *
+ # cd /
+ # tar cf /root/users.tar home/*
 
 Si tout s'est bien passé et qu'aucune erreur ne s'est produite, vous pouvez supprimez les dossiers:
 .P
  Toujours en root:
- # cd /home
- # rm -r *
+ # cd /
+ # rm -r /home/*
  Le dossier \fI/home\fR est maintenant vide et prêt pour pouvoir être monté sur le point de montage de votre choix.
 
 Le fichier \fI/etc/fstab\fR défini les points de montage des différents périphériques lors de l'amorçage de la machine. Vous souhaitez probablement utiliser une partition ou un disque oumême un dossier NFS pour stocker les données personnelles des utilisateurs enrégistrés sur la machine. Dans notre exemple, GRUB est sur la première partition, NuTyX sur la deuxième partition, les données d'échange mémoire virtuelle sur la troisième partition. Le fichier \fI/etc/fstab\fR de notre exemple contient les informations suivantes:
@@ -139,7 +139,7 @@ Aucun message d'erreur ne doit apparaître. Vous pouvez vérifier que le résult
 .P
 
  A faire uniquement si des utilisateurs sont déjà créés et que vous avez choisi de monter le dossier \fI/home\fR:
- # cd /home
+ # cd /
  # tar xf /root/users.tar
 
 Vous pouvez repasser en mode graphique et vous connectez en non root.
