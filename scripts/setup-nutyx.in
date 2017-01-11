@@ -1786,10 +1786,12 @@ EOF
 		NuTyX_FS="`print_file_system $NuTyX_PART`"
 		echo "menuentry \"NuTyX ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo " linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro quiet verbose=no" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo "#  initrd /${GRUB_DESTINATION_DIR}initrd" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo "}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo " " >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo "menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo "  linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro " >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+		echo "#  initrd /${GRUB_DESTINATION_DIR}initrd" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 		echo "}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
 	else
 		#
@@ -1835,6 +1837,14 @@ EOF
 #menuentry  "Harddisk number 2 and partition number 3 verbose mode" {
 #   set root=(hd1,3)
 #   linux /boot/kernel root=/dev/sdb3 ro
+#}
+#
+# An other one with initrd and rootdelay (to use with USB stick for ex)
+#
+#menuentry  "Harddisk number 2 and partition number 1 with initrd" {
+#   set root=(hd1,1)
+#   linux /boot/kernel root=/dev/sdb1 ro rootdelay=5
+#   initrd /boot/initrd
 #}
 #
 EOF
