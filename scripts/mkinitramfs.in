@@ -56,7 +56,8 @@ fi
 
 printf "Creating $INITRAMFS_FILE... \n"
 
-binfiles="sh cat clear cut date grep cp dd hostname killall ls mkdir mknod more mount mountpoint chmod"
+usrbinfiles="cut groups"
+binfiles="sh cat clear date grep cp dd hostname killall ls mkdir mknod more mount mountpoint chmod"
 binfiles="$binfiles umount stty sed sleep ln rm uname"
 
 sbinfiles="$sbinfiles blkid switch_root"
@@ -161,15 +162,19 @@ fi
 # Install the init file
 install -m0755 $DATADIR/$INITIN $WDIR/init
 
-  binfiles="$binfiles groups"
-  if [ -x /bin/kmod ] ; then
-    binfiles="$binfiles kmod"
-  else
-    binfiles="$binfiles lsmod"
-    sbinfiles="$sbinfiles insmod"
-  fi
+if [ -x /bin/kmod ] ; then
+   binfiles="$binfiles kmod"
+else
+   binfiles="$binfiles lsmod"
+   sbinfiles="$sbinfiles insmod"
+fi
 
 # Install basic binaries
+for f in $usrbinfiles; do
+  ldd /usr/bin/$f | sed "s/\t//" | cut -d " " -f1 >> $unsorted
+  copy $f usr/bin
+done
+
 for f in $binfiles ; do
   ldd /bin/$f | sed "s/\t//" | cut -d " " -f1 >> $unsorted
   copy $f bin

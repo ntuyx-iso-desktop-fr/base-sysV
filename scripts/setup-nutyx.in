@@ -269,8 +269,8 @@ setup_password()
 setup_user()
 {
 	
-	/sbin/pwconv
-	/sbin/grpconv
+	/usr/sbin/pwconv
+	/usr/sbin/grpconv
 	if [ -d /.home ]; then
 		mv /.home /home
 	else
@@ -331,9 +331,9 @@ setup_user()
 		unset RESULT
 
 		if [ -d /home/"${NAME}" ];then
-			RESULT=`/sbin/useradd -c "${DESCRIPTION}" -G "$USER_GROUPS" -M "${NAME}" 2>&1`
+			RESULT=`/usr/sbin/useradd -c "${DESCRIPTION}" -G "$USER_GROUPS" -M "${NAME}" 2>&1`
 		else
-			RESULT=`/sbin/useradd -c "${DESCRIPTION}" -G "$USER_GROUPS" -m "${NAME}" 2>&1`
+			RESULT=`/usr/sbin/useradd -c "${DESCRIPTION}" -G "$USER_GROUPS" -m "${NAME}" 2>&1`
 		fi
 		if [ ! -z "$RESULT" ]; then
 			dialog --msgbox "$RESULT" 6 120
@@ -556,7 +556,7 @@ else
 	/sbin/ifconfig ${NETWORK_CARD} ${IP} broadcast ${BROADCAST} netmask ${PREFIX}
 
 	if [ -n ${GW} ]; then
-		/bin/ip route add default via ${GW}
+		/sbin/ip route add default via ${GW}
 	fi
 	cat > /etc/sysconfig/ifconfig.${NETWORK_CARD} << "EOF"
 ONBOOT=yes
@@ -604,7 +604,7 @@ SETUP_CONFIG_NETWORK="no"
 setup_language()
 {
 /usr/bin/localedef -i de_CH -f UTF-8 de_CH.UTF8
-/bin/setfont LatGrkCyr-8x16
+/usr/bin/setfont LatGrkCyr-8x16
 while [ true ]; do
 dialog   \
 --no-ok --no-cancel \
@@ -1550,7 +1550,6 @@ install_nutyx() {
 	echo "92"
 	chmod 750 ${2}/root
 	mkdir ${2}/boot 2>/dev/null
-	[ "`uname -m`" == "x86_64" ] && ln -svf lib ${2}/lib64
 	echo "$PARTITION   /    $FORMAT  defaults     0    0" >> /etc/fstab
 	for FILE in boot/kernel  \
 	boot/kernel-`uname -r` \
@@ -1923,8 +1922,8 @@ setup_initrd() {
 				;;
 			"$(gettext "Console")")
 				source /etc/profile
-				/sbin/pwconv
-				/sbin/grpconv
+				/usr/sbin/pwconv
+				/usr/sbin/grpconv
 				sh
 				;;
 			"$(gettext "Erase")")

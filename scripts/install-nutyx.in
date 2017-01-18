@@ -1163,17 +1163,12 @@ dir ${DEPOT}/cli-extra|${URL}
 ## For a minimal console interface
 dir ${DEPOT}/cli|${URL}
 #
-## Strict minimum Base system to be able to boot on it
-dir ${DEPOT}/base-extra|${URL}
-#
-# Chroot system without reboot possibilities for a chroot
+## Chroot system without reboot possibilities for a chroot
 dir ${DEPOT}/base|${URL}
 #
 ## Normaly you want to keep base and
 base ${DEPOT}/base
 #
-## and base-extra
-base ${DEPOT}/base-extra
 #
 ## If you want to keep more collections remove comments below
 # Adjust to your needs
