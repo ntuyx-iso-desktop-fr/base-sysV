@@ -107,23 +107,29 @@ do_mount_in_ram()
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /$DIR > /dev/null 2>&1
-			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR"
+			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s" ${1} $DIR $DIR
 			mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR || problem
 		fi
 	done		
 }
 
 find_media() {
+   local PI
    EXPECT_LABEL="nutyxcd"
-   for SYS in /sys/block/sd* /sys/block/sr* ; do
-	   [ "$verbose" == "no" ] || echo "Looking in $SYS for media"
+   for SYS in /sys/block/sd*/sd* /sys/block/sr* ; do
+	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
       if [ ! -d "$SYS" ]; then  continue; fi
       DEV=/dev/${SYS##*/}
-      LABEL=`dd if=$DEV bs=1 skip=32808 count=32 2>/dev/null`
+      PI=`/sbin/blkid $DEV`
+      for param in $PI; do
+        case $param in LABEL=*)
+          LABEL=`echo ${param#LABEL=}|sed s/\"//g`;;
+	esac
+      done
       if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
 	ln -s $DEV /dev/nutyx-cd
 	mkdir  -p /media/cdrom 2>/dev/null
-	[ "$verbose" == "no" ] || echo "mount -n /dev/nutyx-cd /media/cdrom"
+	[ "$verbose" == "no" ] || printf "mount -n /dev/nutyx-cd /media/cdrom"
 	mount -n /dev/nutyx-cd /media/cdrom
 	[ -d /media/cdrom/depot ] && echo $DEV > /tmp/depot
 	break
@@ -136,7 +142,7 @@ MainLoop(){
    do
 	if [ "$verbose" == "yes" ]; then
 		ListModules
-		echo "Launch /etc/rc.d/init.d/setup-nutyx ..."
+		printf "Launch /etc/rc.d/init.d/setup-nutyx ..."
 	fi
 	/etc/rc.d/init.d/setup-nutyx || problem
    done
@@ -144,9 +150,9 @@ MainLoop(){
 }
 LoadModules() {
  for i in dm-mod md-mod ehci-pci \
- xhci-pci xhci-hcd ehci-hcd \
+ xhci-pci xhci-hcd ehci-hcd nls_iso8859_1 \
  uhci-hcd uas sr_mod usb-storage loop \
- squashfs isofs
+ squashfs isofs vfat fat nls_cp437
  do
   if [ "$verbose" == "yes" ]; then
     modprobe -v $i
@@ -157,12 +163,13 @@ LoadModules() {
 }
 ListModules() {
   lsmod
-  echo "Press <enter> to continue ..."
+  printf "Press <enter> to continue ...\n"
   read a
 }
 # **********
 # Begin here
 # **********
+printf "Starting initrd...\n"
 
 init=/sbin/init
 overlayroot=
@@ -201,30 +208,30 @@ for param in $cmdline ; do
 done
 
 if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
-        [ "$verbose" == "no" ] || echo "Start udev..."
+        [ "$verbose" == "no" ] || printf "Start udev...\n"
         do_start_udev
 fi
 
 if [ -f /etc/mdadm.conf ]; then
 
-  [ "$verbose" == "no" ] || echo "mdadm -As..."
+  [ "$verbose" == "no" ] || printf "mdadm -As...\n"
   /sbin/mdadm -As
 
-  [ "$verbose" == "no" ] || echo "mdadm --auto-detect..."
+  [ "$verbose" == "no" ] || printf "mdadm --auto-detect...\n"
   /sbin/mdadm --auto-detect
   ### First we activate lvm if possible
   if [ -f /sbin/lvm ]; then
-    [ "$verbose" == "no" ] || echo "/sbin/lvm vgchange --ignorelockingfailure -ay"
+    [ "$verbose" == "no" ] || printf "/sbin/lvm vgchange --ignorelockingfailure -ay\n"
     /sbin/lvm vgchange --ignorelockingfailure -ay
     if [ $? = 0 ]; then
-       [ "$verbose" == "no" ] || echo "/sbin/lvm vgscan --ignorelockingfailure --mknodes"
+       [ "$verbose" == "no" ] || printf "/sbin/lvm vgscan --ignorelockingfailure --mknodes\n"
        /sbin/lvm vgscan --ignorelockingfailure --mknodes
     fi
   fi
 fi
 
 if [ -n "$rootdelay" ] ; then
-	[ "$verbose" == "no" ] || echo "... wait $rootdelay second(s)"
+	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
 
@@ -233,7 +240,7 @@ if [ "$root" == "" ]; then
 	if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
 		find_media
 		if [ ! -L /dev/nutyx-cd ]; then
-			[ "$verbose" == "no" ] || echo "Media not found yet, trying again in 5 sec"
+			[ "$verbose" == "no" ] || printf "Media not found yet, trying again in 5 sec\n"
 			sleep 5
 			find_media
 		fi
@@ -258,43 +265,43 @@ if [ "$root" == "" ]; then
 		sh
 	else
 		if [ "$verbose" == "yes" ]; then
-			echo "/etc/rc.d/init.d/setup-nutyx exist ..."
+			printf "/etc/rc.d/init.d/setup-nutyx exist ...\n"
 			ls -lt /etc/rc.d/init.d/setup-nutyx
 		fi
 	fi
 	if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
 		# If Eudev was already started
 		# We need to restart it for loading keyboards, screen, usb needed modules
-		[ "$verbose" == "no" ] || echo "Stop udev..."
+		[ "$verbose" == "no" ] || printf "Stop udev...\n"
 		do_stop_udev
 
-		[ "$verbose" == "no" ] || echo "Wait $rootdelay second(s) ..."
+		[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
 		sleep $rootdelay
 	fi
-	[ "$verbose" == "no" ] || echo "Start udev ..."
+	[ "$verbose" == "no" ] || printf "Start udev ...\n"
         do_start_udev
 
-	[ "$verbose" == "no" ] || echo "Wait $rootdelay second(s) ..."
+	[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
 	sleep $rootdelay
 
-	[ "$verbose" == "no" ] || echo "Stsrt sysklogd ..."
+	[ "$verbose" == "no" ] || printf "Start sysklogd ...\n"
 	do_start_sysklogd
 	[ "$verbose" == "no" ]  && clear
 
 	MainLoop
 	root=`cat /root/boot`
 
-	[ "$verbose" == "no" ] || echo "Stop udev ..."
+	[ "$verbose" == "no" ] || printf "Stop udev ...\n"
 	do_stop_udev
 
-	[ "$verbose" == "no" ] || echo "Stop sysklogd ..."
+	[ "$verbose" == "no" ] || printf "Stop sysklogd ...\n"
 	do_stop_sysklogd
 
 	cd /
 
 	for DIR in usr lib sbin bin
 	do
-		[ "$verbose" == "no" ] || echo "umount /$DIR ..."
+		[ "$verbose" == "no" ] || printf "umount /%s ...\n" $DIR
 		umount /$DIR > /dev/null 2>&1
 	done
 fi
@@ -303,7 +310,7 @@ mkdir /.root
 do_mount_root
 
 if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
-	[ "$verbose" == "no" ] || echo "Stop udev ..."
+	[ "$verbose" == "no" ] || printf "Stop udev ...\n"
 	do_stop_udev
 fi
 
