@@ -1689,6 +1689,49 @@ $(gettext "an simplify VI editor will allow you to modify it").\n\n \
 			vi $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE;;
 	esac
 }
+setup_grub_efi() {
+	# efi is less flexible, we need that the first partition formated 
+	# in vfat file system
+	# The partition table MUST be gpt type
+	# Means those 2 criteria are not fullfill we die 
+	local GRUB_CONFIG_FILE GRUB_CONFIG_DIR GRUB_DESTINATION_DIR GRUB_LOG_FILE
+	GRUB_CONFIG_FILE="grub.cfg"
+	GRUB_DESTINATION_DIR="boot/"
+	GRUB_LOG_FILE=$TMP/grub.log
+	if [ "$CHECK_HD_OK" == "no" ]; then
+		check_available_disk
+		[ "$CHECK_HD_OK" == "no" ] && return
+	fi
+	if [ "$CHECK_PART_OK" == "no" ]; then
+		check_available_partition
+		[ "$CHECK_PART_OK" == "no" ] && return
+	fi
+	# gpt partition ?
+
+	# /dev/sda1 exist and free ?
+	
+	# NuTyX is installed ?
+	if [ ! -d $TMP/boot_partition/${GRUB_DESTINATION_DIR} ]; then
+		# NuTyX is not installed we die
+		return
+	fi
+	
+
+	# Preparations
+    mkfs.vfat ${DISK}1
+	mkdir $TMP/boot_partition
+	# $PARTITION is the install NuTyX partition
+	mount $PARTITION $TMP/boot_partition
+	mount ${DISK}1 $TMP/boot_partition/boot/efi
+	echo "$PARTITION" > $TMP/boot_part
+	GRUB_CONFIG_DIR="$TMP/boot_partition/${GRUB_DESTINATION_DIR}grub-efi"
+
+	# Writing files
+	LANG=C /sbin/grub-install-efi --recheck \
+	--boot-directory=$TMP/boot_partition/${GRUB_DESTINATION_DIR} \
+	--efi-directory=$TMP/boot_partition/${GRUB_DESTINATION_DIR}/efi \
+	--bootloader-id=boot --target=x86_64-efi > ${GRUB_LOG_FILE} 2>&1
+}
 setup_grub() {
 	local GRUB_CONFIG_FILE GRUB_CONFIG_DIR GRUB_DESTINATION_DIR GRUB_LOG_FILE
 	GRUB_CONFIG_FILE="grub.cfg"
@@ -1856,6 +1899,96 @@ EOF
 		MBR_ok
 	fi
 	umount $PARTITION
+}
+update_grub_config_file() {
+	if [ ! -f $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE ]; then
+		cat > $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE << "EOF"
+# Begin grub.cfg
+# By default boot the first menu entry.
+set default=0
+# Allow 5 seconds before booting the default.
+set timeout=5
+set color_highlight=blue/white
+set color_normal=cyan/black
+# insmod all_video
+# insmod jpeg
+# terminal_output gfxterm
+EOF
+	fi
+	BOOT_FS="`print_file_system $PARTITION`"
+	if [ -f $TMP/boot ]; then
+		#
+		# The $TMP/boot file contains the NuTyX partition
+		#
+		NuTyX_PART="`cat $TMP/boot`"
+		BOOT_FS="`print_file_system $PARTITION`"
+		NuTyX_FS="`print_file_system $NuTyX_PART`"
+		echo "
+menuentry \"NuTyX ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {
+   linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro quiet verbose=no
+#  initrd /${GRUB_DESTINATION_DIR}initrd
+}
+
+menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {
+   linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro
+#  initrd /${GRUB_DESTINATION_DIR}initrd
+}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
+	else
+		#
+		# NuTyX is not yet installed
+		#
+		cat >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}  << "EOF"
+#################################################################
+#                                                               #
+#               Example of a menuentry:                         #
+#                                                               #
+#   The NuTyX distribution to boot from is located:             #
+#      on the SECOND harddisk ( HDD 2 ) AND                     #
+#      the second harddisk has THREE partitions.                #
+#      NuTyX IS installed on the third partition.               #
+#                                                               #
+# NOTE:                                                         #
+# -----                                                         #
+#                                                               #
+#  ==>>>    Harddisk start AT ZERO                              #
+#  ==>>>    Partition start AT ONE                              #
+#                                                               #
+# We need to inform GRUB that we use the kernel on              #
+# the Partition Number 3 of Harddisk Number 2                   #
+#                                                               #
+#  ======>  set root=(hd1,3)                                    #
+#                                                               #
+# And we need to inform the kernel to look at the right place:  #
+#                                                               #
+#  ======>  root=/dev/sdb3                                      #
+#                                                               #
+#           Below the menuentry of this example:                #
+#       ( adjust to your needs and remove the '#' )             #
+#                                                               #
+#################################################################
+#
+#menuentry  "Harddisk number 2 and partition number 3" {
+#   set root=(hd1,3)
+#   linux /boot/kernel root=/dev/sdb3 ro quiet verbose=no
+#}
+#
+# The same one for debug purpose:
+#
+#menuentry  "Harddisk number 2 and partition number 3 verbose mode" {
+#   set root=(hd1,3)
+#   linux /boot/kernel root=/dev/sdb3 ro
+#}
+#
+# An other one with initrd and rootdelay (to use with USB stick for ex)
+#
+#menuentry  "Harddisk number 2 and partition number 1 with initrd" {
+#   set root=(hd1,1)
+#   linux /boot/kernel root=/dev/sdb1 ro rootdelay=5
+#   initrd /boot/initrd
+#}
+#
+EOF
+
 }
 setup_reboot() {
 	cd /
