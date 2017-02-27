@@ -116,7 +116,7 @@ do_mount_in_ram()
 find_media() {
    local PI
    EXPECT_LABEL="nutyxcd"
-   for SYS in /sys/block/sd*/sd* /sys/block/sr* ; do
+   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* ; do
 	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
       if [ ! -d "$SYS" ]; then  continue; fi
       DEV=/dev/${SYS##*/}

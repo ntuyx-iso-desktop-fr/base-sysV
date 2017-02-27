@@ -1988,7 +1988,7 @@ menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {
 #}
 #
 EOF
-
+  fi
 }
 setup_reboot() {
 	cd /
