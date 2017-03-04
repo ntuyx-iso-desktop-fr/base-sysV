@@ -1372,11 +1372,15 @@ check_available_partition() {
 		CHECK_PART_OK="no"
 		setup_partition
 	else
+		[ -d "$EFIVARS" ] && check_esp
 		check_swap
 		for i in ${SWAP_LIST}
 		do
 			PARTITION_LIST=`echo ${PARTITION_LIST}| sed "s@$i@@"`
 		done
+
+		[ -d "$EFIVARS" ] && PARTITION_LIST=`echo ${PARTITION_LIST}| sed "s@$EFI_SYS_PART@@"`
+
 		# Only one partition ?
 		if [ `echo $PARTITION_LIST|wc -w` -eq 1 ];then
 			# Only one disk
@@ -1406,6 +1410,20 @@ $(gettext "Install GRUB first, then NuTyX") \n\n\
 $(gettext "Have fun") :) \n\n\
 $(gettext "Thank you for installing NuTyX") \
 " 0 0
+}
+setup_help_efi() {
+	dialog --no-cancel \
+	--title "   $(gettext "How to do it")  " \
+	--colors --msgbox \
+"$(gettext "This is a very basic tool, do not expect too much"). \
+$(gettext "It will ask you on which partition you want to install NuTyX"). \
+$(gettext "If not yet created/formatted, it will prompt you to do so").\n\
+\n$(gettext "NuTyX goes on") \
+\Zu\Zb\Z1$(gettext "only ONE partition")\Zn\n\n\
+$(gettext "Have fun") :) \n\n\
+$(gettext "Thank you for installing NuTyX") \
+" 0 0
+
 }	
 setup_partition() {
 	unset DISK_LIST
@@ -1535,6 +1553,9 @@ erase_nutyx() {
 install_nutyx() {
 	local DIR REAL FILE
 	setup_swap
+
+	[ -d "$EFIVARS" ] && setup_esp
+
 	cd ${1}/boot
 	MAX=`ls *squashfs|wc -l`
 	N=0
@@ -1551,6 +1572,22 @@ install_nutyx() {
 	chmod 750 ${2}/root
 	mkdir ${2}/boot 2>/dev/null
 	echo "$PARTITION   /    $FORMAT  defaults     0    0" >> /etc/fstab
+	if [ -d "$EFIVARS" ]; then
+		mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+		mkdir -p ${2}/boot/efi
+		echo "efivarfs    /sys/firmware/efi/efivars    efivarfs    rw,nosuid,nodev,noexec,noatime 0 0" >> /etc/fstab
+		if [ ! -z "$EFI_SYS_PART" ]; then
+			mount "$EFI_SYS_PART" ${2}/boot/efi
+			mkdir -p ${2}/boot/efi/EFI/BOOT
+			cp ${1}/kernel \
+			${2}/boot/efi/EFI/BOOT/kernel-`uname -r`.efi
+			umount "$EFI_SYS_PART"
+			efibootmgr -c -L "NuTyX Linux Quiet on $PARTITION" -l "\EFI\boot\kernel-`uname -r`.efi" -u "root=$PARTITION ro quiet"
+		fi
+	else
+		mkdir -p ${2}/boot
+	fi
+
 	for FILE in boot/kernel  \
 	boot/kernel-`uname -r` \
 	etc/profile.d/i18n.sh \
@@ -1661,13 +1698,15 @@ setup_install() {
 	SETUP_INSTALL="yes"
 	echo "$PARTITION" > /root/boot
 	echo "$PARTITION" > $TMP/boot
-	dialog --title "   $(gettext "Configuration of the boot of the computer (GRUB)")   " \
-	--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
-	retval=$?
-	case $retval in
-		0)
-			setup_grub;;
-	esac
+	if [ ! -d "$EFIVARS" ];then
+		dialog --title "   $(gettext "Configuration of the boot of the computer (GRUB)")   " \
+		--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
+		retval=$?
+		case $retval in
+			0)
+				setup_grub;;
+		esac
+	fi
 }
 MBR_ok() {
 	local retval
@@ -1688,49 +1727,6 @@ $(gettext "an simplify VI editor will allow you to modify it").\n\n \
 			setup_keymap
 			vi $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE;;
 	esac
-}
-setup_grub_efi() {
-	# efi is less flexible, we need that the first partition formated 
-	# in vfat file system
-	# The partition table MUST be gpt type
-	# Means those 2 criteria are not fullfill we die 
-	local GRUB_CONFIG_FILE GRUB_CONFIG_DIR GRUB_DESTINATION_DIR GRUB_LOG_FILE
-	GRUB_CONFIG_FILE="grub.cfg"
-	GRUB_DESTINATION_DIR="boot/"
-	GRUB_LOG_FILE=$TMP/grub.log
-	if [ "$CHECK_HD_OK" == "no" ]; then
-		check_available_disk
-		[ "$CHECK_HD_OK" == "no" ] && return
-	fi
-	if [ "$CHECK_PART_OK" == "no" ]; then
-		check_available_partition
-		[ "$CHECK_PART_OK" == "no" ] && return
-	fi
-	# gpt partition ?
-
-	# /dev/sda1 exist and free ?
-	
-	# NuTyX is installed ?
-	if [ ! -d $TMP/boot_partition/${GRUB_DESTINATION_DIR} ]; then
-		# NuTyX is not installed we die
-		return
-	fi
-	
-
-	# Preparations
-    mkfs.vfat ${DISK}1
-	mkdir $TMP/boot_partition
-	# $PARTITION is the install NuTyX partition
-	mount $PARTITION $TMP/boot_partition
-	mount ${DISK}1 $TMP/boot_partition/boot/efi
-	echo "$PARTITION" > $TMP/boot_part
-	GRUB_CONFIG_DIR="$TMP/boot_partition/${GRUB_DESTINATION_DIR}grub-efi"
-
-	# Writing files
-	LANG=C /sbin/grub-install-efi --recheck \
-	--boot-directory=$TMP/boot_partition/${GRUB_DESTINATION_DIR} \
-	--efi-directory=$TMP/boot_partition/${GRUB_DESTINATION_DIR}/efi \
-	--bootloader-id=boot --target=x86_64-efi > ${GRUB_LOG_FILE} 2>&1
 }
 setup_grub() {
 	local GRUB_CONFIG_FILE GRUB_CONFIG_DIR GRUB_DESTINATION_DIR GRUB_LOG_FILE
@@ -1900,96 +1896,6 @@ EOF
 	fi
 	umount $PARTITION
 }
-update_grub_config_file() {
-	if [ ! -f $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE ]; then
-		cat > $GRUB_CONFIG_DIR/$GRUB_CONFIG_FILE << "EOF"
-# Begin grub.cfg
-# By default boot the first menu entry.
-set default=0
-# Allow 5 seconds before booting the default.
-set timeout=5
-set color_highlight=blue/white
-set color_normal=cyan/black
-# insmod all_video
-# insmod jpeg
-# terminal_output gfxterm
-EOF
-	fi
-	BOOT_FS="`print_file_system $PARTITION`"
-	if [ -f $TMP/boot ]; then
-		#
-		# The $TMP/boot file contains the NuTyX partition
-		#
-		NuTyX_PART="`cat $TMP/boot`"
-		BOOT_FS="`print_file_system $PARTITION`"
-		NuTyX_FS="`print_file_system $NuTyX_PART`"
-		echo "
-menuentry \"NuTyX ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {
-   linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro quiet verbose=no
-#  initrd /${GRUB_DESTINATION_DIR}initrd
-}
-
-menuentry \"NuTyX Verbose ${SETUP_ARCH} ${NuTyX_FS} on ${NuTyX_PART}\" {
-   linux /${GRUB_DESTINATION_DIR}kernel root=${NuTyX_PART} ro
-#  initrd /${GRUB_DESTINATION_DIR}initrd
-}" >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}
-	else
-		#
-		# NuTyX is not yet installed
-		#
-		cat >> ${GRUB_CONFIG_DIR}/${GRUB_CONFIG_FILE}  << "EOF"
-#################################################################
-#                                                               #
-#               Example of a menuentry:                         #
-#                                                               #
-#   The NuTyX distribution to boot from is located:             #
-#      on the SECOND harddisk ( HDD 2 ) AND                     #
-#      the second harddisk has THREE partitions.                #
-#      NuTyX IS installed on the third partition.               #
-#                                                               #
-# NOTE:                                                         #
-# -----                                                         #
-#                                                               #
-#  ==>>>    Harddisk start AT ZERO                              #
-#  ==>>>    Partition start AT ONE                              #
-#                                                               #
-# We need to inform GRUB that we use the kernel on              #
-# the Partition Number 3 of Harddisk Number 2                   #
-#                                                               #
-#  ======>  set root=(hd1,3)                                    #
-#                                                               #
-# And we need to inform the kernel to look at the right place:  #
-#                                                               #
-#  ======>  root=/dev/sdb3                                      #
-#                                                               #
-#           Below the menuentry of this example:                #
-#       ( adjust to your needs and remove the '#' )             #
-#                                                               #
-#################################################################
-#
-#menuentry  "Harddisk number 2 and partition number 3" {
-#   set root=(hd1,3)
-#   linux /boot/kernel root=/dev/sdb3 ro quiet verbose=no
-#}
-#
-# The same one for debug purpose:
-#
-#menuentry  "Harddisk number 2 and partition number 3 verbose mode" {
-#   set root=(hd1,3)
-#   linux /boot/kernel root=/dev/sdb3 ro
-#}
-#
-# An other one with initrd and rootdelay (to use with USB stick for ex)
-#
-#menuentry  "Harddisk number 2 and partition number 1 with initrd" {
-#   set root=(hd1,1)
-#   linux /boot/kernel root=/dev/sdb1 ro rootdelay=5
-#   initrd /boot/initrd
-#}
-#
-EOF
-  fi
-}
 setup_reboot() {
 	cd /
 	if [ -f /tmp/depot ]; then
@@ -2005,26 +1911,45 @@ setup_reboot() {
 	/sbin/reboot -f
 }
 setup_initrd() {
-	dialog --title "   $(gettext "Welcome to the NuTyX installer")   " \
-	--colors --menu "    $(gettext "Main Menu")   "  0 0 0 \
-	"$(gettext "Help")" "$(gettext "How to do it") ? " \
-	"$(gettext "Keyboard")" "$(gettext "Configure the keyboard") ($(gettext "optional"))" \
-	"$(gettext "Partitioning")" "$(gettext "Create all your partitions") ($(gettext "optional"))" \
-	"$(gettext "Format")" "$(gettext "Format a partition") ($(gettext "optional"))" \
-	"$(gettext "Boot")" "$(gettext "Configure the boot of the PC") ($(gettext "optional")) ($(gettext "skilled"))" \
-	"$(gettext "Install")" "$(gettext "Install NuTyX")" \
-	"$(gettext "Clock")" "$(gettext "Date and time settings") ($(gettext "optional"))" \
-	"$(gettext "Console")" "$(gettext "Open a console")" \
-	"$(gettext "Erase")" "$(gettext "Erase") NuTyX" \
-	"$(gettext "Restart")" "$(gettext "Reboot the PC")" \
- 	2>$TMP/choix
+	if [ -d "$EFIVARS" ]; then
+		dialog --title "   $(gettext "Welcome to the NuTyX installer")   " \
+		--colors --menu "    $(gettext "Main Menu")   "  0 0 0 \
+		"$(gettext "Help")" "$(gettext "How to do it") ? " \
+		"$(gettext "Keyboard")" "$(gettext "Configure the keyboard") ($(gettext "optional"))" \
+		"$(gettext "Partitioning")" "$(gettext "Create all your partitions") ($(gettext "optional"))" \
+		"$(gettext "Format")" "$(gettext "Format a partition") ($(gettext "optional"))" \
+		"$(gettext "Install")" "$(gettext "Install NuTyX")" \
+		"$(gettext "Clock")" "$(gettext "Date and time settings") ($(gettext "optional"))" \
+		"$(gettext "Console")" "$(gettext "Open a console")" \
+		"$(gettext "Erase")" "$(gettext "Erase") NuTyX" \
+		"$(gettext "Restart")" "$(gettext "Reboot the PC")" \
+		2>$TMP/choix
+	else
+		dialog --title "   $(gettext "Welcome to the NuTyX installer")   " \
+		--colors --menu "    $(gettext "Main Menu")   "  0 0 0 \
+		"$(gettext "Help")" "$(gettext "How to do it") ? " \
+		"$(gettext "Keyboard")" "$(gettext "Configure the keyboard") ($(gettext "optional"))" \
+		"$(gettext "Partitioning")" "$(gettext "Create all your partitions") ($(gettext "optional"))" \
+		"$(gettext "Format")" "$(gettext "Format a partition") ($(gettext "optional"))" \
+		"$(gettext "Boot")" "$(gettext "Configure the boot of the PC") ($(gettext "optional")) ($(gettext "skilled"))" \
+		"$(gettext "Install")" "$(gettext "Install NuTyX")" \
+		"$(gettext "Clock")" "$(gettext "Date and time settings") ($(gettext "optional"))" \
+		"$(gettext "Console")" "$(gettext "Open a console")" \
+		"$(gettext "Erase")" "$(gettext "Erase") NuTyX" \
+		"$(gettext "Restart")" "$(gettext "Reboot the PC")" \
+		2>$TMP/choix
+	fi
 	retval=$?
 	choice=`cat $TMP/choix`
 	case $retval in
 	0|2)
 		case $choice in
 			"$(gettext "Help")")
-				setup_help
+				if [ -d "$EFIVARS" ]; then
+					setup_help_efi
+				else
+					setup_help
+				fi
 				;;
 			"$(gettext "Install")")
 				echo "CHECK_SINGLE_PARTITION=$CHECK_SINGLE_PARTITION" > /dev/tty2
@@ -2077,6 +2002,22 @@ setup_initrd() {
 		;;
 	esac
 
+}
+check_esp() {
+	unset EFI_SYS_PART
+	EFI_SYS_PART="`LANG=C fdisk -l -o device,type|grep EFI|cut -d " " -f1`"
+	if [ -z "${EFI_SYS_PART}" ];then
+	   dialog --title "   Hmmmm   " \
+	   --msgbox "    $(gettext "EFI partition not found")" 6 60
+	fi
+}
+setup_esp() {
+	check_esp
+	if [ ! -z $EFI_SYS_PART ]; then
+		/usr/bin/mkfs.vfat $EFI_SYS_PART
+		$SETUP_LOG "setup-nutyx" "EFI partition $EFI_SYS_PART added in /etc/fstab"
+		echo "$EFI_SYS_PART /boot/efi     vfat       defaults            0     0" >> /etc/fstab
+	fi
 }
 check_swap() {
 	unset SWAP_LIST
@@ -2262,7 +2203,11 @@ cleanup () {
 top_loop() {
 	if [ "$SETUP_INITRD" = "yes" ]; then
 		[ "$SETUP_CONFIG_LANGUAGE" = "yes" ] && LANG=de_CH.utf-8 setup_language
-		setup_help
+		if [ -d "$EFIVARS" ]; then
+			setup_help_efi
+		else
+			setup_help
+		fi
 		while [ "$SETUP_INSTALL" = "no" ];do
 				[ "$SETUP_CONFIG_LANGUAGE" = "yes" ] && LANG=de_CH.utf-8 setup_language
 				[ "$SETUP_INSTALL" = "no" ] && setup_initrd
@@ -2348,6 +2293,7 @@ ZONEINFO="/usr/share/zoneinfo/"
 NETWORK="`ls /etc/sysconfig/ifconfig* 2>/dev/null|head -1`"
 CLOCK="/etc/sysconfig/clock"
 USER="/home"
+EFIVARS="/sys/firmware/efi/efivars"
 
 SETUP_INITRD="no"
 SETUP_INSTALL="no"
