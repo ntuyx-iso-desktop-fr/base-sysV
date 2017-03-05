@@ -147,8 +147,8 @@ msgstr "Skriv inn datoen"
 msgid "Please enter the time"
 msgstr "Skriv inn tiden"
 
-msgid "Configuration of the boot of the computer (GRUB)"
-msgstr "Konfigurasjon av oppstartsinnstillinger i datorn (GRUB)"
+msgid "Configuration of the boot of the computer"
+msgstr "Konfigurasjon av oppstartsinnstillinger i datorn"
 
 msgid "Select the disk on which you want to modify the MBR"
 msgstr "Velg disken du ønsker å endre MBR på"
@@ -455,3 +455,9 @@ msgstr "Configure automatic update"
 
 msgid "Would you like to enable automatic update"
 msgstr "Would you like to enable automatic update"
+
+msgid "Make shure you reserve the first partition for ESP"
+msgstr "Make shure you reserve the first partition for ESP"
+
+msgid "At partitioning, declare the first partition as EFI System"
+msgstr "At partitioning, declare the first partition as EFI System"

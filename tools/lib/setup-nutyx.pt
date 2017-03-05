@@ -147,8 +147,8 @@ msgstr "Por favor, insira a data"
 msgid "Please enter the time"
 msgstr "Por favor, indique o tempo"
 
-msgid "Configuration of the boot of the computer (GRUB)"
-msgstr "Configuração da inicialização da máquina (GRUB)"
+msgid "Configuration of the boot of the computer"
+msgstr "Configuração da inicialização da máquina"
 
 msgid "Select the disk on which you want to modify the MBR"
 msgstr "Selecione o disco em que você deseja modificar o MBR"
@@ -422,3 +422,9 @@ msgstr "Configure automatic update"
 
 msgid "Would you like to enable automatic update"
 msgstr "Would you like to enable automatic update"
+
+msgid "Make shure you reserve the first partition for ESP"
+msgstr "Make shure you reserve the first partition for ESP"
+
+msgid "At partitioning, declare the first partition as EFI System"
+msgstr "At partitioning, declare the first partition as EFI System"

@@ -1356,6 +1356,7 @@ check_available_disk() {
 		fi
 		CHECK_HD_OK="yes"
 	fi
+	echo "DISK_LIST=$DISK_LIST" > /dev/tty2
 }
 check_available_partition() {
 	unset PARTITION_LIST
@@ -1372,26 +1373,34 @@ check_available_partition() {
 		CHECK_PART_OK="no"
 		setup_partition
 	else
+		echo "PARTITION_LIST=$PARTITION_LIST" > /dev/tty2
 		[ -d "$EFIVARS" ] && check_esp
 		check_swap
 		for i in ${SWAP_LIST}
 		do
+			echo "SWAP_PARTITION=$i" > /dev/tty2
 			PARTITION_LIST=`echo ${PARTITION_LIST}| sed "s@$i@@"`
 		done
-
-		[ -d "$EFIVARS" ] && PARTITION_LIST=`echo ${PARTITION_LIST}| sed "s@$EFI_SYS_PART@@"`
-
-		# Only one partition ?
-		if [ `echo $PARTITION_LIST|wc -w` -eq 1 ];then
-			# Only one disk
-			if [ `echo $DISK_LIST|wc -w` -eq 1 ]; then
-				PARTITION=`echo $PARTITION_LIST|sed 's/ //g'`
-				echo "PARTITION=$PARTITION" > /dev/tty2
-				CHECK_SINGLE_PARTITION="yes"
-				echo "CHECK_SINGLE_PARTITION=$CHECK_SINGLE_PARTITION"  > /dev/tty2
-			fi
+		echo "PARTITION_LIST=$PARTITION_LIST" > /dev/tty2
+		if [ ! -z "$EFI_SYS_PART" ]; then
+			echo "EFI_SYS_PART=$EFI_SYS_PART" > /dev/tty2
+			PARTITION_LIST=`echo ${PARTITION_LIST}| sed "s@$EFI_SYS_PART@@"`
 		fi
-		CHECK_PART_OK="yes"
+		echo "PARTITION_LIST=$PARTITION_LIST" > /dev/tty2
+		if [ ! -z "$PARTITION_LIST" ]; then
+			# Only one partition ?
+			if [ `echo $PARTITION_LIST|wc -w` -eq 1 ];then
+				# Only one disk
+				if [ `echo $DISK_LIST|wc -w` -eq 1 ]; then
+					PARTITION=`echo $PARTITION_LIST|sed 's/ //g'`
+					echo "PARTITION=$PARTITION" > /dev/tty2
+					CHECK_SINGLE_PARTITION="yes"
+					echo "CHECK_SINGLE_PARTITION=$CHECK_SINGLE_PARTITION"  > /dev/tty2
+				fi
+			fi
+			CHECK_PART_OK="yes"
+		fi
+		echo "PARTITION_LIST=$PARTITION_LIST" > /dev/tty2
 	fi
 }
 setup_help() {
@@ -1420,6 +1429,9 @@ $(gettext "It will ask you on which partition you want to install NuTyX"). \
 $(gettext "If not yet created/formatted, it will prompt you to do so").\n\
 \n$(gettext "NuTyX goes on") \
 \Zu\Zb\Z1$(gettext "only ONE partition")\Zn\n\n\
+$(gettext "Make shure you reserve the first partition for ESP"): \n\n\
+$(gettext "To do so"): \
+$(gettext "At partitioning, declare the first partition as EFI System") \n\n\
 $(gettext "Have fun") :) \n\n\
 $(gettext "Thank you for installing NuTyX") \
 " 0 0
@@ -1573,17 +1585,8 @@ install_nutyx() {
 	mkdir ${2}/boot 2>/dev/null
 	echo "$PARTITION   /    $FORMAT  defaults     0    0" >> /etc/fstab
 	if [ -d "$EFIVARS" ]; then
-		mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 		mkdir -p ${2}/boot/efi
 		echo "efivarfs    /sys/firmware/efi/efivars    efivarfs    rw,nosuid,nodev,noexec,noatime 0 0" >> /etc/fstab
-		if [ ! -z "$EFI_SYS_PART" ]; then
-			mount "$EFI_SYS_PART" ${2}/boot/efi
-			mkdir -p ${2}/boot/efi/EFI/BOOT
-			cp ${1}/kernel \
-			${2}/boot/efi/EFI/BOOT/kernel-`uname -r`.efi
-			umount "$EFI_SYS_PART"
-			efibootmgr -c -L "NuTyX Linux Quiet on $PARTITION" -l "\EFI\boot\kernel-`uname -r`.efi" -u "root=$PARTITION ro quiet"
-		fi
 	else
 		mkdir -p ${2}/boot
 	fi
@@ -1699,14 +1702,37 @@ setup_install() {
 	echo "$PARTITION" > /root/boot
 	echo "$PARTITION" > $TMP/boot
 	if [ ! -d "$EFIVARS" ];then
-		dialog --title "   $(gettext "Configuration of the boot of the computer (GRUB)")   " \
+		dialog --title "   $(gettext "Configuration of the boot of the computer") (GRUB)   " \
 		--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
 		retval=$?
 		case $retval in
 			0)
 				setup_grub;;
 		esac
+	else
+		FORMAT=`print_file_system $EFI_SYS_PART`
+		if [ "$FORMAT" == "vfat" ];then
+			dialog --title "   $(gettext "Configuration of the boot of the computer") (efibootmgr)   " \
+			--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
+			retval=$?
+			case $retval in
+				0)
+				setup_efibootmgr "/media/cdrom/isolinux" "$MF";;
+			esac
+		fi
 	fi
+}
+setup_efibootmgr() {
+	local SPNR
+	SPNR=`echo $PARTITION|sed "s@^/dev/[a-z]*@@"`
+	mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+	mkdir -p ${2}/boot/efi
+	mount "$EFI_SYS_PART" ${2}/boot/efi
+	mkdir -p ${2}/boot/efi/EFI/BOOT/$SPNR
+	cp ${1}/kernel \
+	${2}/boot/efi/EFI/BOOT/$SPNR/kernel.efi
+	umount "$EFI_SYS_PART"
+	efibootmgr -c -L "NuTyX Linux Quiet on $PARTITION" -l "\EFI\BOOT\\$SPNR\kernel.efi" -u "root=$PARTITION ro quiet"
 }
 MBR_ok() {
 	local retval
@@ -2004,17 +2030,37 @@ setup_initrd() {
 
 }
 check_esp() {
+	local FORMAT FIRST_DISK
 	unset EFI_SYS_PART
-	EFI_SYS_PART="`LANG=C fdisk -l -o device,type|grep EFI|cut -d " " -f1`"
+	FIRST_DISK=`for i in $DISK_LIST;do echo $i;break;done`
+	EFI_SYS_PART="`LANG=C fdisk ${FIRST_DISK} -l -o device,type|grep EFI|cut -d " " -f1`"
 	if [ -z "${EFI_SYS_PART}" ];then
 	   dialog --title "   Hmmmm   " \
 	   --msgbox "    $(gettext "EFI partition not found")" 6 60
 	fi
+	if [ ! -z $EFI_SYS_PART ]; then
+		FORMAT=`print_file_system $EFI_SYS_PART`
+		if [ "$FORMAT" != "no" ] && [ "$FORMAT" != "vfat" ];then
+			dialog --title " $(gettext "Launch the format process ?") " \
+			--colors --yesno "$(gettext "The partition") \Zb\Z1${EFI_SYS_PART}\Zn \
+$(gettext "will be formatted in") \Zb\Z1vfat\Zn.\n\n\
+$(gettext "Are you sure you want to continue ?")" 7 60
+			retval2=$?
+			case $retval2 in
+				0)
+					/usr/bin/mkfs.vfat $EFI_SYS_PART;;
+				1|255)
+					break;;
+			esac
+		fi
+	fi	
 }
 setup_esp() {
+	local FORMAT
 	check_esp
 	if [ ! -z $EFI_SYS_PART ]; then
-		/usr/bin/mkfs.vfat $EFI_SYS_PART
+		FORMAT=`print_file_system $EFI_SYS_PART`
+		 [ "$FORMAT" == "no" ] && /usr/bin/mkfs.vfat $EFI_SYS_PART
 		$SETUP_LOG "setup-nutyx" "EFI partition $EFI_SYS_PART added in /etc/fstab"
 		echo "$EFI_SYS_PART /boot/efi     vfat       defaults            0     0" >> /etc/fstab
 	fi

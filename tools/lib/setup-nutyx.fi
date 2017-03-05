@@ -147,8 +147,8 @@ msgstr "Syötä päivämäärä"
 msgid "Please enter the time"
 msgstr "Syötä aika"
 
-msgid "Configuration of the boot of the computer (GRUB)"
-msgstr "Konfiguraatio pelaa kone (GRUB)"
+msgid "Configuration of the boot of the computer"
+msgstr "Konfiguraatio pelaa kone"
 
 msgid "Select the disk on which you want to modify the MBR"
 msgstr "Valitse levy, jolle haluat muuttaa MBR"
@@ -455,3 +455,9 @@ msgstr "Configure automatic update"
 
 msgid "Would you like to enable automatic update"
 msgstr "Would you like to enable automatic update"
+
+msgid "Make shure you reserve the first partition for ESP"
+msgstr "Make shure you reserve the first partition for ESP"
+
+msgid "At partitioning, declare the first partition as EFI System"
+msgstr "At partitioning, declare the first partition as EFI System"
