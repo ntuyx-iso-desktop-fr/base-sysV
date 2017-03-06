@@ -1710,7 +1710,8 @@ setup_install() {
 				setup_grub;;
 		esac
 	else
-		FORMAT=`print_file_system $EFI_SYS_PART`
+		FORMAT="no"
+		[ ! -z $EFI_SYS_PART ] && FORMAT=`print_file_system $EFI_SYS_PART`
 		if [ "$FORMAT" == "vfat" ];then
 			dialog --title "   $(gettext "Configuration of the boot of the computer") (efibootmgr)   " \
 			--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
@@ -1719,20 +1720,29 @@ setup_install() {
 				0)
 				setup_efibootmgr "/media/cdrom/isolinux" "$MF";;
 			esac
+		else
+			dialog --title "   Oups !!!  " \
+			--msgbox "    $(gettext "This installation won't boot again ...")" 6 60
 		fi
 	fi
 }
 setup_efibootmgr() {
-	local SPNR
+	local SPNR OPTIONS
+	mount $PARTITION ${2}
+	OPTIONS=`cat /proc/cmdline|sed "s@BOOT_IMAGE=/boot/kernel\ @@"`
 	SPNR=`echo $PARTITION|sed "s@^/dev/[a-z]*@@"`
 	mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 	mkdir -p ${2}/boot/efi
 	mount "$EFI_SYS_PART" ${2}/boot/efi
 	mkdir -p ${2}/boot/efi/EFI/BOOT/$SPNR
-	cp ${1}/kernel \
+	rm ${2}/boot/efi/EFI/BOOT/$SPNR/* 2>/dev/null
+	mv ${2}/boot/kernel-`uname -r` \
 	${2}/boot/efi/EFI/BOOT/$SPNR/kernel.efi
+	ln -sf efi/EFI/BOOT/$SPNR/kernel.efi ${2}/boot/kernel-`uname -r`
+	ln -sf efi/EFI/BOOT/$SPNR/kernel.efi ${2}/boot/kernel
 	umount "$EFI_SYS_PART"
-	efibootmgr -c -L "NuTyX Linux Quiet on $PARTITION" -l "\EFI\BOOT\\$SPNR\kernel.efi" -u "root=$PARTITION ro quiet"
+	efibootmgr -c -L "NuTyX Linux Quiet on $PARTITION" -l "\EFI\BOOT\\$SPNR\kernel.efi" -u "root=$PARTITION $OPTIONS"
+	umount $PARTITION
 }
 MBR_ok() {
 	local retval
@@ -2033,14 +2043,27 @@ check_esp() {
 	local FORMAT FIRST_DISK
 	unset EFI_SYS_PART
 	FIRST_DISK=`for i in $DISK_LIST;do echo $i;break;done`
-	EFI_SYS_PART="`LANG=C fdisk ${FIRST_DISK} -l -o device,type|grep EFI|cut -d " " -f1`"
-	if [ -z "${EFI_SYS_PART}" ];then
-	   dialog --title "   Hmmmm   " \
-	   --msgbox "    $(gettext "EFI partition not found")" 6 60
+	for VAR in `blkid $FIRST_DISK -o export`
+	do
+		local $VAR
+	done
+	if [ "$PTTYPE" != "gpt" ]; then
+		dialog --title "   Hmmmm   " \
+		--msgbox "    $(gettext "GPT partition table not found")" 6 60
+	else
+		EFI_SYS_PART="`LANG=C fdisk ${FIRST_DISK} -l -o device,type|grep EFI|cut -d " " -f1`"
+		if [ -z "${EFI_SYS_PART}" ];then
+			dialog --title "   Hmmmm   " \
+			--msgbox "    $(gettext "EFI partition not found")" 6 60
+		fi
 	fi
+}
+setup_esp() {
+	local FORMAT
+	check_esp
 	if [ ! -z $EFI_SYS_PART ]; then
 		FORMAT=`print_file_system $EFI_SYS_PART`
-		if [ "$FORMAT" != "no" ] && [ "$FORMAT" != "vfat" ];then
+		if [ "$FORMAT" != "vfat" ]; then
 			dialog --title " $(gettext "Launch the format process ?") " \
 			--colors --yesno "$(gettext "The partition") \Zb\Z1${EFI_SYS_PART}\Zn \
 $(gettext "will be formatted in") \Zb\Z1vfat\Zn.\n\n\
@@ -2048,21 +2071,18 @@ $(gettext "Are you sure you want to continue ?")" 7 60
 			retval2=$?
 			case $retval2 in
 				0)
-					/usr/bin/mkfs.vfat $EFI_SYS_PART;;
+					/usr/bin/mkfs.vfat $EFI_SYS_PART
+					$SETUP_LOG "setup-nutyx" "EFI partition $EFI_SYS_PART formatted in vfat"
+					;;
 				1|255)
 					break;;
 			esac
 		fi
-	fi	
-}
-setup_esp() {
-	local FORMAT
-	check_esp
-	if [ ! -z $EFI_SYS_PART ]; then
 		FORMAT=`print_file_system $EFI_SYS_PART`
-		 [ "$FORMAT" == "no" ] && /usr/bin/mkfs.vfat $EFI_SYS_PART
-		$SETUP_LOG "setup-nutyx" "EFI partition $EFI_SYS_PART added in /etc/fstab"
-		echo "$EFI_SYS_PART /boot/efi     vfat       defaults            0     0" >> /etc/fstab
+		if [ "$FORMAT" == "vfat" ]; then
+			$SETUP_LOG "setup-nutyx" "EFI partition $EFI_SYS_PART added in /etc/fstab"
+			echo "$EFI_SYS_PART /boot/efi     vfat       defaults            0     0" >> /etc/fstab
+		fi
 	fi
 }
 check_swap() {

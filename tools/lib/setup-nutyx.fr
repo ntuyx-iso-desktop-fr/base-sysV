@@ -465,3 +465,11 @@ msgstr "Assurez-vous de reserver la première partition pour l'ESP"
 msgid "At partitioning, declare the first partition as EFI System"
 msgstr "Lors du partionnement, déclarez la première partition comme EFI System"
 
+msgid "EFI partition not found"
+msgstr "Partition EFI pas trouvée"
+
+msgid "GPT partition table not found"
+msgstr "Table de partitions GPT pas trouvée"
+
+msgid "This installation won't boot again ..."
+msgstr "Cette installation ne redémarrera pas ..."

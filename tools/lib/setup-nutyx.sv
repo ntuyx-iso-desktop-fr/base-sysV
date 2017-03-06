@@ -457,4 +457,19 @@ msgid "Configure automatic update"
 msgstr "Configure automatic update"
 
 msgid "Would you like to enable automatic update"
-msgstr ""
+msgstr "Would you like to enable automatic update"
+
+msgid "Make shure you reserve the first partition for ESP"
+msgstr "Make shure you reserve the first partition for ESP"
+
+msgid "At partitioning, declare the first partition as EFI System"
+msgstr "At partitioning, declare the first partition as EFI System"
+
+msgid "EFI partition not found"
+msgstr "EFI partition not found"
+
+msgid "GPT partition table not found"
+msgstr "GPT partition table not found"
+
+msgid "This installation won't boot again ..."
+msgstr "This installation won't boot again ..."
