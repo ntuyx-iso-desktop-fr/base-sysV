@@ -1713,13 +1713,7 @@ setup_install() {
 		FORMAT="no"
 		[ ! -z $EFI_SYS_PART ] && FORMAT=`print_file_system $EFI_SYS_PART`
 		if [ "$FORMAT" == "vfat" ];then
-			dialog --title "   $(gettext "Configuration of the boot of the computer") (efibootmgr)   " \
-			--yesno "$(gettext "Configure the boot of the PC") ? " 0 0
-			retval=$?
-			case $retval in
-				0)
-				setup_efibootmgr "/media/cdrom/isolinux" "$MF";;
-			esac
+			setup_efibootmgr "/media/cdrom/isolinux" "$MF"
 		else
 			dialog --title "   Oups !!!  " \
 			--msgbox "    $(gettext "This installation won't boot again ...")" 6 60
