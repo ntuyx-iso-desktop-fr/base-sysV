@@ -1187,6 +1187,13 @@ FILE="nutyx-version"
 echo "name ${CODE_NAME}
 version $VERSION" > ${FOLDER}/var/lib/pkg/$FILE
 }
+generate_lsb() {
+echo "DISTRIB_ID=\"NuTyX\"
+DISTRIB_DESCRIPTION=\"NuTyX GNU/Linux\"
+DISTRIB_CODENAME=\"${CODE_NAME}\"
+DISTRIB_RELEASE=\"$VERSION\"
+LSB_VERSION=\"1.4-1\"" > ${FOLDER}/etc/lsb-release
+}
 install_resolv_conf() {
 [ -f /etc/resolv.conf ] && cp /etc/resolv.conf ${FOLDER}/etc
 }
@@ -1223,7 +1230,7 @@ fi
 if [ "$VERSION" == "development" ]; then
 	CODE_NAME="`date +%Y%m%d`"
 else
-	CODE_NAME="stable"
+	CODE_NAME="Houaphan"
 fi
 [ -z "$DEPOT" ] && DEPOT="/var/lib/pkg/depot"
 [ -z "$FOLDER" ] && FOLDER="/mnt/hd"
@@ -1396,9 +1403,9 @@ gettext procps-ng psmisc \
 sed sudo tzdata inetutils \
 iproute2 iana-etc \
 eudev kmod less groff man-db \
-cards.man nutyx.man \
+cards.fr cards.man nutyx.man \
 lvm2 dialog cpio squashfs \
-ca-certificates \
+ca-certificates lsb-release \
 $KERNEL \
 $DEVEL
 exit" > $FOLDER/$SETUP_FILE
@@ -1433,6 +1440,7 @@ install_configuration_files() {
 	generate_rc_site
 	generate_etc_bashrc
 	generate_blfs_bootscripts
+	generate_lsb
 	generate_nutyx_version
 }
 print_help() {
