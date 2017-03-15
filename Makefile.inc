@@ -32,7 +32,7 @@ SERVICEDIR=${LIBDIR}/services
 ROOTDIR=${DESTDIR}/root
 VARDIR=${DESTDIR}/var
 
-VERSION = 8.2.95
+VERSION = 8.3
 
 NAME = nutyx-$(VERSION)
 
