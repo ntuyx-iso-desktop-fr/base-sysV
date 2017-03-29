@@ -139,6 +139,7 @@ chroot ${FOLDER} /usr/bin/env -i \
 HOME=/root \
 TERM="$TERM" \
 PS1='\u:\w\$ ' \
+$LINUX_ARCH \
 /bin/bash --login
 }
 #******************************************************************************
@@ -1224,6 +1225,7 @@ if [ -z "$CHROOT_LIST" ]; then
 	CHROOT_LIST="nutyx acl attr bash bzip2 coreutils curl \
 expat gcc readline ncurses lzo glibc gmp xz zlib \
 libarchive mpc mpfr openssl cards"
+   [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
 fi
 [ -z "$URL" ] && URL="http://downloads.nutyx.org"
 [ -z "$VERSION" ] && VERSION="#VERSION#"
@@ -1234,8 +1236,14 @@ else
 fi
 [ -z "$DEPOT" ] && DEPOT="/var/lib/pkg/depot"
 [ -z "$FOLDER" ] && FOLDER="/mnt/hd"
-[ -z "$KERNEL" ] && KERNEL="linux-firmware sysklogd sysvinit reiserfsprogs e3 \
+if [ -z "$KERNEL" ]; then
+   if [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ]; then
+      KERNEL="sysklogd sysvinit"
+   else
+      KERNEL="linux-firmware sysklogd sysvinit reiserfsprogs e3 \
 grub lz4 mdadm jfsutils xfsprogs btrfs-progs dhcpcd kernel-lts"
+   fi
+fi
 [ "$KERNEL" == "NONE" ] && KERNEL=""
 [ "$KERNEL" == "none" ] && KERNEL=""
 
@@ -1253,7 +1261,10 @@ SETUP_FILE=/tmp/setup
 
 }
 config() {
-ARCH=`uname -m`
+HOST_ARCH=`uname -m`
+[ -z "$ARCH" ] && ARCH=`uname -m`
+[ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && LINUX_ARCH="linux32" || LINUX_ARCH=""
+
 # Number of seconds between STOPSIG and FALLBACK when stopping processes
 KILLDELAY="3"
 
@@ -1411,7 +1422,7 @@ $DEVEL
 exit" > $FOLDER/$SETUP_FILE
 chmod 177 $FOLDER/$SETUP_FILE
 setup_chroot
-chroot ${FOLDER} /bin/bash -c "$SETUP_FILE"
+chroot ${FOLDER} /usr/bin/env $LINUX_ARCH /bin/bash -c "$SETUP_FILE"
 unmountall
 }
 install_configuration_files() {
