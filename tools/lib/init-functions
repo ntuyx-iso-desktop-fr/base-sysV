@@ -789,7 +789,9 @@ check_sig_type()
 wait_for_user()
 {
    # Wait for the user by default
-   [ "${HEADLESS=0}" = "0" ] && read ENTER
+   if [ "${HEADLESS=0}" = "0" ]; then
+	   read -t 15 ENTER || echo " TIMEOUT" >> ${BOOTLOG}
+   fi
    return 0
 }
 
