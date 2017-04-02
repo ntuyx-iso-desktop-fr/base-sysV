@@ -132,6 +132,15 @@ find_media() {
 	[ "$verbose" == "no" ] || printf "mount -n /dev/nutyx-cd /media/cdrom\n"
 	mount -n /dev/nutyx-cd /media/cdrom
 	[ -d /media/cdrom/depot ] && echo $DEV > /tmp/depot
+	# If RAM Available > 1Gb (lets say around 1 000 000 kb) we get rid of the key (mounted)
+	[ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt 1000000 ] || break
+	mkdir /boot
+	for i in `ls /media/cdrom/isolinux/boot/`
+	do
+	  cp  /media/cdrom/isolinux/boot/$i /boot/
+	done
+	cp /media/cdrom/isolinux/kernel /boot/kernel
+	umount /media/cdrom
 	break
       fi
    done
@@ -282,7 +291,7 @@ if [ "$root" == "" ]; then
         do_start_udev
 
 	[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
-	sleep $rootdelay
+	[ -n "$rootdelay" ] && sleep $rootdelay
 
 	[ "$verbose" == "no" ] || printf "Start sysklogd ...\n"
 	do_start_sysklogd

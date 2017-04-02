@@ -1616,6 +1616,10 @@ install_nutyx() {
 		cp  ${1}/kernel ${2}/boot/kernel-`uname -r`
 		ln -sf kernel-`uname -r` ${2}/boot/kernel
 	fi
+	if [ -f ${1}/boot/kernel ]; then
+		cp  ${1}/boot/kernel ${2}/boot/kernel-`uname -r`
+		ln -sf kernel-`uname -r` ${2}/boot/kernel
+	fi
 	for DIR in proc sys dev srv mnt tmp
 	do
 		[ ! -d ${2}/$DIR ] &&	mkdir ${2}/$DIR
