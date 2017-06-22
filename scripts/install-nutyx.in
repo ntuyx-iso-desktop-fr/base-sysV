@@ -264,7 +264,7 @@ generate_blfs_bootscripts() {
 [ -f ${FOLDER}/etc/${FOLDER}/etc/blfs-bootscripts ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
 echo "scripts=blfs-bootscripts
-scriptsversion=20170225" > ${FOLDER}/etc/blfs-bootscripts
+scriptsversion=$BLFS" > ${FOLDER}/etc/blfs-bootscripts
 }
 generate_etc_bashrc() {
 local FILE
@@ -1248,6 +1248,7 @@ fi
 [ "$KERNEL" == "none" ] && KERNEL=""
 
 [ -z $LFS ] && LFS=$FOLDER
+[ -z $BLFS ] && BLFS="20170611"
 
 HOMEPAGE="${URL}"                      ## http://downloads.nutyx.org
 INSTALL_BASE="$ARCH/$VERSION"          ## x86_64/8.2

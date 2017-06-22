@@ -75,10 +75,10 @@ WDIR=$(mktemp -d /tmp/initrd-work.XXXXXXXXXX)
 
 # Create base directory structure
 # mkdir -p $WDIR/{bin,dev,lib/firmware,run,sbin,sys,proc}
-mkdir -p $WDIR/{bin,dev,lib/{lsb,firmware},run,sbin,sys,proc,tmp,etc,usr/share}
+mkdir -p $WDIR/{bin,dev,lib/{lsb,firmware},run,sbin,sys,proc,tmp,etc,usr/{bin,share}}
 mkdir -p $WDIR/etc/{sysconfig,modprobe.d,udev/{rules.d,hwdb.d}}
 touch $WDIR/etc/modprobe.d/modprobe.conf
-ln -s lib $WDIR/lib64
+[ -d /lib64 ] && cp -a /lib64 $WDIR/lib64
 
 # Create necessary device nodes
 # mknod -m 640 $WDIR/dev/console c 5 1

@@ -112,9 +112,36 @@ do_mount_in_ram()
 		fi
 	done		
 }
-
+do_mount_iso_rw()
+{
+	local DIR
+	for DIR in var run etc root usr lib lib64 sbin bin opt
+	do
+		if [ -f ${1}/$DIR.squashfs ]; then
+			mkdir /DIR
+			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR"
+			mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR || problem
+			[ "$verbose" == "no" ] || echo "mkdir -p ${2}/$DIR"
+			mkdir -p ${2}/$DIR > /dev/null 2>&1
+			cp -a /DIR/* ${2}/$DIR/ > /dev/null 2>&1
+			umount /DIR
+			[ "$verbose" == "no" ] || echo "rm -r /DIR"
+			rm -r /DIR
+			if [ "$DIR" == "root" ]; then
+				chmod 750 ${2}/root
+			fi
+		fi
+	done
+	# get read of some services
+	for i in do_stop_mountfs
+	do
+		sed -i "/${i}/d" ${2}/etc/rc.d/init.d/init_single
+	done
+	touch /fastboot
+	rm /init
+}
 find_media() {
-   local PI
+   local PI FSIZE
    EXPECT_LABEL="nutyxcd"
    for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* ; do
 	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
@@ -134,13 +161,22 @@ find_media() {
 	[ -d /media/cdrom/depot ] && echo $DEV > /tmp/depot
 	# If RAM Available > 1Gb (lets say around 1 000 000 kb) we get rid of the key (mounted)
 	[ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt 1000000 ] || break
-	mkdir /boot
+	mkdir -p /boot
 	for i in `ls /media/cdrom/isolinux/boot/`
 	do
-	  cp  /media/cdrom/isolinux/boot/$i /boot/
+	  FSIZE=`ls -s /media/cdrom/isolinux/boot/$i| cut -d " " -f1`
+	  if [ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt $((FSIZE + 250000)) ]; then
+	    PI="yes"
+	    cp  /media/cdrom/isolinux/boot/$i /boot/
+	  else
+	    PI="no"
+	    break
+	  fi
 	done
-	cp /media/cdrom/isolinux/kernel /boot/kernel
-	umount /media/cdrom
+	if [ "$PI" == "yes" ]; then
+	  cp /media/cdrom/isolinux/kernel /boot/kernel
+	  umount /media/cdrom
+	fi
 	break
       fi
    done
@@ -207,7 +243,7 @@ for param in $cmdline ; do
     rootfstype=* ) rootfstype=${param#rootfstype=}   ;;
     rootflags=*  ) rootflags=${param#rootflags=}     ;;
     fromdev=*    ) fromdev=${param#fromdev=}         ;;
-    fromiso=*    ) fromiso=${param#fromiso=}         ;;
+    fromiso      ) fromiso="yes"                     ;;
     ro           ) ro="ro"                           ;;
     rw           ) ro="rw"                           ;;
     quiet        ) export verbose="no"               ;;
@@ -242,6 +278,27 @@ fi
 if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
+fi
+if [ "$fromiso" != "" ]; then
+	LoadModules
+	find_media
+	if [ -L /dev/nutyx-cd ]; then
+		sleep 5
+		find_media
+	fi
+	if [ -d /boot ]; then
+		[ "$verbose" == "no" ] || printf "do_mount_iso_rw /boot /.ISO"
+		do_mount_iso_rw /boot /
+		rm -r /boot/*.squashfs
+		[ "$verbose" == "no" ] || printf "cd / ...\n"
+		cd /
+		[ "$verbose" == "no" ] || printf "exec $init ..."
+		exec "$init" "$@" > /dev/null 2>&1
+	else
+		no_mount
+		sh
+	fi
+	return
 fi
 
 if [ "$root" == "" ]; then
