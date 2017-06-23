@@ -110,12 +110,12 @@ do_mount_in_ram()
 			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s" ${1} $DIR $DIR
 			mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR || problem
 		fi
-	done		
+	done
 }
 do_mount_iso_rw()
 {
 	local DIR
-	for DIR in var run etc root usr lib lib64 sbin bin opt
+	for DIR in var run etc root usr lib lib64 sbin bin opt home
 	do
 		if [ -f ${1}/$DIR.squashfs ]; then
 			mkdir /DIR
@@ -137,8 +137,9 @@ do_mount_iso_rw()
 	do
 		sed -i "/${i}/d" ${2}/etc/rc.d/init.d/init_single
 	done
-	touch /fastboot
-	rm /init
+	touch ${2}/fastboot
+	rm ${2}/init
+	chmod 755 ${2}/
 }
 find_media() {
    local PI FSIZE
@@ -154,7 +155,7 @@ find_media() {
 	esac
       done
       if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
-	ln -s $DEV /dev/nutyx-cd
+	ln -sf $DEV /dev/nutyx-cd
 	mkdir  -p /media/cdrom 2>/dev/null
 	[ "$verbose" == "no" ] || printf "mount -n /dev/nutyx-cd /media/cdrom\n"
 	mount -n /dev/nutyx-cd /media/cdrom
