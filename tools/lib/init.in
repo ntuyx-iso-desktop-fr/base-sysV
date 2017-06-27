@@ -283,7 +283,7 @@ fi
 if [ "$fromiso" != "" ]; then
 	LoadModules
 	find_media
-	if [ -L /dev/nutyx-cd ]; then
+	if [ ! -L /dev/nutyx-cd ]; then
 		sleep 5
 		find_media
 	fi
