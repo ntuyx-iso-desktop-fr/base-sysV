@@ -38,6 +38,11 @@ do_mount_root()
       ""     ) echo "No root device specified." ; problem    ;;
    esac
 
+if [ ! -z "$croot" ]; then                                                  ##C
+   cryptsetup luksOpen --key-file=/root/.crypto/keyfile.bin $croot CROOT    ##C
+   device=/dev/mapper/CROOT                                                 ##C
+fi                                                                          ##C
+
    while [ ! -b "$device" ] ; do
        no_device $device
        problem
@@ -239,6 +244,7 @@ for param in $cmdline ; do
   case $param in
     init=*       ) init=${param#init=}               ;;
     root=*       ) root=${param#root=}               ;;
+    croot=*      ) croot=${param#croot=}; root=$croot;;                     ##C
     rootdelay=*  ) rootdelay=${param#rootdelay=}     ;;
     overlayroot=*) overlayroot=${param#overlayroot=} ;;
     rootfstype=* ) rootfstype=${param#rootfstype=}   ;;
