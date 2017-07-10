@@ -244,7 +244,7 @@ for param in $cmdline ; do
     rootfstype=* ) rootfstype=${param#rootfstype=}   ;;
     rootflags=*  ) rootflags=${param#rootflags=}     ;;
     fromdev=*    ) fromdev=${param#fromdev=}         ;;
-    fromiso      ) fromiso="yes"                     ;;
+    fromiso=*    ) fromiso=${param#fromiso=}         ;;
     ro           ) ro="ro"                           ;;
     rw           ) ro="rw"                           ;;
     quiet        ) export verbose="no"               ;;
@@ -280,7 +280,7 @@ if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
-if [ "$fromiso" != "" ]; then
+if [ "$fromiso" == "yes" ]; then
 	LoadModules
 	find_media
 	if [ ! -L /dev/nutyx-cd ]; then
