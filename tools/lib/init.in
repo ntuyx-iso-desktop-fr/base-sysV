@@ -149,16 +149,24 @@ do_mount_iso_rw()
 find_media() {
    local PI FSIZE
    EXPECT_LABEL="nutyxcd"
-   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* ; do
+   if [ -n "$fromiso" ]; then
+	mkdir -p /media/fromdev
+	mount -o ro ${fromdev} /media/fromdev
+	modprobe loop
+	LOOPDEV=`losetup -f`
+	losetup $LOOPDEV /media/fromdev${fromiso}
+   fi
+   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* /sys/block/loop*; do
 	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
       if [ ! -d "$SYS" ]; then  continue; fi
       DEV=/dev/${SYS##*/}
-      PI=`/sbin/blkid $DEV`
-      for param in $PI; do
-        case $param in LABEL=*)
-          LABEL=`echo ${param#LABEL=}|sed s/\"//g`;;
-	esac
-      done
+#     PI=`/sbin/blkid $DEV`
+#     for param in $PI; do
+#       case $param in LABEL=*)
+#         LABEL=`echo ${param#LABEL=}|sed s/\"//g`;;
+#	esac
+#     done
+      LABEL=`/sbin/blkid -o value -s LABEL $DEV`
       if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
 	ln -sf $DEV /dev/nutyx-cd
 	mkdir  -p /media/cdrom 2>/dev/null
@@ -250,7 +258,8 @@ for param in $cmdline ; do
     rootfstype=* ) rootfstype=${param#rootfstype=}   ;;
     rootflags=*  ) rootflags=${param#rootflags=}     ;;
     fromdev=*    ) fromdev=${param#fromdev=}         ;;
-    fromiso      ) fromiso="yes"                     ;;
+    fromiso=*    ) fromiso=${param#fromiso=}         ;;
+    live         ) live="yes"                        ;;
     ro           ) ro="ro"                           ;;
     rw           ) ro="rw"                           ;;
     quiet        ) export verbose="no"               ;;
@@ -286,7 +295,9 @@ if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
-if [ "$fromiso" != "" ]; then
+if [ "$live" == "yes" ]; then
+	[ "$verbose" == "no" ] || printf "live=%s ...\n" $live
+		[ "$verbose" == "no" ] || sleep 3
 	LoadModules
 	find_media
 	if [ ! -L /dev/nutyx-cd ]; then
@@ -295,11 +306,13 @@ if [ "$fromiso" != "" ]; then
 	fi
 	if [ -d /boot ]; then
 		[ "$verbose" == "no" ] || printf "do_mount_iso_rw /boot /.ISO"
+		[ "$verbose" == "no" ] || sleep 3
 		do_mount_iso_rw /boot /
 		rm -r /boot/*.squashfs
 		[ "$verbose" == "no" ] || printf "cd / ...\n"
 		cd /
-		[ "$verbose" == "no" ] || printf "exec $init ..."
+		[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
+		[ "$verbose" == "no" ] || sleep 3
 		exec "$init" "$@" > /dev/null 2>&1
 	else
 		no_mount
@@ -320,14 +333,14 @@ if [ "$root" == "" ]; then
 		if [ -d /media/cdrom/isolinux/boot ]; then
 			do_mount_in_ram /media/cdrom/isolinux/boot
 		else
- 			if [ -n "$fromiso" ]; then
- 				mkdir -p /media/{fromdev,cdrom}
- 				mount -o ro ${fromdev} /media/fromdev
- 				mount -o loop /media/fromdev${fromiso} /media/cdrom
- 				do_mount_in_ram /media/cdrom/isolinux/boot
- 			else
+#			if [ -n "$fromiso" ]; then
+#				mkdir -p /media/{fromdev,cdrom}
+#				mount -o ro ${fromdev} /media/fromdev
+#				mount -o loop /media/fromdev${fromiso} /media/cdrom
+#				do_mount_in_ram /media/cdrom/isolinux/boot
+#			else
  				do_mount_in_ram /boot
- 			fi
+#			fi
 
 		fi
 	else
