@@ -38,10 +38,10 @@ do_mount_root()
       ""     ) echo "No root device specified." ; problem    ;;
    esac
 
-if [ ! -z "$croot" ]; then                                                  ##C
-   cryptsetup luksOpen --key-file=/root/.crypto/keyfile.bin $croot CROOT    ##C
-   device=/dev/mapper/CROOT                                                 ##C
-fi                                                                          ##C
+if [ ! -z "$croot" ]; then
+   cryptsetup luksOpen --key-file=/root/.crypto/keyfile.bin $croot CROOT
+   device=/dev/mapper/CROOT
+fi
 
    while [ ! -b "$device" ] ; do
        no_device $device
@@ -149,16 +149,18 @@ do_mount_iso_rw()
 find_media() {
    local PI FSIZE
    EXPECT_LABEL="nutyxcd"
-   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* ; do
+   if [ -n "$fromiso" ]; then
+	mkdir -p /media/fromdev
+	mount -o ro ${fromdev} /media/fromdev
+	modprobe loop
+	LOOPDEV=`losetup -f`
+	losetup $LOOPDEV /media/fromdev${fromiso}
+   fi
+   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* /sys/block/loop*; do
 	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
       if [ ! -d "$SYS" ]; then  continue; fi
       DEV=/dev/${SYS##*/}
-      PI=`/sbin/blkid $DEV`
-      for param in $PI; do
-        case $param in LABEL=*)
-          LABEL=`echo ${param#LABEL=}|sed s/\"//g`;;
-	esac
-      done
+      LABEL=`/sbin/blkid -o value -s LABEL $DEV`
       if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
 	ln -sf $DEV /dev/nutyx-cd
 	mkdir  -p /media/cdrom 2>/dev/null
@@ -244,13 +246,14 @@ for param in $cmdline ; do
   case $param in
     init=*       ) init=${param#init=}               ;;
     root=*       ) root=${param#root=}               ;;
-    croot=*      ) croot=${param#croot=}; root=$croot;;                     ##C
+    croot=*      ) croot=${param#croot=}; root=$croot;;                    
     rootdelay=*  ) rootdelay=${param#rootdelay=}     ;;
     overlayroot=*) overlayroot=${param#overlayroot=} ;;
     rootfstype=* ) rootfstype=${param#rootfstype=}   ;;
     rootflags=*  ) rootflags=${param#rootflags=}     ;;
     fromdev=*    ) fromdev=${param#fromdev=}         ;;
     fromiso=*    ) fromiso=${param#fromiso=}         ;;
+    live         ) live="yes"                        ;;
     ro           ) ro="ro"                           ;;
     rw           ) ro="rw"                           ;;
     quiet        ) export verbose="no"               ;;
@@ -286,7 +289,7 @@ if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
-if [ "$fromiso" == "yes" ]; then
+if [ "$live" == "yes" ]; then
 	LoadModules
 	find_media
 	if [ ! -L /dev/nutyx-cd ]; then
@@ -299,7 +302,7 @@ if [ "$fromiso" == "yes" ]; then
 		rm -r /boot/*.squashfs
 		[ "$verbose" == "no" ] || printf "cd / ...\n"
 		cd /
-		[ "$verbose" == "no" ] || printf "exec $init ..."
+		[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
 		exec "$init" "$@" > /dev/null 2>&1
 	else
 		no_mount
@@ -320,14 +323,7 @@ if [ "$root" == "" ]; then
 		if [ -d /media/cdrom/isolinux/boot ]; then
 			do_mount_in_ram /media/cdrom/isolinux/boot
 		else
- 			if [ -n "$fromiso" ]; then
- 				mkdir -p /media/{fromdev,cdrom}
- 				mount -o ro ${fromdev} /media/fromdev
- 				mount -o loop /media/fromdev${fromiso} /media/cdrom
- 				do_mount_in_ram /media/cdrom/isolinux/boot
- 			else
- 				do_mount_in_ram /boot
- 			fi
+			do_mount_in_ram /boot
 
 		fi
 	else

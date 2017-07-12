@@ -60,7 +60,7 @@ usrbinfiles="cut groups"
 binfiles="sh cat clear date grep cp dd hostname killall ls mkdir mknod more mount mountpoint chmod"
 binfiles="$binfiles umount stty sed sleep ln rm uname"
 
-sbinfiles="$sbinfiles blkid switch_root"
+sbinfiles="$sbinfiles blkid switch_root losetup"
 
 #Optional files and locations
 if [ -x /sbin/mdadm ] ; then sbinfiles="$sbinfiles mdadm"; fi
