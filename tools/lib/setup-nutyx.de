@@ -67,7 +67,7 @@ msgid "Enter the gateway address"
 msgstr "Geben Sie die Gateway-Adresse ein"
 
 msgid "it is normally the address of your router access point"
-msgstr "es ist in der Regel die Adresse Ihres Routers Zugangspunkt"
+msgstr "es ist in der Regel die Adresse des Zugang ihres Rates"
 
 msgid "Enter the DNS address"
 msgstr "Geben Sie die DNS-Adresse ein"
@@ -136,10 +136,10 @@ msgid "The hardware clock is set to"
 msgstr "Die Hardware-Uhr ist eingestellt auf"
 
 msgid "Do you want to use this time as Coordinated Universal Time ?"
-msgstr "Möchten Sie diese Zeit als koordinierte Weltzeit nutzen wollen?"
+msgstr "Möchten Sie diese Zeit als  Weltzeit nutzen ?"
 
 msgid "so that the summer/winter time is changed automatically"
-msgstr "so dass die Sommer / Winterzeit automatisch geändert wird"
+msgstr "sodass die Sommer / Winterzeit automatisch geändert wird"
 
 msgid "Please enter the date"
 msgstr "Bitte geben Sie das Datum ein"
@@ -148,7 +148,7 @@ msgid "Please enter the time"
 msgstr "Bitte geben Sie die Zeit ein"
 
 msgid "Configuration of the boot of the computer (GRUB)"
-msgstr "Konfiguration des Boot der Maschine (GRUB)"
+msgstr "Konfiguration des Betriebsystem der Maschine (GRUB)"
 
 msgid "Select the disk on which you want to modify the MBR"
 msgstr "Wählen Sie das Laufwerk, auf dem Sie den MBR ändern möchten"
@@ -172,7 +172,7 @@ msgid "You already have a copy of the original MBR, I will not make a backup of 
 msgstr "Sie haben bereits eine Kopie des Original-MBR, es wird kein Backup davon erstellt"
 
 msgid "A copy of the original MBR is saved in the folder /boot/grub of your NuTyX. It will then be possible to restore it if need"
-msgstr "Eine Kopie des Original-MBR ist im Verzeichnis /boot/grub Ihres NuTyX gespeichert. Es möglich sein diese wiederherstellen"
+msgstr "Eine Kopie des Original-MBR ist im Verzeichnis /boot/grub Ihres NuTyX gespeichert. Es möglich  diese wiederherzustellen"
 
 msgid "Everything OK, do you want to modify"
 msgstr "Alles ok, möchten sie ändern"
@@ -214,7 +214,7 @@ msgid "Main Menu"
 msgstr "Hauptmenü"
 
 msgid "Welcome to the NuTyX installer"
-msgstr "Willkommen in der NuTyX Installations"
+msgstr "Willkommen zu der NuTyX Installations"
 
 msgid "Create all your partitions"
 msgstr "Erstellen Sie alle Ihre Partition"
@@ -262,10 +262,10 @@ msgid "Yes"
 msgstr "Ja"
 
 msgid "Choose the disk you want to use for this operation"
-msgstr "Wählen Sie den Datenträger, den Sie für diesen Vorgang verwendet werden soll"
+msgstr "Wählen Sie einen Datenträger, der für diesen Vorgang verwendet werden soll"
 
 msgid "Choose the partition you want to use for this operation"
-msgstr "Wählen Sie die Partition, die Sie für diesen Vorgang verwendet werden soll"
+msgstr "Wählen Sie die Partition, die Sie für diesen Vorgang verwendet wollen"
 
 msgid "Available file systems"
 msgstr "Verfügbare Dateisysteme"
@@ -334,7 +334,7 @@ msgid "Open a console"
 msgstr "Öffnen Sie eine Konsole"
 
 msgid "Please wait"
-msgstr "Warten Sie mal"
+msgstr "Bitte warten"
 
 msgid "This is a very basic tool, do not expect too much"
 msgstr "Dies ist ein sehr einfaches Werkzeug, nicht zu viel erwarten"
@@ -343,7 +343,7 @@ msgid "It will ask you on which partition you want to install NuTyX"
 msgstr "Sie werden gefragt auf welche Partition sie NuTyX installieren wollen"
 
 msgid "If not yet created/formatted, it will prompt you to do so"
-msgstr "Falls noch nicht erstellt / formatiert ist, werden Sie aufgefordert, dies zu tun"
+msgstr "Falls noch nicht erstellt / formatiert , werden Sie aufgefordert, dies zu tun"
 
 msgid "No future plan to make this installer more sophisticated"
 msgstr "Keine Zukunftsplan dieses Installationsprogram besser zu machen"
@@ -355,7 +355,7 @@ msgid "only ONE partition"
 msgstr "nur EINE Partition"
 
 msgid "ONE exception, GRUB can be part of it, installed on a separate partition or not installed at all"
-msgstr "Eine Ausnahme, GRUB könnte ein Teil davon sein, auf einer separaten Partition installiert oder überhaupt nicht installiert"
+msgstr "Eine Ausnahme, GRUB könnte darin vorkommen entweder, auf einer separaten Partition installiert oder überhaupt nicht installiert"
 
 msgid "As NuTyX users, we recommand you to install GRUB on a separate partition"
 msgstr "Als NuTyX Nutzer, empfehlen wir Ihnen, GRUB auf einer separaten Partition zu installieren"
@@ -367,7 +367,7 @@ msgid "Install GRUB first, then NuTyX"
 msgstr "Installieren Sie GRUB zuerst, dann NuTyX"
 
 msgid "Have fun"
-msgstr "Viel Spass"
+msgstr "Viel Spaß"
 
 msgid "Thank you for installing NuTyX"
 msgstr "Danke, dass Sie NuTyX installieren"
@@ -379,10 +379,10 @@ msgid "How to do it"
 msgstr "Wie wird es gemacht"
 
 msgid "The name you enter is invalid"
-msgstr "Der Name ist ungültig"
+msgstr "Der Name ist bereist ungültig"
 
 msgid "The name you enter is already register on the system"
-msgstr "Der Name wird bereits registrieren"
+msgstr "Der Name ist bereits registriert"
 
 msgid "The description you enter is invalid"
 msgstr "Die Beschreibung ist ungültig"
@@ -394,7 +394,7 @@ msgid "Add a description for the user"
 msgstr "Fügen Sie eine Beschreibung für den Benutzer"
 
 msgid "Name or Description of the user"
-msgstr "Namen oder die Beschreibung des Benutzers"
+msgstr "Name oder  Beschreibung des Benutzers"
 
 msgid "Password"
 msgstr "Passwort"
@@ -409,7 +409,7 @@ msgid "Passwords are differents, please try again"
 msgstr "Passwörter sind unterschiedlich, bitte versuchen Sie es erneut"
 
 msgid "Do you want to try again"
-msgstr "Möchten Sie noch einmal zu versuchen"
+msgstr "Möchten Sie es noch einmal  versuchen"
 
 msgid "Please run this command as root"
 msgstr "Bitte verwenden Sie diesen command als root"
@@ -424,52 +424,52 @@ msgid "Swap partition not found"
 msgstr "Swap -Partition nicht gefunden"
 
 msgid "recommended"
-msgstr "recommended"
+msgstr "empfohlen"
 
 msgid "skilled"
-msgstr "skilled"
+msgstr "qualifiziert"
 
 msgid "Configure the wireless access point"
-msgstr "Configure the wireless access point"
+msgstr "Konfigurieren des Kabellosen Zugangspunkt"
 
 msgid "Configuration of a wireless access point for"
-msgstr "Configuration of a wireless access point for"
+msgstr "Konfiguration des Kabellosen Zugangspunkt für"
 
 msgid "Choose the name of the wireless access point"
-msgstr "Choose the name of the wireless access point"
+msgstr "Whäle einen Namen für den Kabellosen Zugungspunkt"
 
 msgid "Enter the password of"
-msgstr "Enter the password of"
+msgstr "Bestätige das Passwort"
 
 msgid "File"
-msgstr "File"
+msgstr "Liste"
 
 msgid "successfully created"
-msgstr "successfully created"
+msgstr "erfolgreich worfen"
 
 msgid "Cannot create"
-msgstr "Cannot create"
+msgstr "Konnte nicht entwerfen"
 
 msgid "Erase"
-msgstr "Erase"
+msgstr "lüschen"
 
 msgid "Configure automatic update"
-msgstr "Configure automatic update"
+msgstr "Konfiguriert automatisches update"
 
 msgid "Would you like to enable automatic update"
-msgstr "Would you like to enable automatic update"
+msgstr "Wüden Sie ein automatisches update erlauben"
 
 msgid "Make shure you reserve the first partition for ESP"
-msgstr "Make shure you reserve the first partition for ESP"
+msgstr "Gehen Sie sicher dass sie den ersten Teil für ESP einbehallen"
 
 msgid "At partitioning, declare the first partition as EFI System"
-msgstr "At partitioning, declare the first partition as EFI System"
+msgstr "Bei der Aufteilung,melchen sie den ersten Teil bei den EFI System an "
 
 msgid "EFI partition not found"
-msgstr "EFI partition not found"
+msgstr "EFI Teilbereich nicht gefunden"
 
 msgid "GPT partition table not found"
-msgstr "GPT partition table not found"
+msgstr "GPT Teilverzeichnis nicht gefunden"
 
 msgid "This installation won't boot again ..."
-msgstr "This installation won't boot again ..."
+msgstr "Diese Installation wird nicht erneut hochfahren..."
