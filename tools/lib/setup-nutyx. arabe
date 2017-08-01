@@ -1,0 +1,73 @@
+hm [ ~/hm1971nutyx ]$ git sync                                              [18:59 x86_64 4.9.23-NuTyX-lts hm@nutyx]
+git : 'sync' n'est pas une commande git. Voir 'git --help'.
+
+Vouliez-vous dire cela ?
+        svn
+hm [ ~/hm1971nutyx ]$ git status
+Sur la branche master
+Votre branche est à jour avec 'origin/master'.
+Modifications qui ne seront pas validées :
+  (utilisez "git add/rm <fichier>..." pour mettre à jour ce qui sera validé)
+  (utilisez "git checkout -- <fichier>..." pour annuler les modifications dans la copie de travail)
+
+        supprimé :        setup-nutyx arabe version finale
+        supprimé :        tools/lib/setup-nutyx. arabe
+
+Fichiers non suivis:
+  (utilisez "git add <fichier>..." pour inclure dans ce qui sera validé)
+
+        setup-nutyx. arabe
+
+aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+hm [ ~/hm1971nutyx ]$ git amend
+git : 'amend' n'est pas une commande git. Voir 'git --help'.
+
+Vouliez-vous dire cela ?
+        imap-send
+hm [ ~/hm1971nutyx ]$ git add setup-nutyx. arabe
+fatal: le chemin 'setup-nutyx.' ne correspond à aucun fichier
+hm [ ~/hm1971nutyx ]$ git diff
+diff --git a/setup-nutyx arabe version finale b/setup-nutyx arabe version finale
+diff --git a/setup-nutyx arabe version finale b/setup-nutyx arabe version finale
+deleted file mode 100644
+index 4adab12..0000000
+--- a/setup-nutyx arabe version finale  
++++ /dev/null
+@@ -1,475 +0,0 @@
+-<U+FEFF>msgid ""
+-msgstr ""
+-"Project-Id-Version: NuTyX Configuration tool\n"
+-"PO-Revision-Date: 2014-08-07+2000\n"
+-"Last-Translator: tnut <tnut at NuTyX dot org>\n"
+-"Language-Team: French\n"
+-"Language: fr\n"
+-"MIME-Version: 1.0\n"
+-"Content-Type: text/plain; charset=UTF-8\n"
+-"Content-Transfer-Encoding: 8bit\n"
+-merci de traduire en face de la ligne msgtr dans la langue demandée
+-msgid "Settings"
+-msgstr "إعدادات "
+-
+-msgid "Keyboard Layout"
+-msgstr " وضعية اللوحة"
+-
+-msgid "Choose available"
+-msgstr "إختيار الوضعية"
+-
+-msgid "ERROR configuration"
+-msgstr "تكوين الخطأ"
+-
+-msgid "Please try again"
+-msgstr "حاول مرة اخرى"
+-
+-msgid "Network card"
+-msgstr "بطاقة الشبكة
+-
+-msgid "Select the card"
+-msgstr "حدد البطاقة"
+-
+-msgid "Card to configure"
+-msgstr "بطاقة لتكوين"
+-
+-msgid "Configuration of"
+:
