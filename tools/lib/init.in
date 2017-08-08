@@ -112,7 +112,7 @@ do_mount_in_ram()
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /$DIR > /dev/null 2>&1
-			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s" ${1} $DIR $DIR
+			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s\n" ${1} $DIR $DIR
 			mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR || problem
 		fi
 	done
