@@ -16,25 +16,25 @@ msgid "Keyboard Layout"
 msgstr "Distribución del teclado"
 
 msgid "Choose available"
-msgstr "Elija disponible"
+msgstr "Eligir disponibles"
 
 msgid "ERROR configuration"
-msgstr "configuración ERROR"
+msgstr " ERROR de configuración"
 
 msgid "Please try again"
-msgstr "Por favor, inténtalo de nuevo"
+msgstr "Por favor, inténte de nuevo"
 
 msgid "Network card"
 msgstr "tarjeta de red"
 
 msgid "Select the card"
-msgstr "Seleccione la tarjeta"
+msgstr "Elija la tarjeta"
 
 msgid "Card to configure"
-msgstr "Tarjeta para configurar"
+msgstr "Tarjeta a configurar"
 
 msgid "Configuration of"
-msgstr "Configuración de los"
+msgstr "Configuración de "
 
 msgid "Configuration mode"
 msgstr "modo de configuración"
@@ -46,67 +46,67 @@ msgid "Man"
 msgstr "Man"
 
 msgid "IP address automatically set from DHCP server"
-msgstr "Dirección IP fija automáticamente desde el servidor DHCP"
+msgstr "Dirección IP configurada automáticamente del servidor DHCP"
 
 msgid "Manually specify parameters"
-msgstr "Especifique manualmente los parámetros"
+msgstr "Especificar parámetros manualmente"
 
 msgid "Enter an IP address"
-msgstr "Introduzca una dirección IP"
+msgstr "Ingrese una direccion IP"
 
 msgid "Enter a broadcast address"
-msgstr "Introduzca una dirección de difusión"
+msgstr "Ingrese una dirección de difusión"
 
 msgid "in most cases the current value can be used"
-msgstr "en la mayoría de los casos, el valor actual se puede utilizar"
+msgstr "en la mayoría de los casos, el valor actual puede ser usado"
 
 msgid "Enter the subnet mask"
-msgstr "Introduzca la máscara de subred"
+msgstr "Ingrese la  máscara de la subred"
 
 msgid "Enter the gateway address"
-msgstr "Introduzca la dirección de la pasarela"
+msgstr "Ingrese la dirección de la puerta de enlace"
 
 msgid "it is normally the address of your router access point"
-msgstr "es normalmente la dirección del punto de acceso del router"
+msgstr "normalmente es la dirección del punto de acceso de su router"
 
 msgid "Enter the DNS address"
-msgstr "Introduzca la dirección DNS"
+msgstr "Ingrese la dirección DNS"
 
 msgid "DNS Search Suffix"
-msgstr "DNS de búsqueda de sufijos"
+msgstr "Sufijo de busqueda DNS"
 
 msgid "Enter the domain name"
-msgstr "Introduzca el nombre de dominio"
+msgstr "Ingrese el nombre de dominio"
 
 msgid "this is only need if you are in a subdomain"
-msgstr "esto sólo es necesario si usted está en un subdominio"
+msgstr "esto es sólo necesario si se encuenta en un subdominio"
 
 msgid "Most of the time it's not need"
-msgstr "La mayoría de las veces no es necesario"
+msgstr "Por lo general no es necesario"
 
 msgid "Start the service"
 msgstr "Iniciar el servicio"
 
 msgid "Checking the configuration, returning true or false"
-msgstr "Comprobar la configuración de todo, devolver true o false"
+msgstr "Verificando la configuracion,respondiendo si verdadero o falso"
 
 msgid "Show the network configuration"
 msgstr "Mostrar la configuración de red"
 
 msgid "Show the keyboard configuration"
-msgstr "Mostrar la configuración del teclado"
+msgstr "Mostrar configuración del teclado"
 
 msgid "Show the date and time settings"
-msgstr "Mostrar la configuración del reloj"
+msgstr "Mostrar configuración de horario"
 
 msgid "Show the timezone and time adjustment"
-msgstr "Mostrar la configuración regional y el ajuste de la hora local"
+msgstr "Mostrar  huso horario y configuracion de hora"
 
 msgid "Show all configurations"
-msgstr "Mostrar la configuración de todos los"
+msgstr "Mostrar todas las configuraciónes"
 
 msgid "Configure the language"
-msgstr "Configurar el idioma"
+msgstr "Configurar idioma"
 
 msgid "Configure the keyboard"
 msgstr "Configurar el teclado"
@@ -115,64 +115,64 @@ msgid "Configure the network"
 msgstr "Configurar la red"
 
 msgid "Date and time settings"
-msgstr "Configurar el reloj"
+msgstr "Configuracion de fecha y hora"
 
 msgid "Add a user to the system"
-msgstr "añadir un usuario al sistema"
+msgstr "Agregar un usuario al sistema"
 
 msgid "Configure the system"
-msgstr "Configurar todo el sistema de"
+msgstr "Configurar el sistema "
 
 msgid "Install NuTyX"
 msgstr "Instalar NuTyX"
 
 msgid "Use the arrows keys to change the values"
-msgstr "Use las teclas de flechas para cambiar los valores"
+msgstr "Utilice la flechas para modificar los valores"
 
 msgid "Coordinated Universal Time ??or Local Time ?"
-msgstr "Tiempo Universal Coordinado o Hora Local"
+msgstr "Tiempo Universal Coordinado u Hora Local"
 
 msgid "The hardware clock is set to"
-msgstr "El reloj del hardware está configurado a"
+msgstr "El reloj del hardware está ajustado a"
 
 msgid "Do you want to use this time as Coordinated Universal Time ?"
-msgstr "¿Quieres utilizar este tiempo como tiempo universal coordinado"
+msgstr "Le gustaria usar esta informacion como tiempo universal coordinado"
 
 msgid "so that the summer/winter time is changed automatically"
-msgstr "y tiene el tiempo de verano / invierno cambiar automáticamente"
+msgstr "para que el cambio de hora (invierno/verano) sea modificado automáticamente"
 
 msgid "Please enter the date"
-msgstr "Por favor introduzca la fecha"
+msgstr "Por favor ingrese la fecha"
 
 msgid "Please enter the time"
-msgstr "Por favor, introduzca la hora"
+msgstr "Por favor, ingrese la hora"
 
 msgid "Configuration of the boot of the computer"
-msgstr "Configuración del arranque de la máquina"
+msgstr "Configure el arranque de la computadora"
 
 msgid "Select the disk on which you want to modify the MBR"
-msgstr "Seleccione el disco en el que desea modificar el MBR"
+msgstr "Seleccione el disco en el cual quiere modificar el MBR"
 
 msgid "Select the partition on which you want to place the GRUB files"
-msgstr "Seleccione la partición en la que debe estar ubicado los archivos de GRUB"
+msgstr "Elija la partición donde le gustaria guardar los archivos GRUB"
 
 msgid "Note that the destination partition can contain NuTyX or any other distribution"
-msgstr "Tenga en cuenta que la partición de destino puede contener NuTyX o cualquier otra distribución"
+msgstr "Observe que la partición de destino puede contener NuTyX o cualquier otra distribución"
 
 msgid "No boot process configured"
-msgstr "Ningún proceso de arranque configurado"
+msgstr "No hay proceso de arranque configurado"
 
 msgid "You have installed NuTyX without configuring the boot process"
-msgstr "Ha instalado NuTyX sin configurar el proceso de arranque"
+msgstr "usted Ha instalado NuTyX sin configurar el proceso de arranque"
 
 msgid "Are you sure, you want to cancel the process ?"
-msgstr "¿Está usted seguro de que quiere cancelar el proceso de"
+msgstr "Está  seguro/a de que quiere cancelar el proceso "
 
 msgid "You already have a copy of the original MBR, I will not make a backup of it"
-msgstr "Usted ya tiene una copia del MBR original, no va a ser la copia de seguridad"
+msgstr " ya existe  una copia del MBR original, no eses necessario un backup"
 
 msgid "Good to know"
-msgstr "Es bueno saber"
+msgstr " bueno saberlo"
 
 msgid "Main Menu"
 msgstr "Menú Principal"
@@ -181,259 +181,260 @@ msgid "Welcome to the NuTyX installer"
 msgstr "Bienvenidos en el instalador NuTyX"
 
 msgid "Create all your partitions"
-msgstr "Crear toda su partición"
+msgstr "Crear todas su partición"
 
 msgid "Format a partition"
-msgstr "Dar formato a una partición"
+msgstr "formatear una partición"
 
 msgid "Configure the boot of the PC"
 msgstr "Configurar el arranque de la PC"
 
 msgid "Reboot the PC"
-msgstr "Reinicie el PC"
+msgstr "Reiniciar  PC"
 
 msgid "Press OK to reboot the computer"
-msgstr "Press OK to reboot the computer"
+msgstr"Presione Aceptar para reiniciar la computadora"
 
 msgid "optional"
-msgstr "optional"
+msgstr "opcional"
 
 msgid "Install"
 msgstr "Instalar"
 
 msgid "Partitioning"
-msgstr "Partitioning"
+msgstr Particionando"
 
 msgid "Format"
-msgstr "Format"
+msgstr "Formateo"
 
 msgid "Boot"
-msgstr "Boot"
+msgstr "Arrangue"
 
 msgid "Keyboard"
-msgstr "Keyboard"
+msgstr "Teclado"
 
 msgid "Network"
-msgstr "Network"
+msgstr "Red"
 
 msgid "Clock"
-msgstr "Clock"
+msgstr "Reloj"
 
 msgid "Restart"
-msgstr "Restart"
+msgstr "Reiniciar"
 
 msgid "Yes"
-msgstr "Yes"
+msgstr "Si"
 
 msgid "Choose the disk you want to use for this operation"
-msgstr "Choose the disk you want to use for this operation"
+msgstr "Elija el disco que quiere usar para esta operación"
+
 
 msgid "Choose the partition you want to use for this operation"
-msgstr "Choose the partition you want to use for this operation"
+msgstr "Elija la partición que quiera usar para esta operación"
 
 msgid "Available file systems"
-msgstr "Available file systems"
+msgstr "Sistemas de archivos disponibles"
 
 msgid "Choose the file system you want to use for the partition"
-msgstr "Choose the file system you want to use for the partition"
+msgstr "Elija el Sistema de archivos que quiera usar para la partición"
 
 msgid "High performance journaling file system create by SGI"
-msgstr "High performance journaling file system create by SGI"
+msgstr " Sistema de archivos de diario de alto rendimiento creado por SGI "
 
 msgid "Journaling file system create by IBM"
-msgstr "Journaling file system create by IBM"
+msgstr "Sistema de archivos de diario creado por IBM "
 
 msgid "Very stable file system but not maintain anymore"
-msgstr "Very stable file system but not maintain anymore"
+msgstr "Sistema de archivos muy estable, pero ya no mantenido"
 
 msgid "Next generation of Ext3 file system"
-msgstr "Next generation of Ext3 file system"
+msgstr "Nueva generación de sistema de archivos Ext3"
 
 msgid "Journaling version of Ext2 file system"
-msgstr "Journaling version of Ext2 file system"
+msgstr " Versión de registro en diario del sistema de archivos Ext2 "
 
 msgid "Standard file system Ext2"
-msgstr "Standard file system Ext2"
+msgstr "Sistema de archivos estándard Ext2"
 
 msgid "New promising file system"
-msgstr "New promising file system"
+msgstr "Nuevo Sistema de archivos, muy prometedor"
 
 msgid "Launch the format process ?"
-msgstr "Launch the format process ?"
+msgstr "Iniciar el proceso de formateo ?"
 
 msgid "The partition"
-msgstr "The partition"
+msgstr "La partición"
 
 msgid "will be formatted in"
-msgstr "will be formatted in"
+msgstr "será formateado en"
 
 msgid "Are you sure you want to continue ?"
-msgstr "Are you sure you want to continue ?"
+msgstr "Seguro que quiere continuar ?"
 
 msgid "No disk available"
-msgstr "No disk available"
+msgstr "No hay disco disponible"
 
 msgid "Please stop the PC and install a harddisk"
-msgstr "Please stop the PC and install a harddisk"
+msgstr "Por favor, frene la PC e instale un disco duro"
 
 msgid "No partition available"
-msgstr "No partition available"
+msgstr "No hay una partición disponible"
 
 msgid "Please create/modify yours partitions"
-msgstr "Please create/modify yours partitions"
+msgstr "Por favor cree/modifique sus particiones"
 
 msgid "Choose your favorite tool"
-msgstr "Choose your favorite tool"
+msgstr "Elija su herramienta favorita"
 
 msgid "Basic partitioning tool"
-msgstr "Basic partitioning tool"
+msgstr "Herramienta de partición basica"
 
 msgid "Advanced partitioning tool"
-msgstr "Advanced partitioning tool"
+msgstr "Herramienta de partición avanzada"
 
 msgid "Partitioning of the disk"
-msgstr "Partitioning of the disk"
+msgstr "Particionamiento del disco"
 
 msgid "Open a console"
-msgstr "Open a console"
+msgstr "Abrir una consola"
 
 msgid "Please wait"
-msgstr "Please wait"
+msgstr "Por favor espere"
 
 msgid "This is a very basic tool, do not expect too much"
-msgstr "This is a very basic tool, do not expect too much"
+msgstr "Esta es una herramienta muy simple, no tenga muchas expectativas"
 
 msgid "It will ask you on which partition you want to install NuTyX"
-msgstr "It will ask you on which partition you want to install NuTyX"
+msgstr "Le preguntará en cuál partición quiere instalar NuTyX"
 
 msgid "If not yet created/formatted, it will prompt you to do so"
-msgstr "If not yet created/formatted, it will prompt you to do so"
+msgstr "Si aún no está creado/formateado, deberá hacerlo ahora"
 
 msgid "No future plan to make this installer more sophisticated"
-msgstr "No future plan to make this installer more sophisticated"
+msgstr No hay planes futuros para que este instalador sea más sofisticado "
 
 msgid "NuTyX goes on"
-msgstr "NuTyX goes on"
+msgstr "NuTyX sigue"
 
 msgid "only ONE partition"
-msgstr "only ONE partition"
+msgstr "Sólo UNA partición"
 
 msgid "ONE exception, GRUB can be part of it, installed on a separate partition or not installed at all"
-msgstr "ONE exception, GRUB can be part of it, installed on a separate partition or not installed at all"
+msgstr "UNA excepción, GRUB puede ser parte de NuTyX, instalándolo en una partición separada o mismo sin instalarlo”
 
 msgid "As NuTyX users, we recommand you to install GRUB on a separate partition"
-msgstr "As NuTyX users, we recommand you to install GRUB on a separate partition"
+msgstr Como usuarios de NuTyX, les recomendamos que instalen GRUB en una partición separada"
 
 msgid "To do so"
-msgstr "To do so"
+msgstr "Proceder de la siguiente"
 
 msgid "Install GRUB first, then NuTyX"
-msgstr "Install GRUB first, then NuTyX"
+msgstr "Instale GRUB primero, luego NuTyX"
 
 msgid "Have fun"
-msgstr "Have fun"
+msgstr "Diviertase!"
 
 msgid "Thank you for installing NuTyX"
-msgstr "Thank you for installing NuTyX"
+msgstr "Gracias por instalar NuTyX"
 
 msgid "Help"
-msgstr "Help"
+msgstr "Ayuda"
 
 msgid "How to do it"
-msgstr "How to do it"
+msgstr "Como proceder"
 
 msgid "The name you enter is invalid"
-msgstr "The name you enter is invalid"
+msgstr "El nombre ingresado no es válido"
 
 msgid "The name you enter is already register on the system"
-msgstr "The name you enter is already register on the system"
+msgstr El nombre ingresado ya está registrado en el sistema"
 
 msgid "The description you enter is invalid"
-msgstr "The description you enter is invalid"
+msgstr "La descripción ingresada es inválida"
 
 msgid "Name of the user"
-msgstr "Name of the user"
+msgstr "Nombre del usuario"
 
 msgid "Add a description for the user"
-msgstr "Add a description for the user"
+msgstr "Agregue una descripción del usuario"
 
 msgid "Name or Description of the user"
-msgstr "Name or Description of the user"
+msgstr ombre o descripción del usuario "
 
 msgid "Password"
-msgstr "Password"
+msgstr "Contraseña"
 
 msgid "Enter a new password"
-msgstr "Enter a new password"
+msgstr "Ingrese una contraseña nueva"
 
 msgid "Confirm the new password"
-msgstr "Confirm the new password"
+msgstr "Confirme la constraseña"
 
 msgid "Passwords are differents, please try again"
-msgstr "Passwords are differents, please try again"
+msgstr "Las contraseñas son diferentes, por favor intente de nuevo"
 
 msgid "Do you want to try again"
-msgstr "Do you want to try again"
+msgstr "Quiere probar de nuevo"
 
 msgid "Please run this command as root"
-msgstr "Please run this command as root"
+msgstr "Por favor ejecute este comando como root"
 
 msgid "Sync the HD"
-msgstr "Sync the HD"
+msgstr Sincronice el disco duro"
 
 msgid "Emptying memory"
-msgstr "Emptying memory"
+msgstr "Vaciando la memoria"
 
 msgid "Swap partition not found"
-msgstr "Swap partition not found"
+msgstr "Partición de cambio no encontrada
 
 msgid "recommended"
-msgstr "recommended"
+msgstr "recommendado"
 
 msgid "skilled"
-msgstr "skilled"
+msgstr "Experto"
 
 msgid "Configure the wireless access point"
-msgstr "Configure the wireless access point"
+msgstr "Configure el punto de acceso WiFi"
 
 msgid "Configuration of a wireless access point for"
-msgstr "Configuration of a wireless access point for"
+msgstr "Configuración de un acceso WiFi para"
 
 msgid "Choose the name of the wireless access point"
-msgstr "Choose the name of the wireless access point"
+msgstr "Elija el nombre del punto de acceso de WiFi"
 
 msgid "Enter the password of"
-msgstr "Enter the password of"
+msgstr "Ingrese la contraseña de"
 
 msgid "File"
-msgstr "File"
+msgstr "Archivo"
 
 msgid "successfully created"
-msgstr "successfully created"
+msgstr "créado con éxito"
 
 msgid "Cannot create"
-msgstr "Cannot create"
+msgstr "Impossible crear
 
 msgid "Erase"
-msgstr "Erase"
+msgstr "Borrar"
 
 msgid "Configure automatic update"
-msgstr "Configure automatic update"
+msgstr "Configurar las actualizaciones automáticas"
 
 msgid "Would you like to enable automatic update"
-msgstr "Would you like to enable automatic update"
+msgstr "Le gustaría habilitar la actualización automática"
 
 msgid "Make shure you reserve the first partition for ESP"
-msgstr "Make shure you reserve the first partition for ESP"
+msgstr "Asegúrese de reservar la primer partición para el ESP"
 
 msgid "At partitioning, declare the first partition as EFI System"
-msgstr "At partitioning, declare the first partition as EFI System"
+msgstr "Al particionar, declare la primera partición como Sistema EFI"
 
 msgid "EFI partition not found"
-msgstr "EFI partition not found"
+msgstr "Partición EFI no encontrada "
 
 msgid "GPT partition table not found"
-msgstr "GPT partition table not found"
+msgstr "abla de partición GPT no encontrada"
 
 msgid "This installation won't boot again ..."
-msgstr "This installation won't boot again ..."
+msgstr "Esta installacion no se reiniciara..."
