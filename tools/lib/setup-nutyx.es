@@ -19,7 +19,7 @@ msgid "Choose available"
 msgstr "Eligir disponibles"
 
 msgid "ERROR configuration"
-msgstr " ERROR de configuración"
+msgstr "ERROR de configuración"
 
 msgid "Please try again"
 msgstr "Por favor, inténte de nuevo"
@@ -34,7 +34,7 @@ msgid "Card to configure"
 msgstr "Tarjeta a configurar"
 
 msgid "Configuration of"
-msgstr "Configuración de "
+msgstr "Configuración de"
 
 msgid "Configuration mode"
 msgstr "modo de configuración"
@@ -121,7 +121,7 @@ msgid "Add a user to the system"
 msgstr "Agregar un usuario al sistema"
 
 msgid "Configure the system"
-msgstr "Configurar el sistema "
+msgstr "Configurar el sistema"
 
 msgid "Install NuTyX"
 msgstr "Instalar NuTyX"
@@ -166,13 +166,13 @@ msgid "You have installed NuTyX without configuring the boot process"
 msgstr "usted Ha instalado NuTyX sin configurar el proceso de arranque"
 
 msgid "Are you sure, you want to cancel the process ?"
-msgstr "Está  seguro/a de que quiere cancelar el proceso "
+msgstr "Está seguro/a de que quiere cancelar el proceso"
 
 msgid "You already have a copy of the original MBR, I will not make a backup of it"
-msgstr " ya existe  una copia del MBR original, no eses necessario un backup"
+msgstr "ya existe  una copia del MBR original, no eses necessario un backup"
 
 msgid "Good to know"
-msgstr " bueno saberlo"
+msgstr "bueno saberlo"
 
 msgid "Main Menu"
 msgstr "Menú Principal"
@@ -202,7 +202,7 @@ msgid "Install"
 msgstr "Instalar"
 
 msgid "Partitioning"
-msgstr Particionando"
+msgstr "Particionando"
 
 msgid "Format"
 msgstr "Formateo"
@@ -239,10 +239,10 @@ msgid "Choose the file system you want to use for the partition"
 msgstr "Elija el Sistema de archivos que quiera usar para la partición"
 
 msgid "High performance journaling file system create by SGI"
-msgstr " Sistema de archivos de diario de alto rendimiento creado por SGI "
+msgstr "Sistema de archivos de diario de alto rendimiento creado por SGI"
 
 msgid "Journaling file system create by IBM"
-msgstr "Sistema de archivos de diario creado por IBM "
+msgstr "Sistema de archivos de diario creado por IBM"
 
 msgid "Very stable file system but not maintain anymore"
 msgstr "Sistema de archivos muy estable, pero ya no mantenido"
@@ -251,7 +251,7 @@ msgid "Next generation of Ext3 file system"
 msgstr "Nueva generación de sistema de archivos Ext3"
 
 msgid "Journaling version of Ext2 file system"
-msgstr " Versión de registro en diario del sistema de archivos Ext2 "
+msgstr "Versión de registro en diario del sistema de archivos Ext2"
 
 msgid "Standard file system Ext2"
 msgstr "Sistema de archivos estándard Ext2"
@@ -311,7 +311,7 @@ msgid "If not yet created/formatted, it will prompt you to do so"
 msgstr "Si aún no está creado/formateado, deberá hacerlo ahora"
 
 msgid "No future plan to make this installer more sophisticated"
-msgstr No hay planes futuros para que este instalador sea más sofisticado "
+msgstr "No hay planes futuros para que este instalador sea más sofisticado"
 
 msgid "NuTyX goes on"
 msgstr "NuTyX sigue"
@@ -323,7 +323,7 @@ msgid "ONE exception, GRUB can be part of it, installed on a separate partition 
 msgstr "UNA excepción, GRUB puede ser parte de NuTyX, instalándolo en una partición separada o mismo sin instalarlo”
 
 msgid "As NuTyX users, we recommand you to install GRUB on a separate partition"
-msgstr Como usuarios de NuTyX, les recomendamos que instalen GRUB en una partición separada"
+msgstr "Como usuarios de NuTyX, les recomendamos que instalen GRUB en una partición separada"
 
 msgid "To do so"
 msgstr "Proceder de la siguiente"
@@ -347,7 +347,7 @@ msgid "The name you enter is invalid"
 msgstr "El nombre ingresado no es válido"
 
 msgid "The name you enter is already register on the system"
-msgstr El nombre ingresado ya está registrado en el sistema"
+msgstr "El nombre ingresado ya está registrado en el sistema"
 
 msgid "The description you enter is invalid"
 msgstr "La descripción ingresada es inválida"
@@ -359,7 +359,7 @@ msgid "Add a description for the user"
 msgstr "Agregue una descripción del usuario"
 
 msgid "Name or Description of the user"
-msgstr ombre o descripción del usuario "
+msgstr "ombre o descripción del usuario"
 
 msgid "Password"
 msgstr "Contraseña"
@@ -380,13 +380,13 @@ msgid "Please run this command as root"
 msgstr "Por favor ejecute este comando como root"
 
 msgid "Sync the HD"
-msgstr Sincronice el disco duro"
+msgstr "Sincronice el disco duro"
 
 msgid "Emptying memory"
 msgstr "Vaciando la memoria"
 
 msgid "Swap partition not found"
-msgstr "Partición de cambio no encontrada
+msgstr "Partición de cambio no encontrada"
 
 msgid "recommended"
 msgstr "recommendado"
@@ -413,7 +413,7 @@ msgid "successfully created"
 msgstr "créado con éxito"
 
 msgid "Cannot create"
-msgstr "Impossible crear
+msgstr "Impossible crear"
 
 msgid "Erase"
 msgstr "Borrar"
@@ -431,7 +431,7 @@ msgid "At partitioning, declare the first partition as EFI System"
 msgstr "Al particionar, declare la primera partición como Sistema EFI"
 
 msgid "EFI partition not found"
-msgstr "Partición EFI no encontrada "
+msgstr "Partición EFI no encontrada"
 
 msgid "GPT partition table not found"
 msgstr "abla de partición GPT no encontrada"
