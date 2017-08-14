@@ -1342,6 +1342,7 @@ check_available_disk() {
 	DISK_FULL_LIST=`lsblk -p -n -d -o NAME -e 1,3,7,11`
 	for i in $DISK_FULL_LIST; do
 		[ "`lsblk -p -n -d -o LABEL $i`" == "nutyxcd" ] && continue
+		[ "`echo $i|grep fd[0-9]*`" == "$i" ] && continue
 		DISK_LIST="$DISK_LIST $i"
 	done
 	if [ -z "$DISK_LIST" ]; then
@@ -1477,10 +1478,8 @@ setup_format() {
 		check_available_disk
 		[ "$CHECK_HD_OK" == "no" ] && return
 	fi
-	if [ "$CHECK_PART_OK" == "no" ]; then
-		check_available_partition
-		[ "$CHECK_PART_OK" == "no" ] && return
-	fi
+	check_available_partition
+	[ "$CHECK_PART_OK" == "no" ] && return
 	if [ -z "$PARTITION" ]; then
 		select_partition "$(gettext "Format a partition")"
 		[ "$PARTITION" == "no" ] && return
