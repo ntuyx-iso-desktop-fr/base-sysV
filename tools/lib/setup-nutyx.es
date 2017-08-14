@@ -320,7 +320,7 @@ msgid "only ONE partition"
 msgstr "Sólo UNA partición"
 
 msgid "ONE exception, GRUB can be part of it, installed on a separate partition or not installed at all"
-msgstr "UNA excepción, GRUB puede ser parte de NuTyX, instalándolo en una partición separada o mismo sin instalarlo”
+msgstr "UNA excepción, GRUB puede ser parte de NuTyX, instalándolo en una partición separada o mismo sin instalarlo"
 
 msgid "As NuTyX users, we recommand you to install GRUB on a separate partition"
 msgstr "Como usuarios de NuTyX, les recomendamos que instalen GRUB en una partición separada"
