@@ -1248,7 +1248,7 @@ fi
 [ "$KERNEL" == "none" ] && KERNEL=""
 
 [ -z $LFS ] && LFS=$FOLDER
-[ -z $BLFS ] && BLFS="20170611"
+[ -z $BLFS ] && BLFS="20170731"
 
 HOMEPAGE="${URL}"                      ## http://downloads.nutyx.org
 INSTALL_BASE="$ARCH/$VERSION"          ## x86_64/8.2
