@@ -67,12 +67,8 @@ links: rcS rc0 rc1 rc2 rc3 rc4 rc5 rc6
 	ln -sf ../proc/self/mounts $(ETCDIR)/mtab
 	ln -sf /usr/share/X11/xorg.conf.d/50-synaptics.conf $(ETCDIR)/X11/xorg.conf.d/50-synaptics.conf
 	ln -sf ../etc/bashrc $(ROOTDIR)/bashrc
-	ln -sf ../etc/sysconfig/console $(ROOTDIR)/console
 	ln -sf ../etc/fstab $(ROOTDIR)/fstab
-	ln -sf ../boot/grub/grub.cfg $(ROOTDIR)/grub.cfg
 	ln -sf ../etc/inittab $(ROOTDIR)/inittab
-	ln -sf ../etc/modprobe.d $(ROOTDIR)/modprobe.d
-	ln -sf ../etc/sysconfig/network $(ROOTDIR)/network
 	ln -sf ../etc/profile.d $(ROOTDIR)/profile.d
 	ln -sf services  $(LIBDIR)/lsb
 	ln -sf /run/lock $(VARDIR)/lock
