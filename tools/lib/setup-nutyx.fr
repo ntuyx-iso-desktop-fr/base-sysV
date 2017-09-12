@@ -424,7 +424,7 @@ msgid "Swap partition not found"
 msgstr "Partition d'échange non trouvée"
 
 msgid "recommended"
-msgstr "recommendé"
+msgstr "recommandé"
 
 msgid "skilled"
 msgstr "expert"
