@@ -813,6 +813,9 @@ export HISTIGNORE="&:[bf]g:exit"
 export XDG_DATA_DIRS=/usr/share/
 export XDG_CONFIG_DIRS=/etc/xdg/
 
+# Set some defaults for certificates
+export GIO_USE_TLS=gnutls-pkcs11
+
 # Setup a red prompt for root and a green one for users.
 NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
