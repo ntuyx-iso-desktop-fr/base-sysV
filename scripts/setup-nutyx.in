@@ -1208,7 +1208,7 @@ case $REPLY in
 	el*) echo '  Option "XkbLayout" "el"' >> ${XORGKB};;
 	pl*) echo '  Option "XkbLayout" "pl"' >> ${XORGKB};;
 	ro_*) echo '  Option "XkbLayout" "ro"' >> ${XORGKB};;
-	ru*) echo '  Option "XkbLayout" "ru"' >> ${XORGKB};;
+	ru*) echo '  Option "XkbLayout" "us,ru"' >> ${XORGKB};;
 	sr*) echo '  Option "XkbLayout" "sr"' >> ${XORGKB};;
 	slo*) echo '  Option "XkbLayout" "sl"' >> ${XORGKB};;
 	cro*) echo '  Option "XkbLayout" "hr"' >> ${XORGKB};;
