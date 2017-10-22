@@ -9,7 +9,6 @@ version=7.2.0
 release=1
 
 source=(http://ftp.gnu.org/gnu/gcc/gcc-$version/gcc-$version.tar.xz)
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(devel man doc)
 
 build()
 {
@@ -55,8 +54,6 @@ $PKG/usr/lib/{libstdc++.la,libsupc++.la}
 mv -v $PKG/usr/lib/*gdb.py \
 $PKG/usr/share/gdb/auto-load/usr/lib
 ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/$version/liblto_plugin.so
-
-rm -rf $PKG/usr/share/info/dir
 
 }
 devel()
