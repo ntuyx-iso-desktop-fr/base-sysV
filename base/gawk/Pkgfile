@@ -5,8 +5,7 @@ packager="tnut <tnut@tnut@org>"
 contributors="Pierre B"
 
 name=gawk
-version=4.1.4
-release=1
+version=4.2.0
 
 source=(http://ftp.gnu.org/gnu/gawk/gawk-$version.tar.xz)
 
@@ -18,7 +17,6 @@ make
 # Some checks fails
 make check || true
 make DESTDIR=$PKG install
-rm -rf $PKG/usr/share/info/dir
 
 # Documentation
 mkdir -vp $PKG/usr/share/doc/gawk-$version
