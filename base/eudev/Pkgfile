@@ -4,11 +4,9 @@ maintainer="Ian Stakenvicius,Tony Vroon,Francisco Blas Izquierdo Riera,Luca Barb
 packager="tnut <tnut@nutyx.org>"
 
 name=eudev
-version=3.2.1
-release=1
+version=3.2.4
 
-source=(http://dev.gentoo.org/~blueness/eudev/$name-$version.tar.gz
-	http://anduin.linuxfromscratch.org/sources/other/udev-lfs-20140408.tar.bz2)
+source=(http://dev.gentoo.org/~blueness/eudev/$name-$version.tar.gz)
 
 build() {
 cd $name-$version
