@@ -4,9 +4,7 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=autoconf2-13
-basename=utoconf2.13
 version=2.13
-release=1
 
 source=(http://ftpmirror.gnu.org/autoconf/autoconf-$version.tar.gz)
 
