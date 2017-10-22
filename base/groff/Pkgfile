@@ -23,5 +23,4 @@ infodir=$PKG/usr/share/info  install
 
 ln -sv eqn $PKG/usr/bin/geqn
 ln -sv tbl $PKG/usr/bin/gtbl
-rm -rf $PKG/usr/share/info/dir
 }
