@@ -6,7 +6,6 @@ packager="tnut <tnut@nutyx.org>"
 
 name=sed
 version=4.4
-release=1
 
 source=(http://ftp.gnu.org/gnu/sed/sed-$version.tar.xz)
 
@@ -26,5 +25,4 @@ make check || true
 make DESTDIR=$PKG install
 install -d m755 $PKG/usr/share/doc/sed-$version
 install -m644 doc/sed.html $PKG/usr/share/doc/sed-$version
-rm -rf $PKG/usr/share/info/dir
 }
