@@ -5,8 +5,8 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=nasm
-version=2.12.02
-release=1
+version=2.13.01
+
 source=( http://www.nasm.us/pub/nasm/releasebuilds/$version/$name-$version.tar.xz
  	http://www.nasm.us/pub/nasm/releasebuilds/$version/nasm-$version-xdoc.tar.xz)
 
