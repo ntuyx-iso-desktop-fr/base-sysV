@@ -3,7 +3,7 @@ url="http://www.gnu.org/software/make/"
 maintainer="Paul D. Smith psmith at gnu dot org,Boris Kolpackov boris at kolpackov dot net"
 packager="tnut <tnut@nutyx.org>"
 
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(man locale)
+PKGMK_GROUPS=(man locale)
 
 name=make
 version=4.2.1
