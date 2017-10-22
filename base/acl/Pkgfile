@@ -4,10 +4,9 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 name=acl
 version=2.2.52
-release=1
 
 source=( http://download.savannah.gnu.org/releases/$name/$name-$version.src.tar.gz)
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(devel man doc)
+
 build() {
 cd acl-*
 
