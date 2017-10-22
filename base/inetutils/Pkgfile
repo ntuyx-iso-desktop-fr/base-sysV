@@ -31,5 +31,4 @@ make DESTDIR=$PKG install
 mkdir $PKG/{s,}bin
 mv -v $PKG/usr/bin/{hostname,ping,ping6,traceroute} $PKG/bin
 mv -v $PKG/usr/bin/ifconfig $PKG/sbin
-rm -rf $PKG/usr/share/info/dir
 }
