@@ -4,12 +4,9 @@ maintainer="Ted Ts'o tytso at mit dot edu,tytso at alum dot mit dot edu"
 packager="tnut <tnut@nutyx.org>"
 
 name=e2fsprogs
-version=1.43.6
-release=1
+version=1.43.7
 
 source=(http://prdownloads.sourceforge.net/$name/$name-$version.tar.gz)
-
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(devel man doc)
 
 build()
 {
