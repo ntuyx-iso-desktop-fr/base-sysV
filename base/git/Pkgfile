@@ -13,8 +13,6 @@ version=2.14.2
 source=( https://www.kernel.org/pub/software/scm/$name/$name{,-manpages,-htmldocs}-$version.tar.xz)
 run=(openssh)
 
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(doc man)
-
 build() {
 cd $name-$version
 
