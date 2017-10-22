@@ -4,7 +4,7 @@ description="The linux kernel firmware set of files. More and more hardware requ
 packager="tnut <tnut@nutyx.org>"
 
 name=linux-firmware
-version=20170723
+version=20171022
 release=1
 
 build() {
