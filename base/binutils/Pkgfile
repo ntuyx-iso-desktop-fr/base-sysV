@@ -4,8 +4,7 @@ maintainer="Tristan Gingold ( gingold at adacore dot com ),Alan Modra ( amodra a
 packager="tnut <tnut@nutyx.org>"
 
 name=binutils
-version=2.29
-release=1
+version=2.29.1
 
 source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.bz2)
 build()
@@ -16,8 +15,11 @@ mkdir -v build
 cd build
 
 ../configure --prefix=/usr \
+--enable-gold \
+--enable-ld=default \
 --enable-plugins \
---enable-shared --disable-werror \
+--enable-shared \
+--disable-werror \
 --with-system-zlib
 
 make tooldir=/usr
