@@ -6,8 +6,7 @@ packager="tnut <tnut@nutyx.org>"
 alias=(card)
 
 PKGMK_IGNORE_RUNTIMEDEPS="no"
-if [ "$PKGMK_ARCH" == "x86_64" ]; then
-   run_devel=(autoconf automake acl.devel attr.devel \
+run_devel=(autoconf automake acl.devel attr.devel \
 bison binutils.devel bzip2.devel curl.devel e2fsprogs.devel \
 eudev.devel expat.devel file.devel flex.devel gawk gawk.devel \
 gdbm.devel gettext.devel gmp.devel gperf kmod.devel iproute2.devel \
@@ -18,13 +17,6 @@ texinfo.devel nasm groff make patch pkg-config \
 glibc.devel gcc.devel libarchive.devel \
 util-linux.devel xz.devel lzo.devel \
 dialog.devel tar wget zlib.devel)
-fi
-
-if [ "$PKGMK_ARCH" == "i686" ]; then
-   run_devel=(autoconf automake bison \
-gawk gperf m4 perl rsync libtool texinfo \
-nasm groff make patch pkg-config tar wget)
-fi
 
 PKGMK_GROUPS=(devel doc man)
 
