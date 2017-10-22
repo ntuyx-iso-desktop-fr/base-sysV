@@ -18,5 +18,4 @@ make check
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html
 
-rm -rf $PKG/usr/share/info/dir
 }
