@@ -4,8 +4,7 @@ maintainer="Philip A. Nelson  phil at cs dot wwu dot edu,Jason Downs downsj at d
 contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 name=gdbm
-version=1.12
-release=2
+version=1.13
 
 source=(http://ftp.gnu.org/gnu/gdbm/gdbm-$version.tar.gz)
 
@@ -19,7 +18,5 @@ make
 make check
 
 make BINOWN=root BINGRP=root prefix=$PKG/usr  install
-
-rm -rf $PKG/usr/share/info/dir
 
 }
