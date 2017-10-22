@@ -6,7 +6,6 @@ contributors="Pierre B"
 
 name=libtool
 version=2.4.6
-release=1
 
 source=(http://ftp.gnu.org/gnu/libtool/libtool-$version.tar.xz)
 
@@ -18,5 +17,4 @@ cd libtool-*
 ./configure --prefix=/usr
 make
 make DESTDIR=$PKG install
-rm -rf $PKG/usr/share/info/dir
 }
