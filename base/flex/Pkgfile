@@ -24,6 +24,4 @@ make DESTDIR=$PKG install
 
 ln -sv flex $PKG/usr/bin/lex
 
-rm -rf $PKG/usr/share/info/dir
-
 }
