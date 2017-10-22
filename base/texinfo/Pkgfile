@@ -4,8 +4,7 @@ maintainer="Karl Berry"
 packager="tnut <tnut@nutyx.org>"
 
 name=texinfo
-version=6.4
-release=1
+version=6.5
 
 source=(http://ftp.gnu.org/gnu/$name/texinfo-$version.tar.xz)
 
@@ -15,7 +14,6 @@ cd texinfo-*
 ./configure --prefix=/usr
 make
 make install DESTDIR=$PKG
-rm -rf $PKG/usr/share/info/dir
 }
 devel()
 {
