@@ -25,7 +25,6 @@ make MANDIR=/usr/share/man INFODIR=/usr/share/info \
 make MANDIR=/usr/share/man \
 	INFODIR=/usr/share/info DESTDIR=$PKG \
      DOCDIR=/usr/share/doc/iproute2-$version install
-rm -rf $PKG/usr/share/info/dir
 }
 devel()
 {
