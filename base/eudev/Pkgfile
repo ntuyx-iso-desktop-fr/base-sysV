@@ -6,13 +6,12 @@ packager="tnut <tnut@nutyx.org>"
 name=eudev
 version=3.2.4
 
-source=(http://dev.gentoo.org/~blueness/eudev/$name-$version.tar.gz)
+source=(http://anduin.linuxfromscratch.org/sources/other/udev-lfs-20140408.tar.bz2
+	http://dev.gentoo.org/~blueness/eudev/$name-$version.tar.gz)
 
 build() {
 cd $name-$version
 sed -r -i 's|/usr(/bin/test)|\1|' test/udev-test.pl
-
-sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c
 
 if [ -d /tools ];then
 	cat > config.cache << "EOF"
