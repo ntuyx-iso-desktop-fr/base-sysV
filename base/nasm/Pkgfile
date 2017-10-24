@@ -23,6 +23,4 @@ mkdir -pv $PKG/usr/share/doc/nasm-$version/html
 cd ../$name-$version
 cp -v doc/html/*.html    $PKG/usr/share/doc/nasm-$version/html
 cp -v doc/*.{txt,ps,pdf} $PKG/usr/share/doc/nasm-$version
-mkdir -pv $PKG/usr/share/info
-cp -v doc/info/*         $PKG/usr/share/info
 }
