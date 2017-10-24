@@ -1,4 +1,4 @@
-version=2.29
+version=2.29.1
 source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.bz2)
 
 build()
