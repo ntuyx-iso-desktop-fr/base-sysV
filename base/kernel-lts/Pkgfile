@@ -19,8 +19,8 @@ version=4.9.58
 _version=${version:0:3}
 
 # Virtualbox
-vb_version=5.1.28
-buildrelease=117968
+vb_version=5.1.30
+buildrelease=118389
 [ "`uname -m`" == "i686"   ] && _VBARCH=x86
 [ "`uname -m`" == "x86_64"   ] && _VBARCH=amd64
 
