@@ -4,8 +4,8 @@ packager="tnut <tnut@nutyx.org>"
 name=bc
 version=1.07.1
 
-source=(http://alpha.gnu.org/gnu/$name/$name-$version.tar.bz2 
-	http://www.linuxfromscratch.org/patches/downloads/$name/$name-$version-memory_leak-1.patch)
+source=(http://ftp.gnu.org/gnu/bc/bc-$version.tar.gz)
+
 build() {
 cd $name-$version
 cat > bc/fix-libmath_h << "EOF"
