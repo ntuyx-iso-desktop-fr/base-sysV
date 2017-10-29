@@ -1,14 +1,14 @@
 version=7.2.0
 source=(\
 http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz \
-http://www.mpfr.org/mpfr-current/mpfr-3.1.5.tar.xz \
+http://www.mpfr.org/mpfr-current/mpfr-3.1.6.tar.xz \
 http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz \
 ftp://gcc.gnu.org/pub/gcc/releases/gcc-$version/gcc-$version.tar.xz)
 
 build()
 {
 cd  gcc-$version
-mv ../mpfr-3.1.5 mpfr
+mv ../mpfr-3.1.6 mpfr
 mv ../gmp-6.1.2 gmp
 mv ../mpc-1.0.3 mpc
 
