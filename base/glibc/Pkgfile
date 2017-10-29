@@ -34,18 +34,20 @@ case $(uname -m) in
    ;;
    x86_64) 
      mkdir $PKG/lib64
+     GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/7.2.0/include
      ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64
      ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64/ld-lsb-x86-64.so.3
    ;;
 esac
 
-mkdir -v ../glibc-build
-cd ../glibc-build
+mkdir -v build
+cd       build
 
 CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
-../glibc-$version/configure --prefix=/usr \
---disable-werror    \
---enable-kernel=3.2 \
+../configure --prefix=/usr      \
+--disable-profile               \
+--disable-werror                \
+--enable-kernel=3.2             \
 --enable-stack-protector=strong \
 libc_cv_slibdir=/lib
 
