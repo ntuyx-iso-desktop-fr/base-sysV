@@ -13,7 +13,7 @@ c342201de104cc9ce0a21e0ad10d4021  bison-3.0.4.tar.xz
 e7cb20d0572cc40d9f47ede6454406d1  coreutils-8.28.tar.xz
 a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.28-i18n-1.patch
 93eea9f07c0058c097891c73e4955456  cpio-2.12.tar.bz2
-18ebc36c5dc9317d4a0b5db94a4e12ad  curl-7.56.0.tar.xz
+e332347fc0b80cabf9c42f310be040c5  curl-7.56.1.tar.xz
 1fdc2eb0d592c4f89d82d24dfdf02f0b  dejagnu-1.6.tar.gz
 a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 07cf286672ced26fba54cd0313bdc071  diffutils-3.6.tar.xz
@@ -23,12 +23,12 @@ a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 44e1a4f4c877e9ddc5a542dfa7ecc92b  expect5.45.tar.gz
 4f2503752ff041895090ed6435610435  file-5.32.tar.gz
 9936aa8009438ce185bea2694a997fc1  findutils-4.6.0.tar.gz
-a5f65570cd9107ec8a8ec88f17b31bb1  flex-2.6.3.tar.gz
+2882e3179748cc9f9c23ec593d6adc8d  flex-2.6.4.tar.gz
 f26c469addc67d88034b01b62ebab284  gawk-4.2.0.tar.xz
 ff370482573133a7fcdd96cd2f552292  gcc-7.2.0.tar.xz
 8929dcda2a8de3fd2367bdbf66769376  gdbm-1.13.tar.gz
 df3f5690eaa30fd228537b00cb7b7590  gettext-0.19.8.1.tar.xz
-9a5997c3452909b1769918c759eff8a2  glibc-2.25-fhs-1.patch
+9a5997c3452909b1769918c759eff8a2  glibc-2.26-fhs-1.patch
 102f637c3812f81111f48f2427611be1  glibc-2.26.tar.xz
 f58fa8001d60c4c77595fbbb62b63c1d  gmp-6.1.2.tar.xz
 9e251c0a618ad0824b51117d5d9db87e  gperf-3.1.tar.gz
@@ -40,7 +40,7 @@ b0e7051fef0b3ba064209a5f3d23bd2a  iana-etc-2.30-numbers_update-20140202-2.patch.
 3ba3afb1d1b261383d247f46cb135ee8  iana-etc-2.30.tar.bz2
 87fef1fa3f603aef11c41dcc097af75e  inetutils-1.9.4.tar.xz
 12e517cac2b57a0121cda351570f1e63  intltool-0.51.0.tar.gz
-e6fecdf46a1542a26044e756fbbabe3b  iproute2-4.12.0.tar.xz
+69dc9e3ece3296890278f0de478330c8  iproute2-4.13.0.tar.xz
 f75cca16a38da6caa7d52151f7136895  kbd-2.0.4-backspace-1.patch
 cb5f04288d26a8806b144e50fe9fb506  kbd-2.0.4.tar.xz
 08297dfb6f2b3f625f928ca3278528af  kmod-24.tar.xz
@@ -84,10 +84,10 @@ c70599ab0d037fde724f7210c2c8d7f8  sysklogd-1.5.1.tar.gz
 a1802fec550baaeecff6c381629653ef  tar-1.29.tar.xz
 3f723d62c2e074bdbb2ddf330b5a71e1  tcl-core8.6.7-src.tar.gz
 3715197e62e0e07f85860b3d7aab55ed  texinfo-6.5.tar.xz
-50dc0dc50c68644c1f70804f2e7a1625  tzdata2017b.tar.gz
+1e751e7e08f8b68530674f04619d894d  tzdata2017c.tar.gz
 c2d6b127f89261513b23b6d458484099  udev-lfs-20140408.tar.bz2
 5b6821c403c3cc6e7775f74df1882a20  util-linux-2.31.tar.xz
-d30d82186b93fcabb4116ff513bfa9bd  wget-1.19.1.tar.xz
+caabf9727fa429626316619a6369fffa  wget-1.19.2.tar.gz
 60fb79cab777e3f71ca43d298adacbd5  xz-5.2.3.tar.xz
 85adef240c5f370b308da8c938951a68  zlib-1.2.11.tar.xz
 fb262d55709427e2e9acadf2c1298c99  root.crt
