@@ -22,9 +22,14 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
 ./configure --prefix=/usr \
 --docdir=/usr/share/doc/readline-$version
 
-make SHLIB_LIBS=-lncurses
+if [ -L /bin/pwd ]; then
+	make SHLIB_LIBS="-L/tools/lib -lncursesw"
+	make DESTDIR=$PKG SHLIB_LIBS="-L/tools/lib -lncurses" install
 
-make DESTDIR=$PKG SHLIB_LIBS=-lncurses install
+else
+	make SHLIB_LIBS=-lncurses
+	make DESTDIR=$PKG SHLIB_LIBS=-lncurses install
+fi
 
 mkdir -p $PKG/lib
 
