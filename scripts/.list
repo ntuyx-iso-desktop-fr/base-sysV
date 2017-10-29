@@ -2,6 +2,9 @@ glibc
 tzdata
 zlib
 file
+readline
+m4
+bc
 binutils
 gmp
 mpfr
@@ -17,13 +20,10 @@ psmisc
 procps-ng
 e2fsprogs
 iana-etc
-m4
 bison
 flex
 grep
-readline
 bash
-bc
 libtool
 gdbm
 expat
