@@ -9,7 +9,7 @@ version=2.26
 release=1
 
 source=(http://www.kernel.org/pub/linux/kernel/v4.x/linux-$kernelversion.tar.xz
-	http://www.linuxfromscratch.org/patches/downloads/$name/glibc-2.25-fhs-1.patch
+	http://www.linuxfromscratch.org/patches/downloads/$name/glibc-$version-fhs-1.patch
 	http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz
 	 glibc.locales.supported )
 
@@ -25,7 +25,7 @@ mkdir -p $PKG/usr/include
 cp -rv dest/include/* $PKG/usr/include
 
 cd ../glibc-$version
-patch -Np1 -i ../glibc-2.25-fhs-1.patch
+patch -Np1 -i ../glibc-$version-fhs-1.patch
 
 case $(uname -m) in
    x86) 
@@ -42,11 +42,11 @@ esac
 mkdir -v ../glibc-build
 cd ../glibc-build
 
+CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
 ../glibc-$version/configure --prefix=/usr \
---disable-profile \
---enable-kernel=2.6.32 \
---enable-obsolete-rpc \
---enable-obsolete-nsl \
+--disable-werror    \
+--enable-kernel=3.2 \
+--enable-stack-protector=strong \
 libc_cv_slibdir=/lib
 
 make || make -j1
@@ -55,7 +55,6 @@ make || make -j1
 # grep Error glibc-check-log
 
 make install_root=$PKG install
-rm -rf $PKG/usr/share/info/dir
 
 mkdir -p $PKG/etc
 cp -v ../glibc-$version/nscd/nscd.conf $PKG/etc/nscd.conf
