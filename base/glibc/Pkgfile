@@ -59,7 +59,7 @@ make || make -j1
 make install_root=$PKG install
 
 mkdir -p $PKG/etc
-cp -v ../glibc-$version/nscd/nscd.conf $PKG/etc/nscd.conf
+cp -v ../nscd/nscd.conf $PKG/etc/nscd.conf
 mkdir -pv $PKG/var/cache/nscd
 
 touch $PKG/etc/ld.so.conf
@@ -67,7 +67,7 @@ touch $PKG/etc/ld.so.conf
 mkdir -pv $PKG/usr/lib/locale
 
 cp $SRC/glibc.locales.supported \
-../glibc-$version/localedata/SUPPORTED
+../localedata/SUPPORTED
 
 make install_root=$PKG localedata/install-locales
 
