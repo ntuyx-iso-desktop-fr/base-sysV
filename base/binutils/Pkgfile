@@ -26,10 +26,7 @@ make tooldir=/usr
 
 # make  LDFLAGS="" -k check || true
 
-# make tooldir=/usr DESTDIR=$PKG install
 make tooldir=/usr DESTDIR=$PKG install
-
-rm -rf $PKG/usr/share/info/dir
 }
 devel()
 {
