@@ -62,6 +62,10 @@ do
             base)
                 PKGMK="pkgmk"
                 case $NAME in
+		    glibc)
+			mkdir -pv /usr/include
+			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+			;;
                     gcc)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
                         rm -fv /usr/lib{,64}/libgcc_s.so{,.1}
@@ -113,10 +117,6 @@ do
                         do
                             echo "=======> Installing '$i' succeeded." >> ${LOG}/$NAME.log
                         done
-                        ;;
-                    kernel)
-                        $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i -kw || exit 1
-                        echo "=======> Installing '$NAME' succeeded." >> ${LOG}/$NAME.log
                         ;;
                     *)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
