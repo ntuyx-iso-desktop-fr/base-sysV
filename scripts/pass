@@ -107,7 +107,7 @@ do
                         ;;
                     cards)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
-                        rm -f /etc/pkgadd.conf
+                        rm -f /var/lib/pkg/pkgadd.conf
                         $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i || exit 1
                         for i in *cards.tar*
                         do
