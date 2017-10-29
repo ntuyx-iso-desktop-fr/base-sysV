@@ -5,11 +5,11 @@ packager="tnut <tnut@nutyx.org>"
 
 
 name=curl
-version=7.56.0
+version=7.56.1
 
 source=(http://curl.haxx.se/download/$name-$version.tar.xz)
 
-[ "$PKGMK_ARCH" == "x86_64" ] && PKGMK_GROUPS=(devel doc man)
+PKGMK_GROUPS=(devel doc man)
 
 build() {
 cd $name-$version
