@@ -14,7 +14,7 @@ e7cb20d0572cc40d9f47ede6454406d1  coreutils-8.28.tar.xz
 a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.28-i18n-1.patch
 93eea9f07c0058c097891c73e4955456  cpio-2.12.tar.bz2
 e332347fc0b80cabf9c42f310be040c5  curl-7.56.1.tar.xz
-1fdc2eb0d592c4f89d82d24dfdf02f0b  dejagnu-1.6.tar.gz
+2ac8405a4c7ca8611d004fe852966c6f  dejagnu-1.6.1.tar.gz
 a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 07cf286672ced26fba54cd0313bdc071  diffutils-3.6.tar.xz
 6d1338c7f4b325e55e5b60ceb7c52a6c  e2fsprogs-1.43.7.tar.gz
