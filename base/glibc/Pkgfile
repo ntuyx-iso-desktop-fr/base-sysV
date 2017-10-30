@@ -43,9 +43,9 @@ esac
 mkdir -v build
 cd       build
 
-CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" \
-../configure --prefix=/usr      \
---disable-profile               \
+CC="gcc -isystem $GCC_INCDIR -isystem /usr/include"       \
+../configure --prefix=/usr                                \
+--with-bugurl=https://github.com/NuTyX/x86_64-sysV/issues \
 --disable-werror                \
 --enable-kernel=3.2             \
 --enable-stack-protector=strong \
@@ -57,6 +57,10 @@ make || make -j1
 # grep Error glibc-check-log
 
 make install_root=$PKG install
+
+# Remove obsolet libnsl libraries
+rm -v $PKG/usr/lib/libnsl*
+rm -v $PKG/lib/libnsl*
 
 mkdir -p $PKG/etc
 cp -v ../nscd/nscd.conf $PKG/etc/nscd.conf
