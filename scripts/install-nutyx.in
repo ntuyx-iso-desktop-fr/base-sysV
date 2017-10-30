@@ -1123,7 +1123,21 @@ if [ -f /etc/${INSTALL_COMMAND}.conf.d/$FILE ]; then
    return
 fi
 
-echo "## For Gnome
+echo "## For LXQt
+# Comment following 2 lines
+# if you don't want to install LXQt
+#
+dir ${DEPOT}/lxqt-extra|${URL}
+dir ${DEPOT}/lxqt|${URL}
+#
+## For lxde
+# Comment following 2 lines
+# if you don't want to install lxde
+#
+dir ${DEPOT}/lxde-extra|${URL}
+dir ${DEPOT}/lxde|${URL}
+#
+## For Gnome
 # Comment following 2 lines
 # if you don't want to install gnome
 #
