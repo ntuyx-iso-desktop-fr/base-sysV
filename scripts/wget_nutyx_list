@@ -62,9 +62,8 @@ d6a1d5f8ddea3abd2cc3e98f58352d26  mpc-1.0.3.tar.gz
 b3ae134bd1b5ead73d659286f568da95  nasm-2.13.01.tar.xz
 0b84a306da9357ec4419b9f18f0afa2b  nasm-2.13.01-xdoc.tar.xz
 ee13d052e1ead260d7c28071f46eefb1  ncurses-6.0.tar.gz
-0b74fc8ac3e3622cbaad8bc74de87907  nutyx-9.0.96.tar.gz
 06a88699018e5fef13d4655abfed1f63  openssh-7.6p1.tar.gz 
-7b521dea79ab159e8ec879d2333369fa  openssl-1.1.0f.tar.gz
+ba5f1b8b835b88cadbce9b35ed9531a6  openssl-1.1.0g.tar.gz
 c8ef18f86d6ba74f7a9259ea138e3e76  openssh-7.6p1-openssl-1.1.0-1.patch
 e3da7940431633fb65a01b91d3b7a27a  patch-2.7.5.tar.xz
 238d9969cc0de8b9105d972007d9d546  pciutils-3.5.5.tar.xz
@@ -93,3 +92,4 @@ caabf9727fa429626316619a6369fffa  wget-1.19.2.tar.gz
 fb262d55709427e2e9acadf2c1298c99  root.crt
 2a1288e8bb4eeea3ca256c8aabd50847  certdata.txt
 a21a04d6ff5c4645c748220dbaa9f221  make-ca.sh-20170514
+f32656185c326856e45362fd28432cce  nutyx-9.0.96.tar.gz
