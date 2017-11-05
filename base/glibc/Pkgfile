@@ -30,6 +30,7 @@ patch -Np1 -i ../glibc-$version-fhs-1.patch
 case $(uname -m) in
    x86) 
      mkdir $PKG/lib
+     GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/7.2.0/include
      ln -s ld-linux.so.2 $PKG/lib/ld-lsb.so.3
    ;;
    x86_64) 
