@@ -7,9 +7,9 @@ packager="tnut <tnut@nutyx.org>"
 maintainer="tnut <tnut@nutyx.org>"
 
 name=nutyx
-version=9.0.96
+version=9.91
 release=1
-source=(http://downloads.nutyx.org/files/$name-$version.tar.gz)
+source=(http://downloads.nutyx.org/files/$name-$version.tar.xz)
 
 build () {
 cd $name-$version
