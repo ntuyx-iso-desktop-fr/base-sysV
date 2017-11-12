@@ -6,18 +6,15 @@ packager="tnut <tnut@nutyx.org>"
 
 name=nfs-utils
 version=2.1.1
-release=2
+release=3
 
-source=(http://downloads.sourceforge.net/nfs/$name-$version.tar.bz2)
+nutyx_version=9.91
+source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
+	http://downloads.sourceforge.net/nfs/$name-$version.tar.bz2)
 
 run=(rpcbind)
 
 build() {
-source  /etc/blfs-bootscripts
-wget \
-http://www.linuxfromscratch.org/blfs/downloads/svn/$scripts-$scriptsversion.tar.bz2
-tar xvf $scripts-$scriptsversion.tar.bz2 
-	
 # build package
 
 cd $name-$version
@@ -36,6 +33,6 @@ chmod u+w,go+r $PKG/sbin/mount.nfs
 chown nobody.nogroup $PKG/var/lib/nfs
 
 # Services
-cd ../$scripts-$scriptsversion
+cd ../nutyx-${nutyx_version}
 make DESTDIR=$PKG install-nfs-server
 }
