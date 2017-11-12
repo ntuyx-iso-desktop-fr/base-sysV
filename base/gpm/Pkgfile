@@ -4,16 +4,14 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 name=gpm
 version=1.20.7
-release=1
+release=3
+nutyx_version=9.91
 
-source=(gpm-1.20.7-glibc-2.26-1.patch
+source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
+	gpm-1.20.7-glibc-2.26-1.patch
 	http://www.nico.schottelius.org/software/$name/archives/$name-$version.tar.bz2)
 
 build() {
-	source /etc/blfs-bootscripts
-	wget  http://www.linuxfromscratch.org/blfs/downloads/svn/$scripts-$scriptsversion.tar.bz2
-	tar xvf $scripts-$scriptsversion.tar.bz2
-
 	cd $name-$version
 
 	patch -Np1 -i ../gpm-1.20.7-glibc-2.26-1.patch
@@ -30,6 +28,6 @@ build() {
 	ln -sv libgpm.so.2.1.0 $PKG/usr/lib/libgpm.so
 	install -v -m644 conf/gpm-root.conf $PKG/etc
 
-	cd ../$scripts-$scriptsversion
+	cd ../nutyx-${nutyx_version}
 	make DESTDIR=$PKG install-gpm
 }
