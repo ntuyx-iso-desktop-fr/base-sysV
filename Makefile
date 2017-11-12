@@ -35,10 +35,10 @@ dist: distclean
 
 	git archive --format=tar --prefix=$(NAME)/ HEAD | tar -x
 	git log > $(NAME)/ChangeLog
-	tar czvf $(NAME).tar.gz $(NAME)
+	tar cJvf $(NAME).tar.xz $(NAME)
 	rm -rf $(NAME)
 	sed -i "/nutyx-/d" scripts/wget_nutyx_list
-	md5sum $(NAME).tar.gz >> scripts/wget_nutyx_list
+	md5sum $(NAME).tar.xz >> scripts/wget_nutyx_list
 
 distclean:
-	rm -rf $(NAME).tar.gz
+	rm -rf $(NAME).tar.xz
