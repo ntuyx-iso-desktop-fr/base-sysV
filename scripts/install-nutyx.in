@@ -260,11 +260,12 @@ do
 	install_pkg "$i"
 done
 }
-generate_blfs_bootscripts() {
-[ -f ${FOLDER}/etc/${FOLDER}/etc/blfs-bootscripts ] && return
+generate_services_scripts() {
+FILE="services-scripts"
+[ -f ${FOLDER}/etc/${FOLDER}/etc/$FILE ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
-echo "scripts=http://downloads.nutyx.org/files/nutyx
-scriptsversion=$VERSION" > ${FOLDER}/etc/blfs-bootscripts
+echo "scripts=http://downloads.nutyx.org/files/nutyx-$VERSION.tar.xz" \
+> ${FOLDER}/etc/$FILE
 }
 generate_etc_bashrc() {
 local FILE
@@ -1467,7 +1468,7 @@ install_configuration_files() {
 	generate_udev_retry
 	generate_rc_site
 	generate_etc_bashrc
-	generate_blfs_bootscripts
+	generate_services_scripts
 	generate_lsb
 	generate_nutyx_version
 }
