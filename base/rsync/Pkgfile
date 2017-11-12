@@ -3,14 +3,14 @@ url="http://samba.anu.edu.au/rsync/"
 packager="tnut <tnut@nutyx.org>"
 name=rsync
 version=3.1.2
-release=1
+release=2
+nutyx_version=9.91
 
-source=( http://rsync.samba.org/ftp/$name/$name-$version.tar.gz
+source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz 
+	http://rsync.samba.org/ftp/$name/$name-$version.tar.gz
 	rsync.driver )
 
 build() {
-source /etc/blfs-bootscripts
-wget http://www.linuxfromscratch.org/blfs/downloads/svn/$scripts-$scriptsversion.tar.bz2
 
 cd $name-$version
 ./configure --prefix=/usr \
@@ -27,7 +27,6 @@ $PKG/var/lib/pkg/drivers/rsync
 # service
 cd $SRC
 
-tar xf $scripts-$scriptsversion.tar.bz2
-cd $SRC/$scripts-$scriptsversion
+cd $SRC/nutyx-${nutyx_version}
 make DESTDIR=$PKG install-rsyncd
 }
