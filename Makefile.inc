@@ -1,7 +1,7 @@
 #
 #  nutyx
 #
-#  Copyright (c) 2016 by NuTyX team (http://nutyx.org)
+#  Copyright (c) 2016 - 2017 by NuTyX team (http://nutyx.org)
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 
 
 DESTDIR =
+
 LIBDIR = ${DESTDIR}/lib
 USRBINDIR = ${DESTDIR}/usr/bin
 BINDIR = ${DESTDIR}/bin
@@ -31,11 +32,13 @@ ETCDIR = ${DESTDIR}/etc
 SERVICEDIR=${LIBDIR}/services
 ROOTDIR=${DESTDIR}/root
 VARDIR=${DESTDIR}/var
+EXTDIR=${ETCDIR}
 
 VERSION = 9.91
 
 NAME = nutyx-$(VERSION)
 
+MODE = 754
 FILEMODE = 754
 DIRMODE = 755
 CONFMODE = 644

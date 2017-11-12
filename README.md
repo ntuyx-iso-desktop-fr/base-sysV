@@ -7,6 +7,7 @@ NuTyX features a custom package manager called "cards". Cards can install binary
 (e.g. desktop packages, such as KDE or Xfce), and compile source packages from "ports". The distribution is designed
 for intermediate and advanced Linux users.
 
+There are variables defined for script permissions {MODE}, configuration file permissions {CONFMODE}, directory permissions {DIRMODE} and destination directory {DESTDIR}.
 ---
 
 **TÜRKÇE** [NuTyX](http://www.nutyx.org) işletim sistemi çoğul mimari desteği sağlayan 

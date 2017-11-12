@@ -6,6 +6,7 @@ DIRTOOLS = tools
 
 DIRSCRIPTS = scripts
 
+DIRSERVICES = services-scripts
 
 .PHONY: all
 
@@ -26,6 +27,9 @@ clean:
 
 	$(MAKE) -C $(DIRSCRIPTS) clean
 	$(MAKE) -C $(DIRMAN) clean
+
+install-%:
+	$(MAKE) -C $(DIRSERVICES) $@
 
 dist: distclean
 
