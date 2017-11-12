@@ -9,17 +9,14 @@ PKGMK_GROUPS=(man)
 
 name=rpcbind
 version=0.2.4
-release=3
+release=4
+nutyx_version=9.91
 
-source=(http://downloads.sourceforge.net/rpcbind/rpcbind-$version.tar.bz2
+source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
+	http://downloads.sourceforge.net/rpcbind/rpcbind-$version.tar.bz2
 	http://www.linuxfromscratch.org/patches/blfs/svn/rpcbind-$version-vulnerability_fixes-1.patch)
 
 build() {
-    source /etc/blfs-bootscripts
-
-    wget http://www.linuxfromscratch.org/blfs/downloads/svn/$scripts-$scriptsversion.tar.bz2
-    tar xvf $scripts-$scriptsversion.tar.bz2
-
     cd rpcbind-$version
     sed -i "/servname/s:rpcbind:sunrpc:" src/rpcbind.c
 
@@ -32,7 +29,7 @@ build() {
     make
     make DESTDIR=$PKG install
 
-    cd ../$scripts-$scriptsversion
+    cd ../nutyx-${nutyx_version}
     make DESTDIR=$PKG install-rpcbind
     make DESTDIR=$PKG install-netfs
 
