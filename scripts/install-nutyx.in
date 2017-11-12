@@ -264,7 +264,7 @@ generate_services_scripts() {
 FILE="services-scripts"
 [ -f ${FOLDER}/etc/${FOLDER}/etc/$FILE ] && return
 [ ! -d ${FOLDER}/etc ] && mkdir -pv ${FOLDER}/etc
-echo "scripts=http://downloads.nutyx.org/files/nutyx-$VERSION.tar.xz" \
+echo "http://downloads.nutyx.org/files/nutyx-$VERSION.tar.xz" \
 > ${FOLDER}/etc/$FILE
 }
 generate_etc_bashrc() {
