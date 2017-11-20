@@ -145,6 +145,7 @@ do_mount_iso_rw()
 	touch ${2}/fastboot
 	rm ${2}/init
 	chmod 755 ${2}/
+	chmod 755 ${2}/var
 }
 find_media() {
    local PI FSIZE
@@ -173,7 +174,7 @@ find_media() {
 	for i in `ls /media/cdrom/isolinux/boot/`
 	do
 	  FSIZE=`ls -s /media/cdrom/isolinux/boot/$i| cut -d " " -f1`
-	  if [ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt $((FSIZE + 250000)) ]; then
+	  if [ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt $((2 * FSIZE)) ]; then
 	    PI="yes"
 	    cp  /media/cdrom/isolinux/boot/$i /boot/
 	  else
