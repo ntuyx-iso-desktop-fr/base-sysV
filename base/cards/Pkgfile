@@ -21,13 +21,11 @@ dialog.devel tar wget zlib.devel)
 PKGMK_GROUPS=(devel doc man)
 
 name=cards
-version=2.3.100
+version=2.3.101
 
-source=(cards-2.3.100-header-1.patch
-	http://downloads.nutyx.org/files/cards-$version.tar.gz)
+source=(http://downloads.nutyx.org/files/cards-$version.tar.gz)
 build () {
 cd $name-$version
-patch -Np1 -i ../cards-2.3.100-header-1.patch
 make all
 make DESTDIR=$PKG install
 mkdir -p $PKG/{etc,usr}/ports
