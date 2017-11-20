@@ -7,6 +7,7 @@ packager="tnut <tnut@nutyx.org>"
 
 name=sudo
 version=1.8.21p2
+release=2
 
 source=($url/sudo/dist/$name-$version.tar.gz)
 
@@ -43,5 +44,7 @@ session   include     system-session
 # End /etc/pam.d/sudo
 EOF
 chmod 644 $PKG/etc/pam.d/sudo
-echo "%wheel ALL=(ALL) ALL" >> $PKG/etc/sudoers
+echo "%wheel ALL=(ALL) ALL
+%wheel ALL =(ALL) NOPASSWD: /usr/bin/flcards" >> $PKG/etc/sudoers
+
 }
