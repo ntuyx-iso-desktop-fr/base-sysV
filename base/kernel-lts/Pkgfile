@@ -15,7 +15,7 @@ PKGMK_GROUPS=(devel doc)
 name=kernel-lts
 alias=(linux-lts)
 
-version=4.14
+version=4.14.1
 _version=${version:0:4}
 
 # Virtualbox
@@ -29,7 +29,7 @@ buildrelease=118389
 
 source=(\
 $url/pub/linux/kernel/v4.x/linux-${_version}.tar.xz
-# $url/pub/linux/kernel/v4.x/patch-$version.xz
+$url/pub/linux/kernel/v4.x/patch-$version.xz
 http://download.virtualbox.org/virtualbox/${vb_version}/VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run
 $name.config $name.config_64)
 
