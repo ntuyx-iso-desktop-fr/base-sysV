@@ -21,7 +21,7 @@ dialog.devel tar wget zlib.devel)
 PKGMK_GROUPS=(devel doc man)
 
 name=cards
-version=2.3.101
+version=2.3.102
 
 source=(http://downloads.nutyx.org/files/cards-$version.tar.gz)
 build () {
