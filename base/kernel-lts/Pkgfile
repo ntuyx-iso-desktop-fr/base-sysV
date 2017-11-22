@@ -15,8 +15,8 @@ PKGMK_GROUPS=(devel doc)
 name=kernel-lts
 alias=(linux-lts)
 
-version=4.14.1
-_version=${version:0:4}
+version=4.9.64
+_version=${version:0:3}
 
 # Virtualbox
 vb_version=5.2.0
