@@ -55,7 +55,7 @@ $(ETCDIR)/init.d/$${FILE}; \
 	install -m 755 lib/ipv4-static-route $(SERVICEDIR)/ipv4-static-route
 	install -m 644 lib/init-functions $(SERVICEDIR)/init-functions
 	install -m 644 lib/init.in	$(SERVICEDIR)/init.in
-	for EXT in da de es fi fr it nl nn pt sv tr ru; do \
+	for EXT in ar da de es fi fr it nl nn pt sv tr ru; do \
 		install -m 644 lib/setup-nutyx.$${EXT} \
 $(SERVICEDIR)/setup-nutyx/setup-nutyx.$${EXT}; \
 	done
