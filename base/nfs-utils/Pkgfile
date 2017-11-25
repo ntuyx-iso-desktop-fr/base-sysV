@@ -5,10 +5,9 @@ url="http://nfs.sourceforge.net"
 packager="tnut <tnut@nutyx.org>"
 
 name=nfs-utils
-version=2.1.1
-release=3
+version=2.2.1
 
-nutyx_version=9.91
+nutyx_version=9.92
 source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
 	http://downloads.sourceforge.net/nfs/$name-$version.tar.bz2)
 
