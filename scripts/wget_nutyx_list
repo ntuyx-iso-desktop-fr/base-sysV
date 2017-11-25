@@ -9,7 +9,7 @@ c342201de104cc9ce0a21e0ad10d4021  bison-3.0.4.tar.xz
 6a5ac7e89b791aae556de0f745916f7f  bzip2-1.0.6-install_docs-1.patch
 00b516f4704d4a7cb50a1d97e6e8e15b  bzip2-1.0.6.tar.gz
 50199caa2dcfc63e8a1fdc3faa889a05  cards-2.3.103.tar.gz
-9b90522b31f5628c2e0f55dda348e558  check-0.11.0.tar.gz
+31b17c6075820a434119592941186f70  check-0.12.0.tar.gz
 e7cb20d0572cc40d9f47ede6454406d1  coreutils-8.28.tar.xz
 a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.28-i18n-1.patch
 93eea9f07c0058c097891c73e4955456  cpio-2.12.tar.bz2
@@ -19,7 +19,7 @@ a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 07cf286672ced26fba54cd0313bdc071  diffutils-3.6.tar.xz
 6d1338c7f4b325e55e5b60ceb7c52a6c  e2fsprogs-1.43.7.tar.gz
 66acef4c6094aab4aced7ae83b74b0d2  eudev-3.2.4.tar.gz
-6e3980aba29a224a9f478d88ac7ec207  expat-2.2.4.tar.bz2
+789e297f547980fc9ecc036f9a070d49  expat-2.2.5.tar.bz2
 44e1a4f4c877e9ddc5a542dfa7ecc92b  expect5.45.tar.gz
 4f2503752ff041895090ed6435610435  file-5.32.tar.gz
 9936aa8009438ce185bea2694a997fc1  findutils-4.6.0.tar.gz
@@ -40,7 +40,7 @@ b0e7051fef0b3ba064209a5f3d23bd2a  iana-etc-2.30-numbers_update-20140202-2.patch.
 3ba3afb1d1b261383d247f46cb135ee8  iana-etc-2.30.tar.bz2
 87fef1fa3f603aef11c41dcc097af75e  inetutils-1.9.4.tar.xz
 12e517cac2b57a0121cda351570f1e63  intltool-0.51.0.tar.gz
-69dc9e3ece3296890278f0de478330c8  iproute2-4.13.0.tar.xz
+1075423d7029e02a8f23ed4f42b7e372  iproute2-4.14.1.tar.xz
 f75cca16a38da6caa7d52151f7136895  kbd-2.0.4-backspace-1.patch
 cb5f04288d26a8806b144e50fe9fb506  kbd-2.0.4.tar.xz
 08297dfb6f2b3f625f928ca3278528af  kmod-24.tar.xz
@@ -66,7 +66,7 @@ ee13d052e1ead260d7c28071f46eefb1  ncurses-6.0.tar.gz
 ba5f1b8b835b88cadbce9b35ed9531a6  openssl-1.1.0g.tar.gz
 c8ef18f86d6ba74f7a9259ea138e3e76  openssh-7.6p1-openssl-1.1.0-1.patch
 e3da7940431633fb65a01b91d3b7a27a  patch-2.7.5.tar.xz
-238d9969cc0de8b9105d972007d9d546  pciutils-3.5.5.tar.xz
+8e52278399b7b35fcfc031bc05da80a8  pciutils-3.5.6.tar.xz
 467cd0c43514b9b5e397c8b385581f53  perl-5.26.1.tar.bz2
 f6e931e319531b736fadc017f470e68a  pkg-config-0.29.2.tar.gz
 957e42e8b193490b2111252e4a2b443c  procps-ng-3.3.12.tar.xz
@@ -92,4 +92,4 @@ caabf9727fa429626316619a6369fffa  wget-1.19.2.tar.gz
 fb262d55709427e2e9acadf2c1298c99  root.crt
 2a1288e8bb4eeea3ca256c8aabd50847  certdata.txt
 a21a04d6ff5c4645c748220dbaa9f221  make-ca.sh-20170514
-a7f991ac869984c09badf0be84b43dc3  nutyx-9.92.tar.xz
+fa0353275a4b5a2aa179f1a8b136f052  nutyx-9.92.tar.xz
