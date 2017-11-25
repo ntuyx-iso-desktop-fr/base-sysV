@@ -1,4 +1,4 @@
-﻿msgid ""
+msgid ""
 msgstr ""
 "Project-Id-Version: NuTyX Configuration tool\n"
 "PO-Revision-Date: 2014-08-07+2000\n"
@@ -192,8 +192,6 @@ msgstr "Configurare l'avvio del PC"
 
 msgid "Reboot the PC"
 msgstr "Riavviare il PC"
-
-merci de traduire en face de msgtr
 
 msgid "Press OK to reboot the computer"
 msgstr "Premere OK per riavviare la machina"

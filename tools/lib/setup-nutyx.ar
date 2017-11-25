@@ -1,4 +1,4 @@
-﻿msgid ""
+msgid ""
 msgstr ""
 "Project-Id-Version: NuTyX Configuration tool\n"
 "PO-Revision-Date: 2014-08-07+2000\n"
@@ -15,19 +15,19 @@ msgstr "ضبط"
 msgid "Keyboard Layout"
 msgstr "وضعية اللوحة"
 
-msgid “Choose available"
+msgid "Choose available"
 msgstr "إختيار الوضعية"
 
-msgsid "error configuration"
+msgid "error configuration"
 msgstr "خلل في الـتأكيد"
 
 msgid "Please try again"
-msgstr "الرجاء إعادة المحاولة
+msgstr "الرجاء إعادة المحاولة"
 
 msgid "Network card"
-msgstr “بطاقة الشبكة"
+msgstr " “بطاقة الشبكة"
 
-msgid “Select the card"
+msgid "Select the card"
 msgstr "إختر البطاقة "
 
 msgid "Card to configure"
@@ -36,17 +36,17 @@ msgstr "البطاقة للتأكيد"
 msgid "Configuration of"
 msgstr "التأكيد"
 
-msgid “configuration mode”
-msgstr"وضع التاكيد "
+msgid "configuration mode"
+msgstr "وض ع التاكيد "
 
-msgid “Auto"
+msgid "Auto"
 msgstr "تلقائي"
 
 msgid "IP address automatically set from DHCP server"
 msgstr "العنوان IP محصل عليه تلقائيا من محصل البث الشبكي"
 
 msgid "Man"
-msgstr “Man”
+msgstr "Man"
 
 msgid "Manually specify parameters"
 msgstr "تحديد الخواص يدويا "
@@ -58,7 +58,7 @@ msgid "Enter a broadcast adress"
 msgstr "أدخل عنوان النشر"
 
 msgid "in most cases the current value can be used"
-msgstr ""ن تستعملفي غالب الحالات القيم المنشورة يمكن أ، "
+msgstr "ن تستعملفي غالب الحالات القيم المنشورة يمكن أ، "
 
 msgid "Enter the subnet mask"
 msgstr "أدخل قناع تحت الشبكة "
@@ -113,7 +113,7 @@ msgstr "تأكيد اللغة"
 msgid "Configure the network"
 msgstr "لوقت و الساعة"
 
-msgid "Date and time settings"ا
+msgid "Date and time settings"
 msgstr "تاكي الوقت و الساعة"
 
 msgid "add a user to the system"
@@ -137,7 +137,7 @@ msgstr "الساعة مبرمجة على"
 msgid "Do you want to use this time as Coordinated Universal Time ?"
 msgstr " هل تريد إستعمال الوقت العالمي أو المحلي "
 
-so that the summer/winter time is changed automatically"
+msgid "so that the summer/winter time is changed automatically"
 msgstr "هل تريد الحصول وقت الشتاء و الصيف تلقائيا"
 
 msgid "Please enter the date"

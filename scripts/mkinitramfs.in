@@ -263,7 +263,9 @@ usbcore usb-storage usb-common \
 usb-storage usbcore loop sr_mod \
 cdrom squashfs isofs overlay mmc_core \
 rtsx_pci rtsx_pci_sdmmc rtsx_pci_ms \
-mmc_block memstick ssb pcmcia_core pcmcia
+mmc_block memstick ssb pcmcia_core \
+pcmcia lpc_ich shpcp sdhci-acpi sdhci-pltfm \
+md-mod dm-mod sdhci sdhci-pci
   do
     find /lib/modules/ -type f -name $i* 2> /dev/null | cpio --make-directories -p --quiet $WDIR 2> /dev/null
   done
