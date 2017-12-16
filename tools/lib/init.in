@@ -92,7 +92,7 @@ do_mount_in_ram()
 {
 	# squasfs files are in ${1} on the initrd
 	# RW folders
-	for DIR in var run etc root
+	for DIR in var run etc root home
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /DIR
@@ -108,7 +108,7 @@ do_mount_in_ram()
 		fi
 	done
 	# RO folders
-	for DIR in usr lib sbin bin
+	for DIR in usr lib sbin bin opt lib64
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /$DIR > /dev/null 2>&1
@@ -175,7 +175,9 @@ find_media() {
 	do
 	  FSIZE=`ls -s /media/cdrom/isolinux/boot/$i| cut -d " " -f1`
 	  if [ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt $((2 * FSIZE)) ]; then
+	    [ "$verbose" == "no" ] || printf "FSIZE: %s\n" $FSIZE
 	    PI="yes"
+            [ "$verbose" == "no" ] || printf "cp /media/cdrom/isolinux/boot/%s /boot/\n" $i
 	    cp  /media/cdrom/isolinux/boot/$i /boot/
 	  else
 	    PI="no"
