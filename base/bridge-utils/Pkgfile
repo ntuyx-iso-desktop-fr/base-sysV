@@ -16,11 +16,13 @@ cd $name-$version
 
 autoconf
 
-./configure --prefix=/
+./configure --prefix=/usr
 
 make
 
 make DESTDIR=$PKG install
+
+mv $PKG/usr/sbin $PKG/sbin
 
 # service
 cd ../nutyx-${nutyx_version}
