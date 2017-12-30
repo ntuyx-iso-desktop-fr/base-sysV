@@ -92,7 +92,7 @@ do_mount_in_ram()
 {
 	# squasfs files are in ${1} on the initrd
 	# RW folders
-	for DIR in var run etc root home
+	for DIR in var run etc sbin bin home
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /DIR
@@ -102,41 +102,58 @@ do_mount_in_ram()
 			cp -a /DIR/* /$DIR/ > /dev/null 2>&1
 			umount /DIR
 			rm -r /DIR
-			if [ "$DIR" == "root" ]; then
-				chmod 750 /root
-			fi
 		fi
 	done
+	# root
+	mkdir -p /root
+	chmod 750 /root
+	cp /etc/skel/.bash* /root
 	# RO folders
-	for DIR in usr lib sbin bin opt lib64
+	for DIR in mnt usr lib opt
 	do
 		if [ -f ${1}/$DIR.squashfs ];then
 			mkdir /$DIR > /dev/null 2>&1
 			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s\n" ${1} $DIR $DIR
 			mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR || problem
+		else
+			mkdir /$DIR
+		fi
+	done
+#   Overlay
+	mkdir -p /OVL/{usr-upper,usr-work,lib-upper,lib-work}
+
+	[ "$verbose" == "no" ] || echo "mount -n -t overlay -o lowerdir=/usr:/lib:/opt,upperdir=/OVL/upper,workdir=/OVL/work /"
+	mount -n -t overlay overlay -o lowerdir=/usr,upperdir=/OVL/usr-upper,workdir=/OVL/usr-work /usr
+	mount -n -t overlay overlay -o lowerdir=/lib,upperdir=/OVL/lib-upper,workdir=/OVL/lib-work /lib
+	sleep 5
+}
+find_media() {
+	local PI FSIZE MSIZE
+	EXPECT_LABEL="nutyxcd"
+	if [ -n "$fromiso" ]; then
+		mkdir -p /media/fromdev
+		mount -o ro ${fromdev} /media/fromdev
+		modprobe loop
+		LOOPDEV=`losetup -f`
+		losetup $LOOPDEV /media/fromdev${fromiso}
+	fi
+
+	for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* /sys/block/loop*; do
+		[ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
+		if [ ! -d "$SYS" ]; then  continue; fi
+		DEV=/dev/${SYS##*/}
+		LABEL=`/sbin/blkid -o value -s LABEL $DEV`
+		if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
+			ln -sf $DEV /dev/nutyx-cd
+			mkdir  -p /media/cdrom 2>/dev/null
+			[ "$verbose" == "no" ] || printf "mount -n /dev/nutyx-cd /media/cdrom\n"
+			mount -n /dev/nutyx-cd /media/cdrom
+			[ -d /media/cdrom/depot ] && echo $DEV > /tmp/depot
+			break
 		fi
 	done
 }
-do_mount_iso_rw()
-{
-	local DIR
-	for DIR in var run etc root usr lib lib64 sbin bin opt home
-	do
-		if [ -f ${1}/$DIR.squashfs ]; then
-			mkdir /DIR
-			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR"
-			mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR || problem
-			[ "$verbose" == "no" ] || echo "mkdir -p ${2}/$DIR"
-			mkdir -p ${2}/$DIR > /dev/null 2>&1
-			cp -a /DIR/* ${2}/$DIR/ > /dev/null 2>&1
-			umount /DIR
-			[ "$verbose" == "no" ] || echo "rm -r /DIR"
-			rm -r /DIR
-			if [ "$DIR" == "root" ]; then
-				chmod 750 ${2}/root
-			fi
-		fi
-	done
+do_mount_iso_rw() {
 	# get read of some services
 	for i in do_stop_mountfs
 	do
@@ -147,52 +164,6 @@ do_mount_iso_rw()
 	chmod 755 ${2}/
 	chmod 755 ${2}/var
 }
-find_media() {
-   local PI FSIZE
-   EXPECT_LABEL="nutyxcd"
-   if [ -n "$fromiso" ]; then
-	mkdir -p /media/fromdev
-	mount -o ro ${fromdev} /media/fromdev
-	modprobe loop
-	LOOPDEV=`losetup -f`
-	losetup $LOOPDEV /media/fromdev${fromiso}
-   fi
-   for SYS in /sys/block/sd* /sys/block/sd*/sd* /sys/block/sr* /sys/block/loop*; do
-	   [ "$verbose" == "no" ] || printf "Looking in %s for media\n" $SYS
-      if [ ! -d "$SYS" ]; then  continue; fi
-      DEV=/dev/${SYS##*/}
-      LABEL=`/sbin/blkid -o value -s LABEL $DEV`
-      if [ ${LABEL} == ${EXPECT_LABEL} ]  2>/dev/null ; then
-	ln -sf $DEV /dev/nutyx-cd
-	mkdir  -p /media/cdrom 2>/dev/null
-	[ "$verbose" == "no" ] || printf "mount -n /dev/nutyx-cd /media/cdrom\n"
-	mount -n /dev/nutyx-cd /media/cdrom
-	[ -d /media/cdrom/depot ] && echo $DEV > /tmp/depot
-	# If RAM Available > 1Gb (lets say around 1 000 000 kb) we get rid of the key (mounted)
-	[ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt 1000000 ] || break
-	mkdir -p /boot
-	for i in `ls /media/cdrom/isolinux/boot/`
-	do
-	  FSIZE=`ls -s /media/cdrom/isolinux/boot/$i| cut -d " " -f1`
-	  if [ `cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"` -gt $((2 * FSIZE)) ]; then
-	    [ "$verbose" == "no" ] || printf "FSIZE: %s\n" $FSIZE
-	    PI="yes"
-            [ "$verbose" == "no" ] || printf "cp /media/cdrom/isolinux/boot/%s /boot/\n" $i
-	    cp  /media/cdrom/isolinux/boot/$i /boot/
-	  else
-	    PI="no"
-	    break
-	  fi
-	done
-	if [ "$PI" == "yes" ]; then
-	  cp /media/cdrom/isolinux/kernel /boot/kernel
-	  umount /media/cdrom
-	fi
-	break
-      fi
-   done
-}
-
 MainLoop(){
    while [ ! -f /root/boot ];
    do
@@ -205,7 +176,7 @@ MainLoop(){
    clear
 }
 LoadModules() {
- for i in dm-mod md-mod ehci-pci \
+ for i in dm-mod md-mod ehci-pci overlay \
  xhci-pci xhci-hcd ehci-hcd nls_iso8859_1 \
  uhci-hcd uas sr_mod usb-storage loop \
  squashfs isofs vfat fat nls_cp437
@@ -292,29 +263,9 @@ if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
-if [ "$live" == "yes" ]; then
-	LoadModules
-	find_media
-	if [ ! -L /dev/nutyx-cd ]; then
-		sleep 5
-		find_media
-	fi
-	if [ -d /boot ]; then
-		[ "$verbose" == "no" ] || printf "do_mount_iso_rw /boot /.ISO"
-		do_mount_iso_rw /boot /
-		rm -r /boot/*.squashfs
-		[ "$verbose" == "no" ] || printf "cd / ...\n"
-		cd /
-		[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
-		exec "$init" "$@" > /dev/null 2>&1
-	else
-		no_mount
-		sh
-	fi
-	return
-fi
-
-if [ "$root" == "" ]; then
+if [ "$live" == "yes" ] || [ "$root" == "" ]; then
+	[ "$verbose" == "no" ] || printf "Loading kernel Modules ...\n"
+	[ "$verbose" == "no" ] || sleep 2
 	LoadModules
 	if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
 		find_media
@@ -323,30 +274,43 @@ if [ "$root" == "" ]; then
 			sleep 5
 			find_media
 		fi
-		if [ -d /media/cdrom/isolinux/boot ]; then
-			do_mount_in_ram /media/cdrom/isolinux/boot
-		else
-			do_mount_in_ram /boot
-
-		fi
+	fi
+	if [ -d /media/cdrom/isolinux/boot ]; then
+		do_mount_in_ram /media/cdrom/isolinux/boot
 	else
 		do_mount_in_ram /boot
 	fi
-	if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
+fi
+#
+# If still not find the setup-nutyx file then it's time to giveup
+#
+if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
 		no_mount
 		sh
-	else
-		if [ "$verbose" == "yes" ]; then
-			printf "/etc/rc.d/init.d/setup-nutyx exist ...\n"
-			ls -lt /etc/rc.d/init.d/setup-nutyx
-		fi
-	fi
+fi
+if [ "$verbose" == "yes" ]; then
+	printf "/etc/rc.d/init.d/setup-nutyx exist ...\n"
+	ls -lt /etc/rc.d/init.d/setup-nutyx
+	sleep 5
+fi
+
+if [ "$live" == "yes" ]; then
+		[ "$verbose" == "no" ] || printf "cd / ...\n"
+		cd /
+		[ "$verbose" == "no" ] || sleep 5
+
+		[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
+		[ "$verbose" == "no" ] || sleep 5
+
+		exec "$init" "$@" > /dev/null 2>&1
+fi
+
+if [ "$root" == "" ]; then
 	if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
 		# If Eudev was already started
 		# We need to restart it for loading keyboards, screen, usb needed modules
 		[ "$verbose" == "no" ] || printf "Stop udev...\n"
 		do_stop_udev
-
 		[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
 		sleep $rootdelay
 	fi
