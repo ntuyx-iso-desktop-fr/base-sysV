@@ -2267,6 +2267,10 @@ cleanup () {
 top_loop() {
 	if [ "$SETUP_INITRD" = "yes" ]; then
 		[ "$SETUP_CONFIG_LANGUAGE" = "yes" ] && LANG=de_CH.utf-8 setup_language
+		if [ ! -d /media/cdrom/isolinux/boot ]; then
+			dialog --title "   $(gettext "Welcome to the NuTyX installer")   " \
+				--msgbox "    $(gettext "You can remove the ISO media now.")" 6 60
+		fi
 		if [ -d "$EFIVARS" ]; then
 			setup_help_efi
 		else

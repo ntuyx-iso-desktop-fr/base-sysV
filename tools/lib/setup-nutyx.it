@@ -439,3 +439,5 @@ msgstr "GPT partizione tabella non trovato"
 msgid "This installation won't boot again ..."
 msgstr "Questa installazione non si avvia ancora..."
 
+msgid "You can remove the ISO media now."
+msgstr "È possibile rimuovere il supporto contenente l'ISO ora."

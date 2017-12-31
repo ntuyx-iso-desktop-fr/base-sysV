@@ -438,3 +438,6 @@ msgstr "abla de partición GPT no encontrada"
 
 msgid "This installation won't boot again ..."
 msgstr "Esta installacion no se reiniciara..."
+
+msgid "You can remove the ISO media now."
+msgstr "Puede eliminar los medios que contienen el ISO ahora."

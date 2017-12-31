@@ -473,3 +473,6 @@ msgstr "GPT Teilverzeichnis nicht gefunden"
 
 msgid "This installation won't boot again ..."
 msgstr "Diese Installation wird nicht erneut hochfahren..."
+
+msgid "You can remove the ISO media now."
+msgstr "Sie können jetzt das Medium entfernen, das die ISO enthält."

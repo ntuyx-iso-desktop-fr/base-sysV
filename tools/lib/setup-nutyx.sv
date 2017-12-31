@@ -473,3 +473,6 @@ msgstr "GPT partition table not found"
 
 msgid "This installation won't boot again ..."
 msgstr "This installation won't boot again ..."
+
+msgid "You can remove the ISO media now."
+msgstr "Du kan ta bort media som innehåller ISO nu."

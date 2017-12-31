@@ -1,4 +1,6 @@
 #!/bin/sh
+# Default Quota in percent for rootfs
+ROOTFS_QUOTA=50
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export PATH
@@ -90,42 +92,71 @@ fi
 
 do_mount_in_ram()
 {
-	# squasfs files are in ${1} on the initrd
-	# RW folders
+	# squasfs files are in /media/cdrom/isolinux/boot on the initrd
+	SQFS="/media/cdrom/isolinux/boot"
+	# RW folders: This are tiny size and part of them already exist so
+	# Lets copy them, won't restrict to much the memory
 	for DIR in var run etc sbin bin home
 	do
-		if [ -f ${1}/$DIR.squashfs ];then
+		if [ -f $SQFS/$DIR.squashfs ];then
 			mkdir /DIR
-			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR"
-			mount -o loop -t squashfs ${1}/$DIR.squashfs /DIR || problem
-			mkdir -p /$DIR > /dev/null 2>&1
-			cp -a /DIR/* /$DIR/ > /dev/null 2>&1
+			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs $SQFS/$DIR.squashfs /DIR"
+			mount -o loop -t squashfs $SQFS/$DIR.squashfs /DIR || problem
+			mkdir -p /$DIR
+			cp -a /DIR/* /$DIR/
 			umount /DIR
 			rm -r /DIR
 		fi
 	done
-	# root
+
+	# root is not copied but created "from scratch"
+	#
 	mkdir -p /root
 	chmod 750 /root
 	cp /etc/skel/.bash* /root
-	# RO folders
+
+	# RO folders: Only bigger directories are going to be mounted and overlayed
+	OVL=/boot/ovl
+	ROOTFS_OK="yes"
 	for DIR in mnt usr lib opt
 	do
-		if [ -f ${1}/$DIR.squashfs ];then
-			mkdir /$DIR > /dev/null 2>&1
-			[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s\n" ${1} $DIR $DIR
-			mount -o loop -t squashfs ${1}/$DIR.squashfs /$DIR || problem
-		else
-			mkdir /$DIR
+		if [ -f $SQFS/$DIR.squashfs ];then
+			OVLU=$OVL/$DIR-u
+			OVLW=$OVL/$DIR-w
+			mkdir -p /{$DIR,$OVLU,$OVLW}
+			# How much RAM for rootfs:
+			MEM_TOTAL=`cat /proc/meminfo|grep MemTotal|sed "s/[^[:digit:]]*//g"`
+			MEM_AVAIL=`cat /proc/meminfo|grep MemAvail|sed "s/[^[:digit:]]*//g"`
+			MEM_USED=$((MEM_TOTAL - MEM_AVAIL))
+			ROOTFS_TOTAL=$((MEM_TOTAL * ROOTFS_QUOTA / 100))
+			ROOTFS_AVAIL=$((ROOTFS_TOTAL - MEM_USED))
+			MAX_ROOTFS_SIZE=$((ROOTFS_AVAIL * 90 / 100 ))
+			SQFS_SIZE=`ls -s $SQFS/$DIR.squashfs| cut -d " " -f1`
+			# We going to keep 10 % as reserve (calculation rounding issue etc)
+			if [ $SQFS_SIZE -gt $((ROOTFS_AVAIL * 90 / 100 )) ];then
+				# Not enough RAM
+				[ "$verbose" == "no" ] || printf "mount -o loop -t squashfs %s/%s.squashfs /%s\n" $SQFS/$DIR.squashfs /$DIR
+				[ "$verbose" == "no" ] || printf "not enough space in RAM\n"
+				mount -o loop -t squashfs $SQFS/$DIR.squashfs /$DIR || problem
+				[ "$verbose" == "no" ] || sleep 5
+				ROOTFS_OK="no"
+			else
+				# Still enough RAM
+				[ "$verbose" == "no" ] || printf "still enough RAM, cp  %s /boot\n" $SQFS/$DIR.squashfs
+				cp $SQFS/$DIR.squashfs /boot/
+				mount -o loop -t squashfs /boot/$DIR.squashfs /$DIR || problem
+				[ "$verbose" == "no" ] || sleep 5
+			fi
+			# Overlay
+			[ "$verbose" == "no" ] || echo "mount -n -t overlay -o lowerdir=/$DIR,upperdir=$OVLU,workdir=$OVLW /$DIR"
+			mount -n -t overlay overlay -o lowerdir=/$DIR,upperdir=$OVLU,workdir=$OVLW /$DIR
+			[ "$verbose" == "no" ] || sleep 5
 		fi
 	done
-#   Overlay
-	mkdir -p /OVL/{usr-upper,usr-work,lib-upper,lib-work}
-
-	[ "$verbose" == "no" ] || echo "mount -n -t overlay -o lowerdir=/usr:/lib:/opt,upperdir=/OVL/upper,workdir=/OVL/work /"
-	mount -n -t overlay overlay -o lowerdir=/usr,upperdir=/OVL/usr-upper,workdir=/OVL/usr-work /usr
-	mount -n -t overlay overlay -o lowerdir=/lib,upperdir=/OVL/lib-upper,workdir=/OVL/lib-work /lib
-	sleep 5
+	if [ "$ROOTFS_OK" == "yes" ]; then
+		cp /media/cdrom/isolinux/kernel /boot/kernel
+		umount /media/cdrom
+	fi 
 }
 find_media() {
 	local PI FSIZE MSIZE
@@ -153,16 +184,18 @@ find_media() {
 		fi
 	done
 }
-do_mount_iso_rw() {
-	# get read of some services
-	for i in do_stop_mountfs
-	do
-		sed -i "/${i}/d" ${2}/etc/rc.d/init.d/init_single
-	done
-	touch ${2}/fastboot
-	rm ${2}/init
-	chmod 755 ${2}/
-	chmod 755 ${2}/var
+do_resize_rootfs() {
+	MEM_TOTAL=`cat /proc/meminfo|grep MemTotal|sed "s/[^[:digit:]]*//g"`
+	MEM_TOTAL=$((MEM_TOTAL / 1024 / 100))
+	[ $MEM_TOTAL -gt 15 ] && ROOTFS_QUOTA=60
+	[ $MEM_TOTAL -gt 35 ] && ROOTFS_QUOTA=75
+	[ $MEM_TOTAL -gt 75 ] && ROOTFS_QUOTA=80
+	[ $MEM_TOTAL -gt 100 ] && ROOTFS_QUOTA=85
+	[ $MEM_TOTAL -gt 300 ] && ROOTFS_QUOTA=90
+
+	mount -o remount,size=${ROOTFS_QUOTA}%,noatime /
+	mount -o remount,size=${ROOTFS_QUOTA}%,noatime tmpfs
+	mount -o remount,size=${ROOTFS_QUOTA}%,noatime devtmpfs
 }
 MainLoop(){
    while [ ! -f /root/boot ];
@@ -236,7 +269,7 @@ for param in $cmdline ; do
   esac
 done
 
-if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
+if [ -d /lib/modules ] && [ -n "$rootdelay" ] && [ -n "$root" ]; then
         [ "$verbose" == "no" ] || printf "Start udev...\n"
         do_start_udev
 fi
@@ -263,6 +296,7 @@ if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
 	sleep "$rootdelay"
 fi
+
 if [ "$live" == "yes" ] || [ "$root" == "" ]; then
 	[ "$verbose" == "no" ] || printf "Loading kernel Modules ...\n"
 	[ "$verbose" == "no" ] || sleep 2
@@ -275,11 +309,8 @@ if [ "$live" == "yes" ] || [ "$root" == "" ]; then
 			find_media
 		fi
 	fi
-	if [ -d /media/cdrom/isolinux/boot ]; then
-		do_mount_in_ram /media/cdrom/isolinux/boot
-	else
-		do_mount_in_ram /boot
-	fi
+	do_resize_rootfs
+	do_mount_in_ram
 fi
 #
 # If still not find the setup-nutyx file then it's time to giveup
@@ -295,30 +326,27 @@ if [ "$verbose" == "yes" ]; then
 fi
 
 if [ "$live" == "yes" ]; then
-		[ "$verbose" == "no" ] || printf "cd / ...\n"
-		cd /
-		[ "$verbose" == "no" ] || sleep 5
+	# get read of some services
+	for i in do_stop_mountfs
+	do
+		sed -i "/${i}/d" /etc/rc.d/init.d/init_single
+	done
+	touch /fastboot
+	rm /init
+	chmod 755 /
+	chmod 755 /var
+	[ "$verbose" == "no" ] || printf "cd / ...\n"
+	cd /
+	[ "$verbose" == "no" ] || sleep 5
 
-		[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
-		[ "$verbose" == "no" ] || sleep 5
-
-		exec "$init" "$@" > /dev/null 2>&1
+	[ "$verbose" == "no" ] || printf "exec \"%s\" \"%s\" > /dev/null 2>&1 ...\n" "$init" "$@"
+	[ "$verbose" == "no" ] || sleep 5
+	exec "$init" "$@" > /dev/null 2>&1
 fi
 
 if [ "$root" == "" ]; then
-	if [ -d /lib/modules ] && [ -n "$rootdelay" ]; then
-		# If Eudev was already started
-		# We need to restart it for loading keyboards, screen, usb needed modules
-		[ "$verbose" == "no" ] || printf "Stop udev...\n"
-		do_stop_udev
-		[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
-		sleep $rootdelay
-	fi
 	[ "$verbose" == "no" ] || printf "Start udev ...\n"
         do_start_udev
-
-	[ "$verbose" == "no" ] || printf "Wait %s second(s) ...\n" $rootdelay
-	[ -n "$rootdelay" ] && sleep $rootdelay
 
 	[ "$verbose" == "no" ] || printf "Start sysklogd ...\n"
 	do_start_sysklogd
@@ -335,7 +363,7 @@ if [ "$root" == "" ]; then
 
 	cd /
 
-	for DIR in usr lib sbin bin
+	for DIR in usr lib
 	do
 		[ "$verbose" == "no" ] || printf "umount /%s ...\n" $DIR
 		umount /$DIR > /dev/null 2>&1
