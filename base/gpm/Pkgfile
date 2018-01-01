@@ -4,8 +4,8 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 name=gpm
 version=1.20.7
-release=3
-nutyx_version=9.91
+release=4
+nutyx_version=10.0-rc1
 
 source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
 	gpm-1.20.7-glibc-2.26-1.patch
