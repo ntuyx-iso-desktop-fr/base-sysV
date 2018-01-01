@@ -9,8 +9,8 @@ PKGMK_GROUPS=(man)
 
 name=rpcbind
 version=0.2.4
-release=4
-nutyx_version=9.91
+release=6
+nutyx_version=10.0-rc1
 
 source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
 	http://downloads.sourceforge.net/rpcbind/rpcbind-$version.tar.bz2
