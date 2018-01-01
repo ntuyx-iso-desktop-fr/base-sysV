@@ -94,6 +94,7 @@ do_mount_in_ram()
 {
 	# squasfs files are in /media/cdrom/isolinux/boot on the initrd
 	SQFS="/media/cdrom/isolinux/boot"
+	mkdir -p /boot
 	# RW folders: This are tiny size and part of them already exist so
 	# Lets copy them, won't restrict to much the memory
 	for DIR in var run etc sbin bin home
@@ -103,9 +104,12 @@ do_mount_in_ram()
 			[ "$verbose" == "no" ] || echo "mount -o loop -t squashfs $SQFS/$DIR.squashfs /DIR"
 			mount -o loop -t squashfs $SQFS/$DIR.squashfs /DIR || problem
 			mkdir -p /$DIR
-			cp -a /DIR/* /$DIR/
+			cp -a /DIR/* /$DIR/ > /dev/null 2>&1
 			umount /DIR
 			rm -r /DIR
+			# In case we have enough RAM /media/cdrom/ will be unmounted
+			[ "$verbose" == "no" ] || echo "cp $SQFS/$DIR.squashfs /boot/$DIR.squashfs"
+			cp $SQFS/$DIR.squashfs /boot/
 		fi
 	done
 
@@ -114,6 +118,12 @@ do_mount_in_ram()
 	mkdir -p /root
 	chmod 750 /root
 	cp /etc/skel/.bash* /root
+	[ "$verbose" == "no" ] || echo "cp $SQFS/root.squashfs /boot/root.squashfs"
+	cp $SQFS/root.squashfs /boot/
+
+	# lib64
+	[ "$verbose" == "no" ] || echo "cp $SQFS/lib64.squashfs /boot/lib64.squashfs"
+	[ -f $SQFS/lib64.squashfs ] && cp $SQFS/lib64.squashfs /boot/
 
 	# RO folders: Only bigger directories are going to be mounted and overlayed
 	OVL=/boot/ovl
@@ -156,6 +166,7 @@ do_mount_in_ram()
 	if [ "$ROOTFS_OK" == "yes" ]; then
 		cp /media/cdrom/isolinux/kernel /boot/kernel
 		umount /media/cdrom
+		eject $DEV > /dev/null 2>&1
 	fi 
 }
 find_media() {
