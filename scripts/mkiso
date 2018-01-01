@@ -99,7 +99,7 @@ menuentry "NuTyX #ARCH# #VERSION_NUTYX# (UEFI mode) debug" {
     linux /boot/kernel ro testiso rootdelay=3
     initrd /boot/initrd
 }
-menuentry "NuTyX #ARCH# #VERSION_NUTYX# (UEFI mode) live" {
+menuentry "NuTyX #ARCH# #VERSION_NUTYX# (UEFI mode) installable live" {
     insmod efi_uga
     insmod efi_gop
     set gfxmode=auto

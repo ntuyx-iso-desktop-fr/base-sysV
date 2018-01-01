@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-#  Copyright (c) 2014 by NuTyX team (http://nutyx.org)
+#  Copyright (c) 2014 - 2018 by NuTyX team (http://nutyx.org)
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
@@ -1050,15 +1050,40 @@ while [ true ]; do
 dialog  \
 --title " $(gettext "Keyboard Layout") " \
 --backtitle " $(gettext "Settings") " --menu " $(gettext "Choose available"): " 0 0 0 \
-"fr-latin9" "AZERTYUIOP" \
-"be-latin1" "AZERTYUIOP" \
-"fr_CH-latin1" "QWERTZUIOP" \
-"de_CH-latin1" "QWERTZUIOP" \
-"cf" "AZERTYUIOP" \
-"us" "QWERTYUIOP" \
+"fr-latin9" "AZERTY" \
+"be-latin1" "AZERTY" \
+"fr_CH-latin1" "QWERTZ" \
+"de_CH-latin1" "QWERTZ" \
+"de-latin1-nodeadkeys" "QWERTZ" \
+"de" "QWERTZ" \
+"cf" "AZERTY" \
+"us" "QWERTY" \
 "de-latin1" "QWERTY" \
 "azerty" "AZERTY" \
-"ANSI-dvorak" "" \
+"it-ibm" "QWERTY" \
+"it" "QWERTY" \
+"it2" "QWERTY" \
+"sv-latin1" "QWERTY" \
+"nl" "QWERTY" \
+"nl2" "QWERTY" \
+"no-latin1" "QWERTY" \
+"no" "QWERTY" \
+"ANSI-dvorak" "AOEUID" \
+"dvorak-l" "AOEUID" \
+"dvorak-r" "AOEUID" \
+"dvorak" "AOEUID" \
+"fi-latin1" "QWERTYUIOPÅ" \
+"fi-latin9" "QWERTYUIOPÅ" \
+"croat" "QWERTZ" \
+"ru-cp1251" "QWERTY" \
+"ru-ms" "" \
+"ru-yawerty" "" \
+"ru" "" \
+"ru1" "" \
+"ru2" "" \
+"ru3" "" \
+"ru4" "" \
+"ru_win" "" \
 "applkey" "" \
 "backspace" "" \
 "bg-cp1251" "" \
@@ -1072,22 +1097,16 @@ dialog  \
 "br-latin1-abnt2" "" \
 "br-latin1-us" "" \
 "by" "" \
-"croat" "" \
 "ctrl" "" \
 "cz-cp1250" "" \
 "cz-lat2-prog" "" \
 "cz-lat2" "" \
 "cz-us-qwertz" "" \
 "cz" "" \
-"de-latin1-nodeadkeys" "" \
-"de" "" \
-"defkeymap" "" \
-"defkeymap_V1.0" "" \
 "dk-latin1" "" \
 "dk" "" \
-"dvorak-l" "\"<>PYF" \
-"dvorak-r" "" \
-"dvorak" "" \
+"defkeymap" "" \
+"defkeymap_V1.0" "" \
 "emacs" "" \
 "emacs2" "" \
 "es-cp850" "" \
@@ -1097,8 +1116,6 @@ dialog  \
 "euro" "" \
 "euro1" "" \
 "euro2" "" \
-"fi-latin1" "QWERTYUIOPÅ" \
-"fi-latin9" "QWERTYUIOPÅ" \
 "fi" "" \
 "gr-pc" "" \
 "gr" "" \
@@ -1109,9 +1126,6 @@ dialog  \
 "il" "" \
 "is-latin1-us" "" \
 "is-latin1" "" \
-"it-ibm" "" \
-"it" "" \
-"it2" "" \
 "jp106" "" \
 "keypad" "" \
 "la-latin1" "" \
@@ -1123,25 +1137,12 @@ dialog  \
 "mk-utf" "" \
 "mk" "" \
 "mk0" "" \
-"nl" "" \
-"nl2" "" \
-"no-latin1" "" \
-"no" "" \
 "pc110" "" \
 "pl" "" \
 "pl2" "" \
 "pt-latin1" "" \
 "pt-latin9" "" \
 "ro_win" "" \
-"ru-cp1251" "" \
-"ru-ms" "" \
-"ru-yawerty" "" \
-"ru" "" \
-"ru1" "" \
-"ru2" "" \
-"ru3" "" \
-"ru4" "" \
-"ru_win" "" \
 "se-fi-ir209" "" \
 "se-fi-lat6" "" \
 "se-ir209" "" \
@@ -1157,7 +1158,6 @@ dialog  \
 "speakup-jfw" "" \
 "speakupmap" "" \
 "sr-cy" "" \
-"sv-latin1" "" \
 "tr_f-latin5" "" \
 "tr_q-latin5" "" \
 "tralt" "" \
