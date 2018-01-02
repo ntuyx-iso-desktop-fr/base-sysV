@@ -314,7 +314,9 @@ if [ -f /etc/mdadm.conf ]; then
 
   [ "$verbose" == "no" ] || printf "mdadm --auto-detect...\n"
   /sbin/mdadm --auto-detect
-  ### First we activate lvm if possible
+fi  
+
+### First we activate lvm if possible
   if [ -f /sbin/lvm ]; then
     [ "$verbose" == "no" ] || printf "/sbin/lvm vgchange --ignorelockingfailure -ay\n"
     /sbin/lvm vgchange --ignorelockingfailure -ay
@@ -323,7 +325,6 @@ if [ -f /etc/mdadm.conf ]; then
        /sbin/lvm vgscan --ignorelockingfailure --mknodes
     fi
   fi
-fi
 
 if [ -n "$rootdelay" ] ; then
 	[ "$verbose" == "no" ] || printf "Wait  %s second(s) ...\n" $rootdelay
