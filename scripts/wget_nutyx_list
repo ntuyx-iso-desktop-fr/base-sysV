@@ -18,7 +18,7 @@ a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.28-i18n-1.patch
 a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 07cf286672ced26fba54cd0313bdc071  diffutils-3.6.tar.xz
 6d1338c7f4b325e55e5b60ceb7c52a6c  e2fsprogs-1.43.7.tar.gz
-66acef4c6094aab4aced7ae83b74b0d2  eudev-3.2.4.tar.gz
+6ca08c0e14380f87df8e8aceac123671  eudev-3.2.5.tar.gz
 789e297f547980fc9ecc036f9a070d49  expat-2.2.5.tar.bz2
 44e1a4f4c877e9ddc5a542dfa7ecc92b  expect5.45.tar.gz
 4f2503752ff041895090ed6435610435  file-5.32.tar.gz
@@ -84,7 +84,7 @@ a1802fec550baaeecff6c381629653ef  tar-1.29.tar.xz
 3f723d62c2e074bdbb2ddf330b5a71e1  tcl-core8.6.7-src.tar.gz
 3715197e62e0e07f85860b3d7aab55ed  texinfo-6.5.tar.xz
 1e751e7e08f8b68530674f04619d894d  tzdata2017c.tar.gz
-c2d6b127f89261513b23b6d458484099  udev-lfs-20140408.tar.bz2
+d92afb0c6e8e616792068ee4737b0d24  udev-lfs-20171102.tar.bz2
 5b6821c403c3cc6e7775f74df1882a20  util-linux-2.31.tar.xz
 caabf9727fa429626316619a6369fffa  wget-1.19.2.tar.gz
 60fb79cab777e3f71ca43d298adacbd5  xz-5.2.3.tar.xz

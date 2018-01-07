@@ -4,9 +4,9 @@ maintainer="Ian Stakenvicius,Tony Vroon,Francisco Blas Izquierdo Riera,Luca Barb
 packager="tnut <tnut@nutyx.org>"
 
 name=eudev
-version=3.2.4
+version=3.2.5
 
-source=(http://anduin.linuxfromscratch.org/sources/other/udev-lfs-20140408.tar.bz2
+source=(http://anduin.linuxfromscratch.org/LFS/udev-lfs-20171102.tar.bz2
 	http://dev.gentoo.org/~blueness/eudev/$name-$version.tar.gz)
 
 build() {
@@ -32,11 +32,8 @@ fi
 --enable-manpages \
 --enable-hwdb  \
 --disable-introspection \
---disable-gudev \
 --disable-static  \
---config-cache   \
---disable-gtk-doc-html \
---with-firmware-path=/lib/firmware
+--config-cache
 if [ -d /tools ];then
  LIBRARY_PATH=/tools/lib make
 else
@@ -55,7 +52,7 @@ pushd man
 make DESTDIR=$PKG install-man7 install-man8
 
 cd $SRC
-make -j1 -f udev-lfs-20140408/Makefile.lfs DESTDIR=$PKG install
+make -j1 -f udev-lfs-20171102/Makefile.lfs DESTDIR=$PKG install
 
 # DB
 if [ -d /tools ];then
