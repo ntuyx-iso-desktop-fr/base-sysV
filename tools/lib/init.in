@@ -81,7 +81,9 @@ fi
    fi
    [ -z "$overlayroot" ] && mountpoint=/.root  || mountpoint=/.roRoot
    mkdir -p $mountpoint
-   if ! mount -n -t "$rootfstype" -o "$rootflags" "$device" $mountpoint ; then
+   [ "$verbose" == "no" ] || printf "mount -n -t $rootfstype -o $rootflags $device $mountpoint ...\n"
+   mount -n -t $rootfstype -o $rootflags $device $mountpoint
+   if [ $? -gt 0 ]; then
        no_mount $device
        cat /proc/partitions
        while true ; do sleep 10000 ; done
@@ -101,7 +103,8 @@ fi
        evaluate_retval
      fi
      mkdir -p /mnt/OVL/{upper,work}
-     if ! mount -n -t overlay -o lowerdir=$mountpoint,upperdir=/mnt/OVL/upper,workdir=/mnt/OVL/work overlayrootfs /.root; then
+     mount -n -t overlay -o lowerdir=$mountpoint,upperdir=/mnt/OVL/upper,workdir=/mnt/OVL/work overlayrootfs /.root 
+     if [ $? -gt 0 ]; then
        no_mount "overlayrootfs"
        cat /proc/partitions
        while true ; do sleep 10000 ; done
@@ -345,18 +348,20 @@ if [ "$live" == "yes" ] || [ "$root" == "" ]; then
 	fi
 	do_resize_rootfs
 	do_mount_in_ram
-fi
-#
-# If still not find the setup-nutyx file then it's time to giveup
-#
-if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
+
+	#
+	# If still not find the setup-nutyx file then it's time to giveup
+	#
+	if [ ! -f /etc/rc.d/init.d/setup-nutyx ]; then
 		no_mount
 		sh
-fi
-if [ "$verbose" == "yes" ]; then
-	printf "/etc/rc.d/init.d/setup-nutyx exist ...\n"
-	ls -lt /etc/rc.d/init.d/setup-nutyx
-	sleep 5
+	fi
+	if [ "$verbose" == "yes" ]; then
+
+		printf "/etc/rc.d/init.d/setup-nutyx exist ...\n"
+		ls -lt /etc/rc.d/init.d/setup-nutyx
+		sleep 5
+	fi
 fi
 
 if [ "$live" == "yes" ]; then
@@ -421,6 +426,8 @@ if [ "$root" == "" ]; then
 		umount /$DIR > /dev/null 2>&1
 	done
 fi
+
+[ -n "$root" ] && LoadModules
 
 mkdir /.root
 do_mount_root
