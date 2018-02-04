@@ -10,9 +10,9 @@ PKGMK_GROUPS=(man)
 name=rpcbind
 version=0.2.4
 release=6
-nutyx_version=10.0
+nutyx_version=10.0.1
 
-source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz
+source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
 	http://downloads.sourceforge.net/rpcbind/rpcbind-$version.tar.bz2
 	http://www.linuxfromscratch.org/patches/blfs/svn/rpcbind-$version-vulnerability_fixes-1.patch)
 

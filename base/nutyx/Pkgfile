@@ -9,7 +9,7 @@ maintainer="tnut <tnut@nutyx.org>"
 name=nutyx
 version=10.0.1
 
-source=(http://downloads.nutyx.org/files/$name-$version.tar.xz)
+source=(http://downloads.tuxfamily.org/nutyx/files/$name-$version.tar.xz)
 
 build () {
 cd $name-$version

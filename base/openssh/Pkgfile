@@ -7,9 +7,9 @@ packager="tnut <tnut@nutyx.org>"
 name=openssh
 version=7.6p1
 release=3
-nutyx_version=10.0
+nutyx_version=10.0.1
 
-source=(http://downloads.nutyx.org/files/nutyx-${nutyx_version}.tar.xz 
+source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
 	http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
 	http://www.linuxfromscratch.org/patches/blfs/svn/openssh-$version-openssl-1.1.0-1.patch)
 
