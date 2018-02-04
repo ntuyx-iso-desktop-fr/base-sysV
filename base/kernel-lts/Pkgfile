@@ -1,10 +1,7 @@
-# The LTS kernel includes the virtualbox drivers
-#
+# Depends on: nutyx
 
-## Variables initialisation
-#
 url="http://www.kernel.org"
-description="The long term stable kernel version"
+description="The long term stable kernel version with virtualbox modules"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
@@ -15,7 +12,7 @@ PKGMK_GROUPS=(devel doc)
 name=kernel-lts
 alias=(linux-lts)
 
-version=4.14.16
+version=4.14.17
 _version=${version:0:4}
 
 # Virtualbox
