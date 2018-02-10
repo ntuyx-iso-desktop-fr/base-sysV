@@ -1,4 +1,4 @@
-version=8.28
+version=8.29
 source=(http://ftp.gnu.org/gnu/coreutils/coreutils-$version.tar.xz)
 build()
 {

@@ -4,9 +4,9 @@ maintainer="Tristan Gingold ( gingold at adacore dot com ),Alan Modra ( amodra a
 packager="tnut <tnut@nutyx.org>"
 
 name=binutils
-version=2.29.1
+version=2.30
 
-source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.bz2)
+source=(http://ftp.gnu.org/gnu/binutils/binutils-$version.tar.xz)
 build()
 {
 cd binutils-$version
@@ -20,6 +20,7 @@ cd build
 --enable-plugins \
 --enable-shared \
 --disable-werror \
+--enable-64-bit-bfd \
 --with-system-zlib
 
 make tooldir=/usr

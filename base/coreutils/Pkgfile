@@ -4,7 +4,7 @@ maintainer="Jim Meyering meyering at redhat dot com"
 packager="tnut <tnut@nutyx.org>"
 
 name=coreutils
-version=8.28
+version=8.29
 
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz
 	http://www.linuxfromscratch.org/patches/downloads/$name/$name-$version-i18n-1.patch
