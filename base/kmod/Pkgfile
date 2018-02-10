@@ -6,8 +6,7 @@ contributors="Pierre B"
 PKGMK_GROUPS=(devel doc man)
 
 name=kmod
-version=24
-release=1
+version=25
 
 source=(http://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-$version.tar.xz )
 
