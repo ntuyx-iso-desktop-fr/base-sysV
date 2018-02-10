@@ -8,7 +8,7 @@ gcc_pass2
 tcl
 expect
 dejagnu
-check
+m4
 ncurses
 bash
 bison
@@ -21,7 +21,6 @@ gawk
 gettext
 grep
 gzip
-m4
 make
 patch
 perl
