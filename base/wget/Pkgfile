@@ -3,7 +3,7 @@ url="http://www.gnu.org/software/wget/"
 maintainer="gscrivano at gnu dot org"
 packager="tnut <tnut@nutyx.org>"
 name=wget
-version=1.19.2
+version=1.19.4
 
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz) 
 
