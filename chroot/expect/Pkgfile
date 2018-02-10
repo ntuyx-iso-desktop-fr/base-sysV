@@ -1,4 +1,4 @@
-version=5.45
+version=5.45.4
 source=(http://prdownloads.sourceforge.net/expect/expect$version.tar.gz)
 build()
 {
