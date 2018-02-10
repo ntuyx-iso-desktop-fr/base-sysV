@@ -1,4 +1,4 @@
-version=6.0
+version=6.1
 source=(ftp://invisible-island.net/ncurses/ncurses-$version.tar.gz)
 
 build()

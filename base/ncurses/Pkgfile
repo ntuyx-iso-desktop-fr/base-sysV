@@ -4,9 +4,9 @@ maintainer="Thomas E. Dickey TD,Juergen Pfeifer JPF,Eric S Raymond ESR,Alexander
 packager="tnut <tnut@nutyx.org>"
 
 name=ncurses
-version=6.0
-release=2
-source=(ftp://invisible-island.net/ncurses/ncurses-$version.tar.gz)
+version=6.1
+
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
 build()
 {
 cd ncurses-$version
