@@ -4,17 +4,20 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=xfsprogs
-version=4.13.1
+version=4.14.0
 
 source=(https://www.kernel.org/pub/linux/utils/fs/xfs/$name/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
+
+sed -i '/copy_file_range(/s/copy/xfs_&/' io/copy_file_range.c
+
 make DEBUG=-DNDEBUG INSTALL_USER=root INSTALL_GROUP=root \
      LOCAL_CONFIGURE_OPTIONS="--enable-readline"
 
-make DIST_ROOT=$PKG install
-make DIST_ROOT=$PKG install-dev
+make DIST_ROOT=$PKG PKG_DOC_DIR=/usr/share/doc/$name-$version install
+make DIST_ROOT=$PKG PKG_DOC_DIR=/usr/share/doc/$name-$version install-dev
 rm -rfv $PKG/lib/libhandle.{a,la,so}
 ln -sfv ../../lib/libhandle.so.1 $PKG/usr/lib/libhandle.so
 sed -i "s@libdir='/lib@libdir='/usr/lib@g" $PKG/usr/lib/libhandle.la
