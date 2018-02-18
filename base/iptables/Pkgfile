@@ -4,8 +4,7 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=iptables
-version=1.6.1
-release=2
+version=1.6.2
 nutyx_version=10.0.1
 
 source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
