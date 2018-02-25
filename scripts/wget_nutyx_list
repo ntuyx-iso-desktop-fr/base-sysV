@@ -59,8 +59,8 @@ ee6cfbc5a0c5696ffae79dac04ee7a2b  LVM2.2.02.177.tgz
 2b7d6cf6350735544522859d93983fab  man-db-2.8.0.tar.xz
 4125404e41e482ec68282a2e687f6c73  mpc-1.1.0.tar.gz
 94c67b3cfbee10605a5e59d0ed9161db  mpfr-4.0.0.tar.xz
-abb79a82fa30908217e30f76eca8a557  nasm-2.13.02.tar.xz
-04a7324daf3ab4b1ad295084734ae899  nasm-2.13.02-xdoc.tar.xz
+d5ca2ad7121ccbae69dd606b1038532c  nasm-2.13.03.tar.xz
+bad2d35bbf28fa3233352ecc98a703c3  nasm-2.13.03-xdoc.tar.xz
 98c889aaf8d23910d2b92d65be2e737a  ncurses-6.1.tar.gz
 06a88699018e5fef13d4655abfed1f63  openssh-7.6p1.tar.gz 
 ba5f1b8b835b88cadbce9b35ed9531a6  openssl-1.1.0g.tar.gz
