@@ -4,14 +4,12 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=xfsprogs
-version=4.14.0
+version=4.15.0
 
 source=(https://www.kernel.org/pub/linux/utils/fs/xfs/$name/$name-$version.tar.xz)
 
 build() {
 cd $name-$version
-
-sed -i '/copy_file_range(/s/copy/xfs_&/' io/copy_file_range.c
 
 make DEBUG=-DNDEBUG INSTALL_USER=root INSTALL_GROUP=root \
      LOCAL_CONFIGURE_OPTIONS="--enable-readline"
