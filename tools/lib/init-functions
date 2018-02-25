@@ -1192,7 +1192,7 @@ do_stop_mountfs()
   # Don't unmount virtual file systems like /run
   log_info_msg "Unmounting all other currently mounted file systems..."
   while \
-   [ $KILLDELAY -lt 6 ] && \
+   [ $KILLDELAY -lt 3 ] && \
    ! umount -a -d -r -t notmpfs,nosysfs,nodevtmpfs,noproc,nodevpts >/dev/null
   do
     evaluate_retval
@@ -1205,7 +1205,7 @@ do_stop_mountfs()
   # Make sure / is mounted read only (umount bug)
   log_info_msg "Remonting root file system in read-only mode..."
   while \
-   [ $KILLDELAY -lt 6 ] && \
+   [ $KILLDELAY -lt 3 ] && \
    ! mount -o remount,ro /
   do
      evaluate_retval
