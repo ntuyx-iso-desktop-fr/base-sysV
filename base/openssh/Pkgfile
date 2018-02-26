@@ -7,7 +7,7 @@ packager="tnut <tnut@nutyx.org>"
 name=openssh
 version=7.6p1
 release=3
-nutyx_version=10.0.1
+nutyx_version=10.1
 
 source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
 	http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
