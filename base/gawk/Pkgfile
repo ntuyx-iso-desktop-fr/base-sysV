@@ -5,7 +5,7 @@ packager="tnut <tnut@tnut@org>"
 contributors="Pierre B"
 
 name=gawk
-version=4.2.0
+version=4.2.1
 
 source=(http://ftp.gnu.org/gnu/gawk/gawk-$version.tar.xz)
 
