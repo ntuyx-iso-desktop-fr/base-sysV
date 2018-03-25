@@ -5,17 +5,14 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=libtirpc
-version=1.0.2
-release=1
+version=1.0.3
 
-source=(http://downloads.sourceforge.net/project/libtirpc/libtirpc/$version/libtirpc-$version.tar.bz2)
+source=(http://downloads.sourceforge.net/libtirpc/libtirpc-$version.tar.bz2)
 
 build()
 {
 cd libtirpc-$version
 
-sed '/stdlib.h/a#include <stdint.h>' -i src/xdr_sizeof.c
-sed '/key_secret_is/s/secret/secretkey/' -i src/libtirpc.map
 
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
