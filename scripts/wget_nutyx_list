@@ -47,6 +47,7 @@ cb5f04288d26a8806b144e50fe9fb506  kbd-2.0.4.tar.xz
 6a39bccf420c946b0fd7ffc64961315b  less-530.tar.gz
 4583bd6b2ebf7e0e8963d90879eb1b27  libarchive-3.3.2.tar.gz
 6666b839e5d46c2ad33fc8aa2ceb5f77  libcap-2.25.tar.xz
+c57a0690e62ef523c083598730272cfd  libedit-20170329-3.1.tar.gz
 b7437a5020190cfa84f09c412db38902  libpipeline-1.5.0.tar.gz
 1bfb9b923f2c1339b4d2ce1807064aa5  libtool-2.4.6.tar.xz
 0d701ac1e2a67d47ce7127432df2c32b  linux-4.15.tar.xz
@@ -63,7 +64,7 @@ d5ca2ad7121ccbae69dd606b1038532c  nasm-2.13.03.tar.xz
 bad2d35bbf28fa3233352ecc98a703c3  nasm-2.13.03-xdoc.tar.xz
 98c889aaf8d23910d2b92d65be2e737a  ncurses-6.1.tar.gz
 06a88699018e5fef13d4655abfed1f63  openssh-7.6p1.tar.gz 
-ba5f1b8b835b88cadbce9b35ed9531a6  openssl-1.1.0g.tar.gz
+5271477e4d93f4ea032b665ef095ff24  openssl-1.1.0h.tar.gz
 c8ef18f86d6ba74f7a9259ea138e3e76  openssh-7.6p1-openssl-1.1.0-1.patch
 e3da7940431633fb65a01b91d3b7a27a  patch-2.7.5.tar.xz
 8e52278399b7b35fcfc031bc05da80a8  pciutils-3.5.6.tar.xz
