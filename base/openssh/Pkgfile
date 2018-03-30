@@ -1,3 +1,5 @@
+# Depends on: libedit
+
 description="Free version of the SSH connectivity tools"
 url="http://www.openssh.org/"
 
@@ -6,7 +8,7 @@ packager="tnut <tnut@nutyx.org>"
 
 name=openssh
 version=7.6p1
-release=3
+release=4
 nutyx_version=10.1
 
 source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
@@ -27,6 +29,7 @@ patch -Np1 -i ../openssh-$version-openssl-1.1.0-1.patch
 --datadir=/usr/share/sshd \
 --with-md5-passwords \
 --with-privsep-path=/var/lib/sshd \
+--with-libedit \
 --mandir=/usr/share/man \
 --infodir=/usr/share/info
 
