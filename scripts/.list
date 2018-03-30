@@ -68,6 +68,7 @@ lvm2
 wget
 rsync
 gpm
+libedit
 openssh
 dialog
 squashfs
