@@ -63,9 +63,9 @@ ee6cfbc5a0c5696ffae79dac04ee7a2b  LVM2.2.02.177.tgz
 d5ca2ad7121ccbae69dd606b1038532c  nasm-2.13.03.tar.xz
 bad2d35bbf28fa3233352ecc98a703c3  nasm-2.13.03-xdoc.tar.xz
 98c889aaf8d23910d2b92d65be2e737a  ncurses-6.1.tar.gz
-06a88699018e5fef13d4655abfed1f63  openssh-7.6p1.tar.gz 
+68ba883aff6958297432e5877e9a0fe2  openssh-7.7p1.tar.gz
+55e7b5588c5c10f09a4a08477eb56f6b  openssh-7.7p1-openssl-1.1.0-1.patch
 5271477e4d93f4ea032b665ef095ff24  openssl-1.1.0h.tar.gz
-c8ef18f86d6ba74f7a9259ea138e3e76  openssh-7.6p1-openssl-1.1.0-1.patch
 e3da7940431633fb65a01b91d3b7a27a  patch-2.7.5.tar.xz
 8e52278399b7b35fcfc031bc05da80a8  pciutils-3.5.6.tar.xz
 467cd0c43514b9b5e397c8b385581f53  perl-5.26.1.tar.bz2
