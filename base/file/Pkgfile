@@ -4,7 +4,7 @@ maintainer="Christos Zoulas"
 packager="tnut <tnut@nutyx.org>"
 
 name=file
-version=5.32
+version=5.33
 
 source=(ftp://ftp.astron.com/pub/file/file-$version.tar.gz)
 
