@@ -4,8 +4,7 @@ url="https://github.com/rhinstaller/efibootmgr"
 packager="tnut <tnut@nutyx.org>"
 
 name=efibootmgr
-version=15
-release=1
+version=16
 
 run=(dosfstools)
 source=($url/releases/download/$version/$name-$version.tar.bz2)
