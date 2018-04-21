@@ -4,8 +4,7 @@ packager="greg <greg@nuty.org>"
 contributors="tnut"
 
 name=perl
-version=5.26.1
-release=1
+version=5.26.2
 
 source=(http://ftp.funet.fi/pub/CPAN/src/$name-$version.tar.bz2)
 
