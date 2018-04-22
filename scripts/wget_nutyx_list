@@ -79,8 +79,8 @@ c350da50c2120de6bb29177699d89fe3  shadow-4.5.tar.xz
 d92ab59aabf5173f2a59089531e30dbf  squashfs4.3.tar.gz
 cd3993d910c713ae72e94beebd230b22  sudo-1.8.21p2.tar.gz
 c70599ab0d037fde724f7210c2c8d7f8  sysklogd-1.5.1.tar.gz
-0b7b5ea568a878fdcc4057b2bf36e5cb  sysvinit-2.88dsf-consolidated-1.patch
-6eda8a97b86e0a6f59dabbf25202aa6f  sysvinit-2.88dsf.tar.bz2
+84aba59c6beea5960c439106f5581bee  sysvinit-2.89-consolidated-1.patch
+6a2e0776a9a3e29264ddec738ef0031c  sysvinit-2.89.tar.bz2
 2d01c6cd1387be98f57a0ec4e6e35826  tar-1.30.tar.xz
 81656d3367af032e0ae6157eff134f89  tcl8.6.8-src.tar.gz
 3715197e62e0e07f85860b3d7aab55ed  texinfo-6.5.tar.xz
