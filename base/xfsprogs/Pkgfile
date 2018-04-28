@@ -4,7 +4,7 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=xfsprogs
-version=4.15.1
+version=4.16.0
 
 source=(https://www.kernel.org/pub/linux/utils/fs/xfs/$name/$name-$version.tar.xz)
 
@@ -19,4 +19,5 @@ make DIST_ROOT=$PKG PKG_DOC_DIR=/usr/share/doc/$name-$version install-dev
 rm -rfv $PKG/lib/libhandle.{a,la,so}
 ln -sfv ../../lib/libhandle.so.1 $PKG/usr/lib/libhandle.so
 sed -i "s@libdir='/lib@libdir='/usr/lib@g" $PKG/usr/lib/libhandle.la
+rm $PKG/usr/lib/libhandle.la
 }
