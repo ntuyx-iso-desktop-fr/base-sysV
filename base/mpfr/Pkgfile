@@ -5,7 +5,7 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=mpfr
-version=4.0.0
+version=4.0.1
 
 source=(http://www.mpfr.org/mpfr-current/mpfr-$version.tar.xz)
 
@@ -21,4 +21,14 @@ make check
 make DESTDIR=$PKG install
 make html
 make DESTDIR=$PKG install-html
+}
+devel()
+{
+cd $PKG
+bsdtar -cf \
+$PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}any.cards.tar \
+lib/pkgconfig \
+usr/include
+
+rm -r {usr/include,lib/pkgconfig}
 }
