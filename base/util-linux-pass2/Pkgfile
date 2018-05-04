@@ -4,12 +4,11 @@ maintainer="Karel Zak kzak at redhat dot com"
 packager="tnut <tnut@nutyx.org>"
 contributors="Tnut, Greg"
 
-name=util-linux
+name=util-linux-pass2
 version=2.32
 
 source=(http://www.kernel.org/pub/linux/utils/util-linux/v${version:0:4}/util-linux-$version.tar.xz
 	)
-
 PKGMK_GROUPS=(devel doc man)
 
 build()

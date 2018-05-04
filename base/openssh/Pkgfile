@@ -10,7 +10,7 @@ name=openssh
 version=7.7p1
 nutyx_version=10.1
 
-source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
+source=(http://www.linuxfromscratch.org/blfs/downloads/8.2/blfs-systemd-units-20180105.tar.bz2
 	http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/$name-$version.tar.gz
 	http://www.linuxfromscratch.org/patches/blfs/svn/openssh-$version-openssl-1.1.0-1.patch)
 
@@ -49,6 +49,6 @@ install -v -m644 INSTALL LICENCE OVERVIEW README* \
 $PKG/usr/share/doc/$name-$version
 
 # Service
-cd $SRC/nutyx-${nutyx_version}
+cd $SRC/blfs-systemd-units-20180105
 make DESTDIR=$PKG install-sshd
 }

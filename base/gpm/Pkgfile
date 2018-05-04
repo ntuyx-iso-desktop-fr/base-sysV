@@ -7,7 +7,7 @@ version=1.20.7
 release=4
 nutyx_version=10.1
 
-source=(http://downloads.tuxfamily.org/nutyx/files/nutyx-${nutyx_version}.tar.xz
+source=(http://www.linuxfromscratch.org/blfs/downloads/8.2/blfs-systemd-units-20180105.tar.bz2
 	gpm-1.20.7-glibc-2.26-1.patch
 	http://www.nico.schottelius.org/software/$name/archives/$name-$version.tar.bz2)
 
@@ -27,7 +27,7 @@ build() {
 	ln -sv libgpm.so.2.1.0 $PKG/usr/lib/libgpm.so.1
 	ln -sv libgpm.so.2.1.0 $PKG/usr/lib/libgpm.so
 	install -v -m644 conf/gpm-root.conf $PKG/etc
-
-	cd ../nutyx-${nutyx_version}
+	# service
+	cd $SRC/blfs-systemd-units-20180105
 	make DESTDIR=$PKG install-gpm
 }
