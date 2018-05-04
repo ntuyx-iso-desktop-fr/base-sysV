@@ -86,8 +86,8 @@ c350da50c2120de6bb29177699d89fe3  shadow-4.5.tar.xz
 d92ab59aabf5173f2a59089531e30dbf  squashfs4.3.tar.gz
 cd3993d910c713ae72e94beebd230b22  sudo-1.8.21p2.tar.gz
 c70599ab0d037fde724f7210c2c8d7f8  sysklogd-1.5.1.tar.gz
-5a835ddc2a2ae9ef523a5a11674a6713  systemd-237.tar.gz
-8b1b53cff433d99288ce17be775bc44c  systemd-man-pages-237.tar.xz
+76db8004647283b779234364cd637d3c  systemd-238.tar.gz
+2e3f795bc0818e161c03b8cae9c99e80  systemd-man-pages-238.tar.xz
 2d01c6cd1387be98f57a0ec4e6e35826  tar-1.30.tar.xz
 81656d3367af032e0ae6157eff134f89  tcl8.6.8-src.tar.gz
 3715197e62e0e07f85860b3d7aab55ed  texinfo-6.5.tar.xz
