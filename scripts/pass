@@ -115,6 +115,11 @@ do
                         rm -vf /usr/bin/xsltproc
                         systemd-machine-id-setup
                         ;;
+                    util-linux)
+                        pkgrm util-linux-pass2
+                        pkgrm util-linux-pass2.devel
+                        $PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
+                        ;;
                     cards)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
                         rm -f /var/lib/pkg/pkgadd.conf
