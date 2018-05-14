@@ -6,6 +6,7 @@ a61415312426e9c2212bd7dc7929abda  acl-2.2.52.src.tar.gz
 cda93857418655ea43590736fc3ca9fc  bc-1.07.1.tar.gz
 ffc476dd46c96f932875d1b2e27e929f  binutils-2.30.tar.xz
 c342201de104cc9ce0a21e0ad10d4021  bison-3.0.4.tar.xz
+5ce544b00af49cb6a1c16bbe729037cb  blfs-systemd-units-20180105.tar.bz2
 6a5ac7e89b791aae556de0f745916f7f  bzip2-1.0.6-install_docs-1.patch
 00b516f4704d4a7cb50a1d97e6e8e15b  bzip2-1.0.6.tar.gz
 5d95240de53aa21eeef1d8c8c66a355f  cards-2.4.81.tar.gz
@@ -85,7 +86,6 @@ ade8f8c2c548bf41f74db2dcfc37e4e3  sed-4.5.tar.xz
 c350da50c2120de6bb29177699d89fe3  shadow-4.5.tar.xz
 d92ab59aabf5173f2a59089531e30dbf  squashfs4.3.tar.gz
 cd3993d910c713ae72e94beebd230b22  sudo-1.8.21p2.tar.gz
-c70599ab0d037fde724f7210c2c8d7f8  sysklogd-1.5.1.tar.gz
 76db8004647283b779234364cd637d3c  systemd-238.tar.gz
 2e3f795bc0818e161c03b8cae9c99e80  systemd-man-pages-238.tar.xz
 2d01c6cd1387be98f57a0ec4e6e35826  tar-1.30.tar.xz
