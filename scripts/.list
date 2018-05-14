@@ -43,7 +43,6 @@ openssl
 python
 ninja
 meson
-util-linux-pass2
 systemd
 procps-ng
 e2fsprogs
