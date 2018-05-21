@@ -51,10 +51,10 @@ LFS=$LFS \
 LC_ALL=POSIX \
 LFS_TARGET=$(uname -m)-lfs-linux-gnu \
 PATH=/home/lfs/bin:/tools/bin:/bin:/usr/bin \
-export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc \
+export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc
 
 ## Now go in the LFS user
-su - lfs \
+su - lfs
 
 ## You are in the LFS user, now continue the installation with
 git clone https://github.com/rems28/base-sysV.git development \
@@ -70,7 +70,7 @@ pass
 
 ## All will be ok with the message after a long time, which depends of your machine
 "=======> Building '/home/lfs/development/chroot/cards/Pkgfile' succeeded. \
-/home/lfs/development/chroot" \
+/home/lfs/development/chroot"
 
 ## Go to pass2 :
 
@@ -88,10 +88,10 @@ chown -R root:root $LFS \
 install -dv -m0750  $LFS/root \
 ln -sv development/scripts $LFS/root/bin \
 mv /home/lfs/development $LFS/root/ \
-cd $LFS/root/development/base/nutyx \
+cd $LFS/root/development/base/nutyx
 
 ## make the first package
-/tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes \
+/tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes
 
 ## install it
 /tools/bin/pkgadd -r $LFS nutyx1* \
@@ -200,7 +200,7 @@ set root=(hd0,2) \
 menuentry "GNU/Linux, Linux 4.16.8-lfs-20180511-systemd" { \
         linux   /boot/vmlinuz-4.16.8-lfs-20180511-systemd root=/dev/sda2 ro \
 } \
-EOF \
+EOF
 
 ## make a link for /etc/resolv.conf
 ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
@@ -226,7 +226,7 @@ cards depcreate dhcpcd
 
 ## after compiling dhcpcd, you have to enable a systemd service. you have to know your network interface with
 ip a \
-systemctl enable dhcpcd@"your network interface" \
+systemctl enable dhcpcd@"your network interface"
 
 ## make a text editor
 cards depcreate vim \
