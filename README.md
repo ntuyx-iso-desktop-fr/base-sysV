@@ -2,12 +2,12 @@
 
 ## on a normal Nutyx in root
 
-cards install cards.devel git
-wget http://www.nutyx.org/install-nutyx{,.md5sum}
+cards install cards.devel git \
+wget http://www.nutyx.org/install-nutyx{,.md5sum} \
 md5sum -c install-nutyx.md5sum
 
 ## if the commands says "install-nutyx: OK", you can continue
-chmod -v 755 install-nutyx
+chmod -v 755 install-nutyx \
 mv -v install-nutyx /usr/bin/install-nutyx
 
 ## If you've already make the installation process, you have to remove the LFS user from the nutyx base by
