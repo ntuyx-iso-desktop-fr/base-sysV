@@ -30,7 +30,7 @@ gperf
 expat
 inetutils
 perl
-xmlparser
+perl-xml-parser
 intltool
 autoconf
 automake
