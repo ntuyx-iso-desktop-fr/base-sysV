@@ -3,7 +3,7 @@
 ## on a normal Nutyx in root
 
 cards install cards.devel git \
-wget http://www.nutyx.org/install-nutyx{,.md5sum} \
+wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} \
 md5sum -c install-nutyx.md5sum
 
 ## if the commands says "install-nutyx: OK", you can continue
