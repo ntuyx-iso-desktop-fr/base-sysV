@@ -25,7 +25,7 @@ version=2.4.81
 
 source=(http://downloads.tuxfamily.org/nutyx/files/cards-$version.tar.gz)
 build () {
-cd $name-$version
+cd $name-$name-$version
 make all
 make DESTDIR=$PKG install
 mkdir -p $PKG/{etc,usr}/ports

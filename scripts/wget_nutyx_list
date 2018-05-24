@@ -6,10 +6,10 @@ a61415312426e9c2212bd7dc7929abda  acl-2.2.52.src.tar.gz
 cda93857418655ea43590736fc3ca9fc  bc-1.07.1.tar.gz
 ffc476dd46c96f932875d1b2e27e929f  binutils-2.30.tar.xz
 c342201de104cc9ce0a21e0ad10d4021  bison-3.0.4.tar.xz
-5ce544b00af49cb6a1c16bbe729037cb  blfs-systemd-units-20180105.tar.bz2
+d08d942aac69150495f146dc7ea89284  blfs-systemd-units-20180105.tar.bz2
 6a5ac7e89b791aae556de0f745916f7f  bzip2-1.0.6-install_docs-1.patch
 00b516f4704d4a7cb50a1d97e6e8e15b  bzip2-1.0.6.tar.gz
-5d95240de53aa21eeef1d8c8c66a355f  cards-2.4.81.tar.gz
+0bc5aa2c95027417d69b64ee13221520  cards-2.4.81.tar.gz
 31b17c6075820a434119592941186f70  check-0.12.0.tar.gz
 960cfe75a42c9907c71439f8eb436303  coreutils-8.29.tar.xz
 a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.29-i18n-1.patch
@@ -102,4 +102,3 @@ a2a2c1dc4ac5003fc25a8e60b4a9464e  wget-1.19.4.tar.gz
 fb262d55709427e2e9acadf2c1298c99  root.crt
 2a1288e8bb4eeea3ca256c8aabd50847  certdata.txt
 a21a04d6ff5c4645c748220dbaa9f221  make-ca.sh-20170514
-2602ad74616346c03119ab6364adeab0  nutyx-10.1.tar.xz

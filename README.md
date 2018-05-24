@@ -3,7 +3,7 @@
 ## on a normal Nutyx in root
 
 cards install cards.devel git \
-wget http://www.nutyx.org/install-nutyx{,.md5sum} \
+wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum} \
 md5sum -c install-nutyx.md5sum
 
 ## if the commands says "install-nutyx: OK", you can continue
@@ -185,7 +185,7 @@ EOF \
 ports -u
 
 ## To boot, you have to compile the kernel with 
-cd /usr/ports/base/kernel-lts \
+cd /usr/ports/base-systemd/base/kernel-lts \
 pkgmk -d -i
 
 ## make a grub, if you don't have a working linux on an other partition or harddrive, with 
