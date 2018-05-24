@@ -1238,7 +1238,7 @@ expat gcc readline ncurses lzo glibc gmp xz zlib \
 libarchive mpc mpfr openssl cards"
    [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ] && CHROOT_LIST="$CHROOT_LIST util-linux"
 fi
-[ -z "$URL" ] && URL="http://downloads.nutyx.org"
+[ -z "$URL" ] && URL="http://rems.techozor.fr"
 [ -z "$VERSION" ] && VERSION="#VERSION#"
 if [ "$VERSION" == "development" ]; then
 	CODE_NAME="`date +%Y%m%d`"
@@ -1249,9 +1249,9 @@ fi
 [ -z "$FOLDER" ] && FOLDER="/mnt/hd"
 if [ -z "$KERNEL" ]; then
    if [ "$ARCH" = "i686" -a "$HOST_ARCH" = "x86_64" ]; then
-      KERNEL="sysklogd sysvinit"
+      KERNEL="systemd"
    else
-      KERNEL="linux-firmware sysklogd sysvinit reiserfsprogs e3 \
+      KERNEL="linux-firmware systemd reiserfsprogs e3 \
 grub lz4 mdadm jfsutils xfsprogs btrfs-progs dhcpcd kernel-lts"
    fi
 fi
@@ -1260,10 +1260,10 @@ fi
 
 [ -z $LFS ] && LFS=$FOLDER
 
-HOMEPAGE="${URL}"                      ## http://downloads.nutyx.org
+HOMEPAGE="${URL}"                      ## http://rems.techozor.fr
 INSTALL_BASE="$ARCH/$VERSION"          ## x86_64/8.2
-DEPOT_ROOT="$HOMEPAGE/${INSTALL_BASE}" ## http://downloads.nutyx.org/x86_64/8.2
-DEPOT_BASE="$DEPOT_ROOT/$BASE"         ## http://downloads.nutyx.org/x86_64/8.2/base
+DEPOT_ROOT="$HOMEPAGE/${INSTALL_BASE}" ## http://rems.techozor.fr/x86_64/8.2
+DEPOT_BASE="$DEPOT_ROOT/$BASE"         ## http://rems.techozor.fr/x86_64/8.2/base
 
 LOCAL_DEPOT_PACKAGES="$DEPOT/$BASE"
 DEPOT_CD="/media/cdrom"
