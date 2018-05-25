@@ -131,7 +131,6 @@ do
 			
 		    util-linux)
 		    	rm -vf /usr/include/{blkid,libmount,uuid}
-                        done
 			for pc in blkid mount uuid
 			do
 			    rm -vf /usr/lib/pkgconfig/${pc}.pc
