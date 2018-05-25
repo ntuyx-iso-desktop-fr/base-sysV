@@ -3,12 +3,13 @@ url="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certda
 packager="tnut <tnut@nutyx.org>"
 
 name=ca-certificates
-version=20170514
+version=0.8
 release=1
 
-source=(http://anduin.linuxfromscratch.org/BLFS/other/make-ca.sh-$version
+source=(https://github.com/djlucas/make-ca/archive/v0.8/make-ca-$version.tar.gz
 	http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
-	http://www.cacert.org/certs/root.crt)
+	http://www.cacert.org/certs/root.crt
+	wget http://www.cacert.org/certs/class3.crt)
 
 build() {
 
@@ -19,9 +20,11 @@ OPENSSL="`which openssl`"
 $OPENSSL x509 -in root.crt -text -fingerprint -setalias "CAcert Class 1 root" \
    -addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
    > $PKG/etc/ssl/local/CAcert_Class_1_root.pem
-
+wget x509 -in class3.crt -text -fingerprint -setalias "CAcert Class 3 root" \
+-addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
+        > /etc/ssl/local/CAcert_Class_3_root.pem
 cp certdata.txt $PKG/etc/ssl
-install -vm755 make-ca.sh-$version $PKG/usr/sbin/make-ca.sh
+make DESTDIR=$PKG install
 
-$PKG/usr/sbin/make-ca.sh -D $PKG
+$PKG/usr/sbin/make-ca.sh -g -D $PKG
 }
