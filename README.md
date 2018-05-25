@@ -202,9 +202,6 @@ menuentry "GNU/Linux, Linux 4.16.8-lfs-20180511-systemd" { \
 } \
 EOF
 
-## make a link for /etc/resolv.conf
-ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
 ## make a /etc/hostname
 echo "nutyx-systemd" > /etc/hostname
 
@@ -230,6 +227,9 @@ systemctl enable dhcpcd@"your network interface"
 
 ## make a text editor
 cards depcreate vim \
+
+## make a link for /etc/resolv.conf
+ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 ## make a fstab like that if you have your partition in /dev/sda2
 cat > /etc/fstab << "EOF" \
