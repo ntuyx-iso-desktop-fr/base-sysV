@@ -177,12 +177,9 @@ chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ \
 
 ## No "command not found" have to appears here
 
-cat > /etc/cards.conf << "EOF" \
-dir /usr/ports/base \
-locale fr \
-base /usr/ports/base \
-EOF \
-ports -u
+ports -u \
+
+You may have some rsync disfonctions with collections not yet implemented
 
 ## To boot, you have to compile the kernel with 
 cd /usr/ports/base/base/kernel-lts \
@@ -226,7 +223,7 @@ ip a \
 systemctl enable dhcpcd@"your network interface"
 
 ## make a text editor
-cards depcreate vim \
+cards depcreate vim
 
 ## make a link for /etc/resolv.conf
 ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf
@@ -259,63 +256,6 @@ EOF
 ## make a /etc/locale.conf for example in french
 cat > /etc/locale.conf << "EOF" \
 LANG=fr_FR.utf8 \
-EOF
-
-## make a /etc/inputrc
-
-cat > /etc/inputrc << "EOF" \
-#Début de /etc/inputrc \
-#Modifié par Chris Lynn <roryo@roryo.dynup.net> \
-\
-#Permettre à l'invite de commande d'aller à la ligne \
-set horizontal-scroll-mode Off \
-\
-#Activer l'entrée sur 8 bits \
-set meta-flag On \
-set input-meta On \
-\
-#Ne pas supprimer le 8ème bit \
-set convert-meta Off \
-\
-#Conserver le 8ème bit à l'affichage \
-set output-meta On \
-\
-#none, visible ou audible \
-set bell-style none \
-\
-#Toutes les indications qui suivent font correspondre la séquence \
-#d'échappement contenue dans le 1er argument à la fonction \
-#spécifique de readline \
-"\eOd": backward-word \
-"\eOc": forward-word \
-\
-#Pour la console linux \
-"\e[1~": beginning-of-line \
-"\e[4~": end-of-line \
-"\e[5~": beginning-of-history \
-"\e[6~": end-of-history \
-"\e[3~": delete-char \
-"\e[2~": quoted-insert \
-\
-#pour xterm \
-"\eOH": beginning-of-line \
-"\eOF": end-of-line \
-\
-#pour Konsole \
-"\e[H": beginning-of-line \
-"\e[F": end-of-line \
-\
-#Fin de /etc/inputrc \
-EOF \
-]
-## make a /etc/shells
-cat > /etc/shells << "EOF" \
-#Begin /etc/shells \
-\
-/bin/sh \
-/bin/bash \
-\
-#End /etc/shells \
 EOF
 
 ## make a /etc/os-release
