@@ -9,7 +9,7 @@ release=1
 source=(https://github.com/djlucas/make-ca/archive/v0.8/make-ca-$version.tar.gz
 	http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
 	http://www.cacert.org/certs/root.crt
-	wget http://www.cacert.org/certs/class3.crt)
+        http://www.cacert.org/certs/class3.crt)
 
 build() {
 
@@ -20,11 +20,12 @@ OPENSSL="`which openssl`"
 $OPENSSL x509 -in root.crt -text -fingerprint -setalias "CAcert Class 1 root" \
    -addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
    > $PKG/etc/ssl/local/CAcert_Class_1_root.pem
-wget x509 -in class3.crt -text -fingerprint -setalias "CAcert Class 3 root" \
--addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
-        > /etc/ssl/local/CAcert_Class_3_root.pem
+$OPENSSL x509 -in class3.crt -text -fingerprint -setalias "CAcert Class 3 root" \
+   -addtrust serverAuth -addtrust emailProtection -addtrust codeSigning \
+   > $PKG/etc/ssl/local/CAcert_Class_3_root.pem
 cp certdata.txt $PKG/etc/ssl
+cd make-ca-$version
 make DESTDIR=$PKG install
 
-$PKG/usr/sbin/make-ca.sh -g -D $PKG
+$PKG/usr/sbin/make-ca -g -D $PKG
 }
