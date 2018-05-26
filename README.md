@@ -177,7 +177,7 @@ chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ \
 
 ## No "command not found" have to appears here
 
-ports -u \
+ports -u
 
 You may have some rsync disfonctions with collections not yet implemented
 
