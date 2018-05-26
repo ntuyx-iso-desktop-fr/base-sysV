@@ -266,3 +266,11 @@ ID=lfs \
 PRETTY_NAME="nutyx-systemd" \
 VERSION_CODENAME="<your name here>" \
 EOF 
+
+## Have a password on root
+passwd
+
+## make a new unprivileged user
+nu
+
+## After that you will normally have to reboot on your new NuTyX-systemd and enjoy to start a build-collection
