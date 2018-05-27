@@ -7,7 +7,7 @@ name=dosfstools
 version=4.1
 release=1
 
-source=( ftp://ftp.debian.org/debian/pool/main/d/$name/$name\_$version.orig.tar.xz)
+source=(https://github.com/$name/$name/releases/download/v$version/$name-$version.tar.xz)
 
 build() {
   cd $name-$version
