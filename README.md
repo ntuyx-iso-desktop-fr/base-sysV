@@ -177,9 +177,7 @@ chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ \
 
 ## No "command not found" have to appears here
 
-ports -u
-
-You may have some rsync disfonctions with collections not yet implemented
+something will coming
 
 ## To boot, you have to compile the kernel with 
 cd /usr/ports/base/base/kernel-lts \
@@ -194,8 +192,8 @@ set default=0 \
 set timeout=5 \
 insmod ext2 \
 set root=(hd0,2) \
-menuentry "GNU/Linux, Linux 4.16.8-lfs-20180511-systemd" { \
-        linux   /boot/vmlinuz-4.16.8-lfs-20180511-systemd root=/dev/sda2 ro \
+menuentry "GNU/Linux, NuTyX-systemd" { \
+        linux   /boot/kernel root=/dev/sda2 ro \
 } \
 EOF
 
@@ -272,5 +270,12 @@ passwd
 
 ## make a new unprivileged user
 nu
+
+## Umount all the filesystems
+To known what to umount \
+mount | grep $LFS \
+and \
+unmount the filesystems \
+```umount /mnt/lfs/{run,proc,sys,dev/pts,dev,}```
 
 ## After that you will normally have to reboot on your new NuTyX-systemd and enjoy to start a build-collection
