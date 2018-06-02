@@ -11,17 +11,24 @@ source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.12.4.tar.gz)
 
 build () {
 cd $name-$version
-./configure --prefix=/usr                       \
-            --sysconfdir=/etc                   \
-            --localstatedir=/var                \
-            --disable-static                    \
-            --disable-doxygen-docs              \
-            --disable-xml-docs                  \
-            --docdir=/usr/share/doc/dbus-1.12.4 \
-            --with-console-auth-dir=/run/console
+./configure --prefix=/usr                        \
+            --sysconfdir=/etc                    \
+            --localstatedir=/var                 \
+            --enable-user-session                \
+            --disable-doxygen-docs               \
+            --disable-xml-docs                   \
+            --disable-static                     \
+            --docdir=/usr/share/doc/dbus-1.12.8 \
+            --with-console-auth-dir=/run/console \
+            --with-system-pid-file=/run/dbus/pid \
+            --with-system-socket=/run/dbus/system_bus_socket \
+            --with-systemdsystemunitdir=/lib/systemd/system \
+            --enable-systemd --enable-user-session
 make
 make DESTDIR=$PKG install
 mv -v $PKG/usr/lib/libdbus-1.so.* $PKG/lib
 ln -sfv ../../lib/$(readlink $PKG/usr/lib/libdbus-1.so) $PKG/usr/lib/libdbus-1.so
 ln -sv $PKG/etc/machine-id $PKG/var/lib/dbus
+chown -v root:messagebus $PKG/usr/libexec/dbus-daemon-launch-helper
+chmod -v      4750       $PKG/usr/libexec/dbus-daemon-launch-helper
 }
