@@ -3,7 +3,6 @@ url="http://dbus.freedesktop.org/releases/dbus"
 packager="tnut <tnut@nutyx.org>"
 maintainer="tnut <tnut@nutyx.org>"
 
-PKGMK_FORCE="yes"
 name=dbus
 version=1.12.4
 
@@ -18,12 +17,12 @@ cd $name-$version
             --disable-doxygen-docs               \
             --disable-xml-docs                   \
             --disable-static                     \
-            --docdir=/usr/share/doc/dbus-1.12.8 \
+            --docdir=/usr/share/doc/dbus-$version \
             --with-console-auth-dir=/run/console \
             --with-system-pid-file=/run/dbus/pid \
             --with-system-socket=/run/dbus/system_bus_socket \
             --with-systemdsystemunitdir=/lib/systemd/system \
-            --enable-systemd --enable-user-session
+            --enable-systemd
 make
 make DESTDIR=$PKG install
 mv -v $PKG/usr/lib/libdbus-1.so.* $PKG/lib
