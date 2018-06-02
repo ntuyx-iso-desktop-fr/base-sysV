@@ -52,7 +52,7 @@ session   required    pam_unix.so
 # End /etc/pam.d/system-session
 EOF
 
-cat > /etc/pam.d/system-password << "EOF"
+cat > $PKG/etc/pam.d/system-password << "EOF"
 # Begin /etc/pam.d/system-password
 
 # use sha512 hash for encryption, use shadow, and try to use any previously
@@ -62,7 +62,7 @@ password  required    pam_unix.so       sha512 shadow try_first_pass
 # End /etc/pam.d/system-password
 EOF
 
-cat > /etc/pam.d/other << "EOF"
+cat > $PKG/etc/pam.d/other << "EOF"
 # Begin /etc/pam.d/other
 
 auth        required        pam_warn.so
