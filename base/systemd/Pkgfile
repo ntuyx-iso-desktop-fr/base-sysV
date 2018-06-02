@@ -7,10 +7,12 @@ name=systemd
 version=238
 
 source=(https://github.com/systemd/systemd/archive/v238/systemd-238.tar.gz
-        http://anduin.linuxfromscratch.org/LFS/systemd-man-pages-238.tar.xz	)
+        http://anduin.linuxfromscratch.org/LFS/systemd-man-pages-238.tar.xz
+        http://www.linuxfromscratch.org/patches/blfs/svn/systemd-238-upstream_fixes-1.patch)
 
 build () {
 cd $name-$version
+patch -Np1 -i ../systemd-238-upstream_fixes-1.patch
 sed '171,$ d' -i src/resolve/meson.build
 sed -i '527,565 d'                  src/basic/missing.h
 sed -i '24 d'                       src/core/load-fragment.c
@@ -45,6 +47,7 @@ meson --prefix=/usr                \
 LC_ALL="fr_FR.utf8" LANG=en_US.utf8 ninja
 DESTDIR=$PKG LC_ALL="fr_FR.utf8" LANG="en_US.utf8" ninja install
 rm -rfv $PKG/usr/lib/rpm
+
 for tool in runlevel reboot shutdown poweroff halt telinit; do
      ln -sfv ../bin/systemctl $PKG/sbin/${tool}
      done
