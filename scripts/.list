@@ -17,6 +17,7 @@ attr
 acl
 libcap
 sed
+pam
 shadow
 psmisc
 iana-etc
@@ -60,7 +61,6 @@ libpipeline
 make
 patch
 dbus
-pam
 util-linux
 man-db
 tar
