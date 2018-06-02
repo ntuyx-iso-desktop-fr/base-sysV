@@ -22,9 +22,12 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
 sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs
 
+sed -i 's/1000/999/' etc/useradd
+
 ./configure --sysconfdir=/etc --with-group-name-max-length=32
 make
 make DESTDIR=$PKG install
+
 sed -i 's/yes/no/' $PKG/etc/default/useradd
 sed -i 's/GROUP/# GROUP/' $PKG/etc/default/useradd
 mv -v $PKG/usr/bin/passwd $PKG/bin
@@ -53,44 +56,7 @@ done
 
 #
 # Configuration files for pam
-mkdir -p $PKG/etc/pam.d
-cat > $PKG/etc/pam.d/system-account << "EOF"
-# Begin /etc/pam.d/system-account
-
-account   required    pam_unix.so
-
-# End /etc/pam.d/system-account
-EOF
-
-cat > $PKG/etc/pam.d/system-auth << "EOF"
-# Begin /etc/pam.d/system-auth
-
-auth      required    pam_unix.so
-
-# End /etc/pam.d/system-auth
-EOF
-
-cat > $PKG/etc/pam.d/system-password << "EOF"
-# Begin /etc/pam.d/system-password
-
-# use sha512 hash for encryption, use shadow, and try to use any previously
-# defined authentication token (chosen password) set by any prior module
-password  required    pam_pwhistory.so  retry=3
-password  required    pam_unix.so       sha512 shadow try_first_pass
-
-# End /etc/pam.d/system-password
-EOF
-
-cat > $PKG/etc/pam.d/system-session << "EOF"
-# Begin /etc/pam.d/system-session
-
-session   required    pam_unix.so
-session   optional    pam_loginuid.so
-session   optional    pam_ck_connector.so nox11
-
-# End /etc/pam.d/system-session
-EOF
-
+mkdir -pv $PKG/etc/pam.d
 cat > $PKG/etc/pam.d/login << "EOF"
 # Begin /etc/pam.d/login
 
@@ -100,7 +66,7 @@ auth      optional    pam_faildelay.so  delay=3000000
 # Check to make sure that the user is allowed to login
 auth      requisite   pam_nologin.so
 
-# Check to make sure that root is allowed to login 
+# Check to make sure that root is allowed to login
 # Disabled by default. You will need to create /etc/securetty
 # file for this module to function. See man 5 securetty.
 #auth      required    pam_securetty.so
@@ -189,26 +155,6 @@ do
     install -v -m644 $PKG/etc/pam.d/chage $PKG/etc/pam.d/${PROGRAM}
     sed -i "s/chage/$PROGRAM/" $PKG/etc/pam.d/${PROGRAM}
 done
-
-# Backup others
-[ -f $PKG/pam.d/other ] && install -v -m644 $PKG/etc/pam.d/other{,.orig}
-
-# Other 
-#
-cat > $PKG/etc/pam.d/other << "EOF"
-# Begin /etc/pam.d/other
-
-auth        required        pam_warn.so
-auth        required        pam_deny.so
-account     required        pam_warn.so
-account     required        pam_deny.so
-password    required        pam_warn.so
-password    required        pam_deny.so
-session     required        pam_warn.so
-session     required        pam_deny.so
-
-# End /etc/pam.d/other
-EOF
 
 # Replace the login and ressource limits file 
 if [ -f $PKG/etc/login.access ]; then
