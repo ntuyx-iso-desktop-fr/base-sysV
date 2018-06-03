@@ -16,7 +16,6 @@ d08d942aac69150495f146dc7ea89284  blfs-systemd-units-20180105.tar.bz2
 a9404fb575dfd5514f3c8f4120f9ca7d  coreutils-8.29-i18n-1.patch
 93eea9f07c0058c097891c73e4955456  cpio-2.12.tar.bz2
 04c00832fa62d443b8745b056464fb30  curl-7.59.0.tar.xz
-89745b5a6c45c26751dcf673d912f745  dbus-1.12.4.tar.gz
 2ac8405a4c7ca8611d004fe852966c6f  dejagnu-1.6.1.tar.gz
 a39ec183517bc1feaff017d067300b8c  dialog_1.3-20160828.orig.tar.gz
 07cf286672ced26fba54cd0313bdc071  diffutils-3.6.tar.xz

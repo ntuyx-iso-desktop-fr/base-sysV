@@ -60,7 +60,6 @@ kbd
 libpipeline
 make
 patch
-dbus
 util-linux
 man-db
 tar
