@@ -1,0 +1,28 @@
+# Depends on: intltool gtk-update-icon-cache hicolor-icon-theme icon-naming-utils librsvg
+
+description="Adwaita icon theme."
+url="http://www.gnome.org/"
+maintainer="http://linuxfromscratch.org/"
+packager="tnut <tnut@nuty.org>"
+
+run=(librsvg hicolor-icon-theme gtk-update-icon-cache)
+
+name=adwaita-icon-theme
+version=3.28.0
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version:0:4}/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr
+make
+make DESTDIR=$PKG install
+}
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/$name"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f5`"
+echo "$lastversion"
+}

@@ -1,0 +1,22 @@
+# Depends on: cmake
+
+description="A lightweight C++ template library for vector and matrix math."
+urkl="http://eigen.tuxfamily.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=eigen3
+version=3.3.4
+release=1
+
+PKGMK_KEEP_SOURCES="no"
+
+source=(http://bitbucket.org/eigen/eigen/get/$version.tar.bz2)
+build() {
+	cd eigen-eigen-*
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+	make
+	make DESTDIR=$PKG install
+}

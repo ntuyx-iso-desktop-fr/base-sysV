@@ -1,0 +1,21 @@
+description="Control and monitor S.M.A.R.T. enabled ATA and SCSI Hard Drives"
+url="http://smartmontools.sourceforge.net"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=smartmontools
+version=6.6
+release=3
+
+source=(http://downloads.sourceforge.net/sourceforge/$name/$name-$version.tar.gz )
+
+build() {
+
+	cd $name-$version
+	./configure --prefix=/usr \
+	--sysconfdir=/etc         \
+	--with-initscriptdir=no   \
+	--docdir=/usr/share/doc/smartmontools-$version
+	make
+	make DESTDIR=$PKG install
+}

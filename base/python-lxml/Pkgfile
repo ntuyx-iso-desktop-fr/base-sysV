@@ -1,0 +1,16 @@
+# Depends on: libxslt python cython
+
+description="Python binding for the libxml2 and libxslt librairies"
+url="http://lxml.de/"
+packager="tnut<tnut@nutyx.org>"
+contributors="Greg, Remy"
+
+name=python-lxml
+_name=lxml
+version=4.1.1
+release=1
+
+source=(http://rsync.nutyx.org/sources/lxml-4.1.1.tar.gz)
+
+build=python3
+}

@@ -1,0 +1,25 @@
+description="Utilities to monitor system performance and usage activity."
+url="http://perso.wanadoo.fr/sebastien.godard"
+packager="tnut <tnut@nutyx.org>"
+contributors="Fanch, Pierre B"
+
+name=sysstat
+version=11.5.7
+release=2
+
+source=($url/$name-$version.tar.xz)
+build() {
+
+cd $name-$version
+
+sa_lib_dir=/usr/lib/sa    \
+sa_dir=/var/log/sa        \
+conf_dir=/etc/sysconfig   \
+./configure --prefix=/usr \
+            --disable-file-attr 
+make
+make DESTDIR=$PKG install
+install -v -m644 sysstat.service /lib/systemd/system/sysstat.service
+sed -i "/^Also=/d" /lib/systemd/system/sysstat.service
+
+}

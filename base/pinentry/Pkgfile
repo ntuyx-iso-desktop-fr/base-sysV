@@ -1,0 +1,23 @@
+# Depends on: libcap libsecret libassuan
+
+description="a collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol"
+url="http://www.gnupg.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=pinentry
+version=1.0.0
+release=1
+
+source=(ftp://ftp.gnupg.org/gcrypt/$name/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+	--libexecdir=/usr/lib \
+	--disable-pinentry-qt \
+	--disable-pinentry-qt \
+	--disable-pinentry-gtk
+make
+make DESTDIR=$PKG install
+}

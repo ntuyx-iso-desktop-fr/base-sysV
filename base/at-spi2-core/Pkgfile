@@ -1,0 +1,34 @@
+# Depends on: ninja meson glib dbus gobject-introspection xorg-libx11 xorg-libxtst
+
+description="Protocol definitions and daemon for D-Bus at-spi"
+url="http://www.gtk.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=at-spi2-core
+version=2.28.0
+
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+
+mkdir build
+cd    build
+
+meson --prefix=/usr --sysconfdir=/etc
+
+ninja
+
+DESTDIR=$PKG ninja install
+
+}
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/$name"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f5`"
+echo "$lastversion"
+}

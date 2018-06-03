@@ -1,0 +1,32 @@
+description="The Kerberos network authentication system"
+url="http://web.mit.edu/kerberos/"
+packager="tnut <tnut@nutyx.org>"
+
+name=kerberos
+version=1.16
+
+source=(http://web.mit.edu/$name/dist/krb5/${version:0:4}/krb5-$version.tar.gz)
+
+build()  {
+cd krb5-$version/src
+
+./configure --prefix=/usr            \
+            --sysconfdir=/etc        \
+            --localstatedir=/var/lib \
+            --with-system-et         \
+            --with-system-ss         \
+            --with-system-verto=no   \
+            --enable-dns-for-realm
+make
+make DESTDIR=$PKG install
+
+for LIBRARY in gssapi_krb5 gssrpc k5crypto kadm5clnt_mit kadm5srv_mit kdb5 krb5 krb5support verto; do
+	chmod -v 755 $PKG/usr/lib/lib$LIBRARY.so.*.*
+done
+
+unset LIBRARY
+
+install -v -dm755 $PKG/usr/share/doc/krb5-$version
+cp -vfr ../doc/*  $PKG/usr/share/doc/krb5-$version
+
+}

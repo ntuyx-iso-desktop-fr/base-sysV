@@ -1,0 +1,12 @@
+description="ISO AAC audio decoder"
+url="http://www.audiocoding.com"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=faad2
+version=2.8.5
+release=1
+
+source=(http://downloads.sourceforge.net/sourceforge/faac/$name-$version.tar.gz)
+
+build=autotools

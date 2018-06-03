@@ -1,0 +1,35 @@
+# Depends on: freetype ghostscript lcms libgsf giflib libxml2 openexr libwmf libpng librsvg libwebp djvulibre
+
+description="An image viewing/manipulation program"
+url="http://www.imagemagick.org/"
+packager="tnut <tnut@nutyx.org>"
+
+name=imagemagick
+version=7.0.7.37
+_version=7.0.7-37
+source=(ftp://ftp.imagemagick.org/pub/ImageMagick/releases/ImageMagick-${_version}.tar.xz)
+
+build () {
+    cd ImageMagick-*
+    ./configure --prefix=/usr \
+                --enable-static=no \
+                --enable-shared \
+                --with-webp \
+                --with-gslib \
+                --with-perl \
+                --with-perl-options="INSTALLDIRS=vendor" \
+                --with-x \
+                --with-frozenpaths=no \
+                --with-modules \
+                --disable-openmp \
+                --enable-hdri \
+                --with-wmf \
+                --with-gs-font-dir=/usr/share/fonts/Type1 \
+                --with-lqr \
+                --with-rsvg \
+                --enable-opencl \
+                --with-openjp2
+    make
+    make DESTDIR=$PKG install
+    find  $PKG -name perllocal.pod -exec rm {} \;
+}

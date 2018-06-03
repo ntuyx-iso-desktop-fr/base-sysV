@@ -1,0 +1,34 @@
+# Depends on: intltool glib gobject-introspection
+
+description="Shared GSettings schemas for the desktop"
+url="http://www.gnome.org/"
+packager="fanch <fanch@nutyx.org>"
+contributors="Pierre B"
+
+run=( glib )
+name=gsettings-desktop-schemas
+version=3.28.0
+
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version:0:4}/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+
+# NuTyX Background
+sed -i "s@gnome/adwaita-timed.xml@nutyx/nutyx.jpg@" \
+schemas/org.gnome.desktop.background.gschema.xml.in
+
+sed -i -r 's:"(/system):"/org/gnome\1:' schemas/*.in
+./configure --prefix=/usr
+make
+make DESTDIR=$PKG install
+}
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/$name"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f5`"
+echo "$lastversion"
+}

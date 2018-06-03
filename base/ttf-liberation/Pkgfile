@@ -1,0 +1,30 @@
+# Depends on: xorg-fontconfig xorg-font-util xorg-encodings fontforge
+
+description="Red Hats Liberation fonts."
+url="http://sources.openelec.tv/mirror/liberation-fonts-ttf"
+packager="greg <greg@nutyx.org>"
+contributors="Alienus, tnut"
+
+run=( xorg-fontconfig xorg-font-util xorg-encodings fontforge )
+name=ttf-liberation
+version=2.00.1
+release=2
+
+source=(http://sources.openelec.tv/mirror/liberation-fonts-ttf/liberation-fonts-ttf-$version.tar.gz
+ttf-liberation.30-0-liberation-mono.conf
+ttf-liberation.30-0-liberation-sans.conf
+ttf-liberation.30-0-liberation-serif.conf)
+
+build(){
+    cd liberation-fonts-ttf-$version
+    install -d $PKG/usr/share/fonts/TTF/
+    install -m644 *.ttf $PKG/usr/share/fonts/TTF/
+
+    # install fontconfig files
+    install -Dm644 $SRC/ttf-liberation.30-0-liberation-mono.conf \
+       $PKG/etc/fonts/conf.avail/30-$name-mono.conf
+    install -Dm644 $SRC/ttf-liberation.30-0-liberation-sans.conf \
+       $PKG/etc/fonts/conf.avail/30-$name-sans.conf
+    install -Dm644 $SRC/ttf-liberation.30-0-liberation-serif.conf \
+        $PKG/etc/fonts/conf.avail/30-$pkgname-serif.conf
+}

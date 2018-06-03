@@ -1,0 +1,29 @@
+# Depends on: xorg-libx11 xorg-libxext xorg-libxv
+
+description="Library X Video Motion Compensation extension client"
+url="http://xorg.freedesktop.org"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B, tnut, Greg"
+
+name=xorg-libxvmc
+alias=(libXvMC)
+version=1.0.10
+release=2
+_name=libXvMC
+
+source=(http://ftp.x.org/pub/individual/lib/${_name}-$version.tar.bz2)
+
+build=xorg
+
+package() {
+rm $PKG/usr/lib/${_name}{,W}.la
+}
+
+uptodate() {
+local ext url name LINX
+LYNX="lynx -read_timeout=20 -dump -listonly -nonumbers "
+ext=".tar.bz2"
+url="https://ftp.x.org/archive//individual//lib"
+name="libXvMC-"
+$LYNX $url/?C=M\;O=D|grep "$ext$"|grep "$url/$name"|sed "s@$ext\$@@"|sed "s@$url/$name@@"|head -1
+}

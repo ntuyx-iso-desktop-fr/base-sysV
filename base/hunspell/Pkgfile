@@ -1,0 +1,24 @@
+description="Spell checker and morphological analyzer library and program"
+url="http://hunspell.sourceforge.net/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+PKGMK_KEEP_SOURCES="no"
+
+name=hunspell
+version=1.6.1
+release=2
+
+source=(https://github.com/hunspell/hunspell/archive/v$version.tar.gz )
+
+build() {
+	cd $name-$version
+	autoreconf -vfi
+        ./configure --prefix=/usr \
+		    --disable-static \
+        	    --with-ui \
+		    --with-readline \
+		    --with-experimental
+        make
+        make DESTDIR=$PKG install
+}

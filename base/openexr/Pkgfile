@@ -1,0 +1,30 @@
+# Depends on: ilmbase 
+
+description="An high dynamic-range image file format library"
+url="http://www.openexr.org"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=openexr
+version=2.2.1
+
+source=( http://savannah.nongnu.org/download/$name/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--localstatedir=/var \
+--sysconfdir=/etc
+make
+make DESTDIR=$PKG install
+rm $PKG/usr/lib/libIlmImf.la
+rm $PKG/usr/lib/libIlmImfUtil.la
+}
+uptodate() {
+local url ext
+url="http://download.savannah.nongnu.org/releases/$name/"
+ext=".tar.gz"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url?C=M\;O=A|grep $name-[0-9]|grep [0-9]$ext$| \
+sed "s@$url$name-@@"|sed "s@$ext@@"|tail -1
+}

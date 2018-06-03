@@ -1,0 +1,22 @@
+# Depends on: libgpg-error
+
+description="A general purpose crypto library based on the code used in GnuPG."
+url="http://ftp.gnupg.org/gcrypt/libgcrypt/"
+packager="tnut <tnut2nutyx.org>"
+contributors="Pierre B"
+
+name=libgcrypt
+version=1.8.2
+
+source=(ftp://ftp.gnupg.org/gcrypt/$name/$name-$version.tar.bz2 )
+
+build() {
+cd $name-$version
+./configure --prefix=/usr --disable-static
+make
+make DESTDIR=$PKG install
+
+install -v -dm755 $PKG/usr/share/doc/libgcrypt-$version
+install -v -m644 README doc/{README.apichanges,fips*,libgcrypt*} \
+$PKG/usr/share/doc/libgcrypt-$version
+}

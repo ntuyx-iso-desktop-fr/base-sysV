@@ -1,0 +1,29 @@
+# Depends on: python systemd
+
+description="Data files describing media player capabilities, for post-HAL systems"
+url="http://cgit.freedesktop.org/media-player-info/"
+packager="tnut <tnut@nutyx.org>"
+contributions="Pierre B"
+
+name=media-player-info
+version=22
+release=3
+
+source=(http://www.freedesktop.org/software/$name/$name-$version.tar.gz )
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr \
+      		--with-udevdir=/lib/udev
+
+  	LANG="en_US.UTF-8" make
+	make DESTDIR=$PKG install
+}
+
+uptodate() {
+local url ext
+ext=".tar.gz"
+url="https://www.freedesktop.org/software/$name/"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=M\;O=D|grep $ext$|head -1|sed "s@$url/$name-@@"|sed "s/$ext//"
+}

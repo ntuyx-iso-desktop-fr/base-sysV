@@ -1,0 +1,22 @@
+# Depends on: gtk3 perl-xml-parser xorg-libxt xorg-libxres startup-notification xorg-libxinerama xorg-libxrandr xorg-libxcursor xorg-libxdamage intltool gobject-introspection
+
+description="Window Navigator Construction Kit (GTK+3)."
+url="http://www.gnome.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libwnck
+version=3.24.1
+release=1
+
+source=(http://ftp.gnome.org/pub/gnome/sources/libwnck/${version%.*}/libwnck-$version.tar.xz)
+
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/$name"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f3`"
+echo "$lastversion"
+}

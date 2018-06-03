@@ -1,0 +1,23 @@
+# Depends on: xorg-libxinerama xorg-libxft
+
+description="dmenu is a dynamic menu for X."
+url="http://tools.suckless.org/dmenu/"
+packager="jayce <jayce.net@gmail.com>"
+contributors="Alienus, tnut"
+
+name=dmenu
+version=4.7
+release=2
+
+source=(http://dl.suckless.org/tools/$name-$version.tar.gz)
+
+build(){
+    cd $name-$version
+
+    make install PREFIX=/usr \
+                 LIBDIR=/usr/lib \
+                 MANPREFIX=/usr/share/man \
+                 X11INC=/usr/include \
+                 X11LIB=/usr/lib \
+                 DESTDIR=$PKG
+}

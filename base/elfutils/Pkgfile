@@ -1,0 +1,28 @@
+# Depends on: libelf
+description="Set of utilities and libraries for handling elf files."
+url="http://xiph.org/ao/"
+packager="tnut <tnut@nutyx.org>"
+
+name=elfutils
+version=0.170
+release=1
+
+source=( https://sourceware.org/elfutils/ftp/$version/elfutils-$version.tar.bz2 )
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--program-prefix="eu-"
+make
+make prefix=$PKG/usr install
+# already present in libelf in base
+rm $PKG/usr/include/elfutils/elf-knowledge.h \
+$PKG/usr/include/gelf.h \
+$PKG/usr/include/libelf.h \
+$PKG/usr/include/nlist.h \
+$PKG/usr/lib/pkgconfig/libelf.pc \
+$PKG/usr/lib/libelf-0.170.so \
+$PKG/usr/lib/libelf.a \
+$PKG/usr/lib/libelf.so \
+$PKG/usr/lib/libelf.so.1
+}

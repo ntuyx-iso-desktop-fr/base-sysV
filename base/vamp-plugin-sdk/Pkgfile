@@ -1,0 +1,21 @@
+# Depends on: libsndfile 
+
+description="The Vamp audio analysis plug-in system"
+url="http://www.vamp-plugins.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=vamp-plugin-sdk
+version=2.6
+release=1
+
+source=(https://code.soundsoftware.ac.uk/attachments/download/1520/$name-$version.tar.gz)
+
+build() {
+cd $SRC/$name-$version
+./configure --prefix=/usr
+make
+make DESTDIR=$PKG install
+
+install -Dm644 COPYING $PKG/usr/share/licenses/$pkgname/COPYING
+}

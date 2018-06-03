@@ -1,0 +1,20 @@
+# Depends on: libfm-extra
+
+url="http://lxde.org/"
+maintainer="git.lxde.org/gitweb/?p=debian/menu-cache.git;a=summary"
+packager="tnut <tnut@nutyx.org>"
+contributors="Geantbrun"
+description="For creating and utilizing caches to speed up the manipulation for freedesktop.org defined application menus."
+
+name=menu-cache
+version=1.0.2
+release=1
+
+source=(http://downloads.sourceforge.net/lxde/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr  --disable-static
+make
+make DESTDIR=$PKG install
+}

@@ -1,0 +1,23 @@
+# Depends on: sdl
+
+description="A SDL MPEG player library."
+url="http://www.lokigames.com/development/smpeg.php3"
+packager="tnut <tnut@nutyx.org>"
+contributors="Fanch"
+
+name=smpeg
+version=0.4.5
+release=5
+source=(http://crux.ster.zone/downloads/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+	CXX="g++ -std=c++98" ./configure \
+		--prefix=/usr \
+		--mandir=/usr/share/man \
+		--disable-static
+	make || make -j1
+	make install DESTDIR=$PKG
+
+rm $PKG/usr/lib/libsmpeg.la
+}

@@ -1,0 +1,27 @@
+# Depends on : xorg-fontconfig
+
+description="Google Noto TTF fonts"
+url="https://www.google.com/get/noto/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=noto-fonts
+version=20180322
+
+source=(http://rems.techozor.fr/sources/$name-$version.tar.gz
+	66-noto-mono.conf 66-noto-sans.conf 66-noto-serif.conf)
+
+build() {
+  cd $name-*/
+  mkdir -p $PKG/usr/share/fonts/noto
+  install -m644 hinted/Noto*.tt[fc] -t $PKG/usr/share/fonts/noto
+  install -Dm644 unhinted/Noto*.tt[fc] -t $PKG/usr/share/fonts/noto
+
+  mkdir -p $PKG/usr/share/fonts/TTF
+  for font in Arimo Cousine Tinos; do
+    install -m644 hinted/$font*.ttf $PKG/usr/share/fonts/TTF
+  done
+
+  # fontconfig files
+  install -Dm644 $SRC/*.conf -t $PKG/etc/fonts/conf.avail/
+}

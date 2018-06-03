@@ -1,0 +1,18 @@
+# Depends on: python2
+
+description="File manager with VI key bindings."
+url="http://ranger.nongnu.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Alienus"
+
+name=ranger
+version=1.8.1
+release=1
+
+source=(http://ranger.nongnu.org/$name-$version.tar.gz
+)
+
+build() {
+    cd $name-$version
+    python2 setup.py install --prefix=/usr --root=$PKG
+}

@@ -1,0 +1,22 @@
+# Depends on: python2
+
+description="A tool that makes it easy to create Python bindings for C and C++ libraries"
+url="http://www.riverbankcomputing.co.uk/software/sip/intro"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=python2-sip
+version=4.19.6
+
+source=(http://sourceforge.net/projects/pyqt/files/sip/sip-$version/sip-$version.tar.gz )
+
+build() {
+	cd sip-$version
+	python configure.py -b /usr/bin \
+	-d /usr/lib/python2.7/site-packages \
+	-e /usr/include/python2.7 \
+	-v /usr/share/sip
+	make
+	make DESTDIR=$PKG install
+	chmod 644 $PKG/usr/lib/python2.7/site-packages/sipdistutils.py
+}

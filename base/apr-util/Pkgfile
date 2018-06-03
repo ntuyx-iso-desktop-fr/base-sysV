@@ -1,0 +1,34 @@
+# Depends on: apr expat
+
+description="Apache Portable Runtime Utility Library"
+url="http://apr.apache.org/"
+contributors="Jmilot, Greg"
+packager="tnut <tnut@nutyx.org>"
+
+name=apr-util
+version=1.6.1
+
+source=(http://archive.apache.org/dist/apr/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--with-apr=/usr \
+--with-gdbm=/usr \
+--with-openssl=/usr \
+--with-crypto
+make
+make DESTDIR=$PKG install
+}
+
+uptodate() {
+local url ext name
+name="apr"
+url="http://archive.apache.org/dist/$name/"
+ext=".tar.bz2"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url|grep $name-util-[0-9]|grep [0-9]$ext$| \
+sed "s@$url$name-util-@@"|sed "s@$ext@@"| \
+sort|tail -1
+
+}

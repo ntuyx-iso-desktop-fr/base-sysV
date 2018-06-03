@@ -1,0 +1,26 @@
+# Depends on: libusb-compat hwids
+
+description="USB Device Utilities"
+url="http://downloads.sourceforge.net/linux-usb/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+run=(hwids)
+
+name=usbutils
+version=008
+release=2
+
+source=(http://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-$version.tar.xz)
+
+build() {
+cd $name-$version
+sed -i '/^usbids/ s:usb.ids:hwdata/&:' lsusb.py
+./configure --prefix=/usr \
+--datadir=/usr/share/hwdata \
+--disable-zlib \
+--datadir=/usr/share/misc
+mkdir -p $PKG/usr/share/hwdata
+make
+make DESTDIR=$PKG install
+}

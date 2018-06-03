@@ -1,0 +1,18 @@
+description="High quality hyphenation and justification library based on the TeX hyphenation algorithm."
+url="http://hunspell.sourceforge.net/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Fanch"
+
+name=hyphen
+version=2.8.8
+release=1
+
+source=( http://downloads.sourceforge.net/hunspell/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+        ./configure --prefix=/usr \
+		    --disable-static 
+        make
+        make DESTDIR=$PKG install
+}

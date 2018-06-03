@@ -1,0 +1,20 @@
+# Depends on: libsndfile flac 
+
+description="Secret Rabbit Code (aka libsamplerate) is a Sample Rate Converter for audio."
+url="http://www.mega-nerd.com/SRC/index.html"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libsamplerate
+version=0.1.9
+release=1
+
+source=(http://www.mega-nerd.com/SRC/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr
+make
+make htmldocdir=/usr/share/doc/libsamplerate-$version \
+ DESTDIR=$PKG install
+}

@@ -1,0 +1,31 @@
+# Depends on: python
+
+description="Apache Portable Runtime (APR)"
+url="http://apr.apache.org/"
+contributors="Jmilot, Greg"
+packager="tnut <tnut@nutyx.org>"
+
+name=apr
+version=1.6.3
+
+source=(http://archive.apache.org/dist/$name/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr --disable-static \
+--with-installbuilddir=/usr/share/apr-1/build
+make
+make DESTDIR=$PKG install
+}
+
+uptodate() {
+local url ext
+
+url="http://archive.apache.org/dist/$name/"
+ext=".tar.bz2"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url|grep $name-[0-9]|grep [0-9]$ext$| \
+sed "s@$url$name-@@"|sed "s@$ext@@"| \
+sort|tail -1
+
+}

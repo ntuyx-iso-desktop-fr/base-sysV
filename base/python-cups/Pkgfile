@@ -1,0 +1,20 @@
+# Depends on: cups python python-requests
+
+description="Python CUPS Bindings"
+url="http://cyberelk.net/tim/software/pycups/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Alienus"
+
+name=python-cups
+version=1.9.73
+release=2
+
+run=(python-requests)
+
+source=(
+http://cyberelk.net/tim/data/pycups/pycups-$version.tar.bz2)
+
+build() {
+    cd pycups-$version
+    python3 setup.py install --prefix=/usr --root=$PKG
+}

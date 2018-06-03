@@ -1,0 +1,16 @@
+description="A C++ unit testing framework"
+url="http://www.freedesktop.org/wiki/Software/cppunit"
+packager="tnut <tnut@nutyx.org>"
+
+name=cppunit
+version=1.14.0
+release=1
+
+source=(http://dev-www.libreoffice.org/src/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr --disable-static
+make
+make DESTDIR=$PKG install
+}

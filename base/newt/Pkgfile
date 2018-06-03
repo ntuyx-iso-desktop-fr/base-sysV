@@ -1,0 +1,22 @@
+# Depends on: popt slang
+
+description="Library for color text mode, widget based user interfaces."
+url="http://releases.paagure.org/newt"
+packager="tnut <tnut@nutyx.org"
+
+name=newt
+version=0.52.19
+release=1
+
+source=( http://fedorahosted.org/releases/n/e/$name/$name-$version.tar.gz )
+build() {
+cd $name-$version
+sed -e 's/^LIBNEWT =/#&/' \
+    -e '/install -m 644 $(LIBNEWT)/ s/^/#/' \
+    -e 's/$(LIBNEWT)/$(LIBNEWTSONAME)/g' \
+    -i Makefile.in
+
+./configure --prefix=/usr --with-gpm-support &&
+make
+make DESTDIR=$PKG install
+}

@@ -1,0 +1,30 @@
+# Depends on: itstool gtk3 libnotify yelp-tools 
+
+description="Display graphical dialog boxes from shell scripts."
+url="http://www.gnome.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Tnut,Greg"
+
+name=zenity
+version=3.28.0
+
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/3.28/$name-$version.tar.xz)
+
+build() {
+
+cd $name-$version
+./configure --prefix=/usr --sysconfdir=/etc \
+      --localstatedir=/var
+make
+make DESTDIR=$PKG install
+
+}
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/${name}"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f3`"
+echo "$lastversion"
+}

@@ -1,0 +1,29 @@
+# Depends on: xproto videoproto xorg-libx11 xorg-libxext
+
+description="libXv, library X Video extension client"
+url="http://xorg.freedesktop.org"
+packager="greg <greg@nutyx.org>"
+contributors="Pierre B"
+
+name=xorg-libxv
+alias=(libXv)
+version=1.0.11
+release=2
+_name=libXv
+
+source=(http://ftp.x.org/pub/individual/lib/${_name}-$version.tar.bz2)
+
+build=xorg
+
+package() {
+rm $PKG/usr/lib/${_name}.la
+}
+
+uptodate() {
+local ext url name LINX
+LYNX="lynx -read_timeout=20 -dump -listonly -nonumbers "
+ext=".tar.bz2"
+url="https://ftp.x.org/archive//individual//lib"
+name="libXv-"
+$LYNX $url/?C=M\;O=D|grep "$ext$"|grep "$url/$name"|sed "s@$ext\$@@"|sed "s@$url/$name@@"|head -1
+}

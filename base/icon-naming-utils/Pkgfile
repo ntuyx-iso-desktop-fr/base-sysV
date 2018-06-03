@@ -1,0 +1,24 @@
+# Depends on: perl-xml-simple 
+
+description="Maps the new names of icons for Tango to the legacy names used by GNOME and KDE desktops"
+url="http://tango.freedesktop.org/"
+packager="tnut <tnut@nutyx.org>"
+contriburors="Pierre B"
+
+name=icon-naming-utils
+version=0.8.90
+release=1
+
+source=(http://tango.freedesktop.org/releases/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+	./configure --prefix=/usr \
+	--sysconfdir=/etc \
+	--libexecdir=/usr/lib/icon-naming-utils \
+	--localstatedir=/var
+	make
+	make DESTDIR=$PKG install
+}
+
+  

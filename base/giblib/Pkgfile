@@ -1,0 +1,19 @@
+# Depends on: imlib2 freetype 
+
+description="A library that feh uses as a wrapper to imlib2"
+url="http://www.linuxbrit.co.uk/giblib"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=giblib
+version=1.2.4
+release=1
+
+source=(https://mirrors.kernel.org/debian/pool/main/g/giblib/${name}_${version}.orig.tar.gz)
+
+build() {
+cd $name-$version*
+        ./configure --prefix=/usr
+        make
+        make DESTDIR=$PKG install
+}

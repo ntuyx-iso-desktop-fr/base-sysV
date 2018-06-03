@@ -1,0 +1,24 @@
+# Depends on: doxygen
+
+description="Library utilities to manage software packages on NuTyX distribution."
+url="https://github.com/NuTyX/cards"
+maintainer="Tnut, Gianni"
+packager="tnut <tnut@nutyx dot org>"
+name=libcards
+version=2.4.81
+
+source=(https://github.com/rems28/cards/archive/2.4.81.tar.gz)
+build () {
+cd cards-$version
+make libs
+make DESTDIR=$PKG install-libs
+cd documentation
+make DESTDIR=$PKG html install
+}
+doc() {
+cd $PKG
+bsdtar -cf \
+$PKGMK_PACKAGE_DIR/${name}.doc${PKGMK_BUILDVER}any.cards.tar \
+usr/share
+rm -r usr/share
+}

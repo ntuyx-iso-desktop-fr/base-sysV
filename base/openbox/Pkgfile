@@ -1,0 +1,30 @@
+# Depends on: pcre pango freetype libpng xorg-fontconfig harfbuzz dbus imlib2 librsvg startup-notification xcb-util libxcb libxml2
+
+description="Openbox is a highly configurable window manager."
+url="http://openbox.org/wiki/Main_Page"
+packager="tnut <tnut@nutyx.org>"
+
+run=( startup-notification dbus )
+name=openbox
+version=3.6.1
+release=3
+
+source=(http://openbox.org/dist/openbox/$name-$version.tar.gz \
+        openbox.xinitrc openbox-3.6.1-flcards-1.patch)
+
+build()
+{
+   cd $name-$version
+   patch -Np1 -i ../openbox-3.6.1-flcards-1.patch
+
+   ./configure --prefix=/usr \
+	--sysconfdir=/etc \
+	--docdir=/usr/share/doc/$name-$version
+   make
+   make DESTDIR=$PKG install
+   install -D -m644 ../openbox.xinitrc $PKG/etc/X11/dm/openbox.xinitrc
+
+   # Thoses are obsolet launchers
+   rm $PKG/usr/share/xsessions/openbox-{gnome,kde}.desktop
+   rm -r $PKG/usr/share/gnome-session
+} 

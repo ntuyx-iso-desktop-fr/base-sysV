@@ -1,0 +1,25 @@
+# Depends on: libpng libjpeg-turbo libtiff
+
+description="WebP library and conversion tools"
+url="https://developers.google.com/speed/webp/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libwebp
+version=0.6.0
+release=1
+
+source=(http://downloads.webmproject.org/releases/webp/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--enable-libwebpmux \
+--enable-libwebpdemux \
+--enable-libwebpdecoder \
+--enable-libwebpextras  \
+--enable-swap-16bit-csp \
+--disable-static
+make
+make DESTDIR=$PKG install
+}

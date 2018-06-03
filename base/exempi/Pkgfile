@@ -1,0 +1,29 @@
+# Depends on: expat boost
+
+description="Implementation of xmp (Adobe's Extensible Metadata Platform)"
+url="http://libopenraw.freedesktop.org/wiki/Exempi/"
+packager="tnut <tnut@nutyx.org>"
+
+name=exempi
+version=2.4.5
+
+source=( http://libopenraw.freedesktop.org/download/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+
+./configure \
+--prefix=/usr \
+--mandir=/usr/share/man \
+--disable-static
+make
+make DESTDIR=$PKG install
+rm $PKG/usr/lib/libexempi.la
+}
+uptodate() {
+local url latestversion
+url="http://libopenraw.freedesktop.org/download/"
+latestversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=M\;O=D|grep $name|grep tar.bz2$|head -1| cut -d "-" -f2|sed "s/.tar.bz2//"`"
+echo $latestversion
+}

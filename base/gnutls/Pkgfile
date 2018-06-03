@@ -1,0 +1,22 @@
+# Depends on: libtasn1 nettle libidn p11-kit libunistring
+
+description="Libraries and userspace tools which provide a secure layer over a reliable transport layer." 
+url="http://www.gnu.org/software/gnutls/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=gnutls
+version=3.5.18
+
+source=(ftp://ftp.gnutls.org/gcrypt/$name/v${version:0:3}/$name-$version.tar.xz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--with-zlib \
+--with-default-trust-store-file=/etc/ssl/ca-bundle.crt \
+--disable-guile
+make
+make DESTDIR=$PKG install
+rm $PKG/usr/lib/libgnutls{,xx}.la
+}

@@ -1,0 +1,40 @@
+# Depends on: python libxml2 libxslt openldap systemd openssl10 icu pam perl
+
+description="Advanced object-relational database management system (ORDBMS)."
+url="http://www.postgresql.org/docs"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+PKGMK_GROUPS=(lib doc man devel service)
+ 
+name=postgresql
+version=10.4
+
+source=(http://ftp.postgresql.org/pub/source/v$version/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+# prepare
+sed -i '/DEFAULT_PGSOCKET_DIR/s@/tmp@/run/postgresql@' src/include/pg_config_manual.h
+
+# configure
+./configure --prefix=/usr \
+--mandir=/usr/share/man \
+--with-docdir=/usr/share/doc/$name-$version \
+--enable-thread-safety \
+--with-icu \
+--with-ldap \
+--with-system-tzdata=/usr/share/zoneinfo \
+--with-perl \
+--with-openssl \
+--with-libxml \
+--with-systemd \
+--with-pam
+
+# build
+make
+
+# install
+make DESTDIR=$PKG install
+make DESTDIR=$PKG install-docs
+}

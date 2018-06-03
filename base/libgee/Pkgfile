@@ -1,0 +1,20 @@
+# Depends on: glib gobject-introspection vala 
+
+description="GObject collection library (legacy)"
+url="http://www.gnome.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libgee
+version=0.20.1
+
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version:0:4}/$name-$version.tar.xz)
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/$name"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f3`"
+echo "$lastversion"
+}

@@ -1,0 +1,46 @@
+# Depends on: gtk3 libgcrypt pam pcre gobject-introspection xorg-libxklavier
+
+description="Lightweight X11 Display Manager based on Gtk"
+url="https://en.wikipedia.org/wiki/LightDM"
+maintainer="dgod dot osa at gmail dot com"
+packager="rems"
+
+name=lightdm
+version=1.24.0
+release=1
+source=(https://launchpad.net/lightdm/1.24/$version/+download/$name-$version.tar.xz
+        http://rems.techozor.fr/sources/blfs-systemd-units-20180105.tar.bz2)
+
+build() {
+
+cd $name-$version
+
+
+./configure --sysconfdir=/etc \
+	--prefix=/usr \
+       --libexecdir=/usr/lib/lightdm \
+       --localstatedir=/var          \
+       --sbindir=/usr/bin            \
+       --sysconfdir=/etc             \
+       --disable-static              \
+       --disable-tests               \
+       --with-greeter-user=lightdm   \
+       --with-greeter-session=lightdm-gtk-greeter \
+       --docdir=/usr/share/doc/lightdm-1.24.0
+make
+  
+make DESTDIR=$PKG install
+sed '\@/bin/sh@a\
+\
+. $PKG/etc/profile' tests/src/lightdm-session > $PKG/usr/bin/lightdm-session
+
+chmod a+x $PKG/usr/bin/lightdm-session
+rm -rf $PKG/etc/init
+install -v -dm755 -o lightdm -g lightdm $PKG/var/lib/lightdm
+install -v -dm755 -o lightdm -g lightdm $PKG/var/lib/lightdm-data
+install -v -dm755 -o lightdm -g lightdm $PKG/var/cache/lightdm
+install -v -dm770 -o lightdm -g lightdm $PKG/var/log/lightdm
+
+cd $SRC/blfs-systemd-units-20180105
+make DESTDIR=$PKG install-lightdm
+}

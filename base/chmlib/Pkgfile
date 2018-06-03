@@ -1,0 +1,18 @@
+name=chmlib
+version=0.40
+release=2
+
+description="Library for dealing with Microsoft ITSS/CHM format files"
+maintainer="Matthew T. Russotto's"
+packager="tnut at nutyx dot org"
+url="http://www.jedrea.com/chmlib/"
+
+source=($url/$name-$version.tar.bz2)
+
+build(){
+    cd $name-$version
+    ./configure --prefix=/usr \
+                --enable-examples=yes
+    make
+    make DESTDIR=$PKG install
+}

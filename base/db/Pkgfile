@@ -1,0 +1,28 @@
+description="The Berkeley DB embedded database system"
+url="http://www.oracle.com/technology/software/products/berkeley-db/index.html"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+alias=(berkeley-db)
+
+name=db
+version=6.2.32
+release=2
+
+source=(http://download.oracle.com/berkeley-db/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+cd build_unix
+../dist/configure --prefix=/usr \
+--enable-compat185 \
+--enable-shared \
+--enable-cxx --enable-dbm
+make
+make DESTDIR=$PKG \
+docdir=/usr/share/doc/$name-$version install
+
+chown -R 0:0 $PKG
+chmod -R +w $PKG
+rm -rf $PKG/usr/share/info/dir
+}

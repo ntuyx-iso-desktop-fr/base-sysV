@@ -1,0 +1,23 @@
+# Depends on: xorg-libxtst 
+
+description="X virtual keyboard library."
+url="https://www.yoctoproject.org/tools-resources/projects/matchbox"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+
+name=libfakekey
+version=0.1
+release=1
+
+source=(http://downloads.yoctoproject.org/releases/matchbox/$name/$version/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --disable-static
+make AM_LDFLAGS=-lX11
+make DESTDIR=$PKG install
+}

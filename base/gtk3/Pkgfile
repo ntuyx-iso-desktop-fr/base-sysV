@@ -1,0 +1,54 @@
+# Depends on: gtk-doc adwaita-icon-theme libepoxy xorg-libxinerama xorg-libxrandr xorg-libxcursor at-spi2-atk cups colord xorg-libxi atk cairo pango gdk-pixbuf gtk-update-icon-cache wayland-protocols libxkbcommon python2-six
+
+description="Libraries used for creating graphical user interfaces for applications."
+url="http://www.gtk.org/"
+packager="tnut <tnut@nutyx.org>"
+contributor="Pierre B, Greg"
+run=(adwaita-icon-theme)
+
+name=gtk3
+version=3.22.30
+
+source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/${version%.*}/gtk+-$version.tar.xz)
+
+build() {
+cd gtk+-$version
+./configure --prefix=/usr \
+--sysconfdir=/etc         \
+--mandir=/usr/share/man   \
+--infodir=/usr/share/info \
+--enable-broadway-backend \
+--enable-x11-backend      \
+--enable-wayland-backend
+
+make || make -j1
+make DESTDIR=$PKG install
+
+rm $PKG/usr/lib/{libgailutil-3,libgdk-3,libgtk-3}.la
+rm $PKG/usr/lib/gtk-3.0/3.0.0/immodules/*.la
+
+cat > $PKG/etc/gtk-3.0/settings.ini << "EOF"
+[Settings]
+gtk-theme-name = Adwaita
+gtk-icon-theme-name = gnome
+gtk-font-name = DejaVu Sans 12
+gtk-cursor-theme-size = 18
+gtk-toolbar-style = GTK_TOOLBAR_BOTH_HORIZ
+gtk-xft-antialias = 1
+gtk-xft-hinting = 1
+gtk-xft-hintstyle = hintslight
+gtk-xft-rgba = rgb
+gtk-cursor-theme-name = Adwaita
+EOF
+# Empaqueté ds gtk-update-icon-cache
+rm $PKG/{usr/bin/gtk-update-icon-cache,usr/share/man/man1/gtk-update-icon-cache.1}
+}
+uptodate(){
+local latest lastversion url
+url="http://ftp.gnome.org/pub/gnome/sources/gtk+"
+latest="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url/?C=N\;O=D|grep [0-9]/$|head -1`"
+lastversion="`lynx -read_timeout=20 -dump -listonly -nonumbers \
+$latest/?C=N\;O=D|grep LATEST|grep [0-9]$|cut -d "-" -f3`"
+echo "$lastversion"
+}

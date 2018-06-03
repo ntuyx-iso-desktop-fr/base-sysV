@@ -1,0 +1,19 @@
+description="Libraries used by some programs to manage email submission to a mail transport layer."
+url="http://www.stafford.uklinux.net/libesmtp/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libesmtp
+version=1.0.6
+release=1
+
+source=(http://pkgs.fedoraproject.org/repo/pkgs/$name/$name-$version.tar.bz2/bf3915e627fd8f35524a8fdfeed979c8/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr\
+		--mandir=/usr/share/man\
+		--infodir=/usr/share/info
+	make
+	make DESTDIR=$PKG install
+}

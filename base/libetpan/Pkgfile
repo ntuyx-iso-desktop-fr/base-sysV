@@ -1,0 +1,30 @@
+# Depends on: curl expat cyrus-sasl
+
+description="A portable middleware for email access"
+url="http://www.etpan.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+PKGMK_KEEP_SOURCES="no"
+name=libetpan
+version=1.8
+release=1
+
+source=(https://github.com/dinhviethoa/$name/archive/$version.tar.gz)
+
+build() {
+  cd $name-$version
+  libtoolize --force --copy
+  aclocal -I m4
+  autoheader
+  autoconf
+  automake --add-missing \
+           --foreign     \
+           --force --copy
+
+  ./configure --prefix=/usr    \
+              --disable-static \
+              --disable-db
+  make
+  make DESTDIR=$PKG install
+}

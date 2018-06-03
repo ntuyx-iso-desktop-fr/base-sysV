@@ -1,0 +1,19 @@
+description="Audio compression format with lossless, lossy and hybrid compression modes"
+url="http://www.wavpack.com/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=wavpack
+version=5.1.0
+release=1
+
+source=(http://www.wavpack.com/$name-$version.tar.bz2)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--enable-mmx \
+--enable-static=no 
+make
+make DESTDIR=$PKG install
+}

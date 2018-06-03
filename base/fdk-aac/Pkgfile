@@ -1,0 +1,19 @@
+description="Fraunhofer FDK AAC Advanced Audio Codec library."
+url="http://www.iis.fraunhofer.de/en/ff/amm/impl/fdkaaccodec.html"
+packager="tnut <tnut@nutyx.org>"
+
+name=fdk-aac
+version=0.1.5
+release=2
+
+source=(http://downloads.sourceforge.net/opencore-amr/$name-$version.tar.gz)
+
+build() {
+
+cd $name-$version
+CXXFLAGS+=' -std=c++11 -Wno-narrowing'
+./configure --prefix=/usr
+make
+
+make DESTDIR=$PKG install
+}

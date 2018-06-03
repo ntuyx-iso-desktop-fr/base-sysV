@@ -1,0 +1,23 @@
+# Depends on: pcsclite perl-pcsc perl-glib pkg-config
+
+description="PC/SC Architecture smartcard tools"
+url="http://ludovic.rousseau.free.fr/softwares/pcsc-tools/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+run=(perl-pcsc)
+
+name=pcsc-tools
+version=1.5.3
+release=1
+
+source=(http://ludovic.rousseau.free.fr/softwares/$name/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr
+  sed -i -e 's:-Wall -O2:${CFLAGS}:g' Makefile
+  make
+  make DESTDIR=$PKG/usr install
+}
+

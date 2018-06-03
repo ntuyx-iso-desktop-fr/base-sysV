@@ -1,0 +1,27 @@
+description="libunistring is a library that provides functions for manipulating Unicode strings"
+URL="http://www.gnu.org/software/bison/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libunistring
+version=0.9.9
+
+source=(ftp://ftp.gnu.org/gnu/$name/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+-disable-static \
+--docdir=/usr/share/doc/libunistring-$version
+make
+make DESTDIR=$PKG install
+rm $PKG/usr/lib/libunistring.la
+}
+uptodate() {
+local url ext
+url="https://ftp.gnu.org/gnu/$name/"
+ext=".tar.gz"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url?C=M\;O=A|grep $name-[0-9]|grep [0-9]$ext$| \
+sed "s@$url$name-@@"|sed "s@$ext@@"|tail -1
+}

@@ -1,0 +1,26 @@
+# Depends on: apr apr-util neon expat sqlite db cyrus-sasl serf lz4
+
+description="Version control System (Replacement of cvs)"
+url="http://subversion.tigris.org"
+contributors="pierre, tnut, Greg"
+packager="tnut <tnut@nutyx.org>"
+
+
+name=subversion
+version=1.10.0
+
+source=(http://archive.apache.org/dist/$name/$name-$version.tar.bz2)
+
+build() {
+	unset MAKEFLAGS
+
+	cd $name-$version
+	./configure --prefix=/usr \
+		--with-serf \
+		--with-utf8proc=internal \
+		--disable-static
+	make
+
+	make DESTDIR=$PKG install
+
+}

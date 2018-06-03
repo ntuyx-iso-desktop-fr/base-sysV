@@ -1,0 +1,73 @@
+# Depends on: rpcsvc-proto libtirpc talloc tevent avahi gnutls libgpg-error popt python2 cups kerberos libcap openldap libxslt tdb ldb
+
+description="SMB Fileserver and AD Domain server"
+url="http://www.samba.org"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B, Tnut, Greg"
+
+name=samba
+version=4.8.1
+nutyx_version=10.1
+
+source=(http://rems.techozor.fr/sources/blfs-systemd-units-20180105.tar.bz2
+        https://download.samba.org/pub/samba/stable/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+
+CLFAGS="-I/usr/include/tirpc -ltirpc"   \
+./configure                             \
+    --prefix=/usr                       \
+    --sysconfdir=/etc                   \
+    --localstatedir=/var                \
+    --with-piddir=/run/samba            \
+    --with-pammodulesdir=/lib/security  \
+    --without-ad-dc                     \
+    --enable-fhs                        \
+    --bundled-libraries=!talloc,!pytalloc-util,!tevent,!popt,!tdb,!ldb
+
+make
+
+sed -i "/samba3.blackbox.failure.failure/i \^samba3.raw.eas" selftest/knownfail
+
+make DESTDIR=$PKG install
+
+install -d $PKG/lib
+mv -v $PKG/usr/lib/libnss_win{s,bind}.so*   $PKG/lib
+ln -v -sf /lib/libnss_winbind.so.2 $PKG/usr/lib/libnss_winbind.so
+ln -v -sf /lib/libnss_wins.so.2    $PKG/usr/lib/libnss_wins.so
+   
+install -v -m644 examples/smb.conf.default $PKG/etc/samba/smb.conf.default
+
+mkdir -pv $PKG/etc/openldap/schema
+install -v -m644 examples/LDAP/README \
+$PKG/etc/openldap/schema/README.LDAP
+
+install -v -m644 examples/LDAP/samba* \
+$PKG/etc/openldap/schema
+
+install -v -m755 examples/LDAP/{get*,ol*} \
+$PKG/etc/openldap/schema
+
+
+#  cups 
+cd $PKG/usr/lib/
+install -d cups/backend
+ln -v -sf $PKG/usr/bin/smbspool $PKG/usr/lib/cups/backend/smb
+
+# service
+cd $SRC/blfs-systemd-units-20180105
+make DESTDIR=$PKG install-samba
+make DESTDIR=$PKG install-winbindd
+
+#  Doublon
+rm -rv $PKG/usr/lib/share/perl5/vendor/Parse/Yapp
+}
+uptodate() {
+local ext url name LINX
+LYNX="lynx -read_timeout=20 -dump -listonly -nonumbers "
+ext=".tar.gz"
+url="https://download.samba.org/pub/samba/stable"
+name="samba-"
+$LYNX $url/?C=N\;O=A|grep "$ext$"|grep "$url/$name"|sed "s@$ext\$@@"|sed "s@$url/$name@@"|tail -1
+}

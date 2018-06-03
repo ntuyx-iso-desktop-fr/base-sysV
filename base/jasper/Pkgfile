@@ -1,0 +1,28 @@
+# Depends on: cmake libjpeg-turbo
+
+description="A software-based implementation of the codec specified in the emerging JPEG-2000 Part1 std"
+url="http://www.ece.uvic.ca/~frodo/jasper/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=jasper
+version=2.0.6
+release=3
+source=(${url}software/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	mkdir BUILD
+	cd BUILD
+
+	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_LIBDIR=lib \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_SKIP_INSTALL_RPATH=YES \
+      	..
+	make
+	make DESTDIR=$PKG install
+
+	install -v -m755 -d $PKG/usr/share/doc/jasper-$version
+	install -v -m644 ../doc/*.pdf $PKG/usr/share/doc/$name-$version
+}

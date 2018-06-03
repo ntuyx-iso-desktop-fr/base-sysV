@@ -1,0 +1,38 @@
+# Depends on: libffi python2 cmake 
+
+description="Low Level Virtual Machine, collection of modular and reusable compiler and toolchain."
+url="http://llvm.org/"
+maintainer="Chris Lattner <sabre at nondot dot org>"
+packager="remy <remy@nutyx.org>"
+contributors="Pierre B, tnut, Remy"
+
+name=llvm
+version=6.0.0
+
+source=(
+	${url}releases/$version/$name-$version.src.tar.xz
+	${url}releases/$version/cfe-$version.src.tar.xz
+	${url}releases/$version/compiler-rt-$version.src.tar.xz)
+
+build() {
+
+cd $name-$version.src
+
+mv ../compiler-rt-${version}.src projects/compiler-rt
+mv ../cfe-$version.src tools/clang
+
+mkdir -v build
+cd build
+
+CC=gcc CXX=g++ \
+cmake -DCMAKE_INSTALL_PREFIX=/usr \
+	-DLLVM_ENABLE_FFI=ON \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DLLVM_BUILD_LLVM_DYLIB=ON \
+	-DLLVM_TARGETS_TO_BUILD="host;AMDGPU;" \
+	-Wno-dev \
+	..
+make || make -j1
+make DESTDIR=$PKG install || make -j1 DESTDIR=$PKG install
+}
+

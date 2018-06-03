@@ -1,0 +1,27 @@
+# Depends on: alsa-lib pulseaudio
+
+description="Cross-platform audio output library and plugins"
+url="http://xiph.org/ao/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=libao
+version=1.2.0
+release=1
+
+source=(http://downloads.xiph.org/releases/ao/$name-$version.tar.gz)
+
+build() {
+  cd $name-$version
+  ./configure --prefix=/usr      \
+	      --enable-alsa-mmap 
+  make
+  make DESTDIR=$PKG install
+
+  mkdir -p $PKG/etc/
+
+cat > $PKG/etc/libao.conf << "EOf"
+default_driver=alsa
+dev=default
+EOf
+}

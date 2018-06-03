@@ -1,0 +1,70 @@
+# Depends on: iso-codes librsvg xorg-libxinerama xorg-libxrandr xorg-libxcursor xorg-libxdamage gtk3 xorg-server xorg-xinit systemd
+
+description="Lightweight X11 Display Manager based on Gtk"
+url="http://wiki.lxde.org/en/LXDM"
+maintainer="dgod dot osa at gmail dot com"
+packager="tnut <tnut@nutyx.org>"
+
+PKGMK_GROUPS=()
+run=(librsvg xorg-xinit)
+
+name=lxdm
+version=0.5.3
+release=10
+source=(login.png
+	http://downloads.tuxfamily.org/nutyx/files/lxdm-nutyx-10.0.jpg
+	http://downloads.sourceforge.net/$name/$name-$version.tar.xz)
+
+build() {
+
+cd $name-$version
+cat > pam/lxdm << "EOF"
+# Begin /etc/pam.d/lxdm
+
+auth     requisite      pam_nologin.so
+auth     required       pam_env.so
+auth     include        system-auth
+
+account  include        system-account
+
+password include        system-password
+
+session  required       pam_limits.so
+session  include        system-session
+
+# End /etc/pam.d/lxdm
+EOF
+
+sed -i 's:sysconfig/i18n:profile.d/i18n.sh:g' data/lxdm.in
+sed -i 's:/etc/xprofile:/etc/profile:g' data/Xsession
+sed -e 's/^bg/#&/'        \
+    -e '/reset=1/ s/# //' \
+    -e 's/logou$/logout/' \
+    -e "/arg=/a arg=/usr/bin/X" \
+    -i data/lxdm.conf.in
+
+./configure --sysconfdir=/etc \
+	--prefix=/usr \
+	--with-pam \
+	--with-systemdsystemunitdir=/lib/systemd/system \
+        --enable-gtk3
+
+make
+  
+make DESTDIR=$PKG install
+for i in login.png
+do
+   cp ../$i \
+   $PKG/usr/share/lxdm/themes/Industrial/$i
+done
+
+cp ../lxdm-nutyx-10.0.jpg \
+$PKG/usr/share/lxdm/themes/Industrial/nutyx.jpg
+
+sed -i "s@000000@ffffff@" \
+$PKG/usr/share/lxdm/themes/Industrial/gtkrc
+
+# lxdm.conf created in post if needed
+# Let keep it as an example
+mv $PKG/etc/lxdm/lxdm.conf{,.example}
+}

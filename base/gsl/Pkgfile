@@ -1,0 +1,27 @@
+description="Scientific Library (GSL) is a numerical library for C and C++ programmers."
+url="http://www.gnu.org/software/gsl/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+name=gsl
+version=2.4
+release=1
+
+source=(http://ftp.gnu.org/pub/gnu/$name/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+./configure --prefix=/usr \
+--disable-static
+make
+make DESTDIR=$PKG install
+rm -f $PKG/usr/share/info/dir
+}
+uptodate() {
+local url ext
+url="https://ftp.gnu.org/gnu/$name/"
+ext=".tar.gz"
+lynx -read_timeout=20 -dump -listonly -nonumbers \
+$url?C=M\;O=A|grep $name-[0-9]|grep [0-9]$ext$| \
+sed "s@$url$name-@@"|sed "s@$ext@@"|tail -1
+}

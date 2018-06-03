@@ -1,0 +1,22 @@
+# Depends on: wayland
+
+description="Additional Wayland protocols"
+url=" https://wayland.freedesktop.org/"
+packager="greg <greg@nutyx.org>"
+contributors="Pierre B, tnut"
+
+name=wayland-protocols
+version=1.13
+release=1
+
+source=(https://wayland.freedesktop.org/releases/wayland-protocols-$version.tar.xz)
+
+build() {
+
+  cd $name-$version
+  ./configure --prefix=/usr
+  
+  make
+  make DESTDIR=$PKG install
+  
+}

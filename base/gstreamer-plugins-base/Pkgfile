@@ -1,0 +1,22 @@
+# Depends on: gstreamer alsa-lib gobject-introspection iso-codes libtheora libvorbis pango 
+
+description="GStreamer Multimedia Framework Base Plugins"
+url="http://gstreamer.freedesktop.org/"
+packager="tnut <tnut@nutyx.org>"
+contributors="Pierre B"
+
+_name=gst-plugins-base 
+
+name=gstreamer-plugins-base
+version=1.14.0
+
+source=(http://gstreamer.freedesktop.org/src/${_name}/${_name}-$version.tar.xz)
+
+build() {
+cd ${_name}-$version
+./configure --prefix=/usr \
+--with-package-name="GStreamer Base Plugins $version NuTyX" \
+--with-package-origin="http://downloads.nutyx.org/"
+make
+make DESTDIR=$PKG install
+} 

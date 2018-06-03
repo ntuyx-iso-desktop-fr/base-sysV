@@ -1,0 +1,23 @@
+# Depends on: yasm l-smash
+
+description="Library for encoding H264/AVC video streams"
+url="http://www.videolan.org/developers/x264.html"
+packager="greg <greg@nutyx.org>"
+contributors="PierreB Tnut"
+
+name=x264
+version=20180205-2245
+release=1
+
+source=(http://ftp.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-20180205-2245-stable.tar.bz2)
+
+build() {
+cd x264-snapshot-${version/./-}-stable
+./configure \
+--prefix=/usr \
+--enable-pic \
+--enable-shared
+
+make
+make DESTDIR=$PKG install
+}
