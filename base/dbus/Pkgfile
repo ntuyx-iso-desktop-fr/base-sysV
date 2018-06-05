@@ -7,7 +7,7 @@ maintainer="tnut <tnut@nutyx.org>"
 name=dbus
 version=1.12.8
 
-source=(http://dbus.freedesktop.org/releases/dbus/dbus-1.12.4.tar.gz)
+source=(http://dbus.freedesktop.org/releases/dbus/dbus-$version.tar.gz)
 
 build () {
 cd $name-$version

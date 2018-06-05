@@ -9,7 +9,7 @@ version=8u131
 release=1
 _version=1.8.0.131
 
-source=(http://rsync.nutyx.org/sources/OpenJDK-${_version}-`uname -m`-bin.tar.xz)
+source=(http://rems.techozor.fr/sources/OpenJDK-${_version}-`uname -m`-bin.tar.xz)
 	
 build() {
 cd OpenJDK*

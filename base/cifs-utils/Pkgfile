@@ -16,9 +16,9 @@ build() {
 cd $name-$version
 autoreconf -fiv
 ./configure --prefix=/usr \
---disable-systemd \
 --bindir=/usr/bin \
---sbindir=/usr/sbin
+--sbindir=/usr/sbin \
+--with-systemdsystemunitdir=/lib/systemd/system
 
 make
 make DESTDIR=$PKG install

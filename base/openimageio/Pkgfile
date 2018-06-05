@@ -1,4 +1,4 @@
-# Depends on: cmake qtbase boost mesa openexr jasper glew libtiff opencolorio freetype xorg-fontconfig xorg-libxrender python
+# Depends on: cmake qtbase boost mesa openexr jasper glew libtiff opencolorio freetype xorg-fontconfig xorg-libxrender python pcre2
 
 description="For reading and writing images, including classes, utilities, and applications"
 url="http://www.openimageio.org/"

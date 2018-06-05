@@ -8,7 +8,7 @@ contributors="Fanch"
 name=libsass
 version=3.5.1
 release=1
-source=(http://rsync.nutyx.org/sources/$name-$version.tar.bz2)
+source=(http://rems.techozor.fr/sources/$name-$version.tar.bz2)
 
 build() {
 cd $name-$version

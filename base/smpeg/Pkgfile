@@ -1,4 +1,4 @@
-# Depends on: sdl
+# Depends on: sdl xorg-libx11
 
 description="A SDL MPEG player library."
 url="http://www.lokigames.com/development/smpeg.php3"

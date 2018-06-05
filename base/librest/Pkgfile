@@ -1,4 +1,4 @@
-# Depends on: libsoup gobject-introspection 
+# Depends on: libsoup gobject-introspection kerberos python python2
 
 description="Gives more easily access to internet services which says be 'RESTful'."
 url="http://www.gnome.org/"

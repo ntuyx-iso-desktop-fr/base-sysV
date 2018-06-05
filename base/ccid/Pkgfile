@@ -6,10 +6,10 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=ccid
-version=1.4.25
-release=2
+version=1.4.29
+release=1
 
-source=(https://alioth.debian.org/frs/download.php/file/4187/$name-$version.tar.bz2)
+source=(https://ccid.apdu.fr/files/$name-$version.tar.bz2)
 
 build() {
   cd $name-$version

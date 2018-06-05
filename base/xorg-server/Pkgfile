@@ -1,4 +1,4 @@
-# Depends on: xf86dgaproto dri3proto xcmiscproto bigreqsproto randrproto renderproto videoproto compositeproto recordproto scrnsaverproto xf86driproto presentproto xineramaproto xorg-libxkbfile xorg-font-util xcb-util-keysyms libepoxy xcb-util-image xcb-util-renderutil xcb-util-wm mesa xorg-glu xorg-pixman xorg-libdmx xorg-libxres xorg-libxfont2 xorg-xkeyboard-config 
+# Depends on: xf86dgaproto dri3proto xcmiscproto bigreqsproto libbsd dbus glproto randrproto renderproto videoproto compositeproto recordproto scrnsaverproto xf86driproto presentproto xineramaproto xorg-libxkbfile xorg-font-util xcb-util-keysyms libepoxy xcb-util-image xcb-util-renderutil xcb-util-wm mesa xorg-glu xorg-pixman xorg-libdmx xorg-libxres xorg-libxfont2 xorg-xkeyboard-config xorg-libxxf86vm
 
 description="The Xorg Server is the core of the X Window system."
 url="http://xorg.freedesktop.org"
@@ -20,7 +20,8 @@ cd $name-$version
 --enable-glamor \
 --with-fontrootdir=/usr/share/fonts \
 --enable-install-setuid \
---disable-systemd-logind \
+--enable-systemd-logind \
+--enable-udev           \
 --enable-suid-wrapper
 make
 make DESTDIR=$PKG install

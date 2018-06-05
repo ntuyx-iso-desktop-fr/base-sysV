@@ -16,7 +16,7 @@ build() {
   cd mozjs-38.0.0
 
   patch -Np1 -i ../js38-$version-upstream_fixes-2.patch
-
+export SHELL=/bin/bash
   cd js/src
   autoconf-2.13
 

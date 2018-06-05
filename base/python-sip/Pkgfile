@@ -12,10 +12,9 @@ source=(http://sourceforge.net/projects/pyqt/files/sip/sip-$version/sip-$version
 
 build() {
 	cd sip-$version
-	python3 configure.py -b /usr/bin \
-	-d /usr/lib/python3.6/site-packages \
-	-v /usr/share/sip
+	python3 configure.py 
 	make
-	make DESTDIR=$PKG install
-	chmod 644 $PKG/usr/lib/python3.6/site-packages/sipdistutils.py
+	make DESTDIR=$PKG install -C siplib
+	install -Dm644 sipconfig.py "$PKG"/usr/lib/python3.6/site-packages/sipconfig.py
+	install -Dm644 sipdistutils.py "$PKG"/usr/lib/python3.6/site-packages/sipdistutils.py
 }

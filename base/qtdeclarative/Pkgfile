@@ -1,4 +1,4 @@
-# Depends on: qtbase mesa 
+# Depends on: qtbase mesa pcre2
 
 description="A cross-platform application and UI framework, QtDeclarative files"
 url="http://qt-project.org/"
