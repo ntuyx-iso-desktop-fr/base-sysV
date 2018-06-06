@@ -1,4 +1,4 @@
-# Depends on: glib
+# Depends on: glib python
 
 description="Used to describe the program APIs and collect them in a uniform, machine readable format."
 url="http://live.gnome.org/GObjectIntrospection"
@@ -12,7 +12,8 @@ source=(http://ftp.gnome.org/pub/gnome/sources/$name/${version%.*}/$name-$versio
 
 build() {
 cd $name-$version
-./configure --prefix=/usr --disable-static
+./configure --prefix=/usr --disable-static \
+--with-python=/usr/bin/python3
 make
 make DESTDIR=$PKG install
 }
