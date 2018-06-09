@@ -4,7 +4,7 @@ else
 echo "/etc/machine-id already exists, nothing to do"
 fi
 
-if [ $(cat test2.txt | grep -i pam_systemd.so | wc -l) -eq 1 ];then
+if [ $(cat /etc/pam.d/system-session | grep -i pam_systemd.so | wc -l) -eq 1 ];then
 echo "pam conf for systemd present, nothing to do"
 else
 cat >> /etc/pam.d/system-session << "EOF"
