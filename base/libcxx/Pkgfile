@@ -4,20 +4,41 @@ description="llvm C++ lib"
 url="https://libcxx.llvm.org/"
 packager="tnut <tnut@nutyx.org>"
 
+PKGMK_IGNORE_UNPACK=yes
+source=(https://releases.llvm.org/$pkgver/llvm-$pkgver.src.tar.xz
+        https://releases.llvm.org/$pkgver/libcxx-$pkgver.src.tar.xz
+        https://releases.llvm.org/$pkgver/libcxxabi-$pkgver.src.tar.xz)
+
 name=libcxx
-version=svn
+version=6.0.0
 release=1
-
-build()
-{
-svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx
-cd libcxx
-mkdir build
+prepare() {
+[[ -d llvm ]] || mkdir llvm
+  bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
+         ${srcdir}/llvm-$pkgver.src.tar.xz} -C \
+         llvm
+[[ -d llvm/projects/libcxx ]] || mkdir llvm/projects/libcxx
+  bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
+         ${srcdir}/libcxx-$pkgver.src.tar.xz} -C \
+         llvm/projects/libcxx
+[[ -d llvm/projects/libcxxabi ]] || mkdir  llvm/projects/libcxxabi
+  bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
+         ${srcdir}/libcxxabi-$pkgver.src.tar.xz} -C \
+         llvm/projects/libcxxabi
+[[ -d build ]] || mkdir build
+}
+build() {
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr \
--DCMAKE_BUILD_TYPE=Release -Wno-dev \
-..
-
-make
-make DESTDIR=$PKG install
+  cmake \
+    -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=Off \
+    -DLIBCXX_INSTALL_EXPERIMENTAL_LIBRARY=Off \
+    $SRC/llvm
+  ninja cxx
+cd $SRC/build
+  DESTDIR="${PKG}" ninja install-libcxx install-libcxxabi
 }
