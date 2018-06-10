@@ -1,4 +1,4 @@
-# Depends on: llvm subversion cmake
+# Depends on: llvm subversion cmake ninja python libunwind
 
 description="llvm C++ lib"
 url="https://libcxx.llvm.org/"
