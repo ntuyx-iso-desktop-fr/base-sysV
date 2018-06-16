@@ -12,14 +12,14 @@ PKGMK_GROUPS=(devel doc)
 name=kernel-lts
 alias=(linux-lts)
 
-version=4.14.44
+version=4.14.50
 _version=${version:0:4}
 
 run=(nutyx)
 
 # Virtualbox
-vb_version=5.2.10
-buildrelease=122088
+vb_version=5.2.12
+buildrelease=122591
 _VBARCH=amd64
 
 ## Download all the sources
