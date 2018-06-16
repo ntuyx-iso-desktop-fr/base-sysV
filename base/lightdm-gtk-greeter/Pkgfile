@@ -6,7 +6,7 @@ maintainer="dgod dot osa at gmail dot com"
 packager="rems"
 
 name=lightdm-gtk-greeter
-version=2.0.3
+version=2.0.5
 release=1
 source=(https://launchpad.net/lightdm-gtk-greeter/2.0/$version/+download/$name-$version.tar.gz)
 
