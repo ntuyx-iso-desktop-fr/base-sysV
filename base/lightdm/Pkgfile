@@ -8,7 +8,7 @@ packager="rems"
 name=lightdm
 version=1.26.0
 release=1
-source=(https://launchpad.net/lightdm/1.24/$version/+download/$name-$version.tar.xz
+source=(https://launchpad.net/lightdm/1.26/$version/+download/$name-$version.tar.xz
         http://rems.techozor.fr/sources/blfs-systemd-units-20180105.tar.bz2)
 
 build() {
