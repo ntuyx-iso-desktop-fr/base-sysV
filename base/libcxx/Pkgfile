@@ -3,27 +3,27 @@
 description="llvm C++ lib"
 url="https://libcxx.llvm.org/"
 packager="tnut <tnut@nutyx.org>"
-
-PKGMK_IGNORE_UNPACK=yes
-source=(https://releases.llvm.org/$pkgver/llvm-$pkgver.src.tar.xz
-        https://releases.llvm.org/$pkgver/libcxx-$pkgver.src.tar.xz
-        https://releases.llvm.org/$pkgver/libcxxabi-$pkgver.src.tar.xz)
-
 name=libcxx
 version=6.0.0
 release=1
+
+PKGMK_IGNORE_UNPACK=yes
+source=(https://releases.llvm.org/$version/llvm-$version.src.tar.xz
+        https://releases.llvm.org/$version/libcxx-$version.src.tar.xz
+        https://releases.llvm.org/$version/libcxxabi-$version.src.tar.xz)
+
 prepare() {
 [[ -d llvm ]] || mkdir llvm
   bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
-         ${srcdir}/llvm-$pkgver.src.tar.xz} -C \
+         ${SRC}/llvm-$version.src.tar.xz -C \
          llvm
 [[ -d llvm/projects/libcxx ]] || mkdir llvm/projects/libcxx
   bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
-         ${srcdir}/libcxx-$pkgver.src.tar.xz} -C \
+         ${SRC}/libcxx-$version.src.tar.xz -C \
          llvm/projects/libcxx
 [[ -d llvm/projects/libcxxabi ]] || mkdir  llvm/projects/libcxxabi
   bsdtar --strip-components 1 --uid 0 --gid 0 -zxf \
-         ${srcdir}/libcxxabi-$pkgver.src.tar.xz} -C \
+         ${SRC}/libcxxabi-$version.src.tar.xz -C \
          llvm/projects/libcxxabi
 [[ -d build ]] || mkdir build
 }
