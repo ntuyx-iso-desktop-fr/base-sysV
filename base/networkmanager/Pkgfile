@@ -22,6 +22,7 @@ cd ${_name}-$version
 ./configure --prefix=/usr \
 --sysconfdir=/etc \
 --localstatedir=/var \
+--with-libnm-glib \
 --with-nmtui \
 --enable-gtk-doc \
 --docdir=/usr/share/doc/networkmanager-$version \
