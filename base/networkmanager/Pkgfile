@@ -25,6 +25,8 @@ cd ${_name}-$version
 --with-nmtui \
 --enable-gtk-doc \
 --docdir=/usr/share/doc/networkmanager-$version \
+--with-udev-dir=/lib/udev                       \
+--with-session-tracking=systemd                 \
 --with-systemdsystemunitdir=/lib/systemd/system \
 --disable-json-validation \
 --disable-ovs \
