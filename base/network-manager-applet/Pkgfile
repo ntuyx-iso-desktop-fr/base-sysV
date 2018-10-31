@@ -17,7 +17,8 @@ cd $name-$version
 ./configure --prefix=/usr \
             --sysconfdir=/etc \
             --disable-static \
-            --without-team 
+            --without-team \
+            --disable-mobile-broadband-provider-info
 make
 make DESTDIR=$PKG install
 }
