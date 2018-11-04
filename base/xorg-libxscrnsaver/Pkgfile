@@ -1,4 +1,4 @@
-# Depends on: xorg-libx11 scrnsaverproto xorg-libxext 
+# Depends on: xorg-libx11 xorgproto xorg-libxext 
 
 description="libXScrnSaver, library X Screen Saver extension client"
 url="http://xorg.freedesktop.org"
@@ -6,8 +6,8 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B, Greg"
 
 name=xorg-libxscrnsaver
-version=1.2.2
-release=2
+version=1.2.3
+release=1
 _name=libXScrnSaver
 
 source=(http://ftp.x.org/pub/individual//lib/libXScrnSaver-$version.tar.bz2)
