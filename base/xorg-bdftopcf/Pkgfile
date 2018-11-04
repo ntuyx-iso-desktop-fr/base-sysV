@@ -1,4 +1,4 @@
-# Depends on: xorg-libxfont xproto
+# Depends on: xorg-libxfont xorgproto
 
 description="Convert X font from Bitmap Distribution Format to Portable Compiled Format."
 packager="tnut <tnut@nutyx.org>"
