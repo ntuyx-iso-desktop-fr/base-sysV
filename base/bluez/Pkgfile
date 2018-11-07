@@ -15,18 +15,11 @@ cd $name-$version
 ./configure --prefix=/usr \
     --sysconfdir=/etc \
     --localstatedir=/var \
-    --enable-gstreamer \
-    --enable-alsa \
-    --enable-usb \
     --enable-tools \
-    --enable-bccmd \
-    --enable-dfutool \
-    --enable-hid2hci \
-    --enable-hidd \
-    --enable-pand \
-    --enable-dund \
     --enable-cups \
     --disable-test \
+    --enable-mesh \
+    --enable-sixaxis \
     --enable-library
 make
 make DESTDIR=$PKG install
