@@ -13,4 +13,4 @@ release=1
 source=(http://rems.techozor.fr/sources/lxml-4.1.1.tar.gz)
 
 build=python3
-}
+
