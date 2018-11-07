@@ -1,4 +1,4 @@
-# Depends on: libical libvorbis alsa-lib libusb-compat libsndfile cups glib db
+# Depends on: libical libvorbis alsa-lib libusb-compat libsndfile cups glib db systemd
 
 description="The BlueZ package contains the Bluetooth protocol stack for Linux."
 url="http://www.bluez.org/"
@@ -6,8 +6,7 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=bluez
-version=5.49
-release=2
+version=5.50
 
 source=(http://www.kernel.org/pub/linux/bluetooth/$name-$version.tar.xz)
 build() {
