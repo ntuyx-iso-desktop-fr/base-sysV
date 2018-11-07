@@ -2,8 +2,8 @@
 
 description="Classes for a WebKit2 based implementation and a new QML API"
 url="http://qt-project.org/"
-packager="greg<greg@nutyx.org>"
-contributors=""
+packager="rems <rems@nutyx.org>"
+contributors="greg"
 
 run=()
 
