@@ -8,28 +8,39 @@ contributors=""
 run=()
 
 name=qtwebkit
-version=5.9.0
+version=5.212.0alpha2
 release=1
 
-source=(https://download.qt.io/community_releases/5.9/$version-final/$name-opensource-src-$version.tar.xz
-	http://www.linuxfromscratch.org/patches/blfs/8.2/qtwebkit-5.9.0-icu_59-1.patch)
+source=(https://github.com/annulen/webkit/releases/download/qtwebkit-5.212.0-alpha2/qtwebkit-5.212.0-alpha2.tar.xz
+        qtwebkit-gcc7.patch
+        qtwebkit-null-pointer-dereference.patch
+        f51554bf.patch)
 
 build() {
 
-cd $name-opensource-src-$version
+cd qtwebkit-5.212.0-alpha2
+patch -p1 -i ../qtwebkit-gcc7.patch
+patch -p1 -i ../qtwebkit-null-pointer-dereference.patch
+patch -p1 -i ../f51554bf.patch
 
-patch -p1 -i ../qtwebkit-5.9.0-icu_59-1.patch
-sed -e '/CONFIG/a QMAKE_CXXFLAGS += -Wno-expansion-to-defined' \
--i Tools/qmake/mkspecs/features/unix/default_pre.prf
+cd ..
 
 mkdir build
 cd build
 
-qmake ../WebKit.pro
+cmake ../qtwebkit-5.212.0-alpha2 \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DPORT=Qt \
+    -DENABLE_TOOLS=OFF
 make
 
-make INSTALL_ROOT=$PKG install 
-
+make DESTDIR=$PKG install
+# Fix pkgconfig files
+  sed -e 's|qt/Qt5WebKit|qt/QtWebKit|' -i "$pkgdir"/usr/lib/pkgconfig/Qt5WebKit.pc
+  sed -e 's|qt/Qt5WebKitWidgets|qt/QtWebKitWidgets|' -i "$pkgdir"/usr/lib/pkgconfig/Qt5WebKitWidgets.pc
+  sed -e '/Name/a Description: Qt WebKit module' -i "$pkgdir"/usr/lib/pkgconfig/Qt5WebKit.pc
+  sed -e '/Name/a Description: Qt WebKitWidgets module' -i "$pkgdir"/usr/lib/pkgconfig/Qt5WebKitWidgets.pc
 }
 
 uptodate() {
