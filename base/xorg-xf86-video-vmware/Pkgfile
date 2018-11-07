@@ -3,8 +3,8 @@
 description="Xorg vmware video driver."
 packager="tnut <tnut@nutyx.org>"
 name=xorg-xf86-video-vmware
-version=13.2.1
-release=3
+version=13.3.0
+release=1
 
 _name=${name/xorg-/}
 
