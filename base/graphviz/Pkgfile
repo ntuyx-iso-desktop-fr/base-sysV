@@ -8,19 +8,19 @@ contributors="Pierre B"
 
 name=graphviz
 version=2.40.1
-release=1
+release=3
 
-source=(http://www.graphviz.org/pub/graphviz/stable/SOURCES/$name.tar.gz
-        http://www.linuxfromscratch.org/patches/blfs/svn/graphviz-2.40.1-qt5-1.patch)
+PKGMK_KEEP_SOURCES="no"
+
+source=(http://$name.gitlab.io/pub/$name/stable/SOURCES/$name.tar.gz)
 
 build () {
   cd $name-$version
   sed -e '/ruby/s/1\.9/2.4/' -i configure.ac
-  patch -p1 -i ../graphviz-2.40.1-qt5-1.patch
   sed -i '/LIBPOSTFIX="64"/s/64//' configure.ac
 
   autoreconf
-  ./configure --prefix=/ur
+  ./configure --prefix=/usr --disable-php
   make	
   make DESTDIR=$PKG install
 	
