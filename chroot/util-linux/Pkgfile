@@ -1,4 +1,4 @@
-version=2.32
+version=2.33
 
 source=(http://www.kernel.org/pub/linux/utils/util-linux/v${version:0:4}/util-linux-$version.tar.xz)
 
@@ -8,6 +8,7 @@ cd util-linux-$version
 --without-python \
 --disable-makeinstall-chown \
 --without-systemdsystemunitdir \
+--without-ncurses              \
 PKG_CONFIG=""
 make
 make install
