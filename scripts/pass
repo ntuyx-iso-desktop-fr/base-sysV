@@ -109,40 +109,8 @@ do
                             echo "=======> Installing '$i' succeeded." >> ${LOG}/$NAME.log
                         done
                         ;;
-			
-                    systemd)
-                        ln -svf /tools/bin/true /usr/bin/xsltproc
-			for lib in blkid lzma mount uuid
-                        do
-                            ln -sv /tools/lib/lib$lib.so* /usr/lib
-                        done
-			ln -svf /tools/include/blkid    /usr/include
-			ln -svf /tools/include/libmount /usr/include
-			ln -svf /tools/include/uuid     /usr/include
-			for pc in blkid mount uuid
-			do
-			    sed 's@tools@usr@g' /tools/lib/pkgconfig/${pc}.pc \
-                                > /usr/lib/pkgconfig/${pc}.pc
-			done
-			$PKGMK -cf ../../../bin/pkgmk.conf.passes -i -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
-                        rm -vf /usr/bin/xsltproc
-                        ;;
-			
-		    util-linux)
-		    	rm -vf /usr/include/{blkid,libmount,uuid}
-			for pc in blkid mount uuid
-			do
-			    rm -vf /usr/lib/pkgconfig/${pc}.pc
-			done
-			$PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
-			for lib in blkid mount uuid                                                                                               
-                        do                                                                                                                        
-                            rm -vf /usr/lib/lib${lib}.so*                                                                                         
-                        done                                                                                                                      
-                        $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i 2>&1|tee ${LOG}/$NAME.log || exit 1 
-			;;
-			
-                    cards)
+
+                   cards)
                         $PKGMK -cf ../../../bin/pkgmk.conf.passes -kw 2>&1|tee ${LOG}/$NAME.log || exit 1
                         rm -f /var/lib/pkg/pkgadd.conf
                         $PKGMK -d -cf ../../../bin/pkgmk.conf.passes -i || exit 1
