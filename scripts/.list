@@ -44,9 +44,6 @@ openssl
 python
 ninja
 meson
-systemd
-procps-ng
-e2fsprogs
 coreutils
 check
 diffutils
@@ -60,10 +57,14 @@ kbd
 libpipeline
 make
 patch
-util-linux
 man-db
 tar
 texinfo
+systemd
+dbus
+procps-ng
+util-linux
+e2fsprogs
 nasm
 curl
 cpio
