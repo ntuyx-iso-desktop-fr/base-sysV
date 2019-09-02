@@ -1,11 +1,11 @@
-version=5.28.1
-source=(http://ftp.funet.fi/pub/CPAN/src/perl-$version.tar.xz
-	)
+version=5.30.0
+source=(http://ftp.funet.fi/pub/CPAN/src/perl-$version.tar.xz)
+
 build()
 {
 cd perl-$version
 
-sh Configure -des -Dprefix=/tools -Dlibs=-lm
+sh Configure -des -Dprefix=/tools -Dlibs=-lm -Uloclibpth -Ulocincpth
 
 make
 
