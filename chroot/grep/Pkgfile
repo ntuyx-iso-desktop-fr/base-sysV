@@ -1,6 +1,6 @@
-version=3.1
-source=(http://ftp.gnu.org/gnu/grep/grep-$version.tar.xz\
-	)
+version=3.3
+source=(http://ftp.gnu.org/gnu/grep/grep-$version.tar.xz)
+
 build()
 {
 cd grep-$version
