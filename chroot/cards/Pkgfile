@@ -1,8 +1,13 @@
-version=2.4.82
+version=2.4.99
 source=(http://downloads.nutyx.org/files/cards-$version.tar.gz)
-build()
-{
+
+# patchname="$name-$version-consolidate-1.patch"
+
+[ -z "$patchname" ] || source+=" $patchname"
+
+build() {
 cd cards-$version
+[ -z "$patchname" ] || patch -Np1 -i ../$patchname
 
 PKG_CONFIG_PATH=/tools/lib/pkgconfig \
 make pkgadd
