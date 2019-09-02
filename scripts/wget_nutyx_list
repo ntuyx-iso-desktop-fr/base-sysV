@@ -26,7 +26,7 @@ a3c00afe9d4a8685d2287c31bf986c50  dialog-1.3-20181107.tgz
 4824adc0e95dbbf11dfbdfaad6a1e461  diffutils-3.7.tar.xz
 45933b29a045735c2d5a2b29ce3f4480  e2fsprogs-1.45.2.tar.gz
 077e4f49320cad82bf17a997068b1db9  elfutils-0.176.tar.bz2
-ca047ae951b40020ac831c28859161b2  expat-2.2.6.tar.bz2
+3659bc0938db78815b5f5a9c24d732aa  expat-2.2.7.tar.xz
 00fce8de158422f5ccd2666512329bd2  expect5.45.4.tar.gz
 80c29aca745466c6c24d11f059329075  file-5.37.tar.gz
 9936aa8009438ce185bea2694a997fc1  findutils-4.6.0.tar.gz
@@ -43,12 +43,10 @@ bf84143905a6a903dbd4d4b911a2a2b8  gpm-1.20.7.tar.bz2
 05d0718a1b7cc706a4bdf8115363f1ed  grep-3.3.tar.xz
 08fb04335e2f5e73f23ea4c3adbf0c5f  groff-1.22.4.tar.gz
 691b1221694c3394f1c537df4eee39d3  gzip-1.10.tar.xz
-b0e7051fef0b3ba064209a5f3d23bd2a  iana-etc-2.30-numbers_update-20140202-2.patch.xz
 3ba3afb1d1b261383d247f46cb135ee8  iana-etc-2.30.tar.bz2
 87fef1fa3f603aef11c41dcc097af75e  inetutils-1.9.4.tar.xz
 12e517cac2b57a0121cda351570f1e63  intltool-0.51.0.tar.gz
 a2b8349abf4ae00e92155fda22de4d5e  iproute2-5.1.0.tar.xz
-f75cca16a38da6caa7d52151f7136895  kbd-2.0.4-backspace-1.patch
 c1635a5a83b63aca7f97a3eab39ebaa6  kbd-2.0.4.tar.xz
 1129c243199bdd7db01b55a61aa19601  kmod-26.tar.xz
 4ad4408b06d7a6626a055cb453f36819  less-551.tar.gz
@@ -62,7 +60,7 @@ bec755c8044ad84b752dfe49a0b371d8  libedit-20190324-3.1.tar.gz
 30537ef5a01e0ca94b7b8eb6a36bb1e4  lsb-release-1.4.tar.gz
 39d3f3f9c55c87b1e5d6888e1420f4b5  lzo-2.10.tar.gz
 730bb15d96fffe47e148d1e09235af82  m4-1.4.18.tar.xz
-15b012617e7c44c0ed482721629577ac  make-4.2.1.tar.bz2
+15b012617e7c44c0ed482721629577ac  make-4.2.1.tar.gz
 0eeaf712eedeae4fa55d8bfa37f4ca32  make-ca-0.9.tar.gz
 a21a04d6ff5c4645c748220dbaa9f221  make-ca.sh-20170514
 c5c6c3434be14a5527d43b5ad0f09a13  man-db-2.8.5.tar.xz
