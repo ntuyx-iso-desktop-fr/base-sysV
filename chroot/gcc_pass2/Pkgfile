@@ -59,7 +59,7 @@ make
 
 make install
 
-# ln -sv gcc /tools/bin/cc
+ln -sv gcc /tools/bin/cc
 
 echo 'main(){}' > dummy.c
 cc dummy.c
