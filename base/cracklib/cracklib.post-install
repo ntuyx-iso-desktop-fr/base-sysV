@@ -1,3 +1,0 @@
-create-cracklib-dict -o usr/share/cracklib/pw_dict \
-usr/share/dict/cracklib-words \
-usr/share/dict/cracklib-extra-words 2> /dev/null

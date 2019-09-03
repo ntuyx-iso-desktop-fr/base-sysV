@@ -1,3 +1,0 @@
-if [ -f usr/bin/fc-cache ];then
-	usr/bin/fc-cache usr/share/ghostscript/fonts
-fi
