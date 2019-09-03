@@ -2,7 +2,7 @@ version=0.20.1
 source=(http://ftp.gnu.org/gnu/gettext/gettext-$version.tar.xz)
 build()
 {
-cd gettext-$version/gettext-tools
+cd gettext-$version
 
 ./configure --prefix=/tools --disable-shared
 
