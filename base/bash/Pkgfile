@@ -3,7 +3,7 @@ maintainer="Brian Fox,Chet Ramey and many more"
 packager="tnut <tnut@nutyx.org>"
 
 name=bash
-version=4.4.18
+version=5.0
 
 source=(http://ftp.gnu.org/gnu/bash/bash-$version.tar.gz)
 
@@ -11,11 +11,12 @@ build()
 {
 cd bash-$version
 ./configure --prefix=/usr \
---htmldir=/usr/share/doc/bash-$version \
---without-bash-malloc \
---with-installed-readline
+            --docdir=/usr/share/doc/bash-$version \
+            --without-bash-malloc \
+            --with-installed-readline
 
 make
+
 make DESTDIR=$PKG install
 
 mkdir -p $PKG/bin
