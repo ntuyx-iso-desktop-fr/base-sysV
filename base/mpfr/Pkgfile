@@ -5,25 +5,29 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=mpfr
-version=4.0.1
+version=4.0.2
 
 source=(http://www.mpfr.org/mpfr-current/mpfr-$version.tar.xz)
 
-build()
-{
+build() {
 cd mpfr-$version
+
 ./configure --prefix=/usr \
-	--enable-thread-safe \
-	--libdir=/lib \
-	--docdir=/usr/share/doc/mpfr-$version
+            --disable-static \
+            --enable-thread-safe \
+            --docdir=/usr/share/doc/mpfr-$version
+
 make
+
 make check
+
 make DESTDIR=$PKG install
+
 make html
 make DESTDIR=$PKG install-html
 }
-devel()
-{
+
+devel() {
 cd $PKG
 bsdtar -cf \
 $PKGMK_PACKAGE_DIR/$name.devel${PKGMK_BUILDVER}any.cards.tar \
