@@ -4,15 +4,17 @@ maintainer="Mark Nudelman"
 packager="tnut <tnut@nutyx.org>"
 
 name=less
-version=530
+version=551
 
 source=(http://www.greenwoodsoftware.com/less/less-$version.tar.gz)
 
-build()
-{
+build() {
 cd less-$version
+
 ./configure --prefix=/usr \
---sysconfdir=/etc
+            --sysconfdir=/etc
+
 make
+
 make DESTDIR=$PKG install
 }
