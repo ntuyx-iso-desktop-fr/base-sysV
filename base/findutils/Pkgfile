@@ -4,19 +4,21 @@ maintainer="Eric B. Decker,Michael Rendell,James A. Woods"
 packager="tnut <tnut@nutyx.org>"
 
 name=findutils
-version=4.6.0
-release=2
+version=4.7.0
 
 source=(http://ftp.gnu.org/gnu/findutils/findutils-$version.tar.gz)
 
-build()
-{
+build(){
+
 cd findutils-$version
+
 ./configure --prefix=/usr \
---localstatedir=/var/lib/locate
+            --localstatedir=/var/lib/locate
 
 make
+
 # make check
+
 make DESTDIR=$PKG install
 
 mkdir $PKG/bin
