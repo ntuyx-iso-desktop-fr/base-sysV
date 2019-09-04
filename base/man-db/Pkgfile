@@ -5,10 +5,9 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=man-db
-version=2.8.3
+version=2.8.5
 
-source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz \
-)
+source=(http://download.savannah.gnu.org/releases/$name/$name-$version.tar.xz)
 
 PKGMK_GROUPS=(man locale)
 run=(groff less)
@@ -16,17 +15,26 @@ run=(groff less)
 build()
 {
 cd man-db-$version
-PKG_CONFIG_PATH="/usr/lib/pkgconfig" ./configure --prefix=/usr \
---libexecdir=/usr/lib \
---docdir=/usr/share/doc/man-$version \
---sysconfdir=/etc --disable-setuid \
---with-browser=/usr/bin/lynx --with-vgrind=/usr/bin/vgrind \
---with-grap=/usr/bin/grap
+
+sed -i '/find/s@/usr@@' init/systemd/man-db.service.in
+
+PKG_CONFIG_PATH="/usr/lib/pkgconfig" \
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/man-db-$version \
+            --sysconfdir=/etc \
+            --disable-setuid \
+            --enable-cache-owner=bin \
+            --with-browser=/usr/bin/lynx \
+            --with-vgrind=/usr/bin/vgrind \
+            --with-grap=/usr/bin/grap
 
 make
+
 # Certains test fails
 make -k check || true
+
 make DESTDIR=$PKG install
+
 cat >> convert-mans << "EOF"
 #!/bin/sh -e
 FROM="$1"
@@ -40,5 +48,6 @@ do
         mv .tmp.iconv "$FILE"
 done
 EOF
+
 install -m755 convert-mans $PKG/usr/bin
 }
