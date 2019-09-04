@@ -14,11 +14,12 @@ cd flex-$version
 
 sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
 
-HELP2MAN=`which true` \
+HELP2MAN=$(which true) \
 ./configure --prefix=/usr \
---docdir=/usr/share/doc/flex-$version
+            --docdir=/usr/share/doc/flex-$version
 
 make
+
 make -k check||true
 
 make DESTDIR=$PKG install
