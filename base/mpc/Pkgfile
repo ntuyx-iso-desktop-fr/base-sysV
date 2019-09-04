@@ -8,15 +8,19 @@ name=mpc
 version=1.1.0
 
 source=(https://ftp.gnu.org/gnu/mpc/mpc-$version.tar.gz )
-build()
-{
+
+build() {
 cd mpc-$version
+
 ./configure --prefix=/usr \
---disable-static \
---docdir=/usr/share/doc/$name-$version
+            --disable-static \
+            --docdir=/usr/share/doc/$name-$version
+
 make
+make html
+
 make check
+
 make DESTDIR=$PKG install
 make DESTDIR=$PKG install-html
-
 }
