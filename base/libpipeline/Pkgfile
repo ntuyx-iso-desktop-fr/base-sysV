@@ -1,20 +1,22 @@
 description="C library for manipulating pipelines of subprocesses in a flexible way"
 url="http://libpipeline.nongnu.org/"
 maintainer="Colin Watson cjwatson at debian dot org"
-packager="tnut <tnut@nutyx.org>"
+packager="Yaolinux Team"
 
 name=libpipeline
-version=1.5.0
+version=1.5.1
 
 source=(http://download.savannah.gnu.org/releases/libpipeline/libpipeline-$version.tar.gz)
 
 PKGMK_GROUPS=(devel man)
 
-build()
-{
+build() {
 cd $name-$version
+
 PKG_CONFIG_PATH=/tools/lib/pkgconfig \
 ./configure --prefix=/usr
+
 make
+
 make DESTDIR=$PKG install
 }
