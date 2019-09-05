@@ -29,19 +29,13 @@ mkdir -pv $PKG/{etc,lib}/security
 install -v -m755 pam_cap/pam_cap.so $PKG/lib/security
 install -v -m644 pam_cap/capability.conf $PKG/etc/security
 
-mv -v $PKG/etc/pam.d/system-auth{,.bak}
-cat > $PKG/etc/pam.d/system-auth << "EOF"
-# Begin /etc/pam.d/system-auth
-
-auth      optional    pam_cap.so
-EOF
-
 mkdir -pv $PKG/etc/pam.d/
 
 cat > $PKG/etc/pam.d/system-auth << "EOF"
 # Begin /etc/pam.d/system-auth
 
 auth      required    pam_unix.so
+auth      optional    pam_cap.so
 
 # End /etc/pam.d/system-auth
 EOF
