@@ -21,8 +21,8 @@ dialog.devel tar wget zlib.devel perl-xml-parser)
 PKGMK_GROUPS=(devel doc man)
 
 name=cards
-version=2.4.99
-patchname="$name-$version-consolidate-$release.patch"
+version=2.4.99.1
+# patchname="$name-$version-consolidate-$release.patch"
 
 source=(http://downloads.tuxfamily.org/nutyx/files/cards-$version.tar.gz)
 
