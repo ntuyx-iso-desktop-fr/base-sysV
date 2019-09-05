@@ -36,6 +36,8 @@ cat > $PKG/etc/pam.d/system-auth << "EOF"
 auth      optional    pam_cap.so
 EOF
 
+mkdir -pv $PKG/etc/pam.d/
+
 cat > $PKG/etc/pam.d/system-auth << "EOF"
 # Begin /etc/pam.d/system-auth
 
