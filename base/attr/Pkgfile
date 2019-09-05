@@ -16,7 +16,7 @@ build() {
 cd attr-$version
 
 ./configure --prefix=/usr \
-            --bindir=/bin \
+            --disable-static \
             --sysconfdir=/etc \
             --docdir=/usr/share/doc/attr-$version
 
@@ -25,7 +25,6 @@ make
 make  DIST_ROOT=$PKG install
 
 mkdir $PKG/lib
-ls -l $PKG/usr/lib
 mv -v $PKG/usr/lib/libattr.so.* $PKG/lib
 ln -sfv ../../lib/$(readlink $PKG/usr/lib/libattr.so) $PKG/usr/lib/libattr.so
 }
