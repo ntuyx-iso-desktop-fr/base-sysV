@@ -9,7 +9,7 @@ contributors="Alienus"
 packager="tnut <tnut@nutyx.org>"
 
 name=python
-version=3.6.4
+version=3.7.4
 alias=(python3 Python)
 source=(http://www.python.org/ftp/python/$version/Python-$version.tar.xz
         https://docs.python.org/ftp/python/doc/$version/python-$version-docs-html.tar.bz2
@@ -23,14 +23,15 @@ build() {
 	cd Python-$version
 	CXX="/usr/bin/g++" \
 	./configure --prefix=/usr \
-                --enable-shared \
-                --with-system-expat \
-                --with-system-ffi \
-		--without-ensurepip
-	make
-	make DESTDIR=$PKG install
+                    --enable-shared \
+                    --with-system-expat \
+                    --with-system-ffi \
+	            --with-ensurepip=yes
+        make
 
-	chmod -v 755 $PKG/usr/lib/libpython3.6m.so
+        make DESTDIR=$PKG install
+
+	chmod -v 755 $PKG/usr/lib/libpython3.7m.so
 	chmod -v 755 $PKG//usr/lib/libpython3.so
 
 # Install all HTML Docs files with desktop menu integration
@@ -41,7 +42,7 @@ build() {
         --no-same-owner \
         --no-same-permissions \
         -C $PKG/usr/share/doc/$name-$version/html \
-        -xvf $SRC/python-$version-docs-html.tar.bz2
+        -xvf python-$version-docs-html.tar.bz2
 
     find $PKG/usr/share/doc/$name-$version -type d -exec chmod 0755 {} \;
     find $PKG/usr/share/doc/$name-$version -type f -exec chmod 0644 {} \;
