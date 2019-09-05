@@ -38,14 +38,18 @@ if [ -L /bin/pwd ];then
 fi
 
 cd zlib-$version
+
 ./configure --prefix=/usr
+
 make
+
 make check
+
 make prefix=$PKG/usr install
 
 mkdir -p $PKG/lib
 mv -v $PKG/usr/lib/libz.so.* $PKG/lib
-ln -sfv ../../lib/libz.so.$version  $PKG/usr/lib/libz.so
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libz.so)  $PKG/usr/lib/libz.so
 }
 devel () {
 cd $PKG
