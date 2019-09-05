@@ -42,7 +42,7 @@ mv -v install-nutyx /usr/bin/install-nutyx
 `passwd lfs` \
 `chown -v lfs $LFS/{tools,sources}` \
 `chmod -v a+wt $LFS/sources` \
-`chown -v lfs $LFS` \
+`chown -v lfs $LFS`
 
 ## Now go in the LFS user
 
@@ -53,30 +53,30 @@ mv -v install-nutyx /usr/bin/install-nutyx
 `export LFS=/mnt/lfs`
 
 ## Set the correct profile for LFS User
-`cat > /home/lfs/.bash_profile << "EOF" \
-exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash \
-EOF` \
-echo "set +h \
-umask 022 \
-LFS=$LFS \
-LC_ALL=POSIX \
-LFS_TARGET=$(uname -m)-lfs-linux-gnu \
-PATH=/home/lfs/bin:/tools/bin:/bin:/usr/bin \
-export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc
+`cat > /home/lfs/.bash_profile << "EOF"` \
+`exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash` \
+`EOF` \
+`echo "set +h` \
+`umask 022` \
+`LFS=$LFS` \
+`LC_ALL=POSIX` \
+`LFS_TARGET=$(uname -m)-lfs-linux-gnu` \
+`PATH=/home/lfs/bin:/tools/bin:/bin:/usr/bin` \
+`export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc`
 
 
 
 ## You are in the LFS user, now continue the installation with
-git clone https://github.com/rems28/base-sysV.git development \
-cd development \
-scripts/runmebeforepass1 
+`git clone https://github.com/rems28/base-sysV.git development` \
+`cd development` \
+`scripts/runmebeforepass1` 
 
 ## Normally, all will be good with the message above
 "====> Successfull configured"
 
 ## Do the first pass
-cd chroot \
-pass
+`cd chroot` \
+`pass`
 
 ## All will be ok with the message after a long time, which depends of your machine
 "=======> Building '/home/lfs/development/chroot/cards/Pkgfile' succeeded. \
@@ -85,50 +85,50 @@ pass
 ## Go to pass2 :
 
 ## The rest of installation will be done in root
-exit
+`exit`
 
 ## check the LFS variable
-echo $LFS
+`echo $LFS`
 
 ## will return 
 "/mnt/lfs"
 
 ## if the result is correct continue with
-chown -R root:root $LFS \
-install -dv -m0750  $LFS/root \
-ln -sv development/scripts $LFS/root/bin \
-mv /home/lfs/development $LFS/root/ \
-cd $LFS/root/development/base/nutyx
+`chown -R root:root $LFS` \
+`install -dv -m0750  $LFS/root` \
+`ln -sv development/scripts $LFS/root/bin` \
+`mv /home/lfs/development $LFS/root/` \
+`cd $LFS/root/development/base/yaolinux`
 
 ## make the first package
-/tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes
+`/tools/bin/pkgmk -cf ../../../bin/pkgmk.conf.passes`
 
 ## install it
-/tools/bin/pkgadd -r $LFS nutyx1* \
-/tools/bin/pkgadd -r $LFS nutyx.man1*
+`/tools/bin/pkgadd -r $LFS yaolinux1*` \
+`/tools/bin/pkgadd -r $LFS yaolinux.man1*`
 
 ## check if it's present
-/tools/bin/pkginfo -r $LFS -i
+`/tools/bin/pkginfo -r $LFS -i`
 
 ## It's have to return 
-"(base) nutyx 8.2-1... \
-(base) nutyx.man 8.2-1..."
+"(base) yaolinux 1.0-RC1-1... \
+(base) nutyx.man 1.0-RC1-1..."
 
 ## make the configuration
-VERSION="development" install-nutyx -ic
+`VERSION="development" install-nutyx -ic`
 
 ## We mount the folders 
-mount -v --bind /dev $LFS/dev \
-mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620 \
-mount -vt proc proc $LFS/proc \
-mount -vt sysfs sysfs $LFS/sys \
-mount -vt tmpfs tmpfs $LFS/run \
-if [ -h /dev/shm ]; then mkdir -pv $LFS/$(readlink $LFS/dev/shm);fi \
-chmod 1777 /dev/shm \
-cp -v /etc/resolv.conf $LFS/etc
+`mount -v --bind /dev $LFS/dev` \
+`mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620` \
+`mount -vt proc proc $LFS/proc` \
+`mount -vt sysfs sysfs $LFS/sys` \
+`mount -vt tmpfs tmpfs $LFS/run` \
+`if [ -h /dev/shm ]; then mkdir -pv $LFS/$(readlink $LFS/dev/shm);fi` \
+`chmod 1777 /dev/shm` \
+`cp -v /etc/resolv.conf $LFS/etc`
 
 ## We check the correct mount
-mount|grep $LFS
+`mount|grep $LFS`
 
 ## will normally return if it's on /dev/sda2
 "/dev/sda2 on /mnt/lfs type ext4 (rw) \
@@ -139,21 +139,21 @@ sysfs on /mnt/lfs/sys type sysfs (rw,relatime) \
 tmpfs on /mnt/lfs/run type tmpfs (rw,relatime)"
 
 ## continue in chroot
-chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ \
-/bin/bash --login +h
+`chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \` \
+`/bin/bash --login +h`
 
 ## Some "command not found" will appears, but not important here
 
 ## continue with
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin \
-cd /root/development/base \
-pass
+`export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin` \
+`cd /root/development/base` \
+`pass`
 
 ## After a moment the scripts says you have to install bash manually, go with the commands
-exit \
-cd $LFS/root/development/base/bash \
-for PACK in *.xz; do /tools/bin/pkgadd -r $LFS $PACK;done \
-/tools/bin/pkginfo -r $LFS -i|grep bash
+`exit` \
+`cd $LFS/root/development/base/bash` \
+`for PACK in *.xz; do /tools/bin/pkgadd -r $LFS $PACK;done` \
+`/tools/bin/pkginfo -r $LFS -i|grep bash`
 
 ## The last command will return that if succeeds
 "(base) bash 4.4-1 \
@@ -164,11 +164,11 @@ for PACK in *.xz; do /tools/bin/pkgadd -r $LFS $PACK;done \
 ..."
 
 ## return in chroot
-chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \ \
-/bin/bash --login +h \
-export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin \
-cd /root/development/base \
-pass
+`chroot "$LFS" /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \` \
+`/bin/bash --login +h` \
+`export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin:/root/bin` \
+`cd /root/development/base` \
+`pass`
 
 ## The last pass will return at end
 "ADD: ca-certificates-20150725, 1282 files: 100% \
@@ -176,14 +176,14 @@ pass
 =======> compress ca-certificates1418739487x86_64.cards.tar" 
 
 ## Now, follow few commands to configure your nutyx-systemd
-exit \
-echo $LFS
+`exit` \
+`echo $LFS`
 
 ## The ouptput have to be "/mnt/lfs "
 
 ## Go back in chroot
-chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \ \
-/bin/bash --login
+`chroot $LFS /usr/bin/env -i HOME=/root TERM="$TERM" PS1='\u: \w\$' \` \
+`/bin/bash --login`
 
 ## No "command not found" have to appears here
 
