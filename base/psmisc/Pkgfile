@@ -4,19 +4,19 @@ maintainer="Werner Almesberger werner at almesberger dot net,Craig Small csmall 
 packager="tnut <tnut@nutyx.org>"
 
 name=psmisc
-version=23.1
-release=1
+version=23.2
 
 source=(https://sourceforge.net/projects/$name/files/$name/$name-$version.tar.xz)
 
-build()
-{
+build() {
 cd psmisc-$version
-./configure --prefix=/usr
-make
-make DESTDIR=$PKG install
-mkdir -p  $PKG/bin
 
-mv -v $PKG/usr/bin/fuser $PKG/bin
-mv -v $PKG/usr/bin/killall $PKG/bin
+./configure --prefix=/usr
+
+make
+
+make DESTDIR=$PKG install
+
+mkdir -p  $PKG/bin
+mv -v $PKG/usr/bin/{fuser,killall} $PKG/bin
 }
