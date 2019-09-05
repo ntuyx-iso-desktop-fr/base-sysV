@@ -49,7 +49,7 @@ CC="gcc -isystem $GCC_INCDIR -isystem /usr/include"       \
              --disable-werror                \
              --enable-kernel=3.2             \
              --enable-stack-protector=strong \
-	     --with-headers=/usr/include     \
+	     --with-headers=$PKG/usr/include     \
              libc_cv_slibdir=/lib
 
 make || make -j1
