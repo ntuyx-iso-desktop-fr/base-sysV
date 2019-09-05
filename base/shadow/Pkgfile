@@ -5,13 +5,11 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=shadow
-version=4.5
-release=1
+version=4.7
 
 source=(https://github.com/shadow-maint/shadow/releases/download/$version/shadow-$version.tar.xz) 
 
-build()
-{
+build() {
 cd shadow-$version
 
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
@@ -24,8 +22,11 @@ sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
 
 sed -i 's/1000/999/' etc/useradd
 
-./configure --sysconfdir=/etc --with-group-name-max-length=32
+./configure --sysconfdir=/etc \
+            --with-group-name-max-length=32
+
 make
+
 make DESTDIR=$PKG install
 
 sed -i 's/yes/no/' $PKG/etc/default/useradd
