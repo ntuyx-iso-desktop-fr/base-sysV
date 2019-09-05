@@ -4,23 +4,33 @@ packager="rems"
 contributors="Pierre B"
 
 name=libcap
-version=2.25
-release=3
+version=2.27
 
-source=(  https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz)
+source=(https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$version.tar.xz)
 
 build() {
+
 cd $name-$version
-sed -i '/install.*STALIBNAME/d' libcap/Makefile
-make
 make -C pam_cap
-make RAISE_SETFCAP=no \
-lib=lib \
-prefix=/usr \
-DESTDIR=$PKG install
+
 mkdir -pv $PKG/{etc,lib}/security
 install -v -m755 pam_cap/pam_cap.so $PKG/lib/security
 install -v -m644 pam_cap/capability.conf $PKG/etc/security
-mv -v $PKG/usr/lib/libcap.so.* $PKG/lib
-ln -sfv ../../lib/$(readlink $PKG/usr/lib/libcap.so) $PKG/usr/lib/libcap.so
+
+mv -v $PKG/etc/pam.d/system-auth{,.bak}
+cat > $PKG/etc/pam.d/system-auth << "EOF"
+# Begin /etc/pam.d/system-auth
+
+auth      optional    pam_cap.so
+EOF
+
+cat > $PKG/etc/pam.d/system-auth << "EOF"
+# Begin /etc/pam.d/system-auth
+
+auth      required    pam_unix.so
+
+# End /etc/pam.d/system-auth
+EOF
+
+tail -n +3 $PKG/etc/pam.d/system-auth.bak >> $PKG/etc/pam.d/system-auth
 }
