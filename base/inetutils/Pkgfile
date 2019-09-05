@@ -8,7 +8,7 @@ name=inetutils
 version=1.9.4
 
 source=(http://ftp.gnu.org/gnu/inetutils/inetutils-$version.tar.xz
-        0001-ifconfig-Force-use-of-proc-net-dev.patch)
+        https://dev.getsol.us/file/data/we3b2h3ndotzhem4ibmx/PHID-FILE-yji6dznnmv4yujpvuw7q/0001-ifconfig-Force-use-of-proc-net-dev.patch)
 
 build()
 {
