@@ -5,7 +5,7 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=attr
-version=2.4.47
+version=2.4.48
 
 PKGMK_GROUPS=(devel man doc)
 
@@ -15,18 +15,18 @@ source=(http://download.savannah.gnu.org/releases/$name/$name-$version.src.tar.g
 build() {
 cd attr-$version
 
-sed -i -e 's|/@pkg_name@|&-@pkg_version@|' include/builddefs.in
-
-INSTALL_USER=root  \
-INSTALL_GROUP=root \
 ./configure --prefix=/usr \
---bindir=/bin
+            --bindir=/bin \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-$version
+
 make
+
 make  DIST_ROOT=$PKG install install-lib install-dev
-chmod -v 755 $PKG/usr/lib/libattr.so
+
 mkdir $PKG/lib
 mv -v $PKG/usr/lib/libattr.so.* $PKG/lib
-ln -sfv ../../lib/libattr.so.1 $PKG/usr/lib/libattr.so
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libattr.so) $PKG/usr/lib/libattr.so
 }
 
 devel () {
