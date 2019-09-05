@@ -22,7 +22,7 @@ cd attr-$version
 
 make
 
-make  DIST_ROOT=$PKG install
+make  DESTDIR=$PKG install
 
 mkdir $PKG/lib
 mv -v $PKG/usr/lib/libattr.so.* $PKG/lib
