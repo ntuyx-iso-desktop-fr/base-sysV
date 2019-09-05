@@ -42,10 +42,10 @@ mkdir -p $PKG/usr/share/doc/readline-$version
 install -v -m644 doc/*.{ps,pdf,html,dvi} \
                  $PKG/usr/share/doc/readline-$version
 
-ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) \
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libreadline.so) \
         $PKG/usr/lib/libreadline.so
 
-ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) \
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libhistory.so ) \
         $PKG/usr/lib/libhistory.so
 
 }
