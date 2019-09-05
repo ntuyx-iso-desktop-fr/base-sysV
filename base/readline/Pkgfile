@@ -36,7 +36,7 @@ mkdir -p $PKG/lib
 mv -v $PKG/usr/lib/lib{readline,history}.so.* \
       $PKG/lib
 
-chmod -v u+w /lib/lib{readline,history}.so.*
+chmod -v u+w $PKG/lib/lib{readline,history}.so.*
 
 mkdir -p $PKG/usr/share/doc/readline-$version
 install -v -m644 doc/*.{ps,pdf,html,dvi} \
