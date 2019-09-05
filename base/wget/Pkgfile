@@ -3,18 +3,20 @@ url="http://www.gnu.org/software/wget/"
 maintainer="gscrivano at gnu dot org"
 packager="tnut <tnut@nutyx.org>"
 name=wget
-version=1.19.4
+version=1.20.3
 
 source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.gz) 
 
 build() {
 cd $name-$version
 ./configure --prefix=/usr \
---sysconfdir=/etc \
---disable-debug \
---with-ssl=openssl \
---mandir=/usr/share/man \
---infodir=/usr/share/info
+            --sysconfdir=/etc \
+            --disable-debug \
+            --with-ssl=openssl \
+            --mandir=/usr/share/man \
+            --infodir=/usr/share/info
+
 make
+
 make DESTDIR=$PKG install
 }
