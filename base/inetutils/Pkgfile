@@ -7,11 +7,14 @@ contributors="Pierre B"
 name=inetutils
 version=1.9.4
 
-source=(http://ftp.gnu.org/gnu/inetutils/inetutils-$version.tar.xz)
+source=(http://ftp.gnu.org/gnu/inetutils/inetutils-$version.tar.xz
+        0001-ifconfig-Force-use-of-proc-net-dev.patch)
 
 build()
 {
 cd  inetutils-$version
+
+patch -Np1 -i ../0001-ifconfig-Force-use-of-proc-net-dev.patch
 
 ./configure --prefix=/usr \
 --localstatedir=/var \
