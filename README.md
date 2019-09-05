@@ -4,10 +4,9 @@
 
 `cards install cards.devel git`
 
-`wget http://rems.techozor.fr/sources/install-nutyx{,.md5sum}` \
-`md5sum -c install-nutyx.md5sum`
+`wget https://github.com/rems28/base-systemd/raw/master/scripts/install-nutyx.in -O install-nutyx `
 
-## if the commands says "install-nutyx: OK", you can continue
+## You can continue
 `chmod -v 755 install-nutyx` \
 `mv -v install-nutyx /usr/bin/install-nutyx`
 
