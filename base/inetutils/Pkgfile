@@ -21,9 +21,10 @@ cd  inetutils-$version
 --disable-rexec \
 --disable-rlogin \
 --disable-rsh \
---disable-servers
+--disable-servers \
+--with-pam
 
-make -j1
+make
 make check || true
 make DESTDIR=$PKG install
 
