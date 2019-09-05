@@ -42,6 +42,16 @@ passwd lfs \
 chown -v lfs $LFS/{tools,sources} \
 chmod -v a+wt $LFS/sources \
 chown -v lfs $LFS \
+
+## Now go in the LFS user
+
+su - lfs
+
+## Set the LFS variable in LFS User
+
+`export LFS=/mnt/lfs`
+
+## Set the correct profile for LFS User
 cat > /home/lfs/.bash_profile << "EOF" \
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash \
 EOF \
@@ -53,8 +63,7 @@ LFS_TARGET=$(uname -m)-lfs-linux-gnu \
 PATH=/home/lfs/bin:/tools/bin:/bin:/usr/bin \
 export LFS LC_ALL LFS_TARGET PATH" > /home/lfs/.bashrc
 
-## Now go in the LFS user
-su - lfs
+
 
 ## You are in the LFS user, now continue the installation with
 git clone https://github.com/rems28/base-sysV.git development \
