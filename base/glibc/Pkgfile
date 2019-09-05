@@ -29,12 +29,12 @@ patch -Np1 -i ../glibc-$version-fhs-1.patch
 case $(uname -m) in
    i?86)
      mkdir $PKG/lib
-     GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/$(gccversion)/include
+     GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/$gccversion/include
      ln -s ld-linux.so.2 $PKG/lib/ld-lsb.so.3
    ;;
    x86_64) 
      mkdir $PKG/lib64
-     GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/$(gccversion)/include
+     GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/$gccversion/include
      ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64
      ln -s ../lib/ld-linux-x86-64.so.2 $PKG/lib64/ld-lsb-x86-64.so.3
    ;;
