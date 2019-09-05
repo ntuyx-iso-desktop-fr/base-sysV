@@ -6,7 +6,6 @@ contributors="Pierre B"
 
 name=inetutils
 version=1.9.4
-release=2
 
 source=(http://ftp.gnu.org/gnu/inetutils/inetutils-$version.tar.xz)
 
@@ -24,7 +23,7 @@ cd  inetutils-$version
 --disable-rsh \
 --disable-servers
 
-make
+make -j1
 make check || true
 make DESTDIR=$PKG install
 
