@@ -16,7 +16,7 @@ cd acl-*
             --docdir=/usr/share/doc/acl-$version
 
 make
-make DIST_ROOT=$PKG install
+make DESTDIR=$PKG install
 
 mkdir $PKG/lib
 mv -v $PKG/usr/lib/libacl.so.* $PKG/lib
