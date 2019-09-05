@@ -5,8 +5,7 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=readline
-version=7.0
-release=1
+version=8.0
 
 source=(http://ftp.gnu.org/gnu/readline/readline-$version.tar.gz)
 
@@ -20,7 +19,8 @@ sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 ./configure --prefix=/usr \
---docdir=/usr/share/doc/readline-$version
+            --disable-static \
+            --docdir=/usr/share/doc/readline-$version
 
 if [ -L /bin/pwd ]; then
 	make SHLIB_LIBS="-L/tools/lib -lncursesw"
@@ -34,20 +34,19 @@ fi
 mkdir -p $PKG/lib
 
 mv -v $PKG/usr/lib/lib{readline,history}.so.* \
-$PKG/lib
+      $PKG/lib
 
+chmod -v u+w /lib/lib{readline,history}.so.*
 
 mkdir -p $PKG/usr/share/doc/readline-$version
 install -v -m644 doc/*.{ps,pdf,html,dvi} \
-$PKG/usr/share/doc/readline-$version
+                 $PKG/usr/share/doc/readline-$version
 
-rm -rv $PKG/usr/bin
+ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) \
+        $PKG/usr/lib/libreadline.so
 
-ln -sfv ../../lib/libreadline.so.7 \
-$PKG/usr/lib/libreadline.so
-
-ln -sfv ../../lib/libhistory.so.7 \
-$PKG/usr/lib/libhistory.so
+ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) \
+        $PKG/usr/lib/libhistory.so
 
 }
 devel()
