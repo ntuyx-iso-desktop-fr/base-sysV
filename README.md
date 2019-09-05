@@ -12,10 +12,10 @@ chmod -v 755 install-nutyx \
 mv -v install-nutyx /usr/bin/install-nutyx
 
 ## If you've already make the installation process, you have to remove the LFS user from the nutyx base by
-`userdel lfs
-rm -r /home/lfs
-rm -r /mnt/lfs
-groupdel lfs`
+`userdel lfs`
+`rm -r /home/lfs`
+`rm -r /mnt/lfs`
+`groupdel lfs`
 
 ## After that or if you didn't make an installation process, you have to run these following commands
 export LFS=/mnt/lfs \
