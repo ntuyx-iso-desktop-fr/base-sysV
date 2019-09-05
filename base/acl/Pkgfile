@@ -3,34 +3,25 @@ description="Commands for Manipulating POSIX Access Control Lists."
 contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 name=acl
-version=2.2.52
+version=2.2.53
 
 source=( http://download.savannah.gnu.org/releases/$name/$name-$version.src.tar.gz)
 
 build() {
 cd acl-*
 
-sed -i -e 's|/@pkg_name@|&-@pkg_version@|' \
-include/builddefs.in
+./configure --prefix=/usr \
+            --libexecdir=/usr/lib \
+            --disable-static \
+            --docdir=/usr/share/doc/acl-$version
 
-sed -i -e "/TABS-1;/a if (x > (TABS-1)) x = (TABS-1);" \
-libacl/__acl_to_any_text.c
-
-INSTALL_USER=root  \
-INSTALL_GROUP=root \
-./configure --prefix=/usr --libexecdir=/usr/lib \
---bindir=/bin
 make
-make DIST_ROOT=$PKG install install-lib install-dev
-chmod -v 755 $PKG/usr/lib/libacl.so
+make DIST_ROOT=$PKG install
+
 mkdir $PKG/lib
 mv -v $PKG/usr/lib/libacl.so.* $PKG/lib
-ln -sfv ../../lib/libacl.so.1 \
-$PKG/usr/lib/libacl.so
-
-mkdir -p $PKG/usr/share/doc
-install -v -m644 doc/*.txt \
-$PKG/usr/share/doc/acl-$version
+ln -sfv ../../lib/$(readlink $PKG/usr/lib/libacl.so) \
+        $PKG/usr/lib/libacl.so
 }
 devel () {
 cd $PKG
