@@ -4,7 +4,7 @@
 
 `cards install cards.devel git`
 
-`wget https://github.com/rems28/base-systemd/raw/master/scripts/install-nutyx.in -O install-nutyx `
+`wget https://raw.githubusercontent.com/YaoLinux/base-sysd/master/scripts/install-nutyx.in -O install-nutyx `
 
 ## You can continue
 `chmod -v 755 install-nutyx` \
