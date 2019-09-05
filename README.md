@@ -12,50 +12,50 @@ chmod -v 755 install-nutyx \
 mv -v install-nutyx /usr/bin/install-nutyx
 
 ## If you've already make the installation process, you have to remove the LFS user from the nutyx base by
-`userdel lfs`
-`rm -r /home/lfs`
-`rm -r /mnt/lfs`
+`userdel lfs` \
+`rm -r /home/lfs` \
+`rm -r /mnt/lfs` \
 `groupdel lfs`
 
 ## After that or if you didn't make an installation process, you have to run these following commands
-export LFS=/mnt/lfs \
-mkdir -pv $LFS
+`export LFS=/mnt/lfs` \
+`mkdir -pv $LFS`
 
-## Please note that you have to choose your partition in the next command, here /dev/sda2
-mount /dev/sda2 $LFS
+## Please note that you have to choose your partition in the next command, here /dev/sdb2
+`mount /dev/sdb2 $LFS`
 
 ## It's time to begin pass1
 ## make sure the LFS variable is set by
-echo $LFS 
+`echo $LFS` 
 
 ## If nothing is in the output, make
-export LFS=/mnt/lfs 
+`export LFS=/mnt/lfs`
 
 ## Now, create the directories
-mkdir -vp $LFS/{sources,tools} \
-ln -svf $LFS/tools / \
-ln -svf $LFS/sources / 
+`mkdir -vp $LFS/{sources,tools}` \
+`ln -svf $LFS/tools /` \
+`ln -svf $LFS/sources /`
 
 ## Create the LFS user
-groupadd lfs \
-useradd -s /bin/bash -g lfs -m -k /dev/null lfs \
-passwd lfs \
-chown -v lfs $LFS/{tools,sources} \
-chmod -v a+wt $LFS/sources \
-chown -v lfs $LFS \
+`groupadd lfs` \
+`useradd -s /bin/bash -g lfs -m -k /dev/null lfs` \
+`passwd lfs` \
+`chown -v lfs $LFS/{tools,sources}` \
+`chmod -v a+wt $LFS/sources` \
+`chown -v lfs $LFS` \
 
 ## Now go in the LFS user
 
-su - lfs
+`su - lfs`
 
 ## Set the LFS variable in LFS User
 
 `export LFS=/mnt/lfs`
 
 ## Set the correct profile for LFS User
-cat > /home/lfs/.bash_profile << "EOF" \
+`cat > /home/lfs/.bash_profile << "EOF" \
 exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash \
-EOF \
+EOF` \
 echo "set +h \
 umask 022 \
 LFS=$LFS \
