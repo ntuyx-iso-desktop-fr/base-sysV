@@ -61,7 +61,7 @@ DESTDIR=$PKG LC_ALL="en_US.utf8" LANG="en_US.utf8" ninja install
 
 rm -fv /usr/bin/xsltproc
 
-}# Disable service systemd-networkd
+# Disable service systemd-networkd
 unlink $PKG/etc/systemd/system/dbus-org.freedesktop.network1.service
 unlink $PKG/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
 unlink $PKG/etc/systemd/system/sockets.target.wants/systemd-networkd.socket
