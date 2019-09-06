@@ -21,7 +21,7 @@ sed -i '1506,1508 s/</>/' src/shared/seccomp-util.c
 
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 
-[ -L /tools ] && \
+[ -d /tools ] && \
 for file in /tools/lib/lib{blkid,mount,uuid}.so*; do
     ln -svf $file /usr/lib/
 done
