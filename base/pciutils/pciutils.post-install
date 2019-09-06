@@ -1,1 +1,2 @@
-usr/sbin/update-pciids
+. /lib/lsb/init-functions                                                                                                                                         
+log_info_msg2 "${WARNING} To activate update-pciids, please pass ${INFO} systemctl enable --now update-pciids.timer ${NORMAL}"
