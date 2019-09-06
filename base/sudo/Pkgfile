@@ -1,25 +1,24 @@
-# Depends on: pam
-
 description="Give certain users (or groups) the ability to run some commands as root."
 url="http://www.sudo.ws"
 contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
+makedepends=(pam)
+
 name=sudo
-version=1.8.21p2
-release=2
+version=1.8.27
 
 source=($url/sudo/dist/$name-$version.tar.gz)
 
 build() {
 cd $name-$version
 ./configure --prefix=/usr \
---libexecdir=/usr/lib \
---docdir=/usr/share/doc/sudo-$version \
---with-all-insults \
---with-env-editor \
---without-sendmail \
---with-passprompt="[sudo] password for %p: "
+            --libexecdir=/usr/lib \
+            --docdir=/usr/share/doc/sudo-$version \
+            --with-all-insults \
+            --with-env-editor \
+            --without-sendmail \
+            --with-passprompt="[sudo] password for %p: "
 
 make
 make DESTDIR=$PKG install
