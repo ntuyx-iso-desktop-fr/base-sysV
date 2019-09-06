@@ -23,7 +23,7 @@ sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 
 [ -L /tools ] && \
 for file in /tools/lib/lib{blkid,mount,uuid}.so*; do
-    ln -sf $file /usr/lib/
+    ln -svf $file /usr/lib/
 done
 
 mkdir -pv build
@@ -111,5 +111,5 @@ BUG_REPORT_URL="https://bugs.yaolinux.org"
 
 # End /etc/os-release
 EOF
-[ -L /tools ] && rm -fv /usr/lib/lib{blkid,uuid,mount}.so*
+[ -d /tools ] && rm -fv /usr/lib/lib{blkid,uuid,mount}.so*
 }
