@@ -1,5 +1,3 @@
-# Depends on: expat
-
 PKGMK_GROUPS=(devel man doc)
 PKGMK_IGNORE_UNPACK="yes"
 
@@ -7,6 +5,8 @@ description="Next generation of the python high-level scripting language"
 url="http://www.python.org"
 contributors="Alienus"
 packager="tnut <tnut@nutyx.org>"
+
+makedepends=(sqlite libffi)
 
 name=python
 version=3.7.4
