@@ -17,7 +17,7 @@ cd gdbm-$version
 
 make
 
-make check
+# make check
 
 make BINOWN=root BINGRP=root prefix=$PKG/usr  install
 
