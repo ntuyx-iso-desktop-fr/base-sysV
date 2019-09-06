@@ -12,7 +12,6 @@ cd acl-*
 
 ./configure --prefix=/usr \
             --libexecdir=/usr/lib \
-            --disable-static \
             --docdir=/usr/share/doc/acl-$version
 
 make
