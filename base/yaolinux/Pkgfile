@@ -1,0 +1,21 @@
+PKGMK_GROUPS=(man)
+PKGMK_IGNORE_RUNTIMEDEPS=yes
+
+description="Base system of NuTyX, contains all folders and startup scripts."
+url="https://github.com/yaolinux"
+packager="Graknu <graknu@yaolinux.org>"
+maintainer="Graknu <graknu@yaolinux.org>"
+
+name=yaolinux
+version=1.0-RC1
+release=1
+patchname=""
+
+source=(http://downloads.yaolinux.org/yaolinux/files/$name-$version.tar.xz)
+[ -z "$patchname" ] || source+=" $patchname"
+
+build () {
+cd $name-$version
+[ -z "$patchname" ] || patch -Np1 -i ../$patchname
+make DESTDIR=$PKG install
+}
