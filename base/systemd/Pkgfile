@@ -32,6 +32,7 @@ meson --prefix=/usr                \
       -Dfirstboot=false            \
       -Dinstall-tests=false        \
       -Dldconfig=false             \
+      -Dmount-path=/bin/mount      \
       -Drootprefix=                \
       -Drootlibdir=/lib            \
       -Dsplit-usr=true             \
