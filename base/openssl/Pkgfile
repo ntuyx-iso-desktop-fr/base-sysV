@@ -18,7 +18,6 @@ sed -i '/\} data/s/ =.*$/;\n    memset(\&data, 0, sizeof(data));/' \
   crypto/rand/rand_lib.c
 
 ./config --prefix=/usr \
-         --libdir=lib \
 	 --openssldir=/etc/ssl \
 	 shared \
 	 zlib-dynamic
