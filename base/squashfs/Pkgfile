@@ -8,12 +8,17 @@ packager="tnut <tnut@nutyx.org>"
 
 name=squashfs
 version=4.3
-release=2
 
-source=(http://downloads.sourceforge.net/sourceforge/$name/$name$version.tar.gz)
+source=(http://downloads.sourceforge.net/sourceforge/$name/$name$version.tar.gz
+        http://rems.techozor.fr/sources/patch-gentoo-squashfs.patch
+        http://rems.techozor.fr/sources/patch-debian-squashfs.patch)
 
 build() {
 cd $name$version/squashfs-tools
+
+patch -p2 -i ../../patch-gentoo-squashfs.patch
+patch -p2 -i ../../patch-debian-squashfs.patch
+
 make XZ_SUPPORT=1 LZO_SUPPORT=1 LZMA_XZ_SUPPORT=1 LZA_SUPPORT=1
 mkdir -p $PKG/bin
 make INSTALL_DIR=$PKG/bin install
