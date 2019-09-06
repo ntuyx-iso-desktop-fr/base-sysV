@@ -18,7 +18,7 @@ sed -i 's/extras//' Makefile.in
 make
 
 # Some checks fails
-make check || true
+# make check || true
 
 make DESTDIR=$PKG install
 
