@@ -41,6 +41,7 @@ gettext
 libelf
 libffi
 openssl
+sqlite
 python
 ninja
 meson
