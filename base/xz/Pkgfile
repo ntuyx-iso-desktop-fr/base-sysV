@@ -21,12 +21,10 @@ make
 
 make DESTDIR=$PKG install
 
-mv -v   $PKG/usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} $PKG/bin
-
 mkdir -pv $PKG/{,usr/}lib
 mv -v $PKG/usr/lib/liblzma.so.* \
       $PKG/lib
-ln -svf ../../lib/liblzma.so.$version $PKG/usr/lib/liblzma.so
+ln -svf ../../lib/$(readlink $PKG/usr/lib/liblzma.so) $PKG/usr/lib/liblzma.so
 }
 devel()
 {
