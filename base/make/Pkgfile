@@ -9,7 +9,7 @@ name=make
 version=4.2.1
 release=1
 
-source=(http://ftp.gnu.org/gnu/make/make-$version.tar.bz2)
+source=(http://ftp.gnu.org/gnu/make/make-$version.tar.gz)
 prepare() {
 cd $name-$version
 sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
@@ -22,5 +22,4 @@ build() {
 make
 
 make DESTDIR=$PKG install
-
 }
