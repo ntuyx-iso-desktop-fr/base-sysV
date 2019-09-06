@@ -24,7 +24,7 @@ sed -i '/\} data/s/ =.*$/;\n    memset(\&data, 0, sizeof(data));/' \
 
 make
 
-sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+# sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
 
 make DESTDIR=$PKG MANSUFFIX=ssl install
 
