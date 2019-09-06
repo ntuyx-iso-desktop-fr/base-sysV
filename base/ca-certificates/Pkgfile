@@ -3,8 +3,7 @@ url="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certda
 packager="tnut <tnut@nutyx.org>"
 
 name=ca-certificates
-version=0.8
-release=1
+version=0.9
 
 source=(https://github.com/djlucas/make-ca/archive/v0.8/make-ca-$version.tar.gz
 	http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
