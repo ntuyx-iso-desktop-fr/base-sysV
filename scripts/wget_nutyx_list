@@ -92,6 +92,7 @@ d92ab59aabf5173f2a59089531e30dbf  squashfs4.3.tar.gz
 b5c184b13b6b5de32af630af2fd013fd  sudo-1.8.27.tar.gz
 c5953c24c850b44fcf714326e567dc37  systemd-241.tar.gz
 6942e1a9032e19da6639f9705241d119  systemd-man-pages-241.tar.xz
+bb26f26d7c3a17d1888ab3171366906b  systemd-241-networkd_and_rdrand_fixes-1.patch
 83e38700a80a26e30b2df054e69956e5  tar-1.32.tar.xz
 aa0a121d95a0e7b73a036f26028538d4  tcl8.6.9-src.tar.gz
 5231da3e6aa106cd0532b8609e5b3702  texinfo-6.6.tar.xz
