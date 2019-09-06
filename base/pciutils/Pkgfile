@@ -4,9 +4,9 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=pciutils
-version=3.5.6
+version=3.6.2
 
-source=(  https://www.kernel.org/pub/software/utils/pciutils/$name-$version.tar.xz)
+source=(https://www.kernel.org/pub/software/utils/pciutils/$name-$version.tar.xz)
 
 PKGMK_GROUPS=(devel man)
 
