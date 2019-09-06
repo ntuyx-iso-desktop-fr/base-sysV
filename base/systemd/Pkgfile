@@ -15,13 +15,22 @@ cd $name-$version
 
 patch -Np1 -i ../systemd-$version-networkd_and_rdrand_fixes-1.patch
 
+sed '177,$ d' -i src/resolve/meson.build
+
 sed -i '1506,1508 s/</>/' src/shared/seccomp-util.c
 
 sed -i 's/GROUP="render", //' rules/50-udev-default.rules.in
 
-mkdir -p build
+[ -L /tools ] && \
+for file in /tools/lib/lib{blkid,mount,uuid}.so*; do
+    ln -sf $file /usr/lib/
+done
+
+mkdir -pv build
 cd       build
 
+PKG_CONFIG_PATH="/usr/lib/pkgconfig:/tools/lib/pkgconfig" \
+LANG=en_US.UTF-8                   \
 CFLAGS+=" -Wno-format-overflow"     \
 meson --prefix=/usr                \
       --sysconfdir=/etc            \
@@ -33,6 +42,9 @@ meson --prefix=/usr                \
       -Dinstall-tests=false        \
       -Dldconfig=false             \
       -Dmount-path=/bin/mount      \
+      -Dsulogin-path=/sbin/sulogin \
+      -Dumount-path=/bin/umount    \
+      -Dkmod-path=/bin/kmod        \
       -Drootprefix=                \
       -Drootlibdir=/lib            \
       -Dsplit-usr=true             \
@@ -46,4 +58,58 @@ meson --prefix=/usr                \
 
 LC_ALL="en_US.utf8" LANG="en_US.utf8" ninja
 DESTDIR=$PKG LC_ALL="en_US.utf8" LANG="en_US.utf8" ninja install
+
+rm -fv /usr/bin/xsltproc
+
+}# Disable service systemd-networkd
+unlink $PKG/etc/systemd/system/dbus-org.freedesktop.network1.service
+unlink $PKG/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+unlink $PKG/etc/systemd/system/sockets.target.wants/systemd-networkd.socket
+unlink $PKG/etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
+
+# Disable service systemd-resolved
+unlink $PKG/etc/systemd/system/dbus-org.freedesktop.resolve1.service
+unlink $PKG/etc/systemd/system/multi-user.target.wants/systemd-resolved.service
+
+rm -f $PKG/usr/lib/tmpfiles.d/systemd-nologin.conf
+
+chmod 755 $PKG/lib/systemd/systemd-user-sessions
+
+rm $PKG/usr/lib/tmpfiles.d/home.conf
+
+cat > $PKG/etc/pam.d/systemd-user << "EOF"
+# Begin /etc/pam.d/systemd-user
+
+account  required pam_access.so
+account  include  system-account
+
+session  required pam_env.so
+session  required pam_limits.so
+session  required pam_unix.so
+session  required pam_loginuid.so
+session  optional pam_keyinit.so force revoke
+session  optional pam_systemd.so
+
+auth     required pam_deny.so
+password required pam_deny.so
+
+# End /etc/pam.d/systemd-user
+EOF
+
+cat > $PKG/usr/lib/os-release <<EOF
+# Begin /etc/os-release
+
+NAME=YaoLinuX
+VERSION=$yao_version
+ID=yaolinux
+VERSION_ID=$yao_version
+PRETTY_NAME="YaoLinuX $yao_version"
+ANSI_COLOR="0;34"
+CPE_NAME="cpe:/o:YaoLinuX_project:yaolinux:$yao_version"
+HOME_URL="http://www.yaolinux.org/"
+BUG_REPORT_URL="https://bugs.yaolinux.org"
+
+# End /etc/os-release
+EOF
+[ -L /tools ] && rm -fv /usr/lib/lib{blkid,uuid,mount}.so*
 }
