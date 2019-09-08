@@ -4,7 +4,7 @@ contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
 name=vim
-version=8.1.1535
+version=8.1.1846
 
 source=(ftp://ftp.vim.org/pub/vim/unix/vim-$version.tar.bz2)
 build() {
