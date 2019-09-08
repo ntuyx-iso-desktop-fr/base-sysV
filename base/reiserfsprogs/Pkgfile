@@ -10,6 +10,7 @@ source=(https://www.kernel.org/pub/linux/kernel/people/jeffm/reiserfsprogs/v${ve
 
 build() {
         cd $name-$version
+	sed -i '/parse_time.h/i #define _GNU_SOURCE' lib/parse_time.c
 	autoreconf -fiv
         ./configure --prefix=/usr \
                 --sbindir=/sbin
