@@ -1,4 +1,4 @@
-# Depends on: systemd expat xorg-libx11 xorg-libsm xorg-libice
+# Depends on: systemd expat
 description="Bus message system"
 url="http://dbus.freedesktop.org/releases/dbus"
 packager="tnut <tnut@nutyx.org>"
