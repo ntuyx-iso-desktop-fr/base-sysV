@@ -7,10 +7,12 @@ name=efibootmgr
 version=16
 
 run=(dosfstools)
-source=($url/releases/download/$version/$name-$version.tar.bz2)
+source=($url/releases/download/$version/$name-$version.tar.bz2
+        efibootmgr-tilt_slashes-func.patch)
 
 build() {
 cd $name-$version
+patch -Np1 -i ../efibootmgr-tilt_slashes-func.patch
 make EXTRA_CFLAGS="-Os" EFIDIR="/boot/EFI"
 install -d ${PKG}/usr/bin
 install -D -m0755 src/efibootmgr ${PKG}/usr/bin/efibootmgr
