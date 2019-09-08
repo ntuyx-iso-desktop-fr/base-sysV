@@ -8,8 +8,7 @@ contributors="Piernov"
 run=( perl )
 
 name=perl-image-exiftool
-version=10.55
-release=1
+version=11.50
 
 source=(http://www.cpan.org/authors/id/E/EX/EXIFTOOL/Image-ExifTool-$version.tar.gz)
 
