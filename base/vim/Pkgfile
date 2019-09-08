@@ -6,7 +6,7 @@ packager="tnut <tnut@nutyx.org>"
 name=vim
 version=8.1.1846
 
-source=(ftp://ftp.vim.org/pub/vim/unix/vim-$version.tar.bz2)
+source=(https://github.com/vim/vim/archive/v$version/vim-$version.tar.gz)
 build() {
 cd vim81
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
