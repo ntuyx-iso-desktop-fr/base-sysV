@@ -21,8 +21,4 @@ make
 make DESTDIR=$PKG install
 
 mv $PKG/usr/sbin $PKG/sbin
-
-# service
-cd ../nutyx-${nutyx_version}
-make DESTDIR=$PKG install-service-bridge
 }
