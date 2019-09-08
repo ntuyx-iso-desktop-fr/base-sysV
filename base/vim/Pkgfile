@@ -8,7 +8,7 @@ version=8.1.1846
 
 source=(https://github.com/vim/vim/archive/v$version/vim-$version.tar.gz)
 build() {
-cd vim81
+cd $name-$version
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
 ./configure --prefix=/usr \
