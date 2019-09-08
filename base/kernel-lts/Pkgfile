@@ -60,6 +60,7 @@ cd $SRC/linux-${_version}
 make INSTALL_MOD_PATH=$PKG modules_install
 
 KERNEL_VERSION="${version}-YaoLinuX-lts"
+KERNEL_DIR="$PKG/lib/modules/${KERNEL_VERSION}/build"
 
 # Virtualbox
 cd $SRC
@@ -75,7 +76,7 @@ do
   sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
 done
 
-KERN_VER=${KERNEL_VERSION} make
+KERN_DIR=${KERNEL_DIR} KERN_VER=${KERNEL_VERSION} make
 
 for i in *.ko
 do
@@ -98,7 +99,7 @@ do
   sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
 done
 
-KERN_VER=${KERNEL_VERSION} make all
+KERN_DIR=${KERNEL_DIR} KERN_VER=${KERNEL_VERSION} make all
 
 for i in *.ko
 do
