@@ -1,9 +1,9 @@
-# Depends on:  python-setuptools ninja libffi 
-
 description="Meson is an open source build system meant to be both extremely fast, as user friendly as possible"
 url="http://mesonbuild.com/"
 contributors="Jayce, Greg"
 packager="tnut <tnut@nutyx.org>"
+
+makedepends=(ninja libffi)
 
 name=meson
 version=0.51.1
