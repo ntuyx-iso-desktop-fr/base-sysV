@@ -10,7 +10,7 @@ version=20190903
 build() {
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git \
 firmware
-for i in $(find firmware -name '*.c' \
+find firmware -name '*.c' \
 -or -name '*.h' \
 -or -name '*.asm' \
 -or -name 'Makefile' \
@@ -19,9 +19,9 @@ for i in $(find firmware -name '*.c' \
 -or -name "README" \
 -or -name '*.pl' \
 -or -name '*.pst' \
--or -name '*.txt'); do rm -rv $i; done
+-or -name '*.txt') -delete
 
-find firmware \( -type d -and -empty \) | xargs rm -rv
+find firmware \( -type d -and -empty \) -delete
 rm -rvf firmware/cis/src
 rm -rvf firmware/usbdux
 rm -rvf firmware/carl9170fw
