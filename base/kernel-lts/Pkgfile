@@ -17,19 +17,12 @@ _version=${version:0:4}
 
 run=(yaolinux)
 
-# Virtualbox
-vb_version=6.0.12
-buildrelease=133076
-_VBARCH=amd64
-
 ## Download all the sources
 #
 
-source=(\
-$url/pub/linux/kernel/v4.x/linux-${_version}.tar.xz
-$url/pub/linux/kernel/v4.x/patch-$version.xz
-http://download.virtualbox.org/virtualbox/${vb_version}/VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run
-config_64)
+source=($url/pub/linux/kernel/v4.x/linux-${_version}.tar.xz
+        $url/pub/linux/kernel/v4.x/patch-$version.xz
+        config_64)
 
 ## Time to build everything
 #
@@ -60,53 +53,6 @@ cd $SRC/linux-${_version}
 make INSTALL_MOD_PATH=$PKG modules_install
 
 KERNEL_VERSION="${version}-YaoLinuX-lts"
-KERNEL_DIR="$PKG/lib/modules/${KERNEL_VERSION}/build"
-
-# Virtualbox
-cd $SRC
-# Modules host
-
-sh VirtualBox-${vb_version}-${buildrelease}-Linux_${_VBARCH}.run --target vb --keep --noexec
-cd vb
-tar xfj VirtualBox.tar.bz2
-cd src/vboxhost/
-
-for i in $(find . -name Makefile.include.header)
-do
-  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
-done
-
-KERN_DIR=${KERNEL_DIR} KERN_VER=${KERNEL_VERSION} make
-
-for i in *.ko
-do
-	install -D -m0644 $i \
-	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
-done
-
-# Modules guest
-mkdir $SRC/vb-guest
-cd    $SRC/vb-guest
-
-bsdtar -xf ../vb/additions/VBoxGuestAdditions.iso
-sh  VBoxLinuxAdditions.run --target vb --keep --noexec
-cd vb
-tar xfj VBoxGuestAdditions-x86.tar.bz2
-cd src/vboxguest-${vb_version}
-
-for i in $(find . -name Makefile.include.header)
-do
-  sed -i "s@/lib/modules/@$PKG/lib/modules/@" $i
-done
-
-KERN_DIR=${KERNEL_DIR} KERN_VER=${KERNEL_VERSION} make all
-
-for i in *.ko
-do
-	install -D -m0644 $i \
-	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
-done
-
 
 # depmod needed
 depmod -b $PKG -a ${KERNEL_VERSION}
