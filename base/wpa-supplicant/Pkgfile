@@ -1,9 +1,9 @@
-# Depends on: libnl
-
 description="A utility providing key negotiation for WPA wireless networks"
 url="http://hostap.epitest.fi/wpa_supplicant"
-packager="tnut tnut@nutyx.org>"
-contributors="Pierre B, tnut, greg"
+packager="Yaolinux Team"
+maintainer="rems"
+
+makedepends=(libnl dbus)
 
 name=wpa-supplicant
 version=2.9
