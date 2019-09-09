@@ -1,11 +1,11 @@
-# Depends on: efibootmgr efivar freetype
 description="The GRUB package contains the GRand Unified Bootloader, EFI version"
 url="http://www.gnu.org/software/grub/"
 packager="tnut <tnut@nutyx.org>"
 
 name=grub-efi
-version=2.02~beta3
-release=3
+version=2.04
+
+makedepends=(efibootmgr efivar freetype)
 run=(efivar)
 
 source=(http://alpha.gnu.org/gnu/grub/grub-$version.tar.xz)
