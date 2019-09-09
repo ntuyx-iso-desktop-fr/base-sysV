@@ -10,7 +10,7 @@ version=20190903
 build() {
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git \
 firmware
-find firmware -name '*.c' \
+for i in $(find firmware -name '*.c' \
 -or -name '*.h' \
 -or -name '*.asm' \
 -or -name 'Makefile' \
@@ -19,7 +19,8 @@ find firmware -name '*.c' \
 -or -name "README" \
 -or -name '*.pl' \
 -or -name '*.pst' \
--or -name '*.txt' | xargs rm -rv
+-or -name '*.txt'); do rm -rv $i; done
+
 find firmware \( -type d -and -empty \) | xargs rm -rv
 rm -rvf firmware/cis/src
 rm -rvf firmware/usbdux
