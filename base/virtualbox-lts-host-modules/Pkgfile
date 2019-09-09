@@ -24,7 +24,7 @@ source=(http://download.virtualbox.org/virtualbox/${vb_version}/VirtualBox-${vb_
 
 build(){
 
-KERNEL_VERSION="$(kernelversion)"
+KERNEL_VERSION="${kernelversion}"
 
 # Virtualbox
 cd $SRC
