@@ -19,7 +19,7 @@ sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
     -i include/freetype/config/ftoption.h
 
 ./configure --prefix=/usr \
-            --enble-freetype-config \
+            --enable-freetype-config \
             --disable-static
 make
 make DESTDIR=$PKG install
