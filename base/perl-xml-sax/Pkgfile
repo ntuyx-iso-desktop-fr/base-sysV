@@ -13,9 +13,9 @@ source=(http://www.cpan.org/authors/id/G/GR/GRANTM/XML-SAX-$version.tar.gz)
 
 build() {
     cd XML-SAX-$version
-    yes | perl Makefile.PL
+    yes | PERL_MM_USE_DEFAULT=1 perl Makefile.PL
     make test
-    make install INSTALLDIRS=vendor DESTDIR=$PKG || exit 1
+    PERLLIB=blib/lib make install INSTALLDIRS=vendor DESTDIR=$PKG
 
     # Remove perllocal.pod and .packlist if present in the package
     for i in perllocal.pod .packlist; do
