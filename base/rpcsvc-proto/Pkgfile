@@ -1,0 +1,16 @@
+description="Contains the rcpsvc protocol.x files and headers"
+packager="tnut <tnut@nutyx.org>"
+
+name=rpcsvc-proto
+version=1.4
+
+source=(https://github.com/thkukuk/rpcsvc-proto/releases/download/v$version/rpcsvc-proto-$version.tar.gz)
+
+build() {
+cd $name-$version
+
+./configure --sysconfdir=/etc
+
+make
+make DESTDIR=$PKG install
+}
