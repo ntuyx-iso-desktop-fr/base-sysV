@@ -19,7 +19,7 @@ find firmware -name '*.c' \
 -or -name "README" \
 -or -name '*.pl' \
 -or -name '*.pst' \
--or -name '*.txt') -delete
+-or -name '*.txt' -delete
 
 find firmware \( -type d -and -empty \) -delete
 rm -rvf firmware/cis/src
