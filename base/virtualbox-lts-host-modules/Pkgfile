@@ -8,6 +8,8 @@ PKGMK_IGNORE_UNPACK="yes"
 name=virtualbox-lts-host-modules
 
 version=6.0.12
+release=2
+
 kernelversion=$(basename /lib/modules/*)
 
 makedepends=(kernel-lts)
