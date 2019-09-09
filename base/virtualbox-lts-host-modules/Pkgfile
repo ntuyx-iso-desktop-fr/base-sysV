@@ -45,6 +45,5 @@ do
 	$PKG/lib/modules/${KERNEL_VERSION}/misc/$i
 done
 
-# depmod needed
-depmod -b $PKG -a ${KERNEL_VERSION}
+# depmod needed in post-install
 }
