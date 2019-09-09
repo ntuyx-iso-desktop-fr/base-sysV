@@ -1,11 +1,11 @@
-# Depends on: git
-
 description="The linux kernel firmware set of files. More and more hardware requires this package"
 packager="tnut <tnut@nutyx.org>"
 
+makedepends=(git)
+
 name=linux-firmware
-version=20181018
-release=1
+version=20190903
+
 
 build() {
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git \
@@ -21,12 +21,12 @@ find firmware -name '*.c' \
 -or -name '*.pst' \
 -or -name '*.txt' | xargs rm -rv
 find firmware \( -type d -and -empty \) | xargs rm -rv
-rm -rf firmware/cis/src
-rm -rf firmware/usbdux
-rm -rf firmware/carl9170fw
-rm -rf firmware/.git
+rm -rvf firmware/cis/src
+rm -rvf firmware/usbdux
+rm -rvf firmware/carl9170fw
+rm -rvf firmware/.git
+
 mkdir $PKG/lib
-cp -a firmware \
-$PKG/lib
+cp -a firmware $PKG/lib
 
 }
