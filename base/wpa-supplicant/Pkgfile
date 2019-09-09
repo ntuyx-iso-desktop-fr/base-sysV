@@ -57,7 +57,7 @@ install -v -dm755 $PKG/lib/systemd/system/
 install -v -m644 systemd/*.service $PKG/lib/systemd/system/
 
 install -v -d -m755 $PKG/usr/share/dbus-1/system-services/
-install -v -m644 dbus/fi.{epitest.hostap.WPASupplicant,w1.wpa_supplicant1}.service \
+install -v -m644 dbus/fi.{epitest.hostap.WPASupplicant,fi.w1.wpa_supplicant1.service}.service \
                  $PKG/usr/share/dbus-1/system-services/
 install -v -d -m755 $PKG/etc/dbus-1/system.d
 install -v -m644 dbus/dbus-wpa_supplicant.conf \
