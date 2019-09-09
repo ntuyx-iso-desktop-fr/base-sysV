@@ -8,7 +8,7 @@ makedepends=(libpng)
 name=freetype
 version=2.10.1
 
-source=(http://downloads.sourceforge.net/$name/$name-$version.tar.bz2)
+source=(https://downloads.sourceforge.net/freetype/$name-$version.tar.xz)
 
 
 build() {
