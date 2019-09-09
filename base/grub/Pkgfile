@@ -4,7 +4,7 @@ packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
 name=grub
-version=2.02
+version=2.04
 
 source=(http://ftp.gnu.org/gnu/grub/grub-$version.tar.xz
 	grub.cfg)
