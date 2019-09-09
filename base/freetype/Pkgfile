@@ -28,7 +28,7 @@ cd ..
 
 mkdir docs
 wget http://downloads.sourceforge.net/freetype/freetype-doc-$version.tar.xz --no-check-certificate
-tar -xf freetype-doc-$version.tar.bz2 --strip-components=2 -C docs
+tar -xf freetype-doc-$version.tar.xz --strip-components=2 -C docs
 install -v -m755 -d $PKG/usr/share/doc/$name-$version
 cp -v -R docs/*     $PKG/usr/share/doc/$name-$version
 }
