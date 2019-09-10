@@ -12,7 +12,7 @@ RemainAfterExit=yes
 ExecStart=/usr/sbin/update-pciids
 EOF
 
-[ -f /lib/systemd/system/update-pciids.timer ] && cat > /lib/systemd/system/update-pciids.timer << "EOF"
+[ ! -f /lib/systemd/system/update-pciids.timer ] && cat > /lib/systemd/system/update-pciids.timer << "EOF"
 [Unit]
 Description=Update pci.ids file weekly
 
