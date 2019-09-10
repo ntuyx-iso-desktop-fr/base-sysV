@@ -5,6 +5,7 @@ packager="Yaolinux Team"
 
 name=dhcpcd
 version=7.1.1
+release=2
 yaolinux_version=1.0-RC1
 
 source=(http://roy.marples.name/downloads/$name/$name-$version.tar.xz
