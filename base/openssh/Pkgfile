@@ -1,10 +1,10 @@
-# Depends on: libedit
-
 description="Free version of the SSH connectivity tools"
 url="http://www.openssh.org/"
 
-contributors="Pierre B"
-packager="tnut <tnut@nutyx.org>"
+maintainer="rems"
+packager="Yaolinux Team"
+
+makedepends=(libedit)
 
 name=openssh
 version=8.0p1
