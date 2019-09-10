@@ -8,8 +8,7 @@ contributors="Pierre B"
 run=( perl )
 
 name=perl-mozilla-ca
-version=20160104
-release=1
+version=20180117
 
 source=(http://search.cpan.org/CPAN/authors/id/A/AB/ABH/Mozilla-CA-$version.tar.gz)
 
