@@ -1,5 +1,3 @@
-# Depends on: perl
-
 description="Cross-platform path specification manipulation"
 url="http://search.cpan.org/dist/Path-Class/"
 packager="tnut <tnut@nutyx.org>"
