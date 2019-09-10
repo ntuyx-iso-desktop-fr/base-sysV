@@ -4,8 +4,7 @@ packager="tnut <tnut@nutryx.org>"
 contributors="Pierre B"
 
 name=keyutils
-version=1.5.9
-release=1
+version=1.5.10
 
 source=( http://people.redhat.com/~dhowells/$name/$name-$version.tar.bz2 )
 
