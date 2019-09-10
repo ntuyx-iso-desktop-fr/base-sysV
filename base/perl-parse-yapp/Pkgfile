@@ -20,4 +20,5 @@ make
 package() {
 cd Parse-Yapp-$version
 make install DESTDIR=$PKG
+find $PKG -name .packlist -delete
 }
