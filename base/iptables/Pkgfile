@@ -1,7 +1,8 @@
 description="The principal firewall tool for Linux."
 url="http://www.iptables.org/"
-packager="tnut <tnut@nutyx.org>"
-contributors="Pierre B"
+
+packager="Yaolinux Team"
+contributors="Dania"
 
 name=iptables
 version=1.8.2
@@ -15,12 +16,13 @@ build() {
 cd $name-$version
 
 ./configure --prefix=/usr \
---sbindir=/sbin \
---with-xtlibdir=/lib/xtables \
---with-pkgconfigdir=/usr/lib/pkgconfig \
---enable-libipq \
---disable-nftables \
---enable-devel
+            --sbindir=/sbin \
+            --with-xtlibdir=/lib/xtables \
+            --with-pkgconfigdir=/usr/lib/pkgconfig \
+            --enable-libipq \
+            --disable-nftables \
+            --enable-devel
+
 make
 make DESTDIR=$PKG install
 
