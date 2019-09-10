@@ -1,25 +1,24 @@
-# Depends on: openssh
-
-maintainer="Junio C Hamano, Linus Torvalds"
-packager="tnut <tnut@nutyx.org>"
-contributors="Pierre B"
-
 description="Distributed version control system designed to handle small to very large projects."
 url="http://git-scm.com/"
 
+maintainer="rems"
+packager="Yaolinux Team"
+
+makedepends=(openssh)
+run=(openssh)
+
 name=git
 version=2.23.0
+release=2
 
-source=( https://www.kernel.org/pub/software/scm/$name/$name{,-manpages,-htmldocs}-$version.tar.xz)
-run=(openssh)
+source=(https://www.kernel.org/pub/software/scm/$name/$name{,-manpages,-htmldocs}-$version.tar.xz)
 
 build() {
 cd $name-$version
 
 ./configure --prefix=/usr \
             --libexecdir=/usr/lib \
-            --with-gitconfig=/etc/gitconfig \
-            --without-python
+            --with-gitconfig=/etc/gitconfig
 
 make
 make DESTDIR=$PKG install
