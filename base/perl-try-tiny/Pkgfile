@@ -1,14 +1,12 @@
-# Depends on: perl
-
 description="Minimal try/catch with proper localization of $@"
 url="http://search.cpan.org/dist/Try-Tiny/"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
+makedepends=(perl)
 run=( perl )
 name=perl-try-tiny
-version=0.29
-release=1
+version=0.30
 
 source=(http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Try-Tiny-$version.tar.gz)
 
