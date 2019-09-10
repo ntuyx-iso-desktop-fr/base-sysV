@@ -3,10 +3,11 @@ url="http://sourceware.org/lvm2/"
 contributors="Pierre B"
 packager="tnut <tnut@nutyx.org>"
 
-makedepends=(libaio)
+makedepends=(systemd libaio)
 
 name=lvm2
 version=2.03.05
+release=2
 
 source=(ftp://sources.redhat.com/pub/lvm2/LVM2.$version.tgz)
 
