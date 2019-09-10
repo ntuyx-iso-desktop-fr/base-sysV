@@ -1,14 +1,14 @@
-# Depends on: perl openssl
-
 description="OpenSSL's multiprecision integer arithmetic"
 url="http://search.cpan.org/"
+
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
-run=( perl )
+
+makedepends=(perl openssl)
+run=(perl)
 
 name=perl-crypt-openssl-bignum
-version=0.06
-release=1
+version=0.09
 
 source=(http://search.cpan.org/CPAN/authors/id/K/KM/KMX/Crypt-OpenSSL-Bignum-$version.tar.gz)
 
