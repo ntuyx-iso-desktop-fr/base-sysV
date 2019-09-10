@@ -1,0 +1,26 @@
+description="A very fast Perl module for parsing the Linux desktop files."
+url="https://metacpan.org/release/Linux-DesktopFiles"
+
+makedepends=(perl)
+run=(perl)
+
+name=perl-linux-desktopfiles
+version=0.25
+
+source=(https://cpan.metacpan.org/authors/id/T/TR/TRIZEN/Linux-DesktopFiles-$version.tar.gz)
+
+build() {
+   export PERL_MM_USE_DEFAULT=1 PERL5LIB=""                 \
+        PERL_AUTOINSTALL=--skipdeps                            \
+        PERL_MM_OPT="INSTALLDIRS=vendor DESTDIR=$PKG"     \
+        PERL_MB_OPT="--installdirs vendor --destdir $PKG" \
+        MODULEBUILDRC=/dev/null
+
+   cd Linux-DesktopFiles-$version
+       /usr/bin/perl Makefile.PL
+       make
+
+   make install
+   rm -r "$PKG/usr/lib"
+   find $PKG -name .packlist -o -name perllocal.pod -delete
+}
