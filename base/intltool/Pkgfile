@@ -3,8 +3,12 @@ url="https://github.com/nutyx"
 packager="tnut <tnut@nutyx.org>"
 maintainer="tnut <tnut@nutyx.org>"
 
+makedepends=(perl-xml-parser)
+run=(perl-xml-parser)
+
 name=intltool
 version=0.51.0
+release=2
 
 source=(http://launchpad.net/$name/trunk/$version/+download/$name-$version.tar.gz)
 
@@ -14,6 +18,6 @@ sed -i 's:\\\${:\\\$\\{:' intltool-update.in
 ./configure --prefix=/usr
 make
 make DESTDIR=$PKG install
-mkdir -pv $PKG/usr/share/doc/intltool-0.51.0
-install -v -Dm644 doc/I18N-HOWTO $PKG/usr/share/doc/intltool-0.51.0/I18N-HOWTO
+mkdir -pv $PKG/usr/share/doc/intltool-$version
+install -v -Dm644 doc/I18N-HOWTO $PKG/usr/share/doc/intltool-$version/I18N-HOWTO
 }
