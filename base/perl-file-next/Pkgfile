@@ -9,6 +9,7 @@ run=( perl )
 
 name=perl-file-next
 version=1.16
+release=2
 
 source=(http://search.cpan.org/CPAN/authors/id/P/PE/PETDANCE/File-Next-$version.tar.gz)
 
@@ -17,4 +18,6 @@ build() {
     perl Makefile.PL INSTALLDIRS=vendor
     make
     make DESTDIR=$PKG install
+    # Remove .packlist if present in the package
+    find $PKG -name '.packlist' -delete
 }
