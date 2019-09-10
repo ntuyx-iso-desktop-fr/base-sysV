@@ -1,15 +1,14 @@
-# Depends on: openssl perl
-
 description="Perl extension for using OpenSSL"
 url="http://search.cpan.org/dist/Net-SSLeay"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
-run=( perl )
+makedepends=(openssl perl)
+run=(perl)
+
 _cpanname=Net-SSLeay
 name=perl-net-ssleay
-version=1.81
-release=1
+version=1.85
 
 source=(http://www.cpan.org/authors/id/M/MI/MIKEM/${_cpanname}-$version.tar.gz)
 
@@ -30,5 +29,5 @@ install -D -m644 README $PKG/usr/share/licenses/$name/LICENSE
 find $PKG \
          -name '*.bs' -or \
          -name '.packlist' -or \
-         -name 'perllocal.pod' | xargs rm
+         -name 'perllocal.pod' -delete
 }
