@@ -7,20 +7,19 @@ contributors="alienus at nutyx dot org, tnut at nutyx dot org"
 packager="tnut <tnut@tnut@nutyx.org>"
 
 name=btrfs-progs
-version=4.16.1
+version=5.2.2
 
 source=(https://www.kernel.org/pub/linux/kernel/people/kdave/$name/$name-v$version.tar.xz)
 
 build(){
 cd $name-v$version
-sed -i '1,100 s/\.gz//g' Documentation/Makefile.in
-./configure \
---prefix=/usr \
---libdir=/lib \
---bindir=/bin \
---disable-zstd \
---disable-documentation \
---disable-python
+
+./configure --prefix=/usr \
+            --libdir=/lib \
+            --bindir=/bin \
+            --disable-zstd \
+            --disable-documentation 
+
 make
 make DESTDIR=$PKG install
 
@@ -28,6 +27,6 @@ make DESTDIR=$PKG install
 mkdir -p $PKG/{sbin,usr/lib}
 ln -sfv ../../lib/$(readlink $PKG/lib/libbtrfs.so) $PKG/usr/lib/libbtrfs.so
 ln -sfv ../../lib/$(readlink $PKG/lib/libbtrfsutil.so) $PKG/usr/lib/libbtrfsutil.so &&
-rm -v $PKG/lib/libbtrfs.{a,so}
+rm -v $PKG/lib/libbtrfs.{a,so} $PKG/lib/libbtrfsutil.{a,so}
 mv -v $PKG/bin/{mkfs,fsck}.btrfs $PKG/sbin
 }
