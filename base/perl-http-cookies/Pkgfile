@@ -1,15 +1,13 @@
-# Depends on: perl perl-http-date perl-http-message
-
 description="HTTP cookie jars"
 url="http://search.cpan.org/"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
-run=( perl )
+makedepends=(perl perl-http-date perl-http-message)
+run=(perl)
 
 name=perl-http-cookies
-version=6.01
-release=1
+version=6.04
 
 source=(http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTTP-Cookies-$version.tar.gz)
 
@@ -21,5 +19,5 @@ make DESTDIR=$PKG install
 find $PKG \
          -name '*.bs' -or \
          -name '.packlist' -or \
-         -name 'perllocal.pod' | xargs rm
+         -name 'perllocal.pod' -delete
 }
