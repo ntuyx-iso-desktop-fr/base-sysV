@@ -8,8 +8,7 @@ contributors="Pierre B"
 run=( perl )
 
 name=perl-net-dns
-version=1.12
-release=1
+version=1.19
 
 source=(http://www.cpan.org/authors/id/N/NL/NLNETLABS/Net-DNS-$version.tar.gz)
 
@@ -20,5 +19,5 @@ make
 make DESTDIR=$PKG install
 find $PKG -iname '*.pod' -or \
 -name '.packlist' -or \
--name 'perllocal.pod' | xargs rm
+-name 'perllocal.pod' -delete
 }
