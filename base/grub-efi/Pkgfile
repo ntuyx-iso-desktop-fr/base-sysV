@@ -4,6 +4,7 @@ packager="tnut <tnut@nutyx.org>"
 
 name=grub-efi
 version=2.04
+release=2
 
 makedepends=(efibootmgr efivar freetype)
 run=(efivar)
@@ -14,13 +15,18 @@ PKGMK_GROUPS=(man locale)
 
 build() {
  cd grub-$version
- ./configure --prefix=/usr --sysconfdir=/etc \
- --sbindir=/sbin \
- --disable-efiemu --enable-grub-mkfont \
- --with-platform=efi --target=$PKGMK_ARCH \
- --program-prefix="" --program-suffix="-efi" \
- --with-bootdir="/boot" \
- --with-grubdir="grub-efi"  --disable-werror
+ ./configure --prefix=/usr \
+             --sysconfdir=/etc \
+             --sbindir=/sbin \
+             --disable-efiemu \
+             --enable-grub-mkfont \
+             --with-platform=efi \
+             --target=$PKGMK_ARCH \
+             --program-prefix="" \
+             --program-suffix="-efi" \
+             --with-bootdir="/boot" \
+             --with-grubdir="grub-efi"  \
+             --disable-werror
 
  make
 
