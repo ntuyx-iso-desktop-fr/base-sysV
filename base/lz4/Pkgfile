@@ -4,8 +4,7 @@ maintainer="Yann Collet"
 packager="tnut <tnut@nutyx.org>"
 
 name=lz4
-version=r131
-release=1
+version=1.9.1
 
 source=(https://github.com/Cyan4973/lz4/archive/r131.tar.gz)
 
