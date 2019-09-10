@@ -6,7 +6,7 @@ packager="tnut <tnut@nutyx.org>"
 
 name=lzo
 version=2.10
-release=1
+release=2
 
 source=(  http://www.oberhumer.com/opensource/$name/download/$name-$version.tar.gz)
 
@@ -17,4 +17,5 @@ build() {
  --docdir=/usr/share/doc/lzo-$version
  make
  make DESTDIR=$PKG install
+ rm $PKG/usr/lib/liblzo2.la
 }
