@@ -1,6 +1,6 @@
 description="POSIX 1003.1e capabilities library"
 url="http://www.kernel.org/pub/linux/libs/security/linux-privs/"
-packager="rems"
+packager="Yaolinux Team"
 contributors="Pierre B"
 
 name=libcap
