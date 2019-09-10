@@ -1,14 +1,14 @@
-# Depends on: perl openssl 
-
 description="Interface to OpenSSL PRNG methods"
-url="http://search.cpan.org/"
+url="https://metacpan.org/pod/Crypt::OpenSSL::Random"
+
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
-run=( perl )
+makedepends=(perl openssl perl-crypt-openssl-guess)
+run=(perl-crypt-openssl-guess)
+
 name=perl-crypt-openssl-random
 version=0.11
-release=1
 
 source=(http://search.cpan.org/CPAN/authors/id/R/RU/RURBAN/Crypt-OpenSSL-Random-$version.tar.gz)
 
