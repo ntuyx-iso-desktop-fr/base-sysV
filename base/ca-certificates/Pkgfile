@@ -5,7 +5,7 @@ packager="tnut <tnut@nutyx.org>"
 name=ca-certificates
 version=0.9
 
-source=(https://github.com/djlucas/make-ca/archive/v0.8/make-ca-$version.tar.gz
+source=(https://github.com/djlucas/make-ca/archive/v$version/make-ca-$version.tar.gz
 	http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
 	http://www.cacert.org/certs/root.crt
         http://www.cacert.org/certs/class3.crt)
