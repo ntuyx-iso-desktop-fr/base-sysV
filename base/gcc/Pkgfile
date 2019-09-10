@@ -36,7 +36,7 @@ make
 
 make DESTDIR=$PKG install
 
-rm -rf $PKG/usr/lib/gcc/$(gcc -dumpmachine)/9.2.0/include-fixed/bits/
+rm -rvf $PKG/usr/lib/gcc/$(gcc -dumpmachine)/$version/include-fixed/bits/
 
 chown -v -R root:root \
     $PKG/usr/lib/gcc/*linux-gnu/$version/include{,-fixed}
