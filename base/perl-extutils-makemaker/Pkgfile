@@ -6,7 +6,7 @@ packager="tnut <tnut@nutyx.org>"
 
 run=( perl )
 name=perl-extutils-makemaker
-version=7.31_03
+version=7.34
 release=1
 
 source=(http://search.cpan.org/CPAN/authors/id/B/BI/BINGOS/ExtUtils-MakeMaker-$version.tar.gz)
@@ -22,8 +22,7 @@ build() {
     rm -r $PKG/usr/share/man
 
     # Remove perllocal.pod and .packlist if present in the package
-    for i in perllocal.pod .packlist; do
-        find $PKG -name "$i" -exec rm -rf {} \;
-    done
+    find $PKG -name .packlist or -name "perllocal.pod" -delete
+    
     rm $PKG/usr/bin/instmodsh
 }
