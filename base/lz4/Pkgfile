@@ -6,7 +6,9 @@ packager="tnut <tnut@nutyx.org>"
 name=lz4
 version=1.9.1
 
-source=(https://github.com/Cyan4973/lz4/archive/r131.tar.gz)
+PKGMK_KEEP_SOURCES="no"
+
+source=(https://github.com/Cyan4973/lz4/archive/v$version.tar.gz)
 
 build() {
 cd $name-$version
