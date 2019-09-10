@@ -8,7 +8,7 @@ alias=(card)
 PKGMK_IGNORE_RUNTIMEDEPS="no"
 run_devel=(autoconf automake acl.devel attr.devel \
 bison binutils.devel bzip2.devel curl.devel e2fsprogs.devel \
-expat.devel file.devel flex.devel gawk gawk.devel \
+systemd.devel expat.devel file.devel flex.devel gawk gawk.devel \
 gdbm.devel gettext.devel gmp.devel gperf kmod.devel iproute2.devel \
 libcap.devel libpipeline.devel m4 mpc.devel mpfr.devel \
 ncurses.devel openssl.devel pam.devel perl procps-ng.devel \
@@ -16,12 +16,14 @@ readline.devel rsync lvm2.devel libtool texinfo \
 texinfo.devel nasm groff make patch pkg-config \
 glibc.devel gcc.devel libarchive.devel \
 util-linux.devel xz.devel lzo.devel python \
-dialog.devel tar wget zlib.devel perl-xml-parser)
+dialog.devel tar curl zlib.devel meson ninja)
 
 PKGMK_GROUPS=(devel doc man)
 
 name=cards
 version=2.4.99.1
+release=2
+
 # patchname="$name-$version-consolidate-$release.patch"
 
 source=(http://downloads.tuxfamily.org/nutyx/files/cards-$version.tar.gz)
