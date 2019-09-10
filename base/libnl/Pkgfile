@@ -5,18 +5,19 @@ contributors="Pierre B"
 
 name=libnl
 version=3.4.0
+release=2
 
 source=(https://github.com/thom311/libnl/releases/download/libnl$(echo $version|sed 's/\./_/g')/$name-$version.tar.gz)
 build() {
 cd $name-$version
 ./configure --prefix=/usr \
---sysconfdir=/etc \
---disable-static
+            --sysconfdir=/etc \
+            --disable-static
 make
 make DESTDIR=$PKG install
 # Doc
 mkdir -p $PKG/usr/share/doc/$name-$version
-wget https://github.com/thom311/libnl/releases/download/libnl$(echo $version|sed 's/\./_/g')/libnl-doc-$version.tar.gz --no-check-certificate
+curl -O https://github.com/thom311/libnl/releases/download/libnl$(echo $version|sed 's/\./_/g')/libnl-doc-$version.tar.gz
 tar -xf libnl-doc-$version.tar.gz --strip-components=1 --no-same-owner \
 -C $PKG/usr/share/doc/$name-$version
 }
