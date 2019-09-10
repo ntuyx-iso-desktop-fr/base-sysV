@@ -5,6 +5,7 @@ packager="tnut <tnut@nutyx.org>"
 
 name=pciutils
 version=3.6.2
+release=2
 
 source=(https://www.kernel.org/pub/software/utils/pciutils/$name-$version.tar.xz)
 
