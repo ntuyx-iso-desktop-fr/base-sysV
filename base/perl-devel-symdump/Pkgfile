@@ -1,13 +1,11 @@
-# Depends on: perl
-
 description="Perl symbol table access and dumping"
 url="http://search.cpan.org/dist/Devel-Symdump"
 packager="tnut <tnut@nutyx.org>"
 
-run=( perl )
+makedepends=(perl)
+run=(perl)
 name=perl-devel-symdump
 version=2.18
-release=1
 
 source=(http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-$version.tar.gz)
 
@@ -18,7 +16,6 @@ build() {
     make install INSTALLDIRS=vendor DESTDIR=$PKG || exit 1
 
     # Remove perllocal.pod and .packlist if present in the package
-    for i in perllocal.pod .packlist; do
-        find $PKG -name "$i" -exec rm -rf {} \;
-    done
+    find $PKG -name .packlist -or \
+         -name '*.bs' -delete
 }
