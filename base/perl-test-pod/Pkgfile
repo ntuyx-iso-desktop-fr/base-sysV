@@ -1,15 +1,13 @@
-# Depends on: perl
-
 description="Check for POD errors in files"
 url="http://search.cpan.org/dist/Test-Pod/"
 packager="tnut <tnut@nutyx.org>"
 contributors="Alienus"
 
-run=( perl )
+makedepends=(perl)
+run=(perl)
 
 name=perl-test-pod
-version=1.51
-release=1
+version=1.52
 
 source=(http://search.cpan.org/CPAN/authors/id/E/ET/ETHER/Test-Pod-$version.tar.gz)
 
@@ -24,7 +22,3 @@ build() {
         find $PKG -name "$i" -exec rm -rf {} \;
     done
 }
-
-
-
-# NuTyX Pkgfile (http://nutyx.org)
