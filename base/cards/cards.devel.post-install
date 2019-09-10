@@ -7,10 +7,11 @@ xfce4 xfce4-extra \
 mate mate-extra \
 kde5 kde5-extra \
 lxqt lxqt-extra \
-lxde lxde-extra
+lxde lxde-extra \
+nos
 do
    if [ ! -f etc/ports/$i.cards ]; then
-      echo "host=rems.techozor.fr
+      echo "host=rems.yaolinux.org
 destination=/usr/ports/$i
 version=$VERSION
 collection=$i" > etc/ports/$i.cards
