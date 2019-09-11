@@ -3,9 +3,11 @@ url="http://curl.haxx.se"
 maintainer="Daniel Stenberg"
 packager="tnut <tnut@nutyx.org>"
 
+makedepends=(gnutls)
 
 name=curl
 version=7.65.3
+release=2
 
 source=(http://curl.haxx.se/download/$name-$version.tar.xz)
 
@@ -13,10 +15,14 @@ PKGMK_GROUPS=(devel doc man)
 
 build() {
 cd $name-$version
+
 ./configure --prefix=/usr \
---bindir=/bin  \
---with-ca-path=/etc/ssl/certs \
---enable-threaded-resolver
+            --bindir=/bin  \
+            --with-ca-bundle=/etc/pki/tls/certs/ca-bundle.crt \
+            --enable-threaded-resolver \
+	    --without-ssl \
+	    --with-gnutls
+
 make
 make DESTDIR=$PKG install
 
