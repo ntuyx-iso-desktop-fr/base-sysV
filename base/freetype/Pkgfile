@@ -3,7 +3,7 @@ url="http://www.freetype.org"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
-makedepends=(libpng)
+makedepends=(libpng curl)
 
 name=freetype
 version=2.10.1
