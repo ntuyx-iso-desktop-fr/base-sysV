@@ -5,6 +5,7 @@ packager="Yaolinux Team"
 
 name=gnutls
 version=3.6.9
+release=2
 
 makedepends=(nettle)
 
@@ -16,10 +17,9 @@ cd $name-$version
 ./configure --prefix=/usr \
             --docdir=/usr/share/doc/$name-$version \
             --disable-guile \
-            --without-p11-kit \
+            --with-default-trust-store-pkcs11="pkcs11:"
             --enable-openssl-compatibility \
             --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt \
-            --with-included-libtasn1 \
             --with-included-unistring
 
 make
