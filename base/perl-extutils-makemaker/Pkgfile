@@ -22,7 +22,7 @@ build() {
     rm -r $PKG/usr/share/man
 
     # Remove perllocal.pod and .packlist if present in the package
-    find $PKG -name .packlist or -name "perllocal.pod" -delete
+    find $PKG -name .packlist -or -name "perllocal.pod" -delete
     
     rm $PKG/usr/bin/instmodsh
 }
