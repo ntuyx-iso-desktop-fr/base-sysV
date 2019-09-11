@@ -20,7 +20,8 @@ cd $name-$version
             --without-p11-kit \
             --enable-openssl-compatibility \
             --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt \
-            --with-included-libtasn1
+            --with-included-libtasn1 \
+            --with-included-unistring
 
 make
 
