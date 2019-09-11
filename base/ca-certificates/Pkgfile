@@ -16,6 +16,7 @@ build() {
 
 cd make-ca-$version
 
+make all
 make DESTDIR=$PKG install
 
 install -vdm755 $PKG/{usr/sbin,etc/ssl/local}
