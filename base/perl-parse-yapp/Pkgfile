@@ -9,7 +9,7 @@ run=(perl)
 name=perl-parse-yapp
 version=1.21
 
-source=(http://www.cpan.org/authors/id/F/FD/FDESAR/Parse-Yapp-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-$version.tar.gz)
 
 build() {
 cd Parse-Yapp-$version
