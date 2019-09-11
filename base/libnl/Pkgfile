@@ -3,6 +3,8 @@ url="http://people.suug.ch/~tgr/libnl"
 packager="tnut <tnut@nutyx.org>"
 contributors="Pierre B"
 
+makedepends=(curl)
+
 name=libnl
 version=3.4.0
 release=2
