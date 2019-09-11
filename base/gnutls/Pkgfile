@@ -7,7 +7,7 @@ name=gnutls
 version=3.6.9
 release=2
 
-makedepends=(nettle libtasn1)
+makedepends=(nettle libtasn1 p11-kit)
 
 source=(ftp://ftp.gnupg.org/gcrypt/gnutls/v${version:0:3}/gnutls-$version.tar.xz)
 
