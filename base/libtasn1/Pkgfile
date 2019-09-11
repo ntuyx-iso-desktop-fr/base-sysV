@@ -1,0 +1,22 @@
+description="is a highly portable C library that encodes and decodes DER/BER data"
+url="https://ftp.gnu.org/gnu/libtasn1"
+
+maintainer="rems"
+packager="Yaolinux Team"
+
+name=libtasn1
+version=4.14
+
+source=(ftp://ftp.gnu.org/gnu/libtasn1/$name-$version.tar.gz)
+
+build() {
+cd $name-$version
+
+./configure --prefix=/usr \
+            --disable-static
+
+make
+
+make DESTDIR=$PKG install
+make -C doc/reference DESTDIR=$PKG install-data-local
+}
