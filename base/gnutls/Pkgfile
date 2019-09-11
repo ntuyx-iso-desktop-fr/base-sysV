@@ -17,7 +17,7 @@ cd $name-$version
 ./configure --prefix=/usr \
             --docdir=/usr/share/doc/$name-$version \
             --disable-guile \
-            --with-default-trust-store-pkcs11="pkcs11:"
+            --with-default-trust-store-pkcs11="pkcs11:" \
             --enable-openssl-compatibility \
             --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt \
             --with-included-unistring
