@@ -10,7 +10,8 @@ source=(https://ftp.gnu.org/gnu/nettle/$name-$version.tar.gz)
 
 build()
 {
-cd bison-$version
+cd $name-$version
+
 ./configure --prefix=/usr \
             --disable-static
 
