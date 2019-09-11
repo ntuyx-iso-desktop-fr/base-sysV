@@ -1,4 +1,4 @@
-description="provides a way to load and enumerate PKCS #11 modules"
+description="provides a way to load and enumerate PKCS11 modules"
 url=" https://github.com/p11-glue/p11-kit"
 
 maintainer="rems"
