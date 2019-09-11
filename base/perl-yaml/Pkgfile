@@ -6,7 +6,7 @@ makedepends=(perl)
 run=(perl)
 
 name=perl-yaml
-version=1.26
+version=1.29
 
 source=(http://cpan.metacpan.org/authors/id/I/IN/INGY/YAML-$version.tar.gz)
 
