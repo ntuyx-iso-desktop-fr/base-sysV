@@ -19,7 +19,8 @@ cd $name-$version
             --with-default-trust-store-pkcs11="pkcs11:" \
             --without-p11-kit \
             --enable-openssl-compatibility \
-            --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt
+            --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt \
+            --with-included-libtasn1
 
 make
 
