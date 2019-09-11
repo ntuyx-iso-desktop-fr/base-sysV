@@ -4,6 +4,8 @@ url=" https://github.com/p11-glue/p11-kit"
 maintainer="rems"
 packager="Yaolinux Team"
 
+makedepnds=(libtasn1)
+
 name=p11-kit
 version=0.23.16.1
 
