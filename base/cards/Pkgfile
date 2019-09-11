@@ -7,7 +7,7 @@ alias=(card)
 
 PKGMK_IGNORE_RUNTIMEDEPS="no"
 
-makedepends=(wget)
+makedepends=(python meson ninja systemd)
 run_devel=(autoconf automake acl.devel attr.devel \
 bison binutils.devel bzip2.devel curl.devel e2fsprogs.devel \
 expat.devel file.devel flex.devel gawk gawk.devel \
@@ -18,7 +18,8 @@ readline.devel rsync lvm2.devel libtool texinfo \
 texinfo.devel nasm groff make patch pkg-config \
 glibc.devel gcc.devel libarchive.devel \
 util-linux.devel xz.devel lzo.devel \
-dialog.devel tar wget zlib.devel)
+dialog.devel tar wget zlib.devel \
+systemd.devel python meson ninja)
 
 PKGMK_GROUPS=(devel doc man)
 
