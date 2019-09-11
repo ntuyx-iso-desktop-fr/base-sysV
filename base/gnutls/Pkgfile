@@ -1,1 +1,28 @@
-description=""
+description="Provide a secure layer over a reliable transport layer."
+url="https://www.gnupg.org"
+maintainer="rems"
+packager="Yaolinux Team"
+
+name=gnutls
+version=3.6.9
+
+makedepends=(nettle)
+
+source=(ftp://ftp.gnupg.org/gcrypt/gnutls/v${version:0:3}/gnutls-$version.tar.xz)
+
+build()
+{
+cd $name-$version
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/$name-$version \
+            --disable-guile \
+            --with-default-trust-store-pkcs11="pkcs11:" \
+            --without-p11-kit \
+            --enable-openssl-compatibility \
+            --with-default-trust-store-file=/etc/pki/tls/certs/ca-bundle.crt
+
+make
+
+make DESTDIR=$PKG install
+make -C doc/reference DESTDIR=$PKG install-data-local
+}
