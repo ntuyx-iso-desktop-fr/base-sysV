@@ -3,7 +3,7 @@ url="http://search.cpan.org/dist/Parse-Yapp"
 packager="greg<greg@nutyx.org>"
 contributors=""
 
-makedepends=(perl)
+makedepends=(perl wget)
 run=(perl)
 
 name=perl-parse-yapp
