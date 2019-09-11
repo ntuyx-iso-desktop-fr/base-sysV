@@ -2,8 +2,10 @@ description="Certificate Authority certificates, the Public Key Infrastructure."
 url="http://mxr.mozilla.org/mozilla/source/security/nss/lib/ckfw/builtins/certdata.txt?raw=1"
 packager="tnut <tnut@nutyx.org>"
 
+makedepends=(p11-kit)
+
 name=ca-certificates
-version=0.9
+version=1.5
 
 source=(https://github.com/djlucas/make-ca/archive/v$version/make-ca-$version.tar.gz
 	http://anduin.linuxfromscratch.org/BLFS/other/certdata.txt
@@ -11,6 +13,10 @@ source=(https://github.com/djlucas/make-ca/archive/v$version/make-ca-$version.ta
         http://www.cacert.org/certs/class3.crt)
 
 build() {
+
+cd make-ca-$version
+
+make install
 
 install -vdm755 $PKG/{usr/sbin,etc/ssl/local}
 
