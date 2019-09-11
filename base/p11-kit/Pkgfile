@@ -1,0 +1,33 @@
+description="provides a way to load and enumerate PKCS #11 modules"
+url=" https://github.com/p11-glue/p11-kit"
+
+maintainer="rems"
+packager="Yaolinux Team"
+
+name=p11-kit
+version=0.23.16.1
+
+build() {
+cd $name-$version
+sed '20,$ d' -i trust/trust-extract-compat.in
+cat >> trust/trust-extract-compat.in << "EOF"
+# Copy existing anchor modifications to /etc/ssl/local
+/usr/libexec/make-ca/copy-trust-modifications
+
+# Generate a new trust store
+/usr/sbin/make-ca -f -g
+EOF
+
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --with-trust-paths=/etc/pki/anchors
+make
+
+make DESTDIR=$PKG install
+ln -sfv /usr/libexec/p11-kit/trust-extract-compat \
+        $PKG/usr/bin/update-ca-certificates
+
+# Obsolets libs
+rm $PKG/usr/lib/libp11-kit.la
+rm $PKG/usr/lib/pkcs11/p11-kit-{client,trust}.la
+}
