@@ -68,6 +68,10 @@ procps-ng
 util-linux
 e2fsprogs
 nasm
+libtasn1
+nettle
+p11-kit
+gnutls
 curl
 cpio
 pciutils
