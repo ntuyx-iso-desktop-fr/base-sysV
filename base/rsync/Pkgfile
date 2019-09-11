@@ -3,7 +3,7 @@ url="http://samba.anu.edu.au/rsync/"
 packager="tnut <tnut@nutyx.org>"
 name=rsync
 version=3.1.3
-release=2
+release=3
 yaolinux_version=1.0-RC1
 
 source=(http://downloads.yaolinux.org/yaolinux/files/yaolinux-${yaolinux_version}.tar.xz
