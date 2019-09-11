@@ -40,6 +40,7 @@ f9db3f6715207c6f13719713abc9c707  gawk-5.0.1.tar.xz
 9a5997c3452909b1769918c759eff8a2  glibc-2.30-fhs-1.patch
 2b1dbdf27b28620752956c061d62f60c  glibc-2.30.tar.xz
 f58fa8001d60c4c77595fbbb62b63c1d  gmp-6.1.2.tar.xz
+a36cb11809d31268b6ddd17cb38b92bb  gnutls-3.6.9.tar.xz
 9e251c0a618ad0824b51117d5d9db87e  gperf-3.1.tar.gz
 bf84143905a6a903dbd4d4b911a2a2b8  gpm-1.20.7.tar.bz2
 05d0718a1b7cc706a4bdf8115363f1ed  grep-3.3.tar.xz
@@ -59,14 +60,14 @@ c1635a5a83b63aca7f97a3eab39ebaa6  kbd-2.0.4.tar.xz
 bec755c8044ad84b752dfe49a0b371d8  libedit-20190324-3.1.tar.gz
 83b89587607e3eb65c70d361f13bab43  libffi-3.2.1.tar.gz
 4c8fe6cd85422baafd6e060f896c61bc  libpipeline-1.5.1.tar.gz
+e9918200ed4a778e2b3cbe34c1be4205  libtasn1-4.14.tar.gz
 1bfb9b923f2c1339b4d2ce1807064aa5  libtool-2.4.6.tar.xz
 21297dfdb918a59f85b83e597df1e9be  linux-4.19.69.tar.xz
 30537ef5a01e0ca94b7b8eb6a36bb1e4  lsb-release-1.4.tar.gz
 39d3f3f9c55c87b1e5d6888e1420f4b5  lzo-2.10.tar.gz
 730bb15d96fffe47e148d1e09235af82  m4-1.4.18.tar.xz
 7d0dcb6c474b258aab4d54098f2cf5a7  make-4.2.1.tar.gz
-0eeaf712eedeae4fa55d8bfa37f4ca32  make-ca-0.9.tar.gz
-a21a04d6ff5c4645c748220dbaa9f221  make-ca.sh-20170514
+442d0be8a5d6a3f02807c6ed9bc93d4e  make-ca-1.5.tar.gz
 c5c6c3434be14a5527d43b5ad0f09a13  man-db-2.8.5.tar.xz
 5f75f72efcbe5cd245c4d9f36005d070  man-pages-5.01.tar.xz
 48787e391ec5c052799a3dd491f73909  meson-0.51.1.tar.gz
@@ -75,9 +76,11 @@ c5c6c3434be14a5527d43b5ad0f09a13  man-db-2.8.5.tar.xz
 e3d4bd3b9c36b8c4d8ac1c99f1bb5ec3  nasm-2.14-xdoc.tar.xz
 7d0f554cacd6c5021b3cda3ba9f2474c  nasm-2.14.tar.xz
 98c889aaf8d23910d2b92d65be2e737a  ncurses-6.1.tar.gz
+0e5707b418c3826768d41130fbe4ee86  nettle-3.5.1.tar.gz
 f340be768a76724b83e6daab69009902  ninja-1.9.0.tar.gz
 bf050f002fe510e1daecd39044e1122d  openssh-8.0p1.tar.gz
 15e21da6efe8aa0e0768ffd8cd37a5f6  openssl-1.1.1c.tar.gz
+090a9cf689efd8d4899600c3093b3735  p11-kit-0.23.16.1.tar.gz
 78ad9937e4caadcba1526ef1853730d5  patch-2.7.6.tar.xz
 4ff1b2a7aaf6f837a821a2ab4a21de07  patch-gentoo-squashfs.patch
 397a4a256b7d05a397f9a9020b8e5afe  patch-debian-squashfs.patch
