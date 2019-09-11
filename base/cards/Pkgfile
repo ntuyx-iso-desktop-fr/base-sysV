@@ -6,6 +6,8 @@ packager="tnut <tnut@nutyx.org>"
 alias=(card)
 
 PKGMK_IGNORE_RUNTIMEDEPS="no"
+
+makedepends=(wget)
 run_devel=(autoconf automake acl.devel attr.devel \
 bison binutils.devel bzip2.devel curl.devel e2fsprogs.devel \
 expat.devel file.devel flex.devel gawk gawk.devel \
