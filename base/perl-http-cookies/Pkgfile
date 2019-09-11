@@ -9,7 +9,7 @@ run=(perl)
 name=perl-http-cookies
 version=6.04
 
-source=(http://search.cpan.org/CPAN/authors/id/G/GA/GAAS/HTTP-Cookies-$version.tar.gz)
+source=(https://cpan.metacpan.org/authors/id/O/OA/OALDERS/HTTP-Cookies-$version.tar.gz)
 
 build() {
 cd HTTP-Cookies-$version
