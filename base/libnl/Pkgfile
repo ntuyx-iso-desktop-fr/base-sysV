@@ -17,7 +17,7 @@ make
 make DESTDIR=$PKG install
 # Doc
 mkdir -p $PKG/usr/share/doc/$name-$version
-curl -O https://github.com/thom311/libnl/releases/download/libnl$(echo $version|sed 's/\./_/g')/libnl-doc-$version.tar.gz
+wget https://github.com/thom311/libnl/releases/download/libnl$(echo $version|sed 's/\./_/g')/libnl-doc-$version.tar.gz
 tar -xf libnl-doc-$version.tar.gz --strip-components=1 --no-same-owner \
 -C $PKG/usr/share/doc/$name-$version
 }
