@@ -66,7 +66,7 @@
 
 
 ## You are in the LFS user, now continue the installation with
-`git clone https://github.com/rems28/base-sysV.git development` \
+`git clone https://github.com/rems28/base-systemd.git development` \
 `cd development` \
 `scripts/runmebeforepass1` 
 
